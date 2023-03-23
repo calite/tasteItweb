@@ -13,3 +13,7 @@ export interface Recipe {
     tags:        string[] | null;
     steps:       string[] | null;
 }
+
+export interface User {
+    name: string;
+}

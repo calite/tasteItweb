@@ -1,8 +1,6 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
-import { RecipeService } from '../../services/recipes.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-
+import { Component } from '@angular/core';
+import { RecipeService } from '../../core/recipes.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +8,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 })
 export class HomeComponent {
-
-  get resultados() {
-    return this.recipeServices.resultados;
+  
+  get hola() {
+    debugger
+    console.log(this.recipeServices.resultados);
+    
+    return this.recipeServices.hola;
   }
 
   constructor(private recipeServices: RecipeService, private sanitizer: DomSanitizer) {
@@ -24,7 +25,6 @@ export class HomeComponent {
   decodeImg64(img: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`); 
   }
-
 
 }
 
