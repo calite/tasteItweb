@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-center">
+  <div class="text-center">
+    <img src="assets/tasteIt_logo.png">
+
+    <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
+      <div class="mt-4">
+        <input type="text" class="form-control" placeholder="Email" formControlName="email">
+        <div *ngIf="emailEmptyOrIncorrect" class="text-danger">Please enter a valid email address.</div>
+      </div>
+      <div class="mt-4">
+        <input type="password" class="form-control" placeholder="Password" formControlName="password">
+        <div *ngIf="passwordEmpty" class="text-danger">Please enter a password.</div>
+      </div>
+      <div class="mt-4">
+        <input type="password" class="form-control" placeholder="Repeat Password" formControlName="repeatPassword">
+        <div *ngIf="repeatPasswordEmpty" class="text-danger">Please repeat your password.</div>
+        <div *ngIf="!passwordMatch" class="text-danger">Passwords do not match.</div>
+      </div>
+      <div class="mt-4">
+        <input class="t-button" type="submit" value="REGISTER NOW!">
+      </div>
+    </form>
+
+    <div class="mt-4">
+      <button class="btn btn-link">Forgot your password?</button>
+    </div>
+
+    <div class="mt-4">
+      <button class="btn btn-link" (click)="sendToLogin()">have an account already?</button>
+    </div>
+    
+  </div>
+</div>

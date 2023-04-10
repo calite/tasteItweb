@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Comfortaa-Bold';
+    src: url('../assets/fonts/Comfortaa-Bold.ttf') format('truetype');
+  }
+  
+  body {
+    font-family: 'Comfortaa-Bold';
+  }

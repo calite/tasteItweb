@@ -1,20 +1,15 @@
-<div class="row container mt-4">
+<div class="col" *ngIf="!isLoginPage && !isRegisterPage">
+  <app-topbar></app-topbar>
+</div>
 
-  <div class="col-3">
+<div class="row">
 
-      <h2>tasteIt</h2>
-      <hr>
-      <ul class="list-group">
-          <li routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="list-group-item">Home</li>
-          <li routerLink="search" routerLinkActive="active" class="list-group-item">Search</li>
-          <li routerLink="random" routerLinkActive="active" class="list-group-item">Random</li>
-          <li routerLink="mybook" routerLinkActive="active" class="list-group-item">My Book</li>
-      </ul>
-
+  <div class="col-1" *ngIf="!isLoginPage && !isRegisterPage">
+    <app-sidebar></app-sidebar>
   </div>
-  <!--RUTAS-->
+
   <div class="col">
-      <router-outlet></router-outlet>    
+    <router-outlet></router-outlet>
   </div>
 
 </div>

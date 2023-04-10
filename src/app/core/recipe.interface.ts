@@ -1,19 +1,24 @@
 export interface RecipesResponse {
-    data: Recipe[];
+    recipeId: number;
+    recipe:   Recipe;
+    user:     User;
 }
 
 export interface Recipe {
     name:        string;
     description: string;
     difficulty:  number;
-    image:       null | string;
-    dateCreated: null | string;
-    country:     null | string;
-    ingredients: string[] | null;
-    tags:        string[] | null;
-    steps:       string[] | null;
+    image:       string;
+    dateCreated: Date;
+    country:     string;
+    ingredients: string[];
+    tags:        string[];
+    steps:       string[];
 }
 
 export interface User {
-    name: string;
+    token:      string;
+    username:   string;
+    imgProfile: null;
+    biography:  null;
 }
