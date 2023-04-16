@@ -23,6 +23,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    var currentUser = this.userService.getUser(); // miramos a ver si hay un usuario
+
+    if (currentUser != null) {
+      this.router.navigate(['/home']);
+    }
+
   }
 
   onSubmit() {
@@ -30,6 +37,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.formLogin.value)
       .then(response => {
         console.log(response);
+        this.userService.saveUser(response.user);//guardamos al usuario en local
         this.router.navigate(['/home']);
       })
       .catch(error =>  {
@@ -45,6 +53,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginWithGoogle()
       .then(response => {
         console.log(response);
+        this.userService.saveUser(response.user);//guardamos al usuario en local
         this.router.navigate(['/home']);
       })
       .catch(error => console.log(error))

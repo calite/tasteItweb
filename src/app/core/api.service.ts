@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Recipe, RecipesResponse } from './recipe.interface';
+import { Recipe, RecipesResponse, User } from './interfaces/recipe.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
 
-    private apiUrl: string = 'https://admiring-boyd.212-227-50-151.plesk.page/';
+    private apiUrl: string = 'https://elegant-dhawan.212-227-50-151.plesk.page/';
 
 
     
@@ -29,6 +29,12 @@ export class ApiService {
         const url = `${ this.apiUrl }recipe/${ recipeId }` ;
         return this.http.get<RecipesResponse[]>( url );
 
+    }
+
+    getUserByToken(token : string) : Observable<User> {
+
+        const url = `${ this.apiUrl }User/user/bytoken/${ token }` ;
+        return this.http.get<User>( url );
     }
 
 }

@@ -6,6 +6,10 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signO
 })
 export class UserService {
 
+
+  currentUser : any;
+
+
   constructor(private auth: Auth) { }
 
   register({ email, password }: any) {
@@ -21,7 +25,22 @@ export class UserService {
   }
 
   logout() {
+    this.clearUser();//removemos el usuario al hacer logout
+    localStorage.removeItem('userNeo');
     return signOut(this.auth);
+  }
+
+  saveUser(user : any) {
+    localStorage.setItem('currentUser',JSON.stringify(user)); //almacenamos el usuario
+  }
+
+  getUser(){
+    this.currentUser = localStorage.getItem('currentUser'); //recogemos el usuario
+    return JSON.parse(this.currentUser);
+  }
+
+  clearUser(){
+    localStorage.removeItem('currentUser');
   }
 
 }

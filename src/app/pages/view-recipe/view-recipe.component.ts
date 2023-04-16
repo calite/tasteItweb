@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs';
 import { ApiService } from 'src/app/core/api.service';
-import { RecipesResponse } from 'src/app/core/recipe.interface';
+import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 
 @Component({
   selector: 'app-view-recipe',

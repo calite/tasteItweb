@@ -1,9 +1,68 @@
-.top-bar {
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
     background-color: maroon;
-    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    color: aliceblue;
+}
+
+.logo {
+    flex: 1;
+    /* Hace que el div se expanda para ocupar todo el espacio sobrante */
+}
+
+.menu {
+    flex: 1;
+    /* Hace que el nav se expanda para ocupar todo el espacio sobrante */
+    display: flex;
+    justify-content: center;
+}
+
+.profile {
+    flex: 1;
+    /* Hace que el nav se expanda para ocupar todo el espacio sobrante */
+    display: flex;
+    justify-content: right;
 }
 
 h2 {
-    color: aliceblue;
-    text-align: center;
+    margin: 0;
+    font-size: 1.5rem;
 }
+
+ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-right: 1rem;
+}
+
+li:last-child {
+    margin-right: 0;
+}
+
+a {
+    display: block;
+    padding: 0.5rem;
+    color: white;
+    text-decoration: none;
+}
+
+li:hover {
+    color: black;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
