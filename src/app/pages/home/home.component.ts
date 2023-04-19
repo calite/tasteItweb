@@ -25,7 +25,22 @@ export class HomeComponent {
     private userService: UserService,
     private sanitizer: DomSanitizer,
     private router: Router
-  ) { }
+  ) { 
+
+    this.currentUser = this.userService.getUser(); //traemos el usuario de local
+
+    this.apiService.getUserByToken(this.currentUser.uid) //traemos informacion desde la base de datos
+      .subscribe(user => {
+        this.userNeo = user;
+        localStorage.setItem('userNeo',JSON.stringify(this.userNeo)); //almacenamos los datos del usuario en local
+      });
+
+    this.apiService.getRecipesHome()
+      .subscribe(recipes => {
+        this.recipes = recipes;
+      });
+    
+  }
 
   ngOnInit() {
 
@@ -40,7 +55,7 @@ export class HomeComponent {
     this.apiService.getRecipesHome()
       .subscribe(recipes => {
         this.recipes = recipes;
-      })
+      });
   }
 
   viewRecipe(recipeId: any) {

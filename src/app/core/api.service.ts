@@ -33,8 +33,33 @@ export class ApiService {
 
     getUserByToken(token : string) : Observable<User> {
 
-        const url = `${ this.apiUrl }User/user/bytoken/${ token }` ;
+        const url = `${ this.apiUrl }user/bytoken/${ token }` ;
         return this.http.get<User>( url );
+
+    }
+
+    getRecipesByUser(token : string) : Observable<RecipesResponse[]> {
+
+        const url = `${ this.apiUrl }recipe/byuser/${ token }` ;
+        return this.http.get<RecipesResponse[]>( url );
+
+    }
+
+    getRecipesLiked(token : string) : Observable<RecipesResponse[]> {
+
+        const url = `${ this.apiUrl }user/liked_recipes/${ token }` ;
+        return this.http.get<RecipesResponse[]>( url );
+
+    }
+
+
+    
+
+    getRecipesFollowed(token : string) : Observable<RecipesResponse[]> {
+
+        const url = `${ this.apiUrl }user/followers_recipes/${ token }` ;
+        return this.http.get<RecipesResponse[]>( url );
+
     }
 
 }

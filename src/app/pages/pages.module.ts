@@ -11,7 +11,12 @@ import { MyBookComponent } from './my-book/my-book.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { RandomComponent } from './random/random.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MeComponent } from './my-book/me/me.component';
+import { LikedComponent } from './my-book/liked/liked.component';
+import { FollowedComponent } from './my-book/followed/followed.component';
+import { BioComponent } from './my-profile/bio/bio.component';
+import { CommentsComponent } from './my-profile/comments/comments.component';
 
 
 @NgModule({
@@ -25,12 +30,18 @@ import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
     RegisterComponent,
     SearchComponent,
     ViewRecipeComponent,
+    MeComponent,
+    LikedComponent,
+    FollowedComponent,
+    BioComponent,
+    CommentsComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule
   ]
 })
 export class PagesModule { }
