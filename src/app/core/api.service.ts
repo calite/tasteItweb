@@ -17,9 +17,9 @@ export class ApiService {
         
     }
 
-     getRecipesHome() : Observable<RecipesResponse[]> {
+     getRecipesHome(skipper : number) : Observable<RecipesResponse[]> {
 
-        const url = `${ this.apiUrl }recipe/all`;
+        const url = `${ this.apiUrl }recipe/all/${skipper}`;
         return this.http.get<RecipesResponse[]>( url );
 
     }

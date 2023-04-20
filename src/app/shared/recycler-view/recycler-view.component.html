@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row mx-auto">
+        <div *ngFor="let recipe of recipes" class="col-md-6 col-sm-3 animate__animated animate__fadeIn">
+            <div class="card mt-2" [routerLink]="['/recipe', recipe.recipeId]">
+                <div class="text-center mt-1">
+                    <img [src]="decodeImg64(recipe.recipe.image!)" [alt]="" class="card-img-top">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipe.recipe.name }}</h5>
+                    <p class="card-subtitle">{{ recipe.user.username }}</p>
+                    <p class="card-text">{{ recipe.recipe.description }}</p>
+                    <div class="card-rating">5.0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>

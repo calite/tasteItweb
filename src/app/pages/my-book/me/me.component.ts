@@ -14,6 +14,7 @@ export class MeComponent {
 
   public recipes: RecipesResponse[] = [];
   private userNeo: UserResponse;
+  public isLoading : boolean = false;
   private token: string;
 
   constructor(
@@ -27,19 +28,19 @@ export class MeComponent {
 
   ngOnInit(): void {
 
+    this.loadRecipes();
+
+  }
+
+  loadRecipes() {
+    this.isLoading = true;
+
     this.apiService.getRecipesByUser(this.token)
       .subscribe(recipes => {
         this.recipes = recipes;
+        this.isLoading = false;
       });
 
-  }
-
-  viewRecipe(recipeId: any) {
-    this.router.navigate(['/recipe/' + recipeId]);
-  }
-
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
   }
 
 }
