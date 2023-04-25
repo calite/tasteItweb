@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 
 @Component({
-  selector: 'app-topbar',
+  selector: 'shared-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss']
 })

@@ -1,19 +1,74 @@
-<header>
+<div class="row top-bar">
+
+    <div class="col-4">
+        <h2>TasteIt</h2>
+    </div>
+
+    <div class="col-4">
+
+        <div class="row">
+            <div class="col-3">
+                <div routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                    class="d-flex justify-content-center align-items-center button-nav">Home</div>
+            </div>
+
+            <div class="col-3">
+                <div routerLink="search" routerLinkActive="active"
+                    class="d-flex justify-content-center align-items-center button-nav">Search</div>
+            </div>
+
+            <div class="col-3">
+                <div routerLink="random" routerLinkActive="active"
+                    class="d-flex justify-content-center align-items-center button-nav">Random</div>
+            </div>
+
+            <div class="col-3">
+                <div routerLink="mybook" routerLinkActive="active"
+                    class="d-flex justify-content-center align-items-center button-nav">My Book</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-4 d-flex justify-content-end align-items-end photo-profile">
+
+        <div routerLink="myprofile" routerLinkActive="active"><img
+                [src]="decodeImg64(userNeo.imgProfile!)"></div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- 
     <div class="logo">
         <h2>TasteIt</h2>
     </div>
     <nav class="menu">
-        <ul>
-            <li routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                class="list-group-item">Home</li>
-            <li routerLink="search" routerLinkActive="active" class="list-group-item">Search</li>
-            <li routerLink="random" routerLinkActive="active" class="list-group-item">Random</li>
-            <li routerLink="mybook" routerLinkActive="active" class="list-group-item">My Book</li>      
-        </ul>
+        <div class="row">
+            <div class="col-3">
+                <div routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                    class="list-group-item">Home</div>
+            </div>
+
+            <div class="col-3">
+                <div routerLink="search" routerLinkActive="active" class="list-group-item">Search</div>
+            </div>
+
+            <div class="col-3">
+                <div routerLink="random" routerLinkActive="active" class="list-group-item">Random</div>
+            </div>
+
+            <div class="col-3">
+                <div routerLink="mybook" routerLinkActive="active" class="list-group-item">My Book</div>
+            </div>
+        </div>
     </nav>
     <div class="profile">
-        <ul>
-            <li routerLink="myprofile" routerLinkActive="active" class="list-group-item"><img [src]="decodeImg64(userNeo.imgProfile!)"></li>
-        </ul>
-    </div>
-</header>
+        <div class="row">
+            <div class="col-3 mx-3" routerLink="myprofile" routerLinkActive="active" class="list-group-item"><img
+                    [src]="decodeImg64(userNeo.imgProfile!)"></div>
+            </div>
+    </div> -->

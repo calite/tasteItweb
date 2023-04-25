@@ -13,7 +13,23 @@ img {
     color: maroon;
 }
 
+.mat-mdc-tab {
+    background-color: maroon !important;
+}
+
+.mdc-tab__text-label {
+    color: white !important;
+}
 
 
 
+.mdc-tab--active{
+    background-color: rgb(215, 135, 135) !important;
 
+    .mdc-tab__text-label {
+        color: maroon !important;
+    }
+    .mdc-tab-indicator__content {
+        border-color : maroon !important;
+    }
+}

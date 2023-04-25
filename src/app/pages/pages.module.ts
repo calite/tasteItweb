@@ -19,6 +19,7 @@ import { FollowedComponent } from './my-book/followed/followed.component';
 import { BioComponent } from './my-profile/bio/bio.component';
 import { CommentsComponent } from './my-profile/comments/comments.component';
 import { SharedModule } from '../shared/shared.module';
+import { PhotosComponent } from './my-profile/photos/photos.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { SharedModule } from '../shared/shared.module';
     LikedComponent,
     FollowedComponent,
     BioComponent,
-    CommentsComponent
+    CommentsComponent,
+    PhotosComponent
   ],
   imports: [
     CommonModule,

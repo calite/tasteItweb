@@ -1,68 +1,36 @@
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+.top-bar {
     background-color: maroon;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    flex-wrap: wrap;
     color: aliceblue;
 }
 
-.logo {
-    flex: 1;
-    /* Hace que el div se expanda para ocupar todo el espacio sobrante */
-}
-
-.menu {
-    flex: 1;
-    /* Hace que el nav se expanda para ocupar todo el espacio sobrante */
-    display: flex;
-    justify-content: center;
-}
-
-.profile {
-    flex: 1;
-    /* Hace que el nav se expanda para ocupar todo el espacio sobrante */
-    display: flex;
-    justify-content: right;
-}
 
 h2 {
     margin: 0;
     font-size: 1.5rem;
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
-ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.button-nav {
+    height: 50px;
+    text-align: center;
 }
 
-li {
-    margin-right: 1rem;
+.button-nav:hover {
+    color: maroon;
+    background-color: white;
+    font-size: 17px;
+    font-weight: bold;
+    transition: background-color 0.5s,color 0.5s, font-size 0.1s;
 }
 
-li:last-child {
-    margin-right: 0;
-}
-
-a {
-    display: block;
-    padding: 0.5rem;
-    color: white;
-    text-decoration: none;
-}
-
-li:hover {
-    color: black;
-}
 
 img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-}
+    margin-right: 15px;
+    margin-bottom: 5px;
 
+}
