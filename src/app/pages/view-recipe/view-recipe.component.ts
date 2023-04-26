@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs';
@@ -8,7 +8,8 @@ import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 @Component({
   selector: 'app-view-recipe',
   templateUrl: './view-recipe.component.html',
-  styleUrls: ['./view-recipe.component.scss']
+  styleUrls: ['./view-recipe.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ViewRecipeComponent implements OnInit {
 

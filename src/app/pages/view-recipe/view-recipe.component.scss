@@ -1,66 +1,97 @@
 img {
-    width: 300px;
-    height: 300px;
+  width: 300px;
+  height: 300px;
 }
 
 p strong {
-    color: maroon;
-    font-size: 30px;
+  color: maroon;
+  font-size: 30px;
 }
 
 .card {
-    background-color: maroon;
+  background-color: maroon;
+}
+
+.card-title {
+  color: maroon;
 }
 
 .card-rating {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: yellow;
-    color: black;
-    padding: 5px;
-    border-radius: 25px 25px 25px 25px;
-    margin-bottom: 5px;
-    margin-right: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: yellow;
+  color: black;
+  padding: 5px;
+  border-radius: 25px 25px 25px 25px;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 .star {
-    position: relative;
-    
-    display: inline-block;
+  position: relative;
+
+  display: inline-block;
+  width: 0;
+  height: 0;
+
+  margin-left: .9em;
+  margin-right: .9em;
+  margin-bottom: 1.2em;
+
+  border-right: .3em solid transparent;
+  border-bottom: .7em solid #FC0;
+  border-left: .3em solid transparent;
+
+  /* Controlls the size of the stars. */
+  font-size: 24px;
+
+  &:before,
+  &:after {
+    content: '';
+
+    display: block;
     width: 0;
     height: 0;
-    
-    margin-left: .9em;
-    margin-right: .9em;
-    margin-bottom: 1.2em;
-    
-    border-right:  .3em solid transparent;
-    border-bottom: .7em  solid #FC0;
-    border-left:   .3em solid transparent;
-  
-    /* Controlls the size of the stars. */
-    font-size: 24px;
-    
-    &:before, &:after {
-      content: '';
-      
-      display: block;
-      width: 0;
-      height: 0;
-      
-      position: absolute;
-      top: .6em;
-      left: -1em;
-    
-      border-right:  1em solid transparent;
-      border-bottom: .7em  solid #FC0;
-      border-left:   1em solid transparent;
-    
-      transform: rotate(-35deg);
-    }
-    
-    &:after {  
-      transform: rotate(35deg);
-    }
+
+    position: absolute;
+    top: .6em;
+    left: -1em;
+
+    border-right: 1em solid transparent;
+    border-bottom: .7em solid #FC0;
+    border-left: 1em solid transparent;
+
+    transform: rotate(-35deg);
   }
+
+  &:after {
+    transform: rotate(35deg);
+  }
+}
+
+.horizontal-line {
+  margin-top: 20px;
+  height: 2px;
+  background-color: maroon;
+}
+
+.mat-mdc-tab {
+  background-color: maroon !important;
+}
+
+.mdc-tab__text-label {
+  color: white !important;
+}
+
+.mdc-tab--active {
+  background-color: rgb(215, 135, 135) !important;
+
+  .mdc-tab__text-label {
+    color: maroon !important;
+  }
+
+  .mdc-tab-indicator__content {
+    border-color: maroon !important;
+  }
+}

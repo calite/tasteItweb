@@ -1,24 +1,57 @@
 <div class="container">
     <div class="row">
 
-        <div class="col mt-1 card">
-            <div class="text-center mt-1">
-                <img [src]="decodeImg64(recipe[0].recipe.image!)" [alt]="" class="card-img-top">
-            </div>
-            <div class="card-body">
+        <div class="col-6">
+            <img [src]="decodeImg64(recipe[0].recipe.image!)" [alt]="" class="card-img-top">
+        </div>
+        <div class="col-6">
+            <div>{{ recipe[0].recipe.name }}</div>
+            <div>3.5</div>
+            <div>{{ recipe[0].user.username }}</div>
+        </div>
+
+    </div>
+
+    <div class="horizontal-line"></div>
+
+    <div>
+        <mat-tab-group [disableRipple]=true>
+            <mat-tab label="Information" class="mat-tab-label-active">
+                <p><strong>Description:</strong></p>
+                <p>{{ recipe[0].recipe.description }}</p>
+                <p><strong>Difficulty:</strong></p>
+                <p>{{ recipe[0].recipe.difficulty }}</p>
+                <p><strong>country:</strong></p>
+                <p>{{ recipe[0].recipe.country }}</p>
+                <p><strong>Tags:</strong></p>
+                <p>{{ recipe[0].recipe.tags }}</p>
+                <p><strong>Ingredients:</strong></p>
+                <p *ngFor="let item of recipe[0].recipe.ingredients">{{ item }}</p>
+            </mat-tab>
+            <mat-tab label="Steps">
+                <p><strong>Steps:</strong></p>
+                <p *ngFor="let item of recipe[0].recipe.steps">{{ item }}</p>
+            </mat-tab>
+            <mat-tab label="Comments">
+                comments
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <!-- <div class="col-6">
                 <div class="card-rating">3.5</div>
+                <div>{{ recipe[0].recipe.name }}</div>
             </div>
         </div>
     
-        <div class="col mt-4">
+        <div class="mt-4">
             <p><strong>Name:</strong></p>
             <p>{{ recipe[0].recipe.name }}</p>
             <p><strong>Description:</strong></p>
             <p>{{ recipe[0].recipe.description }}</p>
             <p><strong>Tags:</strong></p>
             <p>{{ recipe[0].recipe.tags }}</p>
-        </div>
-    
+        </div> -->
+    <!--     
         <div class="col mt-5">
             <p><strong>Difficulty:</strong></p>
             <p>{{ recipe[0].recipe.difficulty }}</p>
@@ -52,5 +85,4 @@
                 <p *ngFor="let item of recipe[0].recipe.steps">{{ item }}</p>
             </div>
         </div>
-    </div>
-</div>
+    </div> -->
