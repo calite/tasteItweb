@@ -10,12 +10,8 @@
         </button>
     </div>
 
-    <div class="flex-end">
-        <button routerLink="./profile" routerLinkActive="active">
-            <mat-icon aria-hidden="false" fontIcon="person_4"></mat-icon>
-            <!-- <img [src]="decodeImg64(userNeo.imgProfile!)"> -->
-
-        </button>
+    <div class="flex-end" routerLink="./profile">
+            <img [src]="decodeImg64(userNeo.imgProfile!)">
     </div>
 </mat-toolbar>
 

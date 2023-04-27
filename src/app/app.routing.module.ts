@@ -1,15 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
-import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { RandomComponent } from './pages/random/random.component';
-import { SearchComponent } from './pages/search/search.component';
-import { MyBookComponent } from './pages/my-book/my-book.component';
-import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
-import { ViewRecipeComponent } from './pages/view-recipe/view-recipe.component';
 import { Error404Component } from './shared/error404/error404.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -21,6 +14,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./taste-it/taste-it.module').then(m => m.TasteItModule),
+    canActivate: [AuthGuard],
+    canMatch: [AuthGuard]
   },
   {
     path: '404',

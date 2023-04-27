@@ -1,0 +1,58 @@
+img {
+  width: 300px;
+  height: 300px;
+}
+
+.chipCustom{
+  background-color: maroon !important;
+}
+.chipCustom span {
+  color: white !important;
+}
+
+.stepsCustom {
+  background-color: maroon;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 5px 5px 5px 5px;
+  color: white;
+}
+
+p strong {
+  color: maroon;
+  font-size: 30px;
+}
+
+.card {
+  background-color: maroon;
+}
+
+.card-title {
+  color: maroon;
+}
+
+.horizontal-line {
+  margin-top: 20px;
+  height: 2px;
+  background-color: maroon;
+}
+
+.mat-mdc-tab {
+  background-color: maroon !important;
+}
+
+.mdc-tab__text-label {
+  color: white !important;
+}
+
+.mdc-tab--active {
+  background-color: rgb(215, 135, 135) !important;
+
+  .mdc-tab__text-label {
+    color: maroon !important;
+  }
+
+  .mdc-tab-indicator__content {
+    border-color: maroon !important;
+  }
+}

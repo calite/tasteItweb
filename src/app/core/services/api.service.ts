@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe, RecipesResponse, User } from '../interfaces/recipe.interface';
 import { Observable } from 'rxjs';
-import { CommentsOnUserResponse } from '../interfaces/comment.interface';
+import { CommentsOnRecipeResponse, CommentsOnUserResponse } from '../interfaces/comment.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -95,6 +95,13 @@ export class ApiService {
 
         const url = `${this.apiUrl}user/comments/${token}`;
         return this.http.get<CommentsOnUserResponse[]>(url);
+
+    }
+
+    getCommentsOnRecipe(rid:string) : Observable<CommentsOnRecipeResponse[]>{
+
+        const url = `${this.apiUrl}recipe/comments/${rid}`;
+        return this.http.get<CommentsOnRecipeResponse[]>(url);
 
     }
 

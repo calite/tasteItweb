@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { AuthService} from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -18,7 +18,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private userService: UserService
+    private userService: AuthService
   ) {
     
 

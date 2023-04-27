@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center align-items-center container">
+    <div *ngFor="let comment of comments" class="mt-1 container-comment">
+        <div class="row p-2">
+            <div class="col-12  align-text-right">
+                <div>{{comment.c.dateCreated}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <img class="mx-2" [src]="decodeImg64(comment.user.imgProfile!)">
+            </div>
+            <div class="col-11">
+                <b>{{comment.user.username}}</b> - rating: <b>{{comment.c.rating}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{comment.c.comment}}
+            </div>
+        </div>
+    </div>
+</div> 

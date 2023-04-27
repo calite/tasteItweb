@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="grid flex-column">
+
+
+        <div class="grid flex-row align-items-center justify-content-evenly">
+            <img [src]="decodeImg64(recipe[0].recipe.image!)" [alt]="">
+    
+            <h5>{{ recipe[0].recipe.name }}</h5>
+            <h4>{{ recipe[0].user.username }}</h4>
+        </div>
+    
+        <div class="col">
+    
+        </div>
+    </div>
+    
+    
+    <div class="horizontal-line"></div>
+    
+    <div class="grid">
+        <div class="col">
+            <mat-tab-group [disableRipple]=true>
+                <mat-tab label="Information" class="mat-tab-label-active">
+                    <p><strong>Description:</strong></p>
+                    <p>{{ recipe[0].recipe.description }}</p>
+                    <p><strong>Difficulty:</strong></p>
+                    <p>{{ recipe[0].recipe.difficulty }}</p>
+                    <p><strong>country:</strong></p>
+                    <p>{{ recipe[0].recipe.country }}</p>
+                    <p><strong>Tags:</strong></p>
+                    <mat-chip-set>
+                        <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item}}</mat-chip>
+                    </mat-chip-set>
+                    <p>{{ recipe[0].recipe.tags }}</p>
+                    <p><strong>Ingredients:</strong></p>
+                    <mat-chip-set>
+                        <mat-chip *ngFor="let item of recipe[0].recipe.ingredients" class="chipCustom">{{item}}</mat-chip>
+                    </mat-chip-set>
+                </mat-tab>
+                <mat-tab label="Steps">
+                    <p><strong>Steps:</strong></p>
+                    <div class="stepsCustom" *ngFor="let item of recipe[0].recipe.steps">{{ item }}</div>    
+                </mat-tab>
+                <mat-tab label="Comments">
+                    <app-comments-on-recipe [comments]="comments"></app-comments-on-recipe>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+        
+</div>
+
+<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>

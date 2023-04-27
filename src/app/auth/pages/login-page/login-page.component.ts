@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/core/services/user.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit {
   formLogin: FormGroup;
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) {
     this.formLogin = new FormGroup({
@@ -24,7 +24,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var currentUser = this.userService.getUser(); // miramos a ver si hay un usuario
+    var currentUser = this.authService.getUser(); // miramos a ver si hay un usuario
 
     if (currentUser != null) {
       this.router.navigate(['/home']);
@@ -34,10 +34,10 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
 
-    this.userService.login(this.formLogin.value)
+    this.authService.login(this.formLogin.value)
       .then(response => {
         console.log(response);
-        this.userService.saveUser(response.user);//guardamos al usuario en local
+        this.authService.saveUser(response.user);//guardamos al usuario en local
         this.router.navigate(['/home']);
       })
       .catch(error =>  {
@@ -50,10 +50,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.userService.loginWithGoogle()
+    this.authService.loginWithGoogle()
       .then(response => {
         console.log(response);
-        this.userService.saveUser(response.user);//guardamos al usuario en local
+        this.authService.saveUser(response.user);//guardamos al usuario en local
         this.router.navigate(['/home']);
       })
       .catch(error => console.log(error))

@@ -1,0 +1,51 @@
+.imgProfile {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.cards {
+    background-color: maroon;
+}
+
+.cardsCounts {
+    color: maroon;
+    background-color: maroon;
+    width:100px;
+    text-align: center;
+  }
+
+
+.horizontal-line {
+    margin-top: 20px;
+    height: 2px;
+    background-color: maroon;
+}
+
+.card-title {
+    color: maroon;
+}
+
+.mat-mdc-tab {
+    background-color: maroon !important;
+}
+
+.mdc-tab__text-label {
+    color: white !important;
+}
+
+
+
+.mdc-tab--active {
+    background-color: rgb(215, 135, 135) !important;
+
+    .mdc-tab__text-label {
+        color: maroon !important;
+    }
+
+    .mdc-tab-indicator__content {
+        border-color: maroon !important;
+    }
+}
