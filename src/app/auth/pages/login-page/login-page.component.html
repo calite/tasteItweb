@@ -1,0 +1,25 @@
+<div class="flex flex-column justify-content-center align-items-center">
+    <img src="assets/tasteIt_logo.png">
+    <span class="text-lg mb-4">
+        Login
+    </span>
+    <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        <mat-form-field color="primary">
+            <mat-label>Usuario</mat-label>
+            <input matInput type="text" class="form-control" placeholder="Email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" class="form-control" placeholder="Password" formControlName="password">
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit">
+            Login!
+        </button>
+    </form>
+
+    <div class="flex justify-content-end mt-5">
+        <a routerLink="/auth/register">¿Ya tienes cuenta?</a>
+    </div>
+</div>

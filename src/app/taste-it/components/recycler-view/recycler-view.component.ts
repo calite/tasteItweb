@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/core/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
-import { UserService } from 'src/app/core/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
-  selector: 'shared-recycler-view',
+  selector: 'taste-it-recycler-view',
   templateUrl: './recycler-view.component.html',
   styleUrls: ['./recycler-view.component.scss']
 })

@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+
+    <div class="flex-auto">
+        <h1>tasteIt</h1>
+    </div>
+
+    <div class="flex-auto">
+        <button *ngFor="let item of menuItems" mat-button [routerLink]="item.url">
+            <mat-icon aria-hidden="false" fontIcon="{{item.icon}}"></mat-icon>{{item.label}}
+        </button>
+    </div>
+
+    <div class="flex-end">
+        <button routerLink="./profile" routerLinkActive="active">
+            <mat-icon aria-hidden="false" fontIcon="person_4"></mat-icon>
+            <!-- <img [src]="decodeImg64(userNeo.imgProfile!)"> -->
+
+        </button>
+    </div>
+</mat-toolbar>
+
+
+
+<div class="container p-2">
+    <router-outlet></router-outlet>
+</div>

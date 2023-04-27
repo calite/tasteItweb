@@ -12,8 +12,78 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$tasteItWeb-primary: mat.define-palette(mat.$indigo-palette);
-$tasteItWeb-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+
+
+$primary: (
+  50: #f8e6e8,
+  100: #edc1c4,
+  200: #d18885,
+  300: #bb5c58,
+  400: #bc3a33,
+  500: #b92617,
+  600: #ac1c17,
+  700: #9c1313,
+  800: #8f0b0c,
+  900: #800000,
+  A100: #c2e4ff,
+  A200: #addcff,
+  A400: #5eff00,
+  A700: #a6ff00,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: rgb(255, 55, 55),
+    700: rgb(0, 0, 0),
+    800: rgb(0, 217, 255),
+    900: rgb(187, 255, 0),
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$accent: (
+  50: #f8e6e8,
+  100: #edc1c4,
+  200: #d18885,
+  300: #bb5c58,
+  400: #bc3a33,
+  500: #b92617,
+  600: #ac1c17,
+  700: #9c1313,
+  800: #8f0b0c,
+  900: #800000,
+  A100: #c2e4ff,
+  A200: #addcff,
+  A400: #5eff00,
+  A700: #a6ff00,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: rgb(255, 55, 55),
+    700: rgb(0, 0, 0),
+    800: rgb(0, 217, 255),
+    900: rgb(187, 255, 0),
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$myprimary-palette: mat.define-palette($primary);
+
+$tasteItWeb-accent: mat.define-palette($accent);
 
 // The warn palette is optional (defaults to red).
 $tasteItWeb-warn: mat.define-palette(mat.$red-palette);
@@ -22,7 +92,7 @@ $tasteItWeb-warn: mat.define-palette(mat.$red-palette);
 // theming systems such as "color" or "typography".
 $tasteItWeb-theme: mat.define-light-theme((
   color: (
-    primary: $tasteItWeb-primary,
+    primary: $myprimary-palette,
     accent: $tasteItWeb-accent,
     warn: $tasteItWeb-warn,
   )
@@ -31,7 +101,10 @@ $tasteItWeb-theme: mat.define-light-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($tasteItWeb-theme);
+@include mat.core-theme($tasteItWeb-theme);
+
+@include mat.button-theme($tasteItWeb-theme);
+
 
 // /* You can add global styles to this file, and also import other style files */
 // @font-face {
@@ -45,3 +118,8 @@ $tasteItWeb-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.spacer {
+  flex: 1 1 auto;
+}
+

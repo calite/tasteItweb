@@ -1,5 +1,5 @@
 import { Component, Output } from '@angular/core';
-import { ApiService } from 'src/app/core/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';

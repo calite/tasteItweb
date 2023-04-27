@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommentsOnUserResponse } from '../../../core/interfaces/comment.interface';
-import { ApiService } from 'src/app/core/api.service';
+import { ApiService } from 'src/app/core/services/api.service';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 
 @Component({

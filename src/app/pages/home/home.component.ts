@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { ApiService } from '../../core/api.service';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../core/services/api.service';
 import { RecipesResponse } from '../../core/interfaces/recipe.interface';
-import { UserService } from 'src/app/core/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 
 @Component({
@@ -9,7 +9,7 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   public recipes: RecipesResponse[];
   public isLoading: boolean = false;

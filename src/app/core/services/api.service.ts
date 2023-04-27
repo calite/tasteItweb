@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Recipe, RecipesResponse, User } from './interfaces/recipe.interface';
+import { Recipe, RecipesResponse, User } from '../interfaces/recipe.interface';
 import { Observable } from 'rxjs';
-import { CommentsOnUserResponse } from './interfaces/comment.interface';
+import { CommentsOnUserResponse } from '../interfaces/comment.interface';
 
 @Injectable({
     providedIn: 'root'

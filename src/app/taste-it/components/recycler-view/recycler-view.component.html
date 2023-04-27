@@ -1,0 +1,21 @@
+
+<div class="grid p-2">
+    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3" class="cards">
+        <mat-card-header>
+            <mat-card-title>{{ recipe.user.username }}</mat-card-title>
+            <mat-card-subtitle>{{ recipe.recipe.name }}</mat-card-subtitle>
+        </mat-card-header>
+    
+        <img [src]="decodeImg64(recipe.recipe.image!)" alt="" mat-card-image />
+    
+        <mat-card-content>
+            <mat-list-item>{{ recipe.recipe.description }}</mat-list-item>
+            <mat-list-item>{{ recipe.recipe.difficulty }}</mat-list-item>
+            <mat-list-item>{{ recipe.recipe.country }}</mat-list-item>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+
+<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>

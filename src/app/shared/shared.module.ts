@@ -4,9 +4,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { TopbarComponent } from './topbar/topbar.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { RecyclerViewComponent } from './recycler-view/recycler-view.component';
 import { CommentsOnUserComponent } from './comments-on-user/comments-on-user.component';
 import { PhotosOfRecipesComponent } from './photos-of-recipes/photos-of-recipes.component';
+import { Error404Component } from './error404/error404.component';
 
 
 
@@ -15,15 +15,14 @@ import { PhotosOfRecipesComponent } from './photos-of-recipes/photos-of-recipes.
     SidebarComponent,
     TopbarComponent,
     LoadingSpinnerComponent,
-    RecyclerViewComponent,
     CommentsOnUserComponent,
-    PhotosOfRecipesComponent
+    PhotosOfRecipesComponent,
+    Error404Component
   ],
   exports: [
     SidebarComponent,
     TopbarComponent,
     LoadingSpinnerComponent,
-    RecyclerViewComponent,
     CommentsOnUserComponent,
     PhotosOfRecipesComponent
   ],

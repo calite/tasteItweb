@@ -10,7 +10,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
 
   title = 'tasteIt';
-
+  /*
   isLoginPage: boolean = false;
   isRegisterPage: boolean = false;
 
@@ -23,4 +23,5 @@ export class AppComponent {
         this.isRegisterPage = currentRoute === '/register';
       });
   }
+  */
 }
