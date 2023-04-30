@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-layout-page',
@@ -9,7 +10,7 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
 })
 export class LayoutPageComponent {
 
-  public userNeo : UserResponse;
+  public currentUser : UserResponse;
 
   public menuItems = [
     {label: 'home', icon: 'home', url:'.'},
@@ -18,8 +19,13 @@ export class LayoutPageComponent {
     {label: 'my book', icon: 'menu_book', url:'./my-book'},
   ]
 
-  constructor(private sanitizer: DomSanitizer) {
-    this.userNeo = JSON.parse(localStorage.getItem('userNeo')) //asignamos al usuario
+  constructor(private sanitizer: DomSanitizer, private authService: AuthService) {
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')) //asignamos al usuario
+  }
+
+
+  onLogout() {
+    this.authService.logout();
   }
 
   decodeImg64(img: string) {

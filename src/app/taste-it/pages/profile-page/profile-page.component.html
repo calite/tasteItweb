@@ -1,89 +1,96 @@
-<div class="grid flex-column">
-    <h4>Your Profile</h4>
-
-    <div class="grid flex-row align-items-center justify-content-evenly">
-
-        <img class="imgProfile" [src]="decodeImg64(userNeo.imgProfile!)">
-
-        <div class="d-flex justify-content-center align-items-center">
-            <h5>{{userNeo.username}}</h5>
-        </div>
-
-    </div>
-
-    <div class="grid mt-3">
-
-        <div class="col-3">
-
-            <mat-card class="cardsCounts">
-                <mat-card-content>
-                    <p>
-                        {{recipesCount}}
-                    </p>
-                    <p>
-                        Recipes
-                    </p>
-                </mat-card-content>
-            </mat-card>
-
-        </div>
-        <div class="col-3">
-
-            <mat-card class="cardsCounts">
-                <mat-card-content>
-                    <p>
-                        {{followersCount}}
-                    </p>
-                    <p>
-                        Followers
-                    </p>
-                </mat-card-content>
-            </mat-card>
-
-        </div>
-        <div class="col-3">
-
-            <mat-card class="cardsCounts">
-                <mat-card-content>
-                    <p>
-                        {{followingCount}}
-                    </p>
-                    <p>
-                        Following
-                    </p>
-                </mat-card-content>
-            </mat-card>
-
-        </div>
-        <div class="col-3">
-
-            <mat-card class="cardsCounts">
-                <mat-card-content>
-                    <p>
-                        {{likesCount}}
-                    </p>
-                    <p>
-                        Likes
-                    </p>
-                </mat-card-content>
-            </mat-card>
-
-        </div>
-
-    </div>
-
-    <div class="mt-3">
-        <mat-tab-group [disableRipple]=true>
-            <mat-tab label="Biography" class="mat-tab-label-active">
-                <app-bio [biography]="userNeo.biography"></app-bio>
-            </mat-tab>
-            <mat-tab label="Photos">
-                <app-photos></app-photos>
-            </mat-tab>
-            <mat-tab label="Comments">
-                <app-comments-on-user [comments]="comments"></app-comments-on-user>
-            </mat-tab>
-        </mat-tab-group>
-    </div>
+<div *ngIf="!isLoading; else divProfile" class="alert alert-info">
+    <shared-loading-spinner *ngIf="!isLoading"></shared-loading-spinner>
 </div>
 
+<ng-template #divProfile>
+
+    <div class="grid flex-column">
+        <h4>Profile</h4>
+
+        <div class="grid flex-row align-items-center justify-content-evenly">
+
+            <img class="imgProfile" [src]="decodeImg64(currentUser.imgProfile!)">
+
+            <div class="d-flex justify-content-center align-items-center">
+                <h5>{{currentUser.username}}</h5>
+            </div>
+
+        </div>
+
+        <div class="grid mt-3">
+
+            <div class="col-3 flex flex-row align-items-center justify-content-center">
+
+                <mat-card class="cardsCounts">
+                    <mat-card-content>
+                        <p>
+                            {{recipesCount}}
+                        </p>
+                        <p>
+                            Recipes
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+            <div class="col-3 flex flex-row align-items-center justify-content-center">
+
+                <mat-card class="cardsCounts">
+                    <mat-card-content>
+                        <p>
+                            {{followersCount}}
+                        </p>
+                        <p>
+                            Followers
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+            <div class="col-3 flex flex-row align-items-center justify-content-center">
+
+                <mat-card class="cardsCounts">
+                    <mat-card-content>
+                        <p>
+                            {{followingCount}}
+                        </p>
+                        <p>
+                            Following
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+            <div class="col-3 flex flex-row align-items-center justify-content-center">
+
+                <mat-card class="cardsCounts">
+                    <mat-card-content>
+                        <p>
+                            {{likesCount}}
+                        </p>
+                        <p>
+                            Likes
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+
+        </div>
+
+        <div class="mt-3">
+            <mat-tab-group [disableRipple]=true>
+                <mat-tab label="Biography" class="mat-tab-label-active">
+                    <app-bio [biography]="currentUser.biography"></app-bio>
+                </mat-tab>
+                <mat-tab label="Photos">
+                    <app-photos></app-photos>
+                </mat-tab>
+                <mat-tab label="Comments">
+                    <app-comments-on-user [comments]="comments"></app-comments-on-user>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+</ng-template>

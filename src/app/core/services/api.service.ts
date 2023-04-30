@@ -12,96 +12,107 @@ export class ApiService {
 
     // private apiUrl: string = 'https://elegant-dhawan.212-227-50-151.plesk.page/';
     private apiUrl: string = 'https://localhost:7076/';
+    private apiKey: string = sessionStorage.getItem('accessToken');
 
-
-
-    constructor(private http: HttpClient) {
-
-    }
+    constructor(private http: HttpClient) { }
 
     getRecipesHome(skipper: number): Observable<RecipesResponse[]> {
 
         const url = `${this.apiUrl}recipe/all/${skipper}`;
-        return this.http.get<RecipesResponse[]>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<RecipesResponse[]>(url, { headers });
 
     }
 
     getRecipeById(recipeId: string): Observable<RecipesResponse[]> {
 
         const url = `${this.apiUrl}recipe/${recipeId}`;
-        return this.http.get<RecipesResponse[]>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<RecipesResponse[]>(url, { headers });
 
     }
 
     getUserByToken(token: string): Observable<User> {
 
+        this.apiKey = sessionStorage.getItem('accessToken');
+
         const url = `${this.apiUrl}user/bytoken/${token}`;
-        return this.http.get<User>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<User>(url, { headers });
 
     }
 
-    getRecipesByUser(token: string): Observable<RecipesResponse[]> {
+    getRecipesByUser(token: string, skipper:number): Observable<RecipesResponse[]> {
 
-        const url = `${this.apiUrl}recipe/byuser/${token}`;
-        return this.http.get<RecipesResponse[]>(url);
-
-    }
-
-    getRecipesLiked(token: string): Observable<RecipesResponse[]> {
-
-        const url = `${this.apiUrl}user/liked_recipes/${token}`;
-        return this.http.get<RecipesResponse[]>(url);
+        const url = `${this.apiUrl}recipe/byuser/${token}/${skipper}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<RecipesResponse[]>(url, { headers });
 
     }
 
-    getRecipesFollowed(token: string): Observable<RecipesResponse[]> {
+    getRecipesLiked(token: string, skipper: number): Observable<RecipesResponse[]> {
 
-        const url = `${this.apiUrl}user/followers_recipes/${token}`;
-        return this.http.get<RecipesResponse[]>(url);
+        const url = `${this.apiUrl}user/liked_recipes/${token}/${skipper}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<RecipesResponse[]>(url, { headers });
 
     }
-    
+
+    getRecipesFollowed(token: string, skipper: number): Observable<RecipesResponse[]> {
+
+        const url = `${this.apiUrl}user/followers_recipes/${token}/${skipper}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<RecipesResponse[]>(url, { headers });
+
+    }
+
     //contadores de perfil de usuario
 
     getCountRecipes(token: string): Observable<number> {
-        
+
         const url = `${this.apiUrl}user/recipes_created/${token}`;
-        return this.http.get<number>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<number>(url, { headers });
 
     }
 
     getCountFollowing(token: string): Observable<number> {
-        
+
         const url = `${this.apiUrl}user/following/${token}`;
-        return this.http.get<number>(url);
-        
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<number>(url, { headers });
+
     }
-    
+
     getCountFollowers(token: string): Observable<number> {
 
         const url = `${this.apiUrl}user/followers/${token}`;
-        return this.http.get<number>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<number>(url, { headers });
 
     }
 
     getCountLikes(token: string): Observable<number> {
 
         const url = `${this.apiUrl}user/recipes_liked/${token}`;
-        return this.http.get<number>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<number>(url, { headers });
 
     }
 
-    getCommentsOnUser(token:string) : Observable<CommentsOnUserResponse[]>{
+    getCommentsOnUser(token: string): Observable<CommentsOnUserResponse[]> {
 
         const url = `${this.apiUrl}user/comments/${token}`;
-        return this.http.get<CommentsOnUserResponse[]>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<CommentsOnUserResponse[]>(url, { headers });
 
     }
 
-    getCommentsOnRecipe(rid:string) : Observable<CommentsOnRecipeResponse[]>{
+    getCommentsOnRecipe(rid: string): Observable<CommentsOnRecipeResponse[]> {
 
         const url = `${this.apiUrl}recipe/comments/${rid}`;
-        return this.http.get<CommentsOnRecipeResponse[]>(url);
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<CommentsOnRecipeResponse[]>(url, { headers });
 
     }
 

@@ -10,7 +10,7 @@ import { CommentsOnRecipeResponse } from 'src/app/core/interfaces/comment.interf
 export class CommentsOnRecipeComponent {
 
   @Input()
-  comments : CommentsOnRecipeResponse[] = [];
+  comments : CommentsOnRecipeResponse[];
 
   @Output()
   commentsChange = new EventEmitter<CommentsOnRecipeResponse[]>();

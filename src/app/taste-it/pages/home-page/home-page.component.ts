@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
-import { AuthService} from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,41 +12,61 @@ import { AuthService} from 'src/app/core/services/auth.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  public recipes: RecipesResponse[];
+
+  public recipes: RecipesResponse[] = [];
   public isLoading: boolean = false;
   private skipper: number = 0;
-  private currentUser: any;
-  private userNeo: UserResponse;
+  private currentUser: UserResponse;
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event) {
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const max = document.documentElement.scrollHeight;
+
+    if (pos === max) {
+      this.loadRecipes(this.skipper)
+    }
+  }
 
   constructor(
     private apiService: ApiService,
-    private userService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService
   ) {
-    
 
-    this.currentUser = this.userService.getUser(); //traemos el usuario de local
 
-    this.apiService.getUserByToken(this.currentUser.uid) //traemos informacion desde la base de datos
-      .subscribe(user => {
-        this.userNeo = user;
-        localStorage.setItem('userNeo', JSON.stringify(this.userNeo)); //almacenamos los datos del usuario en local
-      });
+    this.currentUser = this.authService.getUser(); //traemos el usuario de local
 
   }
 
   ngOnInit() {
 
-    this.loadRecipes();
-
+    this.loadRecipes(0);
+    /*
+    this.authService.renewIdToken().subscribe(newToken => {
+      console.log('Token renewed:', newToken);
+    }, error => {
+      console.log('Error renewing token:', error);
+    });
+    */
   }
 
-  loadRecipes() {
+  loadRecipes(skipper: number) {
     this.isLoading = true;
 
-    this.apiService.getRecipesHome(this.skipper)
+    this.apiService.getRecipesHome(skipper)
       .subscribe(recipes => {
-        this.recipes = recipes;
+
+        this.recipes.push(...recipes);
         this.isLoading = false;
+
+        if(recipes.length == 0) {
+          this.toastService.toastGenerator('','There is no more recipes',4, ToastPositionEnum.BOTTOM_RIGHT)
+        }
+
       });
+
+    this.skipper = this.skipper + 10;
+
   }
 }

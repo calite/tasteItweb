@@ -4,22 +4,29 @@
         Login
     </span>
     <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        
         <mat-form-field color="primary">
-            <mat-label>Usuario</mat-label>
-            <input matInput type="text" class="form-control" placeholder="Email" formControlName="email">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email" color="primary">
+            <mat-icon matSuffix>alternate_email</mat-icon>
+            <mat-error *ngIf="formLogin.controls.email.invalid">Invalid email</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Contraseña</mat-label>
-            <input matInput type="password" class="form-control" placeholder="Password" formControlName="password">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" class="form-control" placeholder="Password" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
         </mat-form-field>
+        
 
-        <button mat-flat-button color="primary" type="submit">
+        <button mat-flat-button color="primary" type="submit" [disabled]="formLogin.invalid">
             Login!
         </button>
     </form>
 
     <div class="flex justify-content-end mt-5">
-        <a routerLink="/auth/register">¿Ya tienes cuenta?</a>
+        <a routerLink="/auth/register">Don´t have an account?</a>
     </div>
 </div>

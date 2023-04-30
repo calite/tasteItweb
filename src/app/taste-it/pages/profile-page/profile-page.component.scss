@@ -3,6 +3,7 @@
     height: 300px;
     border-radius: 50%;
     object-fit: cover;
+    border: 3px solid maroon;
 }
 
 
@@ -10,10 +11,15 @@
     background-color: maroon;
 }
 
+mat-mdc-card mat-card {
+    border: 2px solid maroon !important;
+}
+
 .cardsCounts {
-    color: maroon;
-    background-color: maroon;
     width:100px;
+    color: white;
+    background-color: rgb(215, 135, 135) !important;
+    border: 1px solid maroon !important;
     text-align: center;
   }
 
@@ -30,6 +36,7 @@
 
 .mat-mdc-tab {
     background-color: maroon !important;
+    border: 1px solid maroon !important;
 }
 
 .mdc-tab__text-label {

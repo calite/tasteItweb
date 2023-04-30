@@ -28,11 +28,13 @@ export class RecyclerViewComponent {
     this.router.navigate(['/recipe/' + recipeId]);
   }
 
+  viewProfileCreator(token : string) {
+    console.log(token)
+    this.router.navigate(['/profile/' + token]);
+  }
+
   decodeImg64(img: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
   }
-
-  pepito(){
-    console.log('ey')
-  }
+  
 }

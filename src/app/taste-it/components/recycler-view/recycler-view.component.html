@@ -1,17 +1,18 @@
-<div class="grid p-3">
-    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3" class="cards"
-        (click)="viewRecipe(recipe.recipeId)">
+<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+
+<div class="grid p-3 flex-row align-items-center justify-content-center">
+    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3" class="cards">
         <mat-card-header>
             <div  mat-card-avatar>
-                <img class="imgProfile" [src]="decodeImg64(recipe.user.imgProfile!)">
+                <img class="imgProfile" [src]="decodeImg64(recipe.user.imgProfile!)" (click)="viewProfileCreator(recipe.user.token)">
             </div>
-            <mat-card-title>{{ recipe.user.username }}</mat-card-title>
-            <mat-card-subtitle>{{ recipe.recipe.name | slice:0:20 }}</mat-card-subtitle>
+            <mat-card-title (click)="viewProfileCreator(recipe.user.token)">{{ recipe.user.username }}</mat-card-title>
+            <mat-card-subtitle (click)="viewRecipe(recipe.recipeId)">{{ recipe.recipe.name | slice:0:20 }}</mat-card-subtitle>
         </mat-card-header>
 
-        <img [src]="decodeImg64(recipe.recipe.image!)" alt="" />
+        <img [src]="decodeImg64(recipe.recipe.image!)" alt="" (click)="viewRecipe(recipe.recipeId)"/>
 
-        <mat-card-content>
+        <mat-card-content (click)="viewRecipe(recipe.recipeId)">
             <p>{{ recipe.recipe.description }}</p>
             <p>Difficulty: {{ recipe.recipe.difficulty }}</p>
             <p>Country: {{ recipe.recipe.country }}</p>
@@ -20,5 +21,3 @@
 </div>
 
 
-
-<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>

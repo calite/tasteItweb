@@ -1,7 +1,7 @@
 import { Component, Output, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { switchMap, tap } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { ApiService } from 'src/app/core/services/api.service';
 import { CommentsOnRecipeComponent } from '../../components/comments-on-recipe/comments-on-recipe.component';
@@ -19,13 +19,15 @@ export class ViewRecipePageComponent {
   public isLoading: boolean = false;
 
   @Output()
-  comments : CommentsOnRecipeResponse[] = []
+  comments: CommentsOnRecipeResponse[];
 
   constructor(
     private ActivatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private sanitizer: DomSanitizer
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
 
@@ -48,14 +50,15 @@ export class ViewRecipePageComponent {
   }
 
   loadComments() {
+
     this.ActivatedRoute.params
-    .pipe(
-      switchMap(({ recipeId }) => this.apiService.getCommentsOnRecipe(recipeId)),
-    )
-    .subscribe(comments => {
-      this.comments = comments;
-      console.log(comments)
-    })
+      .pipe(
+        switchMap(({ recipeId }) => this.apiService.getCommentsOnRecipe(recipeId)),
+      )
+      .subscribe(comments => {
+          this.comments = comments;
+      })
+
   }
 
   decodeImg64(img: string) {

@@ -18,7 +18,7 @@ const routes: Routes = [
           { path: 'search', component: SearchPageComponent },
           { path: 'random', component: RandomPageComponent },
           { path: 'my-book', component: MyBookPageComponent },
-          { path: 'profile', component: ProfilePageComponent },
+          { path: 'profile/:token', component: ProfilePageComponent },
           { path: 'recipe/:recipeId', component: ViewRecipePageComponent },
           { path: '**', redirectTo: 'home' },
         ]

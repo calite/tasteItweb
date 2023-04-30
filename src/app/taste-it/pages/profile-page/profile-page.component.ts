@@ -1,6 +1,6 @@
-import { Component, Output, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
@@ -14,9 +14,12 @@ import { ApiService } from 'src/app/core/services/api.service';
 export class ProfilePageComponent {
 
   @Output()
-  userNeo: UserResponse;
+  currentUser: UserResponse;
   @Output()
   public comments: CommentsOnUserResponse[] = [];
+
+  @Input()
+  public isLoading : boolean = false;
 
   private token: string;
   public recipesCount = 0;
@@ -28,10 +31,17 @@ export class ProfilePageComponent {
   constructor(
     private apiService: ApiService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.userNeo = JSON.parse(localStorage.getItem("userNeo"));
-    this.token = this.userNeo.token;
+    //this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    //this.token = this.currentUser.token;
+    this.token = this.route.snapshot.paramMap.get('token');
+    this.apiService.getUserByToken(this.token).subscribe(
+      response => {
+        this.currentUser = response
+        this.isLoading = true
+      })
   }
 
   ngOnInit(): void {

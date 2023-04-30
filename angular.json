@@ -31,7 +31,8 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@costlydeveloper/ngx-awesome-popup/styles/theme.css"
             ],
             "scripts": []
           },

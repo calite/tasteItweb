@@ -4,22 +4,40 @@
         Registro
     </span>
 
-    <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <input type="text" matInput placeholder="Nombre de usuario">
-    </mat-form-field>
+    <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formRegister"
+        (ngSubmit)="onSubmit()">
+        
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email">
+            <mat-icon matSuffix>alternate_email</mat-icon>
+            <mat-error *ngIf="formRegister.controls.email.invalid">Invalid email</mat-error>
+        </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Contraseña</mat-label>
-        <input type="password" matInput placeholder="Contraseña">
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide1 ? 'password' : 'text'" class="form-control" placeholder="Password"
+                formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-pressed]="hide1">
+                <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
 
-    <button mat-button mat-flat-button color="primary">
-        <mat-icon>save</mat-icon>
-        Ingresar
-    </button>
+        <mat-form-field>
+            <mat-label>Repeat Password</mat-label>
+            <input matInput [type]="hide2 ? 'repeatPassword' : 'text'" class="form-control" placeholder="repeatPassword"
+                formControlName="repeatPassword">
+            <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-pressed]="hide2">
+                <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="formRegister.invalid">
+            Register!
+        </button>
+    </form>
 
     <div class="flex justify-content-end mt-5">
-        <a routerLink="/auth/login">¿No tienes cuenta?</a>
+        <a routerLink="/auth/login">Already have an account?</a>
     </div>
 </div>

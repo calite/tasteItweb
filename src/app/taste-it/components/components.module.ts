@@ -11,7 +11,6 @@ import { MeComponent } from './me/me.component';
 import { PhotosComponent } from './photos/photos.component';
 import { RecyclerViewComponent } from './recycler-view/recycler-view.component';
 import { CommentsOnUserComponent } from './comments-on-user/comments-on-user.component';
-import { PhotosOfRecipesComponent } from './photos-of-recipes/photos-of-recipes.component';
 import { CommentsOnRecipeComponent } from './comments-on-recipe/comments-on-recipe.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -27,7 +26,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RecyclerViewComponent,
     BioComponent,
     CommentsOnUserComponent,
-    PhotosOfRecipesComponent,
     CommentsOnRecipeComponent
   ],
   imports: [
@@ -45,7 +43,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RecyclerViewComponent,
     BioComponent,
     CommentsOnUserComponent,
-    PhotosOfRecipesComponent,
     CommentsOnRecipeComponent
   ]
 })

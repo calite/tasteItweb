@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { ApiService } from '../../../core/services/api.service';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-login-page',
@@ -11,14 +14,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginPageComponent implements OnInit {
 
   formLogin: FormGroup;
+  hide = true;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.formLogin = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl()
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
     })
   }
 
@@ -33,26 +38,32 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.authService.login(this.formLogin.value)
-      .then(response => {
-        console.log(response);
-        this.authService.saveUser(response.user);//guardamos al usuario en local
-        this.router.navigate(['/home']);
-      })
-      .catch(error =>  {
-        console.log(error)
-        alert("You dont have an account, you will be redirected to the register.");
-        this.router.navigate(['/register']);
-      });
-        
-        
+    if (this.formLogin.valid) {
+      this.authService.login(this.formLogin.value)
+        .then(response => {
+          sessionStorage.setItem('accessToken', response.user['accessToken']);
+          this.authService.saveUser(response.user)
+            .then(() => { //se ejecutra el metodo save user con una promesa
+              this.router.navigate(['/home']);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        })
+        .catch(error => {
+          this.toastService.alertGenerator('Ups!', 'Looks like you dont have and account, do you want to register?', 4)
+            .subscribe((result) => {
+              if (result.success === true) {
+                this.router.navigate(['/auth/register']);
+              }
+            });
+        });
+    }
   }
 
   loginWithGoogle() {
     this.authService.loginWithGoogle()
       .then(response => {
-        console.log(response);
         this.authService.saveUser(response.user);//guardamos al usuario en local
         this.router.navigate(['/home']);
       })
