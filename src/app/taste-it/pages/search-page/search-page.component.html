@@ -1,51 +1,70 @@
 <div class="container">
 
+  <div class="row col-12">
 
+    <div class="col-12">
 
-    <div class="row col-12">
-  
-      <div class="col-4">
-  
-        <div class="filter-box">
-  
-          <form>
-            <div>
-              <label>
-                Buscar:
-                <input type="text" name="search-term">
-              </label>
-            </div>
-            <div>
-              <label>
-                <input type="radio" name="search-type" value="name"> Buscar por nombre
-              </label>
-            </div>
-            <div>
-              <label>
-                <input type="radio" name="search-type" value="tags"> Buscar por tags
-              </label>
-            </div>
-            <div>
-              <label>
-                <input type="radio" name="search-type" value="ingredients"> Buscar por
-                ingredientes
-              </label>
-            </div>
-            <div>
-              <label>
-                <input type="radio" name="search-type" value="user"> Buscar usuario
-              </label>
-            </div>
-  
-            <button type="submit" class="btn btn-warning">Buscar</button>
-          </form>
-        </div>
-      </div>
-  
-      <div class="col-8 bg-black">
-  
-        <!-- <shared-recycler-view></shared-recycler-view> -->
-  
-      </div>
-  
+      <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formSearch"
+        (ngSubmit)="onSubmit()">
+        <mat-form-field color="primary">
+          <mat-label>Search</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Search" formControlName="search"
+            color="primary">
+        </mat-form-field>
+      </form>
     </div>
+
+
+    <div *ngIf="!recipes; else divSearch">
+    </div>
+
+
+    <ng-template #divSearch>
+
+      <div class="col-12">
+
+        <mat-tab-group [disableRipple]=true>
+
+          <mat-tab label="Recipes" class="mat-tab-label-active">
+            <taste-it-recycler-view [recipes]="recipes"></taste-it-recycler-view>
+          </mat-tab>
+
+          <mat-tab label="Users">
+
+            <div class="grid p-3 flex-row align-items-center justify-content-evenly">
+
+              <mat-card class="col-12 sm:col-3 user-cards" *ngFor="let user of users"
+                (click)="viewProfileCreator(user.token)">
+                <mat-card-header>
+                  <div mat-card-avatar>
+                    <img class="imgProfile" [src]="user.imgProfile!">
+                  </div>
+                  <mat-card-title>{{user.username}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  {{user.biography}}
+                </mat-card-content>
+              </mat-card>
+
+            </div>
+
+          </mat-tab>
+          <mat-tab label="Tags">
+            <taste-it-recycler-view [recipes]="recipesByTags"></taste-it-recycler-view>
+          </mat-tab>
+
+          <mat-tab label="Ingredients">
+            <taste-it-recycler-view [recipes]="recipesByIngredients"></taste-it-recycler-view>
+          </mat-tab>
+
+          <mat-tab label="Country">
+            <taste-it-recycler-view [recipes]="recipesByCountry"></taste-it-recycler-view>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+
+    </ng-template>
+
+  </div>

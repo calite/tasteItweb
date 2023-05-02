@@ -5,6 +5,11 @@ img {
     object-fit: cover;
 }
 
+mat-card {
+    background-color: rgb(215, 135, 135) !important;
+    margin-top: 2px;
+}
+
 .align-text-right {
     text-align: end;
 }
@@ -13,4 +18,8 @@ img {
     background-color: rgb(215, 135, 135);
     border-color: maroon;
     width: 99%;
+}
+
+.star {
+    color: yellow;
 }

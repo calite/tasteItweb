@@ -1,5 +1,6 @@
 <div class="container">
 
+    <h4>Recipe</h4>
 
     <div *ngIf="!recipe; else divRecipe">
         <shared-loading-spinner></shared-loading-spinner>
@@ -11,13 +12,43 @@
 
 
             <div class="grid flex-row align-items-center justify-content-evenly">
-                <img [src]="decodeImg64(recipe[0].recipe.image!)" [alt]="">
+                <img class="imgRecipe" [src]="decodeImg64(recipe[0].recipe.image!)" [alt]="">
 
                 <h5>{{ recipe[0].recipe.name }}</h5>
                 <h4 [routerLink]="['../../profile', recipe[0].user.token]">{{ recipe[0].user.username }}</h4>
             </div>
 
-            <div class="col">
+            <div class="col p-2 mt-2 grid flex-row align-items-center justify-content-evenly">
+
+                <button mat-fab extended matTooltip="Like this recipe" color="primary" *ngIf="!isLiked"
+                    (click)="likeRecipe()">
+
+                    <mat-icon>thumb_up</mat-icon>
+                    Like
+                </button>
+
+                <button mat-fab extended matTooltip="Dislike this recipe" color="primary" *ngIf="isLiked"
+                    (click)="likeRecipe()">
+                    <mat-icon>thumb_down</mat-icon>
+                    Dislike
+                </button>
+
+                <button mat-fab extended matTooltip="Report this recipe" color="primary" *ngIf="isReportable"
+                    (click)="reportRecipe()">
+                    <mat-icon>report</mat-icon>
+                    Report
+                </button>
+
+                <button mat-fab extended matTooltip="Rate this recipe" color="primary" (click)="rateRecipe()">
+                    <mat-icon>star_rate</mat-icon>
+                    Rate
+                </button>
+
+                <button mat-fab extended matTooltip="Edit this recipe" color="primary" *ngIf="isEditable">
+                    <mat-icon>edit</mat-icon>
+                    Edit
+                </button>
+
 
             </div>
         </div>

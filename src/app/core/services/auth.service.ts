@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, UserCredential, User } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,8 @@ export class AuthService {
   currentUser: any;
 
 
-  constructor(private auth: Auth, private apiService: ApiService, private router: Router) { }
+  constructor(private auth: Auth, private apiService: ApiService, private router: Router) {
+   }
 
   register({ email, password }: any) {
     return createUserWithEmailAndPassword(this.auth, email, password);
@@ -58,11 +59,24 @@ export class AuthService {
     if (!sessionStorage.getItem('currentUser')) return of(false)
     return of(true)
   }
+
+
+  renewIdToken() {
+    this.auth.onAuthStateChanged(function (user) {
+      if (user) {
+        user.getIdToken(true).then(newToken => {
+          sessionStorage.setItem('accessToken', newToken);
+          console.log('good')
+        }).catch(error => {
+          console.log('ups')
+        });
+      }
+    });
+  }
   /*
-  renewIdToken() : Observable<string> {
+  renewIdToken(): Observable<string> {
     return new Observable(observer => {
       const user = this.auth.currentUser;
-      console.log(user)
       if (user) {
         user.getIdToken(true).then(newToken => {
           sessionStorage.setItem('accessToken', newToken);

@@ -16,7 +16,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu'
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import { MatSliderModule } from "@angular/material/slider";
 
 @NgModule({
   exports: [
@@ -36,7 +38,9 @@ import {MatMenuModule} from '@angular/material/menu'
     MatSnackBarModule,
     MatToolbarModule,
     MatTabsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule,
+    MatSliderModule
   ]
 })
 export class MaterialModule { }

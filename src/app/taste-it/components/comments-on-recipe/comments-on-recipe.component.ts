@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { CommentsOnRecipeResponse } from 'src/app/core/interfaces/comment.interface';
 
 @Component({
@@ -17,8 +18,13 @@ export class CommentsOnRecipeComponent {
 
   constructor(
     private sanitizer: DomSanitizer,
+    private router: Router
   ){
     
+  }
+
+  viewProfileCreator(token: string) {
+    this.router.navigate(['/profile/' + token]);
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -19,7 +19,7 @@ export class ProfilePageComponent {
   public comments: CommentsOnUserResponse[] = [];
 
   @Input()
-  public isLoading : boolean = false;
+  public isLoading: boolean = false;
 
   private token: string;
   public recipesCount = 0;
@@ -36,12 +36,14 @@ export class ProfilePageComponent {
   ) {
     //this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     //this.token = this.currentUser.token;
+
     this.token = this.route.snapshot.paramMap.get('token');
     this.apiService.getUserByToken(this.token).subscribe(
       response => {
         this.currentUser = response
         this.isLoading = true
       })
+
   }
 
   ngOnInit(): void {

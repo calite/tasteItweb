@@ -6,6 +6,7 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-photos',
@@ -16,7 +17,7 @@ export class PhotosComponent {
 
   recipes: RecipesResponse[] = [];
   currentUser: UserResponse;
-  public isLoading : boolean = false;
+  public isLoading: boolean = false;
   private token: string;
   private skipper: number = 0;
 
@@ -31,32 +32,42 @@ export class PhotosComponent {
   }
 
   constructor(
-    private apiService : ApiService,
+    private apiService: ApiService,
     private toastService: ToastService,
     private sanitizer: DomSanitizer,
-    ) {
-    this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-    this.token = this.currentUser.token;
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.token = this.route.snapshot.paramMap.get('token');
+    this.apiService.getUserByToken(this.token).subscribe(
+      response => {
+        this.currentUser = response
+        this.isLoading = true
+      })
   }
 
   ngOnInit(): void {
     this.loadRecipes(0)
   }
 
-  loadRecipes(skipper : number){
+  loadRecipes(skipper: number) {
     this.isLoading = true;
 
     this.apiService.getRecipesByUser(this.token, skipper)
-    .subscribe(recipes => {
-      this.recipes.push(...recipes);
-      this.isLoading = false;
+      .subscribe(recipes => {
+        this.recipes.push(...recipes);
+        this.isLoading = false;
 
-        if(recipes.length == 0) {
-          this.toastService.toastGenerator('','There is no more recipes',4, ToastPositionEnum.BOTTOM_RIGHT)
+        if (recipes.length == 0) {
+          this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
         }
-    });
+      });
 
     this.skipper = this.skipper + 10;
+  }
+
+  viewRecipe(recipeId: any) {
+    this.router.navigate(['/recipe/' + recipeId]);
   }
 
   decodeImg64(img: string) {

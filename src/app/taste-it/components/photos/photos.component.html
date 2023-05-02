@@ -1,9 +1,9 @@
 <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
 
 <div class="grid flex-row align-items-center justify-content-evenly">
-    <mat-card *ngFor="let recipe of recipes" class="cards">
+    <mat-card *ngFor="let recipe of recipes" class="cards" (click)="viewRecipe(recipe.recipeId)">
         <mat-card-header>
-            <mat-card-title>{{recipe.recipe.name}}</mat-card-title>
+            <mat-card-title>{{recipe.recipe.name | slice:0:25}}</mat-card-title>
         </mat-card-header>
         <img [src]="decodeImg64(recipe.recipe.image)">
     </mat-card>

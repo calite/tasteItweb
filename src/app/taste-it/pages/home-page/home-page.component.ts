@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { interval } from 'rxjs';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
@@ -42,6 +43,15 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
 
     this.loadRecipes(0);
+
+    const timer = interval(1800000)
+
+    timer.subscribe(
+      x => this.authService.renewIdToken()
+    )
+
+    //this.authService.renewIdToken()
+
     /*
     this.authService.renewIdToken().subscribe(newToken => {
       console.log('Token renewed:', newToken);
@@ -60,8 +70,8 @@ export class HomePageComponent implements OnInit {
         this.recipes.push(...recipes);
         this.isLoading = false;
 
-        if(recipes.length == 0) {
-          this.toastService.toastGenerator('','There is no more recipes',4, ToastPositionEnum.BOTTOM_RIGHT)
+        if (recipes.length == 0) {
+          this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
         }
 
       });

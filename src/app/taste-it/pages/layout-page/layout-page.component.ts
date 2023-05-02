@@ -13,10 +13,10 @@ export class LayoutPageComponent {
   public currentUser : UserResponse;
 
   public menuItems = [
-    {label: 'home', icon: 'home', url:'.'},
-    {label: 'search', icon: 'search', url:'./search'},
-    {label: 'random', icon: 'shuffle', url:'./random'},
-    {label: 'my book', icon: 'menu_book', url:'./my-book'},
+    {label: 'MENU', icon: 'home', url:'.'},
+    {label: 'SEARCH', icon: 'search', url:'./search'},
+    {label: 'RANDOM', icon: 'shuffle', url:'./random'},
+    {label: 'MY BOOK', icon: 'menu_book', url:'./my-book'},
   ]
 
   constructor(private sanitizer: DomSanitizer, private authService: AuthService) {

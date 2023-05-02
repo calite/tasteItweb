@@ -9,11 +9,30 @@
 
         <div class="grid flex-row align-items-center justify-content-evenly">
 
-            <img class="imgProfile" [src]="decodeImg64(currentUser.imgProfile!)">
+            <img class="imgProfile" [src]="currentUser.imgProfile!">
 
             <div class="d-flex justify-content-center align-items-center">
                 <h5>{{currentUser.username}}</h5>
             </div>
+
+        </div>
+
+        <div class="grid p-2 mt-2 flex-row align-items-center justify-content-evenly">
+
+            <button mat-fab extended matTooltip="Follow this user" color="primary">
+                <mat-icon>person_add</mat-icon>
+                Follow
+            </button>
+
+            <button mat-fab extended matTooltip="Unfollow this user" color="primary">
+                <mat-icon>person_remove</mat-icon>
+                Unfollow
+            </button>
+
+            <button mat-fab extended matTooltip="Like this recipe" color="primary">
+                <mat-icon>comment</mat-icon>
+                Comment
+            </button>
 
         </div>
 

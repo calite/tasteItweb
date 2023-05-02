@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="d-flex justify-content-center align-items-center container">
     <div *ngFor="let comment of comments" class="mt-1 container-comment">
         <div class="row p-2">
@@ -8,10 +8,10 @@
         </div>
         <div class="row">
             <div class="col-1">
-                <img class="mx-2" [src]="decodeImg64(comment.user.imgProfile!)">
+                <img class="mx-2" [src]="comment.user.imgProfile!" (click)="viewProfileCreator(comment.user.token)">
             </div>
             <div class="col-11">
-                <b>{{comment.user.username}}</b>
+                <b (click)="viewProfileCreator(comment.user.token)">{{comment.user.username}}</b>
             </div>
         </div>
         <div class="row">
@@ -20,6 +20,17 @@
             </div>
         </div>
     </div>
-</div> 
+</div>  -->
 
-  
+<mat-card class="user-cards" *ngFor="let comment of comments" (click)="viewProfileCreator(comment.user.token)">
+    <mat-card-header>
+        <div mat-card-avatar>
+            <img class="imgProfile" [src]="comment.user.imgProfile!">
+        </div>
+        <mat-card-title>{{comment.user.username}}</mat-card-title>
+        <mat-card-subtitle>{{comment.comment.dateCreated}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p><b>Said:</b> {{comment.comment.comment}}</p>
+    </mat-card-content>
+</mat-card>

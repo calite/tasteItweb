@@ -13,6 +13,7 @@ import { MyBookPageComponent } from './pages/my-book-page/my-book-page.component
 import { ViewRecipePageComponent } from './pages/view-recipe-page/view-recipe-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from './components/components.module';
+import { DialogsModule } from './dialogs/dialogs.module';
 
 
 
@@ -38,7 +39,8 @@ import { ComponentsModule } from './components/components.module';
         TasteItRoutingModule,
         CommonModule,
         SharedModule,
-        ComponentsModule
+        ComponentsModule,
+        DialogsModule
     ]
 })
 export class TasteItModule { }

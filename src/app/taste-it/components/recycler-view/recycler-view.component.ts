@@ -29,7 +29,6 @@ export class RecyclerViewComponent {
   }
 
   viewProfileCreator(token : string) {
-    console.log(token)
     this.router.navigate(['/profile/' + token]);
   }
 

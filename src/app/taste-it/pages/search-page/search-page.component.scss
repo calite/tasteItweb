@@ -1,0 +1,47 @@
+.filter-box {
+    
+}
+
+
+.user-cards {
+    margin: 20px;
+    // padding: 5px;
+    max-width: 325px;
+    background-color: maroon !important;
+    color: white;
+}
+
+.user-cards img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.card-title {
+    color: maroon !important;
+}
+
+.mat-mdc-tab {
+    background-color: maroon !important;
+    border: 1px solid maroon !important;
+}
+
+.mdc-tab__text-label {
+    color: white !important;
+}
+
+
+
+.mdc-tab--active {
+    background-color: rgb(215, 135, 135) !important;
+
+    .mdc-tab__text-label {
+        color: maroon !important;
+    }
+
+    .mdc-tab-indicator__content {
+        border-color: maroon !important;
+    }
+}

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
 
 @Component({
@@ -17,6 +18,7 @@ export class CommentsOnUserComponent {
 
   constructor(
     private sanitizer: DomSanitizer,
+    private router: Router,
   ){
     
   }
@@ -27,8 +29,8 @@ export class CommentsOnUserComponent {
     }
   }
 
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
+  viewProfileCreator(token : string) {
+    this.router.navigate(['/profile/' + token]);
   }
 
 }
