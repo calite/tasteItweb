@@ -9,6 +9,8 @@ import { CommentsOnRecipeResponse } from 'src/app/core/interfaces/comment.interf
 import { ReportDialogComponent } from '../../dialogs/report-dialog/report-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RateDialogComponent } from '../../dialogs/rate-dialog/rate-dialog.component';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-view-recipe-page',
@@ -21,20 +23,20 @@ export class ViewRecipePageComponent {
   public recipe !: RecipesResponse[];
   private currentUser: User;
   public isLoading: boolean = false;
-
   public isLiked: boolean = false;
   public isEditable: boolean = false;
-  public isReportable : boolean = true;
+  public isReportable: boolean = true;
 
   @Output()
   comments: CommentsOnRecipeResponse[];
 
   constructor(
-    private ActivatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private sanitizer: DomSanitizer,
     private reportDialog: MatDialog,
-    private rateDialog: MatDialog
+    private rateDialog: MatDialog,
+    private toastService: ToastService
   ) {
 
   }
@@ -48,45 +50,46 @@ export class ViewRecipePageComponent {
 
   }
 
-
-
-
-
   loadRecipe() {
     this.isLoading = true;
 
-    this.ActivatedRoute.params
+    this.activatedRoute.params
       .pipe(
         switchMap(({ recipeId }) => this.apiService.getRecipeById(recipeId)),
       )
       .subscribe(recipe => {
         this.recipe = recipe;
-        if(recipe[0].user.token === this.currentUser.token) {
+        if (recipe[0].user.token === this.currentUser.token) {
           this.isEditable = true
           this.isReportable = false;
         }
         this.isLoading = false;
       })
 
-      this.checkLike()
+    this.checkLike()
 
-    
   }
 
-  checkLike(){
-    this.ActivatedRoute.params
+  checkLike() {
+
+    this.activatedRoute.params
       .pipe(
         switchMap(({ recipeId }) => this.apiService.getRecipeIsLiked(recipeId, this.currentUser.token)),
       )
       .subscribe(response => {
-        if(response.length > 0) this.isLiked = true
-        else this.isLiked = false
+        if (response.length > 0) {
+          this.isLiked = true
+        }
+        else {
+          this.isLiked = false
+        }
       })
+
   }
 
   loadComments() {
 
-    this.ActivatedRoute.params
+    this.activatedRoute.params
       .pipe(
         switchMap(({ recipeId }) => this.apiService.getCommentsOnRecipe(recipeId)),
       )
@@ -98,21 +101,33 @@ export class ViewRecipePageComponent {
 
   likeRecipe() {
 
-    this.ActivatedRoute.params
+    this.activatedRoute.params
       .pipe(
-        switchMap(({recipeId}) => this.apiService.postLikeOnRecipe(recipeId, this.currentUser.token))
-      ).subscribe( response => {
+        switchMap(({ recipeId }) => this.apiService.postLikeOnRecipe(recipeId, this.currentUser.token))
+      ).subscribe(response => {
         this.checkLike()
+        if (!this.isLiked) {
+          this.toastService.toastGenerator('', 'recipe liked', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        } else {
+          this.toastService.toastGenerator('', 'recipe disliked', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        }
       })
-        
+
   }
 
   reportRecipe() {
-    const dialogRef = this.reportDialog.open(ReportDialogComponent);
+    const dialogRef = this.reportDialog.open(ReportDialogComponent, {
+      data: { recipeId: this.recipe[0].recipeId }
+    });
   }
 
   rateRecipe() {
-    const dialogRef = this.rateDialog.open(RateDialogComponent);
+    const dialogRef = this.rateDialog.open(RateDialogComponent, {
+      data: { recipeId: this.recipe[0].recipeId }
+    });
+    dialogRef.componentInstance.formClosed.subscribe(() => {
+      this.loadComments()
+    })
   }
 
 

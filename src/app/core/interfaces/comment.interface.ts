@@ -3,7 +3,6 @@ import { Recipe, User } from "./recipe.interface";
 export interface CommentsOnUserResponse {
     user: User;
     comment: Comment;
-
 }
 
 export interface Comment {
@@ -11,19 +10,23 @@ export interface Comment {
     dateCreated: string;
 }
 
-
-
 export interface CommentsOnRecipeResponse {
     recipeId: number;
-    recipe:   Recipe;
-    user:     User;
-    c:        CommentRating;
+    recipe: Recipe;
+    user: User;
+    c: CommentRating;
 }
 
 export interface CommentRating {
     comment: string;
     dateCreated: string;
     rating: string;
+}
+
+export interface ReportOnRecipeResponse {
+    RecipeId: number;
+    token: string;
+    comment: string;
 }
 
 

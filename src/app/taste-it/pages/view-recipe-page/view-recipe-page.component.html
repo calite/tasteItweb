@@ -33,15 +33,15 @@
                     Dislike
                 </button>
 
+                <button mat-fab extended matTooltip="Rate this recipe" color="primary" (click)="rateRecipe()">
+                    <mat-icon>star_rate</mat-icon>
+                    Rate
+                </button>
+
                 <button mat-fab extended matTooltip="Report this recipe" color="primary" *ngIf="isReportable"
                     (click)="reportRecipe()">
                     <mat-icon>report</mat-icon>
                     Report
-                </button>
-
-                <button mat-fab extended matTooltip="Rate this recipe" color="primary" (click)="rateRecipe()">
-                    <mat-icon>star_rate</mat-icon>
-                    Rate
                 </button>
 
                 <button mat-fab extended matTooltip="Edit this recipe" color="primary" *ngIf="isEditable">

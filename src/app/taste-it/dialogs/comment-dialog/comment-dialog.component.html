@@ -1,15 +1,11 @@
 <div mat-dialog-content>
     <p>Rate this recipe</p>
     <form class="flex flex-column align-items-center justify-content-center"
-        [formGroup]="formRate">
+        [formGroup]="formComment">
         <mat-form-field appearance="fill">
             <mat-label>Comment</mat-label>
             <input matInput type="text" formControlName="comment">
         </mat-form-field>
-
-        <mat-slider min="0" max="5" step="1" showTickMarks discrete >
-            <input type="range" matSliderThumb formControlName="rating">
-        </mat-slider>
     </form>
 </div>
 <div mat-dialog-actions>

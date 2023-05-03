@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe, RecipesResponse, User } from '../interfaces/recipe.interface';
 import { Observable } from 'rxjs';
-import { CommentsOnRecipeResponse, CommentsOnUserResponse } from '../interfaces/comment.interface';
-import { UserResponse } from '../interfaces/user.interface';
+import { CommentsOnRecipeResponse, CommentsOnUserResponse, ReportOnRecipeResponse } from '../interfaces/comment.interface';
+import { UserFollowingResponse, UserResponse } from '../interfaces/user.interface';
 
 
 @Injectable({
@@ -12,8 +12,8 @@ import { UserResponse } from '../interfaces/user.interface';
 export class ApiService {
 
 
-    //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
-    private apiUrl: string = 'https://localhost:7076/';
+    private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
+    //private apiUrl: string = 'https://localhost:7076/';
     private apiKey: string = sessionStorage.getItem('accessToken');
 
     constructor(private http: HttpClient) { }
@@ -192,14 +192,98 @@ export class ApiService {
             })
         };
         const body = {
-            rid : recipeId,
-            token : token
+            rid: recipeId,
+            token: token
         }
 
         return this.http.post<RecipesResponse[]>(url, body, httpOptions);
 
     }
+    
+    //rate recipe
+    postCommentOnRecipe(recipeId: number, token: string, comment: string, rating: number): Observable<CommentsOnRecipeResponse[]> {
 
+        const url = `${this.apiUrl}recipe/comment_recipe`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            rid: recipeId,
+            token: token,
+            comment: comment,
+            rating: rating
+        }
+
+        return this.http.post<CommentsOnRecipeResponse[]>(url, body, httpOptions);
+
+     }
+
+     postReportOnRecipe(recipeId: number, token: string, comment: string): Observable<ReportOnRecipeResponse[]> {
+
+        const url = `${this.apiUrl}recipe/report_recipe`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            rid: recipeId,
+            token: token,
+            comment: comment,
+        }
+
+        return this.http.post<ReportOnRecipeResponse[]>(url, body, httpOptions);
+
+     }
+
+     getCheckFollowingUser(sender_token : string, receiver_token : string) : Observable<UserFollowingResponse[]> {
+
+        const url = `${this.apiUrl}user/following/${sender_token}_${receiver_token}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<UserFollowingResponse[]>(url, { headers });
+
+     }
+
+    postFollowUser(sender_token : string, receiver_token : string) : Observable<UserFollowingResponse[]> {
+
+        const url = `${this.apiUrl}user/follow`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            senderToken: sender_token,
+            receiverToken: receiver_token
+        }
+
+        return this.http.post<UserFollowingResponse[]>(url, body, httpOptions);
+
+    }
+
+    postCommentOnUser(sender_token : string, receiver_token: string, comment: string) {
+
+        const url = `${this.apiUrl}user/comment_user`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            senderId: sender_token,
+            receiverId: receiver_token,
+            comment: comment
+        }
+
+        return this.http.post(url, body, httpOptions);
+
+    }
 
 
 }
