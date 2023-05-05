@@ -25,7 +25,6 @@
     "firebase": "^9.19.1",
     "ngx-bar-rating": "^5.0.0",
     "primeflex": "^3.3.0",
-    "primeng": "^13.4.4-lts",
     "rxjs": "~7.8.0",
     "zone.js": "~0.12.0"
   },
