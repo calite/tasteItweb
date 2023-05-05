@@ -12,11 +12,15 @@ import { UserFollowingResponse, UserResponse } from '../interfaces/user.interfac
 export class ApiService {
 
 
-    //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
-    private apiUrl: string = 'https://localhost:7076/';
+    private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
+    //private apiUrl: string = 'https://localhost:7076/';
     private apiKey: string = sessionStorage.getItem('accessToken');
 
     constructor(private http: HttpClient) { }
+
+    updateApiKey() {
+        this.apiKey = sessionStorage.getItem('accessToken')
+    }
 
     getRecipesHome(skipper: number): Observable<RecipesResponse[]> {
 
@@ -283,6 +287,18 @@ export class ApiService {
 
         return this.http.post(url, body, httpOptions);
 
+    }
+
+    getFollowing(sender_token : string, skipper: number) : Observable<UserResponse[]> {
+        const url = `${this.apiUrl}user/following_user/${sender_token}/${skipper}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<UserResponse[]>(url, { headers });
+    }
+
+    getFollowers(sender_token : string, skipper: number) : Observable<UserResponse[]> {
+        const url = `${this.apiUrl}user/followers_user/${sender_token}/${skipper}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<UserResponse[]>(url, { headers });
     }
 
 

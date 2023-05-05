@@ -5,9 +5,14 @@
     object-fit: cover;
     cursor: pointer;
     background-color: maroon !important;
+    border: 3px solid maroon;
 }
 
 mat-card {
     background-color: rgb(215, 135, 135) !important;
     margin-top: 2px;
+}
+
+.star {
+    color: yellow;
 }

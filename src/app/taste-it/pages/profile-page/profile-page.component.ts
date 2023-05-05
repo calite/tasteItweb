@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { CommentDialogComponent } from '../../dialogs/comment-dialog/comment-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ViewRecipesDialogComponent } from '../../dialogs/view-recipes-dialog/view-recipes-dialog.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -49,6 +50,7 @@ export class ProfilePageComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private commentDialog: MatDialog,
+    private recipeDialog: MatDialog,
     private toastService: ToastService
   ) {
     this.comments = []
@@ -152,12 +154,34 @@ export class ProfilePageComponent implements OnInit {
   }
 
   editUser() {
-    console.log('buena')
+    console.log('quasy ready')
   }
 
   viewRecipes() {
-    console.log('pasan cosas')
+    const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
+      data: { userToken: this.token , option: 'recipes'}
+    })
   }
+
+  viewLikes() {
+    const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
+      data: { userToken: this.token , option: 'likes'}
+    })
+  }
+
+  viewFollowers() {
+    const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
+      data: { userToken: this.token , option: 'followers'}
+    })
+  }
+
+  viewFollowing() {
+    const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
+      data: { userToken: this.token , option: 'following'}
+    })
+  }
+
+
 
   decodeImg64(img: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);

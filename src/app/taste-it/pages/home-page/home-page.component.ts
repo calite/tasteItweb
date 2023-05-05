@@ -47,18 +47,12 @@ export class HomePageComponent implements OnInit {
     const timer = interval(1800000)
 
     timer.subscribe(
-      x => this.authService.renewIdToken()
+      x => {
+        this.authService.renewIdToken()
+        this.apiService.updateApiKey()
+      }
     )
 
-    //this.authService.renewIdToken()
-
-    /*
-    this.authService.renewIdToken().subscribe(newToken => {
-      console.log('Token renewed:', newToken);
-    }, error => {
-      console.log('Error renewing token:', error);
-    });
-    */
   }
 
   loadRecipes(skipper: number) {

@@ -30,7 +30,9 @@ export class CommentsOnUserComponent {
   }
 
   viewProfileCreator(token : string) {
-    this.router.navigate(['/profile/' + token]);
+    this.router.navigate(['']).then(() => {
+      this.router.navigate(['/profile/' + token]);
+    });
   }
 
 }

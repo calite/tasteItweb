@@ -14,15 +14,14 @@
             <div class="grid flex-row align-items-center justify-content-evenly">
                 <img class="imgRecipe" [src]="decodeImg64(recipe[0].recipe.image!)" [alt]="">
 
-                <h5>{{ recipe[0].recipe.name }}</h5>
-                <h4 [routerLink]="['../../profile', recipe[0].user.token]">{{ recipe[0].user.username }}</h4>
+                <h5>{{ recipe[0].recipe.name | titlecase }}</h5>
+                <h4 [routerLink]="['../../profile', recipe[0].user.token]">{{ recipe[0].user.username | titlecase }}</h4>
             </div>
 
             <div class="col p-2 mt-2 grid flex-row align-items-center justify-content-evenly">
 
                 <button mat-fab extended matTooltip="Like this recipe" color="primary" *ngIf="!isLiked"
                     (click)="likeRecipe()">
-
                     <mat-icon>thumb_up</mat-icon>
                     Like
                 </button>
@@ -61,25 +60,25 @@
                 <mat-tab-group [disableRipple]=true>
                     <mat-tab label="Information" class="mat-tab-label-active">
                         <p><strong>Description:</strong></p>
-                        <p>{{ recipe[0].recipe.description }}</p>
+                        <p>{{ recipe[0].recipe.description | titlecase }}</p>
                         <p><strong>Difficulty:</strong></p>
                         <p>{{ recipe[0].recipe.difficulty }}</p>
                         <p><strong>country:</strong></p>
-                        <p>{{ recipe[0].recipe.country }}</p>
+                        <p>{{ recipe[0].recipe.country | titlecase }}</p>
                         <p><strong>Tags:</strong></p>
                         <mat-chip-set>
-                            <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item}}</mat-chip>
+                            <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item | titlecase}}</mat-chip>
                         </mat-chip-set>
                         <p>{{ recipe[0].recipe.tags }}</p>
                         <p><strong>Ingredients:</strong></p>
                         <mat-chip-set>
                             <mat-chip *ngFor="let item of recipe[0].recipe.ingredients"
-                                class="chipCustom">{{item}}</mat-chip>
+                                class="chipCustom">{{item | titlecase}}</mat-chip>
                         </mat-chip-set>
                     </mat-tab>
                     <mat-tab label="Steps">
                         <p><strong>Steps:</strong></p>
-                        <div class="stepsCustom" *ngFor="let item of recipe[0].recipe.steps">{{ item }}</div>
+                        <div class="stepsCustom" *ngFor="let item of recipe[0].recipe.steps">{{ item | titlecase }}</div>
                     </mat-tab>
                     <mat-tab label="Comments">
                         <app-comments-on-recipe [comments]="comments"></app-comments-on-recipe>
@@ -90,6 +89,3 @@
     </ng-template>
 
 </div>
-
-
-<!-- <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner> -->

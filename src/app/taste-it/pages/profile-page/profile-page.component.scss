@@ -10,7 +10,6 @@
 
 .cards {
     background-color: maroon;
-    
 }
 
 mat-mdc-card mat-card {
@@ -23,6 +22,7 @@ mat-mdc-card mat-card {
     background-color: rgb(215, 135, 135) !important;
     border: 1px solid maroon !important;
     text-align: center;
+    cursor:pointer;
   }
 
 

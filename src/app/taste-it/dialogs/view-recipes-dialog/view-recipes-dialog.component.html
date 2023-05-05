@@ -1,0 +1,27 @@
+<div class="container" *ngIf="option == 'recipes' || option =='likes'">
+
+    <h3>{{option | titlecase }}</h3>
+
+    <div *ngFor="let recipe of recipes" class="flex-auto flex align-items-center  align-content-center mt-2 mini-card">
+        <div>
+            <img class="imgRecipe" [src]="decodeImg64(recipe.recipe.image!)">
+        </div>
+        <div class="ml-2">
+            <p>{{recipe.recipe.name | titlecase}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="option == 'followers' || option =='following'">
+
+    <h3>{{option | titlecase }}</h3>
+
+    <div *ngFor="let user of users" class="flex-auto flex align-items-center  align-content-center mt-2 mini-card">
+        <div>
+            <img class="imgRecipe" [src]="user.imgProfile!">
+        </div>
+        <div class="ml-2">
+            <p>{{user.username | titlecase}}</p>
+        </div>
+    </div>
+</div>

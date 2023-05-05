@@ -95,9 +95,9 @@ export class ViewRecipePageComponent implements OnInit {
         this.comments.push(...comments)
         this.isLoading = false;
 
-        if (comments.length == 0 && this.comments.length != 0) {
-          // this.toastService.toastGenerator('', 'There is no more comments', 4, ToastPositionEnum.BOTTOM_RIGHT)
-        }
+        // if (comments.length == 0 && this.comments.length != 0) {
+        //   // this.toastService.toastGenerator('', 'There is no more comments', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        // }
       });
 
       this.skipper = this.skipper + 10;
@@ -111,7 +111,7 @@ export class ViewRecipePageComponent implements OnInit {
         switchMap(({ recipeId }) => this.apiService.getRecipeIsLiked(recipeId, this.currentUser.token)),
       )
       .subscribe(response => {
-        if (response.length > 0) {
+        if (response) {
           this.isLiked = true
         }
         else {

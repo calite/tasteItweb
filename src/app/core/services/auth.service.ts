@@ -66,29 +66,11 @@ export class AuthService {
       if (user) {
         user.getIdToken(true).then(newToken => {
           sessionStorage.setItem('accessToken', newToken);
-          console.log('good')
         }).catch(error => {
-          console.log('ups')
+          console.log('Fail to refresh token: ' + error)
         });
       }
     });
   }
-  /*
-  renewIdToken(): Observable<string> {
-    return new Observable(observer => {
-      const user = this.auth.currentUser;
-      if (user) {
-        user.getIdToken(true).then(newToken => {
-          sessionStorage.setItem('accessToken', newToken);
-          observer.next(newToken);
-        }).catch(error => {
-          observer.error(error);
-        });
-      } else {
-        observer.error('No user is currently signed in.');
-      }
-    });
-  }
-  */
 
 }

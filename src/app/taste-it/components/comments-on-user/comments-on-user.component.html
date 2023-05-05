@@ -27,8 +27,8 @@
         <div mat-card-avatar>
             <img class="imgProfile" [src]="comment.user.imgProfile!">
         </div>
-        <mat-card-title>{{comment.user.username}}</mat-card-title>
-        <mat-card-subtitle>{{comment.comment.dateCreated}}</mat-card-subtitle>
+        <mat-card-title class="ml-2">{{comment.user.username | titlecase}}</mat-card-title>
+        <mat-card-subtitle class="ml-2">{{comment.comment.dateCreated}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <p><b>Said:</b> {{comment.comment.comment}}</p>
