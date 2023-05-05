@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HostListener } from '@angular/core';
 import { catchError, switchMap, tap } from 'rxjs';
 import { RecipesResponse, User } from 'src/app/core/interfaces/recipe.interface';
 import { ApiService } from 'src/app/core/services/api.service';
@@ -18,17 +20,30 @@ import { ToastService } from 'src/app/core/services/toast.service';
   styleUrls: ['./view-recipe-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ViewRecipePageComponent {
+export class ViewRecipePageComponent implements OnInit {
 
-  public recipe !: RecipesResponse[];
+  
+  @Output()
+  comments: CommentsOnRecipeResponse[];
+
+  public recipe : RecipesResponse[];
   private currentUser: User;
   public isLoading: boolean = false;
   public isLiked: boolean = false;
   public isEditable: boolean = false;
   public isReportable: boolean = true;
+  private skipper: number = 0;
 
-  @Output()
-  comments: CommentsOnRecipeResponse[];
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event) {
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const max = document.documentElement.scrollHeight;
+
+    if (pos === max) {
+      this.loadComments(this.skipper)
+    }
+  }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,7 +53,7 @@ export class ViewRecipePageComponent {
     private rateDialog: MatDialog,
     private toastService: ToastService
   ) {
-
+    this.comments = []
   }
 
   ngOnInit(): void {
@@ -46,8 +61,7 @@ export class ViewRecipePageComponent {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
 
     this.loadRecipe();
-    this.loadComments();
-
+    this.loadComments(0);
   }
 
   loadRecipe() {
@@ -70,6 +84,26 @@ export class ViewRecipePageComponent {
 
   }
 
+  loadComments(skipper : number) {
+    this.isLoading = true;
+
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({ recipeId }) => this.apiService.getCommentsOnRecipe(recipeId, skipper)),
+      )
+      .subscribe(comments => {
+        this.comments.push(...comments)
+        this.isLoading = false;
+
+        if (comments.length == 0 && this.comments.length != 0) {
+          // this.toastService.toastGenerator('', 'There is no more comments', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        }
+      });
+
+      this.skipper = this.skipper + 10;
+
+  }
+
   checkLike() {
 
     this.activatedRoute.params
@@ -83,18 +117,6 @@ export class ViewRecipePageComponent {
         else {
           this.isLiked = false
         }
-      })
-
-  }
-
-  loadComments() {
-
-    this.activatedRoute.params
-      .pipe(
-        switchMap(({ recipeId }) => this.apiService.getCommentsOnRecipe(recipeId)),
-      )
-      .subscribe(comments => {
-        this.comments = comments
       })
 
   }
@@ -126,7 +148,9 @@ export class ViewRecipePageComponent {
       data: { recipeId: this.recipe[0].recipeId }
     });
     dialogRef.componentInstance.formClosed.subscribe(() => {
-      this.loadComments()
+      this.comments = []
+      this.skipper = 0;
+      this.loadComments(this.skipper)
     })
   }
 

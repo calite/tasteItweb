@@ -1,6 +1,7 @@
-import { Component, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, ViewEncapsulation, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HostListener } from '@angular/core';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
@@ -15,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./profile-page.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit {
 
   @Output()
   currentUser: UserResponse;
@@ -31,7 +32,17 @@ export class ProfilePageComponent {
   public likesCount = 0;
   public samePerson: boolean = false;
   public canFollow: boolean = false;
+  private skipper: number = 0;
 
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event) {
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const max = document.documentElement.scrollHeight;
+
+    if (pos === max) {
+      this.loadComments(this.skipper)
+    }
+  }
 
   constructor(
     private apiService: ApiService,
@@ -40,8 +51,12 @@ export class ProfilePageComponent {
     private commentDialog: MatDialog,
     private toastService: ToastService
   ) {
-    //this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-    //this.token = this.currentUser.token;
+    this.comments = []
+
+    
+  }
+
+  ngOnInit(): void {
 
     this.token = this.route.snapshot.paramMap.get('token');
     this.apiService.getUserByToken(this.token).subscribe(
@@ -52,10 +67,6 @@ export class ProfilePageComponent {
 
     this.checkPerson()
     this.checkFollow()
-
-  }
-
-  ngOnInit(): void {
 
     //contadores
     this.apiService.getCountRecipes(this.token)
@@ -79,8 +90,21 @@ export class ProfilePageComponent {
       });
 
     //comentarios
-    this.loadComments();
+    this.loadComments(0);
 
+  }
+
+  loadComments(skipper: number) {
+    //this.isLoading = true;
+
+    this.apiService.getCommentsOnUser(this.token, skipper)
+      .subscribe(comments => {
+        this.comments.push(...comments)
+        //this.isLoading = false;
+      });
+
+    
+    this.skipper = this.skipper + 10;
   }
 
   checkPerson() {
@@ -93,11 +117,12 @@ export class ProfilePageComponent {
       JSON.parse(sessionStorage.getItem('currentUser')).token,
       this.token
     ).subscribe(response => {
-      if (response.length == 0) {
+      if (response) {
         this.canFollow = true;
       } else {
         this.canFollow = false;
       }
+
     })
   }
 
@@ -107,7 +132,7 @@ export class ProfilePageComponent {
       this.token
     ).subscribe(response => {
       this.checkFollow()
-      if (this.canFollow) {
+      if (!this.canFollow) {
         this.toastService.toastGenerator('', 'start following', 4, ToastPositionEnum.BOTTOM_RIGHT)
       } else {
         this.toastService.toastGenerator('', 'stop following', 4, ToastPositionEnum.BOTTOM_RIGHT)
@@ -120,21 +145,19 @@ export class ProfilePageComponent {
       data: { receiverToken: this.token }
     });
     dialogRef.componentInstance.formClosed.subscribe(() => {
-      this.loadComments()
+      this.comments = []
+      this.skipper = 0;
+      this.loadComments(this.skipper)
     })
   }
 
-  loadComments() {
-    this.apiService.getCommentsOnUser(this.token)
-      .subscribe(response => {
-        this.comments = response;
-      });
-  }
-
-  editUser(){
+  editUser() {
     console.log('buena')
   }
 
+  viewRecipes() {
+    console.log('pasan cosas')
+  }
 
   decodeImg64(img: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);

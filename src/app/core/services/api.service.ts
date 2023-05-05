@@ -12,8 +12,8 @@ import { UserFollowingResponse, UserResponse } from '../interfaces/user.interfac
 export class ApiService {
 
 
-    private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
-    //private apiUrl: string = 'https://localhost:7076/';
+    //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
+    private apiUrl: string = 'https://localhost:7076/';
     private apiKey: string = sessionStorage.getItem('accessToken');
 
     constructor(private http: HttpClient) { }
@@ -104,17 +104,17 @@ export class ApiService {
 
     //coments
 
-    getCommentsOnUser(token: string): Observable<CommentsOnUserResponse[]> {
+    getCommentsOnUser(token: string, skipper: number): Observable<CommentsOnUserResponse[]> {
 
-        const url = `${this.apiUrl}user/comments/${token}`;
+        const url = `${this.apiUrl}user/comments/${token}/${skipper}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<CommentsOnUserResponse[]>(url, { headers });
 
     }
 
-    getCommentsOnRecipe(rid: string): Observable<CommentsOnRecipeResponse[]> {
+    getCommentsOnRecipe(rid: number, skipper : number): Observable<CommentsOnRecipeResponse[]> {
 
-        const url = `${this.apiUrl}recipe/comments/${rid}`;
+        const url = `${this.apiUrl}recipe/comments/${rid}/${skipper}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<CommentsOnRecipeResponse[]>(url, { headers });
 
@@ -199,7 +199,7 @@ export class ApiService {
         return this.http.post<RecipesResponse[]>(url, body, httpOptions);
 
     }
-    
+
     //rate recipe
     postCommentOnRecipe(recipeId: number, token: string, comment: string, rating: number): Observable<CommentsOnRecipeResponse[]> {
 
@@ -219,9 +219,9 @@ export class ApiService {
 
         return this.http.post<CommentsOnRecipeResponse[]>(url, body, httpOptions);
 
-     }
+    }
 
-     postReportOnRecipe(recipeId: number, token: string, comment: string): Observable<ReportOnRecipeResponse[]> {
+    postReportOnRecipe(recipeId: number, token: string, comment: string): Observable<ReportOnRecipeResponse[]> {
 
         const url = `${this.apiUrl}recipe/report_recipe`;
         const httpOptions = {
@@ -238,17 +238,17 @@ export class ApiService {
 
         return this.http.post<ReportOnRecipeResponse[]>(url, body, httpOptions);
 
-     }
+    }
 
-     getCheckFollowingUser(sender_token : string, receiver_token : string) : Observable<UserFollowingResponse[]> {
+    getCheckFollowingUser(sender_token: string, receiver_token: string): Observable<boolean> {
 
         const url = `${this.apiUrl}user/following/${sender_token}_${receiver_token}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
-        return this.http.get<UserFollowingResponse[]>(url, { headers });
+        return this.http.get<boolean>(url, { headers });
 
-     }
+    }
 
-    postFollowUser(sender_token : string, receiver_token : string) : Observable<UserFollowingResponse[]> {
+    postFollowUser(sender_token: string, receiver_token: string): Observable<UserFollowingResponse[]> {
 
         const url = `${this.apiUrl}user/follow`;
         const httpOptions = {
@@ -266,7 +266,7 @@ export class ApiService {
 
     }
 
-    postCommentOnUser(sender_token : string, receiver_token: string, comment: string) {
+    postCommentOnUser(sender_token: string, receiver_token: string, comment: string) {
 
         const url = `${this.apiUrl}user/comment_user`;
         const httpOptions = {

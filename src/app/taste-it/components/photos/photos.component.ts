@@ -1,19 +1,18 @@
-import { Component, HostListener, Output } from '@angular/core';
-import { ApiService } from 'src/app/core/services/api.service';
-import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
-import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
-import { UserResponse } from 'src/app/core/interfaces/user.interface';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
-import { ToastService } from 'src/app/core/services/toast.service';
+import { Component, HostListener, Output, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from 'src/app/core/services/api.service';
+import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
+import { UserResponse } from 'src/app/core/interfaces/user.interface';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.scss']
 })
-export class PhotosComponent {
+export class PhotosComponent implements OnInit {
 
   recipes: RecipesResponse[] = [];
   currentUser: UserResponse;
@@ -59,7 +58,7 @@ export class PhotosComponent {
         this.isLoading = false;
 
         if (recipes.length == 0) {
-          this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
+          // this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
         }
       });
 

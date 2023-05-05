@@ -18,7 +18,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
-import { MatSliderModule } from "@angular/material/slider";
+import { MatSliderModule } from "@angular/material/slider"
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
   exports: [
@@ -40,7 +42,9 @@ import { MatSliderModule } from "@angular/material/slider";
     MatTabsModule,
     MatMenuModule,
     MatProgressBarModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTooltipModule,
+    RatingModule
   ]
 })
 export class MaterialModule { }

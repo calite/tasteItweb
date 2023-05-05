@@ -13,6 +13,8 @@ import { RecyclerViewComponent } from './recycler-view/recycler-view.component';
 import { CommentsOnUserComponent } from './comments-on-user/comments-on-user.component';
 import { CommentsOnRecipeComponent } from './comments-on-recipe/comments-on-recipe.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ListRecipesComponent } from './list-recipes/list-recipes.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -26,13 +28,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RecyclerViewComponent,
     BioComponent,
     CommentsOnUserComponent,
-    CommentsOnRecipeComponent
+    CommentsOnRecipeComponent,
+    ListRecipesComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
   , exports: [
     BioComponent,

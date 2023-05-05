@@ -1,11 +1,11 @@
 <div class="grid">
     <div class="col">
-        <mat-card class="user-cards" *ngFor="let comment of comments" (click)="viewProfileCreator(comment.user.token)">
+        <mat-card class="user-cards" *ngFor="let comment of comments">
             <mat-card-header>
                 <div mat-card-avatar>
                     <img class="imgProfile" [src]="comment.user.imgProfile!">
                 </div>
-                <mat-card-title>{{comment.user.username}}</mat-card-title>
+                <mat-card-title  (click)="viewProfileCreator(comment.user.token)">{{comment.user.username}}</mat-card-title>
                 <mat-card-subtitle>{{comment.c.dateCreated}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>

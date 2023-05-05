@@ -52,7 +52,7 @@ export class LikedComponent {
         this.isLoading = false;
 
         if(recipes.length == 0) {
-          this.toastService.toastGenerator('','There is no more recipes',4, ToastPositionEnum.BOTTOM_RIGHT)
+          // this.toastService.toastGenerator('','There is no more recipes',4, ToastPositionEnum.BOTTOM_RIGHT)
         }
       });
 

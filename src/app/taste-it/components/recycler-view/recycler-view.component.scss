@@ -16,6 +16,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 2px solid #b92617;
     object-fit: cover;
 }
 
@@ -23,4 +24,10 @@
     position: absolute;
     top: 350px;
     right: 5px;
+}
+
+mat-card-subtitle {
+    font-style: italic;
+    color: azure;
+    font-size: small;
 }

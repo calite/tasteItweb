@@ -6,22 +6,22 @@
             <div mat-card-avatar>
                 <img class="imgProfile" [src]="recipe.user.imgProfile!" (click)="viewProfileCreator(recipe.user.token)">
             </div>
-            <mat-card-title (click)="viewProfileCreator(recipe.user.token)">{{ recipe.user.username }}</mat-card-title>
-            <mat-card-subtitle (click)="viewRecipe(recipe.recipeId)">{{ recipe.recipe.name | slice:0:20
+            <mat-card-title matTooltip="Name of the creator" (click)="viewProfileCreator(recipe.user.token)">{{ recipe.user.username | titlecase }}</mat-card-title>
+            <mat-card-subtitle matTooltip="name of the recipe" (click)="viewRecipe(recipe.recipeId)">{{ recipe.recipe.name | slice:0:20
                 }}</mat-card-subtitle>
         </mat-card-header>
         <div class="imgContainer">
             <img class="imgRecipeCard" [src]="decodeImg64(recipe.recipe.image!)" alt=""
                 (click)="viewRecipe(recipe.recipeId)" />
 
-                <button mat-mini-fab class="difficultyContainer">
+                <button mat-mini-fab matTooltip="difficulty" class="difficultyContainer">
                     <mat-icon>speed</mat-icon>
                     {{ recipe.recipe.difficulty }}
                 </button>
 
         </div>
-        <mat-card-content (click)="viewRecipe(recipe.recipeId)">
-            <p>{{ recipe.recipe.description }}</p>
+        <mat-card-content matTooltip="description of the recipe" (click)="viewRecipe(recipe.recipeId)">
+            <p>{{ recipe.recipe.description | titlecase }}</p>
             <!-- <p>Difficulty: {{ recipe.recipe.difficulty }}</p>
             <p>Country: {{ recipe.recipe.country }}</p> -->
         </mat-card-content>
