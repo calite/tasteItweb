@@ -31,44 +31,6 @@ const routes: Routes = [
     redirectTo: '404'
   },
 
-  // { path: '', pathMatch: 'full', redirectTo: '/login' },
-  // { 
-  //     path: 'register', 
-  //     component: RegisterComponent 
-  // },
-  // { 
-  //     path: 'login', 
-  //     component: LoginComponent 
-  // },
-  // {
-  //     path: 'home',
-  //     component: HomeComponent,
-  //     ...canActivate(() => redirectUnauthorizedTo(['/register']))
-  // },
-  // {
-  //     path: 'search',
-  //     component: SearchComponent,
-  // },
-  // {
-  //     path: 'random',
-  //     component: RandomComponent,
-  // },
-  // {
-  //     path: 'mybook',
-  //     component: MyBookComponent,
-  // },
-  // {
-  //     path: 'myprofile',
-  //     component: MyProfileComponent,
-  // },
-  // {
-  //     path: 'recipe/:recipeId',
-  //     component: ViewRecipeComponent,
-  // },
-  // {
-  //     path: '**',
-  //     redirectTo: 'login'
-  // }
 ];
 
 @NgModule({
