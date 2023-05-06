@@ -1,0 +1,60 @@
+<div class="dialogContainer">
+    <h2>Create recipe</h2>
+    <form class="flex flex-column align-items-center justify-content-center" [formGroup]="formCreateRecipe">
+        <mat-form-field>
+            <input matInput type="text" placeholder="Recipe Name" name="recipeName" formControlName="recipeName">
+            <mat-error *ngIf="formCreateRecipe.controls.recipeName.invalid">name needed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea matInput type="text" placeholder="Description" name="description"
+                formControlName="description"></textarea>
+            <mat-error *ngIf="formCreateRecipe.controls.description.invalid">description needed</mat-error>
+        </mat-form-field>
+
+
+        <section>
+            <label>Difficulty: </label>
+            <mat-slider min="0" max="5" step="1" showTickMarks discrete>
+                <input type="range" matSliderThumb formControlName="difficulty">
+            </mat-slider>
+        </section>
+
+        <mat-form-field>
+            <input matInput placeholder="Country" name="country" formControlName="country">
+            <mat-error *ngIf="formCreateRecipe.controls.country.invalid">country needed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Ingredients" name="newIngredient" formControlName="newIngredient"
+                [matChipInputFor]="ingredientsList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addIngredient($event)">
+        </mat-form-field>
+
+        <mat-chip-grid #ingredientsList>
+            <mat-chip *ngFor="let ingredient of ingredients" [removable]="true"
+                (removed)="removeIngredient(ingredient)">
+                {{ ingredient }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-grid>
+
+        <button mat-raised-button (click)="addStep()"color="primary">Add step</button>
+
+        <div *ngFor="let step of steps; let i = index">
+            <mat-form-field class="mt-2">
+                <mat-label>Step {{i+1}}</mat-label>
+                <textarea matInput type="text" [name]="step.name" [formControlName]="step.name" [placeholder]="step.placeholder"></textarea>
+                <button mat-mini-fab matTooltip="delete step" (click)="removeStep(i)"><mat-icon>close</mat-icon></button>
+            </mat-form-field>
+        </div>
+
+        <div class="mt-2">
+            <mat-label>Recipe Photo: </mat-label>
+            <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgRecipe"
+                (change)="uploadPhoto($event)">
+        </div>
+
+        <button mat-raised-button color="primary" (click)="onSubmit()" class="mt-2">Create recipe</button>
+    </form>
+</div>

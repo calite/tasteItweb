@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { interval } from 'rxjs';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
@@ -32,7 +34,8 @@ export class HomePageComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {
 
 
@@ -44,10 +47,12 @@ export class HomePageComponent implements OnInit {
 
     this.loadRecipes(0);
 
-    const timer = interval(1800000)
+    //const timer = interval(1800000)
+    const timer = interval(180000)
 
     timer.subscribe(
       x => {
+        console.log('yep')
         this.authService.renewIdToken()
         this.apiService.updateApiKey()
       }
@@ -72,5 +77,9 @@ export class HomePageComponent implements OnInit {
 
     this.skipper = this.skipper + 10;
 
+  }
+
+  createRecipe() {
+    this.router.navigate(['create-recipe'])
   }
 }

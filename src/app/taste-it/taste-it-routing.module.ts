@@ -7,6 +7,7 @@ import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { MyBookPageComponent } from './pages/my-book-page/my-book-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ViewRecipePageComponent } from './pages/view-recipe-page/view-recipe-page.component';
+import { CreateRecipePageComponent } from './pages/create-recipe-page/create-recipe-page.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
           { path: 'my-book', component: MyBookPageComponent },
           { path: 'profile/:token', component: ProfilePageComponent },
           { path: 'recipe/:recipeId', component: ViewRecipePageComponent },
+          { path: 'create-recipe', component: CreateRecipePageComponent },
           { path: '**', redirectTo: 'home' },
         ]
   }

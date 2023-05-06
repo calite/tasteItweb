@@ -108,16 +108,17 @@ $tasteItWeb-theme: mat.define-light-theme((color: (primary: $tasteItWeb-primary,
   // padding-left: 15px;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
 
 .spacer {
   flex: 1 1 auto;
 }
+
+@font-face {
+    font-family: 'Comfortaa-Bold' !important;
+    src: url('./assets/fonts/Comfortaa-Bold.ttf') format('truetype');
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Comfortaa-Bold';
+  }

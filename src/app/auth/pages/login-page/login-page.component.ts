@@ -41,8 +41,8 @@ export class LoginPageComponent implements OnInit {
         .then(response => {
           
           sessionStorage.setItem('userFirebase',JSON.stringify(response.user))
-
           sessionStorage.setItem('accessToken', response.user['accessToken']);
+
           this.authService.saveUser(response.user)
             .then(() => { //se ejecutra el metodo save user con una promesa
               this.router.navigate(['/home']);

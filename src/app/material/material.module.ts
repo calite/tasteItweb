@@ -44,6 +44,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatProgressBarModule,
     MatSliderModule,
     MatTooltipModule,
+    MatChipsModule,
 
   ]
 })

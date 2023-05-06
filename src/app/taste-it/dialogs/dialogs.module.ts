@@ -13,7 +13,7 @@ import { ViewRecipesDialogComponent } from './view-recipes-dialog/view-recipes-d
     ReportDialogComponent,
     RateDialogComponent,
     CommentDialogComponent,
-    ViewRecipesDialogComponent
+    ViewRecipesDialogComponent,
   ],
   imports: [
     CommonModule,

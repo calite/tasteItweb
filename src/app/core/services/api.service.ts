@@ -40,7 +40,9 @@ export class ApiService {
 
     getUserByToken(token: string): Observable<User> {
 
-        this.apiKey = sessionStorage.getItem('accessToken');
+        //console.log(this.apiKey)
+
+        //this.apiKey = sessionStorage.getItem('accessToken');
 
         const url = `${this.apiUrl}user/bytoken/${token}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
@@ -299,6 +301,25 @@ export class ApiService {
         const url = `${this.apiUrl}user/followers_user/${sender_token}/${skipper}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<UserResponse[]>(url, { headers });
+    }
+
+
+    registerUser(token : string, username : string, imgProfile : string, biography : string) {
+        const url = `${this.apiUrl}user/register`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            token: token,
+            username: username,
+            imgProfile : imgProfile,
+            biography: biography,
+        }
+
+        return this.http.post(url, body, httpOptions);
     }
 
 

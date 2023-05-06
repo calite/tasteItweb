@@ -14,12 +14,7 @@ import { ViewRecipePageComponent } from './pages/view-recipe-page/view-recipe-pa
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from './components/components.module';
 import { DialogsModule } from './dialogs/dialogs.module';
-
-
-
-
-
-
+import { CreateRecipePageComponent } from './pages/create-recipe-page/create-recipe-page.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +25,7 @@ import { DialogsModule } from './dialogs/dialogs.module';
         ProfilePageComponent,
         MyBookPageComponent,
         ViewRecipePageComponent,
+        CreateRecipePageComponent,
     ],
     imports: [
         CommonModule,
