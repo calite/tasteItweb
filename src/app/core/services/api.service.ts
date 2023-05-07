@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe, RecipesResponse, User } from '../interfaces/recipe.interface';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { CommentsOnRecipeResponse, CommentsOnUserResponse, ReportOnRecipeResponse } from '../interfaces/comment.interface';
 import { UserFollowingResponse, UserResponse } from '../interfaces/user.interface';
 
@@ -12,8 +12,8 @@ import { UserFollowingResponse, UserResponse } from '../interfaces/user.interfac
 export class ApiService {
 
 
-    private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
-    //private apiUrl: string = 'https://localhost:7076/';
+    //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
+    private apiUrl: string = 'https://localhost:7076/';
     private apiKey: string = sessionStorage.getItem('accessToken');
 
     constructor(private http: HttpClient) { }
@@ -39,10 +39,6 @@ export class ApiService {
     }
 
     getUserByToken(token: string): Observable<User> {
-
-        //console.log(this.apiKey)
-
-        //this.apiKey = sessionStorage.getItem('accessToken');
 
         const url = `${this.apiUrl}user/bytoken/${token}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
@@ -322,5 +318,26 @@ export class ApiService {
         return this.http.post(url, body, httpOptions);
     }
 
+    createRecipe(token: string, name : string, description : string, country : string, image : string, difficulty : number, ingredients : string[], steps : string[]) {
+        const url = `${this.apiUrl}recipe/create`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            token: token,
+            name: name,
+            description : description,
+            country: country,
+            image: image,
+            difficulty: difficulty,
+            ingredients: ingredients,
+            steps: steps
+        }
+
+        return this.http.post(url, body, httpOptions);
+    }
 
 }

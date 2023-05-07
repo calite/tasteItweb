@@ -54,8 +54,6 @@ export class ProfilePageComponent implements OnInit {
     private toastService: ToastService
   ) {
     this.comments = []
-
-    
   }
 
   ngOnInit(): void {

@@ -36,7 +36,7 @@ import { CreateRecipePageComponent } from './pages/create-recipe-page/create-rec
         CommonModule,
         SharedModule,
         ComponentsModule,
-        DialogsModule
+        DialogsModule,
     ]
 })
 export class TasteItModule { }

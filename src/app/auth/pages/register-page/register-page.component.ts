@@ -36,8 +36,8 @@ export class RegisterPageComponent {
       this.authService.register({ email: this.formRegister.get('email').value, password: this.formRegister.get('password').value })
         .then(response => {
 
-          sessionStorage.setItem('userFirebase', JSON.stringify(response.user))
-          sessionStorage.setItem('accessToken', response.user['accessToken']);
+          //sessionStorage.setItem('userFirebase', JSON.stringify(response.user))
+          //sessionStorage.setItem('accessToken', response.user['accessToken']);
 
           const email = this.formRegister.get('email').value;
           const username = email.split('@')[0].slice(0);

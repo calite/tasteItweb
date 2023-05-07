@@ -52,7 +52,9 @@
         <div class="mt-2">
             <mat-label>Recipe Photo: </mat-label>
             <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgRecipe"
-                (change)="uploadPhoto($event)">
+                (change)="onFileSelected($event)">
+
+                <img *ngIf="photo" [src]="photo" alt="Image selected">
         </div>
 
         <button mat-raised-button color="primary" (click)="onSubmit()" class="mt-2">Create recipe</button>
