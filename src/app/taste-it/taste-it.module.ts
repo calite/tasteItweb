@@ -15,6 +15,8 @@ import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from './components/components.module';
 import { DialogsModule } from './dialogs/dialogs.module';
 import { CreateRecipePageComponent } from './pages/create-recipe-page/create-recipe-page.component';
+import { EditRecipePageComponent } from './pages/edit-recipe-page/edit-recipe-page.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +28,8 @@ import { CreateRecipePageComponent } from './pages/create-recipe-page/create-rec
         MyBookPageComponent,
         ViewRecipePageComponent,
         CreateRecipePageComponent,
+        EditRecipePageComponent,
+        EditProfileComponent,
     ],
     imports: [
         CommonModule,

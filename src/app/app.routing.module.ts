@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
-import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Error404Component } from './shared/error404/error404.component';
 import { AuthGuard } from './core/guards/auth.guard';
 

@@ -1,15 +1,15 @@
 import { Component, Input, Output, ViewEncapsulation, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
 import { HostListener } from '@angular/core';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
-import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
-import { UserResponse } from 'src/app/core/interfaces/user.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { CommentDialogComponent } from '../../dialogs/comment-dialog/comment-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 import { ViewRecipesDialogComponent } from '../../dialogs/view-recipes-dialog/view-recipes-dialog.component';
+import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
+import { UserResponse } from 'src/app/core/interfaces/user.interface';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-profile-page',
@@ -48,7 +48,8 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private route : Router,
     private commentDialog: MatDialog,
     private recipeDialog: MatDialog,
     private toastService: ToastService
@@ -58,7 +59,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.token = this.route.snapshot.paramMap.get('token');
+    this.token = this.activatedRoute.snapshot.paramMap.get('token');
     this.apiService.getUserByToken(this.token).subscribe(
       response => {
         this.currentUser = response
@@ -152,7 +153,8 @@ export class ProfilePageComponent implements OnInit {
   }
 
   editUser() {
-    console.log('quasy ready')
+    const token = this.currentUser.token
+    this.route.navigate([`edit-profile/${token}`])
   }
 
   viewRecipes() {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HostListener } from '@angular/core';
@@ -22,11 +22,11 @@ import { ToastService } from 'src/app/core/services/toast.service';
 })
 export class ViewRecipePageComponent implements OnInit {
 
-  
+
   @Output()
   comments: CommentsOnRecipeResponse[];
 
-  public recipe : RecipesResponse[];
+  public recipe: RecipesResponse[];
   private currentUser: User;
   public isLoading: boolean = false;
   public isLiked: boolean = false;
@@ -51,7 +51,8 @@ export class ViewRecipePageComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private reportDialog: MatDialog,
     private rateDialog: MatDialog,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private route: Router,
   ) {
     this.comments = []
   }
@@ -84,7 +85,7 @@ export class ViewRecipePageComponent implements OnInit {
 
   }
 
-  loadComments(skipper : number) {
+  loadComments(skipper: number) {
     this.isLoading = true;
 
     this.activatedRoute.params
@@ -100,7 +101,7 @@ export class ViewRecipePageComponent implements OnInit {
         // }
       });
 
-      this.skipper = this.skipper + 10;
+    this.skipper = this.skipper + 10;
 
   }
 
@@ -152,6 +153,18 @@ export class ViewRecipePageComponent implements OnInit {
       this.skipper = 0;
       this.loadComments(this.skipper)
     })
+  }
+
+  async editRecipe() {
+
+    let rid = ''
+
+    await this.activatedRoute.paramMap.subscribe(params => {
+      rid = params.get('recipeId')
+    })
+    const token = this.currentUser.token
+
+    this.route.navigate([`/edit-recipe/${rid}/${token}`])
   }
 
 

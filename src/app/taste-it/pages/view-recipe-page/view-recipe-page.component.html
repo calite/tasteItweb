@@ -43,7 +43,7 @@
                     Report
                 </button>
 
-                <button mat-fab extended matTooltip="Edit this recipe" color="primary" *ngIf="isEditable">
+                <button mat-fab extended matTooltip="Edit this recipe" color="primary" *ngIf="isEditable" (click)="editRecipe()">
                     <mat-icon>edit</mat-icon>
                     Edit
                 </button>

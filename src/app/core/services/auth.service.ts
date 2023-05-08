@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, UserCredential, User } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, UserCredential, User, getAuth, updatePassword } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
+import { toastCoreConfig } from '@costlydeveloper/ngx-awesome-popup/ngx-awesome-popup/types/toast-notification/core/classes';
+import { ToastService } from './toast.service';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +16,8 @@ export class AuthService {
   currentUser: any;
 
 
-  constructor(private auth: Auth, private apiService: ApiService, private router: Router) {
-   }
+  constructor(private auth: Auth, private apiService: ApiService, private router: Router, private toastService: ToastService) {
+  }
 
   register({ email, password }: any) {
     return createUserWithEmailAndPassword(this.auth, email, password);
@@ -52,14 +55,13 @@ export class AuthService {
   }
 
   clearUser() {
-    sessionStorage.removeItem('currentUser');
+    sessionStorage.clear();
   }
 
   checkAuth(): Observable<boolean> {
     if (!sessionStorage.getItem('currentUser')) return of(false)
     return of(true)
   }
-
 
   renewIdToken() {
     this.auth.onAuthStateChanged(function (user) {
@@ -71,6 +73,19 @@ export class AuthService {
         });
       }
     });
+  }
+
+  changePassword(newPassword) {
+    const auth = getAuth()
+
+    const user = auth.currentUser;
+
+    updatePassword(user, newPassword).then(() => {
+      this.toastService.toastGenerator('', 'password changed', 4, ToastPositionEnum.BOTTOM_RIGHT)
+    }).catch(error => {
+      console.log(error)
+      this.toastService.toastGenerator('', 'something wrong happen', 4, ToastPositionEnum.BOTTOM_RIGHT)
+    })
   }
 
 

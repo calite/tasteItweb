@@ -1,0 +1,32 @@
+<h2>Edit user</h2>
+
+<form class="flex flex-column align-items-center justify-content-center" [formGroup]="formUser">
+
+    <mat-form-field>
+        <input matInput type="text" placeholder="Username" name="username" formControlName="username">
+        <mat-error *ngIf="formUser.controls.username.invalid">Username needed</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput type="text" placeholder="Biography" name="biography" formControlName="biography"></textarea>
+        <mat-error *ngIf="formUser.controls.biography.invalid">Description needed</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="password" placeholder="Password" name="password" formControlName="password">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="password" placeholder="Confirm password" name="confirmPassword" formControlName="confirmPassword">
+    </mat-form-field>
+
+    <div class="mt-2">
+        <mat-label>User Photo: </mat-label>
+        <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgProfile"
+            (change)="onFileSelected($event)">
+
+        <img *ngIf="photo" [src]="photo" alt="Image selected">
+    </div>
+
+    <button mat-raised-button color="primary" (click)="onSubmit()" class="mt-2">Edit user</button>
+</form>

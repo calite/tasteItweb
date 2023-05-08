@@ -318,7 +318,7 @@ export class ApiService {
         return this.http.post(url, body, httpOptions);
     }
 
-    createRecipe(token: string, name : string, description : string, country : string, image : string, difficulty : number, ingredients : string[], steps : string[]) {
+    postCreateRecipe(token: string, name : string, description : string, country : string, image : string, difficulty : number, ingredients : string[], steps : string[]) {
         const url = `${this.apiUrl}recipe/create`;
         const httpOptions = {
             headers: new HttpHeaders({
@@ -328,6 +328,34 @@ export class ApiService {
         };
         const body = {
             token: token,
+            name: name,
+            description : description,
+            country: country,
+            image: image,
+            difficulty: difficulty,
+            ingredients: ingredients,
+            steps: steps
+        }
+
+        return this.http.post(url, body, httpOptions);
+    }
+
+    getCheckOwnerRecipe(rid: string, token : string) {
+        const url = `${this.apiUrl}recipe/check_owner/${rid}/${token}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<boolean>(url, { headers });
+    }
+
+    postEditRecipe( rid: number, name : string, description : string, country : string, image : string, difficulty : number, ingredients : string[] , steps : string[] ) {
+        const url = `${this.apiUrl}recipe/edit`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            rid : rid,
             name: name,
             description : description,
             country: country,

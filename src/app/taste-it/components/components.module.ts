@@ -13,7 +13,8 @@ import { RecyclerViewComponent } from './recycler-view/recycler-view.component';
 import { CommentsOnUserComponent } from './comments-on-user/comments-on-user.component';
 import { CommentsOnRecipeComponent } from './comments-on-recipe/comments-on-recipe.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModel, ReactiveFormsModule } from '@angular/forms';
+import { RecipeCreatorComponent } from './recipe-creator/recipe-creator.component';
 
 
 
@@ -28,13 +29,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     BioComponent,
     CommentsOnUserComponent,
     CommentsOnRecipeComponent,
+    RecipeCreatorComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
   , exports: [
     BioComponent,
@@ -45,7 +47,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecyclerViewComponent,
     BioComponent,
     CommentsOnUserComponent,
-    CommentsOnRecipeComponent
+    CommentsOnRecipeComponent,
+    RecipeCreatorComponent
   ]
 })
 export class ComponentsModule { }

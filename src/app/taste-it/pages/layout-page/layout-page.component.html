@@ -26,7 +26,7 @@
       
 
     <div class="flex-end" [routerLink]="['./profile', currentUser.token]">
-            <img [src]="currentUser.imgProfile!">
+            <img matTooltip="Your profile" [src]="currentUser.imgProfile!">
     </div>
 </mat-toolbar>
 
