@@ -42,7 +42,7 @@
                   <mat-card-title>{{user.username}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                  {{user.biography}}
+                  {{user.biography | slice:0:100 }}
                 </mat-card-content>
               </mat-card>
 

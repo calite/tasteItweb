@@ -94,6 +94,7 @@ export class ViewRecipePageComponent implements OnInit {
       )
       .subscribe(comments => {
         this.comments.push(...comments)
+        console.log(this.comments)
         this.isLoading = false;
 
         // if (comments.length == 0 && this.comments.length != 0) {

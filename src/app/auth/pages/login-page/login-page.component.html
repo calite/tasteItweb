@@ -7,22 +7,23 @@
         
         <mat-form-field color="primary">
             <mat-label>Email</mat-label>
-            <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email" color="primary">
+            <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email" color="primary" autocomplete="username">
             <mat-icon matSuffix>alternate_email</mat-icon>
             <mat-error *ngIf="formLogin.controls.email.invalid">Invalid email</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" class="form-control" placeholder="Password" formControlName="password">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide">
+            <input matInput [type]="hide ? 'password' : 'text'" class="form-control" placeholder="Password" formControlName="password" autocomplete="current-password">
+            <button mat-icon-button matSuffix (click)="showPassword(hide)" [attr.aria-pressed]="hide" tabindex="-1">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
+            <mat-error *ngIf="formLogin.controls.password.invalid">Fill the password</mat-error>
         </mat-form-field>
         
 
         <button mat-flat-button color="primary" type="submit" [disabled]="formLogin.invalid">
-            Login!
+            LOGIN!
         </button>
     </form>
 

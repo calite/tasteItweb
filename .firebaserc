@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tasteit-java": {
+      "hosting": {
+        "tasteItWeb": [
+          "tasteit-java"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tasteit-java"
+  }
+}

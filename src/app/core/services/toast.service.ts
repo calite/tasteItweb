@@ -50,4 +50,22 @@ export class ToastService {
     return newConfirmBox.openConfirmBox$();
   }
 
+  alertGeneratorWithoutCancel(title: string, msg: string, type: number): Observable<IConfirmBoxPublicResponse> {
+    const newConfirmBox = new ConfirmBoxInitializer();
+
+    newConfirmBox.setTitle(title);
+    newConfirmBox.setMessage(msg);
+    newConfirmBox.setButtonLabels('Ok');
+
+    // Choose layout color type
+    newConfirmBox.setConfig({
+      layoutType: type, 
+      animationIn: AppearanceAnimation.BOUNCE_IN, 
+      animationOut: DisappearanceAnimation.BOUNCE_OUT, 
+    });
+
+    // Simply open the popup
+    return newConfirmBox.openConfirmBox$();
+  }
+
 }

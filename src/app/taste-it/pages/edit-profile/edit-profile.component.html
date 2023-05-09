@@ -2,31 +2,67 @@
 
 <form class="flex flex-column align-items-center justify-content-center" [formGroup]="formUser">
 
-    <mat-form-field>
-        <input matInput type="text" placeholder="Username" name="username" formControlName="username">
-        <mat-error *ngIf="formUser.controls.username.invalid">Username needed</mat-error>
-    </mat-form-field>
 
-    <mat-form-field>
-        <textarea matInput type="text" placeholder="Biography" name="biography" formControlName="biography"></textarea>
-        <mat-error *ngIf="formUser.controls.biography.invalid">Description needed</mat-error>
-    </mat-form-field>
+    <div class="grid">
 
-    <mat-form-field>
-        <input matInput type="password" placeholder="Password" name="password" formControlName="password">
-    </mat-form-field>
+        <div class="col-7">
 
-    <mat-form-field>
-        <input matInput type="password" placeholder="Confirm password" name="confirmPassword" formControlName="confirmPassword">
-    </mat-form-field>
+            <!-- <div class="pepito"> -->
+                <label>
+                    <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgProfile"
+                        class="inputImage" (change)="onFileSelected($event)">
 
-    <div class="mt-2">
-        <mat-label>User Photo: </mat-label>
-        <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgProfile"
-            (change)="onFileSelected($event)">
+                    <!-- <mat-icon class="eye">visibility</mat-icon> -->
 
-        <img *ngIf="photo" [src]="photo" alt="Image selected">
+                    <img *ngIf="imgUrl" [src]="imgUrl" alt="./asests/no-image.png" class="imgProfile">
+                </label>
+
+            <!-- </div> -->
+
+        </div>
+
+        <div class="col-5">
+
+            <mat-form-field>
+                <input matInput type="text" placeholder="Username" name="username" formControlName="username"
+                    autocomplete="username">
+                <mat-error *ngIf="formUser.controls.username.invalid">Username needed</mat-error>
+            </mat-form-field>
+
+            <div class="grid flex-auto flex-column">
+
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Password" name="password" formControlName="password"
+                        autocomplete="new-password">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Confirm password" name="confirmPassword"
+                        formControlName="confirmPassword" autocomplete="current-password">
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div class="col-12">
+
+            <mat-form-field class="col-12">
+                <textarea matInput type="text" placeholder="Biography" name="biography" formControlName="biography"
+                    rows="15"></textarea>
+                <mat-error *ngIf="formUser.controls.biography.invalid">Description needed</mat-error>
+            </mat-form-field>
+
+        </div>
+
     </div>
+
+
+
+
+
+
+
 
     <button mat-raised-button color="primary" (click)="onSubmit()" class="mt-2">Edit user</button>
 </form>

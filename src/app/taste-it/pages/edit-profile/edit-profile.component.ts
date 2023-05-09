@@ -9,6 +9,8 @@ import { ToastService } from '../../../core/services/toast.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Storage, ref, uploadBytes, getDownloadURL, deleteObject } from '@angular/fire/storage';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { BioComponent } from '../../components/bio/bio.component';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 
 @Component({
@@ -35,7 +37,7 @@ export class EditProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.formUser = new FormGroup({
-      username: new FormControl('', Validators.required), 
+      username: new FormControl('', Validators.required),
       biography: new FormControl('', Validators.required),
       password: new FormControl(''),
       confirmPassword: new FormControl(''),
@@ -50,7 +52,7 @@ export class EditProfileComponent implements OnInit {
 
     this.formUser.get('username').setValue(this.currentUser.username)
     this.formUser.get('biography').setValue(this.currentUser.biography)
-    this.photo = this.currentUser.imgProfile
+    this.imgUrl = this.currentUser.imgProfile
 
   }
 
@@ -64,9 +66,9 @@ export class EditProfileComponent implements OnInit {
 
     const token = this.currentUser.token
 
-    if(tokenFromUrl != token) {
+    if (tokenFromUrl != token) {
       this.toastService.toastGenerator('', 'You are not the owner of this account', 4, ToastPositionEnum.BOTTOM_RIGHT);
-    this.route.navigate(['./home']); //enviamos al home si no lo es
+      this.route.navigate(['./home']); //enviamos al home si no lo es
 
     }
 
@@ -75,10 +77,10 @@ export class EditProfileComponent implements OnInit {
   onFileSelected($event): void {
 
     this.imgSelected = $event.target.files[0];
-    
+
     const reader = new FileReader();
     reader.onload = (e: any) => {
-      this.photo = e.target.result;
+      this.imgUrl = e.target.result;
     };
     reader.readAsDataURL(this.imgSelected);
   }
@@ -100,23 +102,58 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
 
-    let password = this.formUser.get('password').value
-    let confirmPassword = this.formUser.get('confirmPassword').value
+    if (this.formUser.controls.password.dirty && this.formUser.controls.confirmPassword.dirty) {
 
-    if(password === confirmPassword && password.length > 0) {
-      this.authService.changePassword(password)
-    } else {
-      this.toastService.toastGenerator('', 'password are not equals', 4, ToastPositionEnum.BOTTOM_RIGHT)
-    }
+      let password = this.formUser.get('password').value
+      let confirmPassword = this.formUser.get('confirmPassword').value
 
-    if(this.formUser.valid) {
-
-
+      if (password === confirmPassword && password.length > 0) {
+        this.authService.changePassword(password)
+      } else {
+        this.toastService.toastGenerator('', 'password are not equals', 4, ToastPositionEnum.BOTTOM_RIGHT)
+      }
 
     }
 
+
+    if (this.formUser.valid) {
+
+      if(this.formUser.controls.imgProfile.dirty) { //si hay cambios en la foto
+
+        this.imgUrl = await this.uploadPhoto() // subimos foto        
+
+        const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
+
+        deleteObject(uriOldImage).then(() => {
+          console.log('image deleted')
+        }).catch(error => {
+          console.log('something wrong happen' + error)
+        })
+      }
+
+      let token = this.currentUser.token
+      let username = this.formUser.controls.username.value
+      let imgProfile = this.imgUrl
+      let biography = this.formUser.controls.biography.value
+
+      this.apiService.postEditUser(token, username, imgProfile, biography)
+      .subscribe(response => {
+        //actualizamos los datos locales tras updatear la bbdd
+        this.currentUser.username = username
+        this.currentUser.imgProfile = imgProfile
+        this.currentUser.biography = biography
+        sessionStorage.setItem("currentUser",JSON.stringify(this.currentUser))
+      })
+
+    }
+
+  }
+
+  pepito() {
+    alert('pasan cosas')
+    
   }
 
 }

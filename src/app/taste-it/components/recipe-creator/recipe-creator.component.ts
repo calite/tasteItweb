@@ -29,7 +29,6 @@ export class RecipeCreatorComponent {
   country: string;
   ingredients: string[] = []
   steps: { name: string, placeholder: string, formControlName: string, value: string }[] = [];
-  photo: string; //a este le damos la url
   imgSelected: File;
   imgUrl: string;
 
@@ -54,7 +53,7 @@ export class RecipeCreatorComponent {
       difficulty: new FormControl(0, Validators.required),
       country: new FormControl('', Validators.required),
       newIngredient: new FormControl(''),
-      imgRecipe: new FormControl('', Validators.required)
+      imgRecipe: new FormControl(this.imgUrl)
     })
 
     this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -78,7 +77,7 @@ export class RecipeCreatorComponent {
       this.steps.push({ name: controlName, placeholder: 'Enter step details', formControlName: controlName, value: element })
     });
 
-    this.photo = this.recipe[0]['recipe'].image
+    this.imgUrl = this.recipe[0]['recipe'].image
 
     this.editRecipe = true;
 
@@ -120,10 +119,10 @@ export class RecipeCreatorComponent {
   onFileSelected($event): void {
 
     this.imgSelected = $event.target.files[0];
-    
+
     const reader = new FileReader();
     reader.onload = (e: any) => {
-      this.photo = e.target.result;
+      this.imgUrl = e.target.result;
     };
     reader.readAsDataURL(this.imgSelected);
   }
@@ -146,7 +145,12 @@ export class RecipeCreatorComponent {
   }
 
   async onSubmit() {
+
+    console.log('pasan cosas')
+
     if (this.formRecipe.valid) {
+
+      console.log('pasan mas cosas')
 
       //obtencion de steps
       const formData = this.formRecipe.getRawValue();
@@ -166,36 +170,41 @@ export class RecipeCreatorComponent {
       //console.log(steps)
       // console.log(formData)
       //console.log(stepsData)
+      //console.log(this.editRecipe)
 
-      console.log(this.editRecipe)
+      if (this.formRecipe.controls.imgRecipe.dirty) {
+        this.imgUrl = await this.uploadPhoto() //subimos la foto nueva
 
-      this.imgUrl = await this.uploadPhoto() //subimos la foto nueva
+        if (this.editRecipe) { //si es edicion
 
-      if (this.editRecipe) { //si es edicion
+          const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
 
-        const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
-
-        deleteObject(uriOldImage).then(() => {
-          console.log('image deleted')
-        }).catch(error => {
-          console.log('something wrong happen' + error)
-        })
-
-        let rid = this.recipe[0].recipeId
-
-        this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
-          .subscribe(response => {
-            console.log('editado')
-            this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_RIGHT)
+          deleteObject(uriOldImage).then(() => {
+            console.log('image deleted')
+          }).catch(error => {
+            console.log('something wrong happen' + error)
           })
 
-      } else {
 
-        this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
-          .subscribe(response => {
-            console.log('creado')
-            this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_RIGHT)
-          })
+
+
+          let rid = this.recipe[0].recipeId
+
+          this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+            .subscribe(response => {
+              console.log('editado')
+              this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_RIGHT)
+            })
+
+        } else {
+
+          this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+            .subscribe(response => {
+              console.log('creado')
+              this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_RIGHT)
+            })
+
+        }
 
       }
 

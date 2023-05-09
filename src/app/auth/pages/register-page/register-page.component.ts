@@ -30,27 +30,35 @@ export class RegisterPageComponent {
     })
   }
 
+  showPassword(hide) {
+    if(hide) hide = false
+    else hide = true
+  }
+
   onSubmit() {
-    if (this.formRegister.valid && this.formRegister.get('password').value == this.formRegister.get('repeatPassword').value) {
+    if (this.formRegister.valid) {
+      if (this.formRegister.valid && this.formRegister.get('password').value == this.formRegister.get('repeatPassword').value) {
 
-      this.authService.register({ email: this.formRegister.get('email').value, password: this.formRegister.get('password').value })
-        .then(response => {
+        this.authService.register({ email: this.formRegister.get('email').value, password: this.formRegister.get('password').value })
+          .then(response => {
 
-          //sessionStorage.setItem('userFirebase', JSON.stringify(response.user))
-          //sessionStorage.setItem('accessToken', response.user['accessToken']);
+            const email = this.formRegister.get('email').value;
+            const username = email.split('@')[0].slice(0);
+            const img = 'https://firebasestorage.googleapis.com/v0/b/tasteit-java.appspot.com/o/images%2Fno-image.png?alt=media&token=1c7acf14-d102-48bd-8e30-86f2fefb76de'
 
-          const email = this.formRegister.get('email').value;
-          const username = email.split('@')[0].slice(0);
-          const img = 'https://firebasestorage.googleapis.com/v0/b/tasteit-java.appspot.com/o/images%2Fno-image.png?alt=media&token=1c7acf14-d102-48bd-8e30-86f2fefb76de'
+            this.apiService.registerUser(response.user['uid'], username, img, 'my biography').subscribe()
 
-          this.apiService.registerUser(response.user['uid'],username,img,'my biography').subscribe()
+            this.toastService.alertGenerator('Great!', 'almost done, just log in to start!', 4)
 
-          this.toastService.alertGenerator('Great!', 'almost done, just login to start!', 4)
+            this.router.navigate(['/login'])
 
-          this.router.navigate(['/login'])
-
-        })
-
+          })
+          .catch( error => {
+            if(error.code = 'auth/email-already-in-use'){
+              this.toastService.alertGeneratorWithoutCancel('Error!', 'email already in use', 4)
+            }
+          })
+      }
     }
   }
 }

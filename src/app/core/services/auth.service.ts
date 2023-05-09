@@ -37,17 +37,17 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  saveUser(user: any) { //promesa para que se ejecute el metodo una vez se reciba la respuesta del servidor de firebase
-    return new Promise<void>((resolve, reject) => {
-      this.apiService.getUserByToken(user.uid)
-        .subscribe(response => {
-          sessionStorage.setItem('currentUser', JSON.stringify(response)); //almacenamos el usuario
-          resolve();
-        }, error => {
-          reject(error);
-        });
-    });
-  }
+  // saveUser(user: any) { //promesa para que se ejecute el metodo una vez se reciba la respuesta del servidor de firebase
+  //   return new Promise<void>((resolve, reject) => {
+  //     this.apiService.getUserByToken(user.uid)
+  //       .subscribe(response => {
+  //         sessionStorage.setItem('currentUser', JSON.stringify(response)); //almacenamos el usuario
+  //         resolve();
+  //       }, error => {
+  //         reject(error);
+  //       });
+  //   });
+  // }
 
   getUser() {
     this.currentUser = sessionStorage.getItem('currentUser'); //recogemos el usuario
@@ -83,8 +83,8 @@ export class AuthService {
     updatePassword(user, newPassword).then(() => {
       this.toastService.toastGenerator('', 'password changed', 4, ToastPositionEnum.BOTTOM_RIGHT)
     }).catch(error => {
-      console.log(error)
-      this.toastService.toastGenerator('', 'something wrong happen', 4, ToastPositionEnum.BOTTOM_RIGHT)
+      if(error.code == 'auth/weak-password')
+      this.toastService.toastGenerator('', 'Password should be at least 6 characters', 4, ToastPositionEnum.BOTTOM_RIGHT)
     })
   }
 

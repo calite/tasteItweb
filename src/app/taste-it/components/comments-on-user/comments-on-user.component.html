@@ -31,6 +31,6 @@
         <mat-card-subtitle class="ml-2">{{comment.comment.dateCreated}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p><b>Said:</b> {{comment.comment.comment}}</p>
+        <p><b>Said:</b> {{comment.comment.comment | date}}</p>
     </mat-card-content>
 </mat-card>

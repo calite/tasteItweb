@@ -57,8 +57,9 @@
         <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgRecipe"
             (change)="onFileSelected($event)">
 
-        <img *ngIf="photo" [src]="photo" alt="Image selected">
+        <img *ngIf="imgUrl" [src]="imgUrl" alt="Image selected">
     </div>
 
+    <button *ngIf="" mat-raised-button color="primary" (click)="onSubmit()" class="mt-2">Create recipe</button>
     <button mat-raised-button color="primary" (click)="onSubmit()" class="mt-2">Create recipe</button>
 </form>

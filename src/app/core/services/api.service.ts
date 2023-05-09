@@ -14,7 +14,8 @@ export class ApiService {
 
     //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
     private apiUrl: string = 'https://localhost:7076/';
-    private apiKey: string = sessionStorage.getItem('accessToken');
+    private apiKey: string = sessionStorage.getItem('accessToken')
+
 
     constructor(private http: HttpClient) { }
 
@@ -42,6 +43,7 @@ export class ApiService {
 
         const url = `${this.apiUrl}user/bytoken/${token}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
+
         return this.http.get<User>(url, { headers });
 
     }
@@ -366,6 +368,26 @@ export class ApiService {
         }
 
         return this.http.post(url, body, httpOptions);
+    }
+
+    postEditUser(token : string, username : string, imgProfile : string, biography: string) {
+
+        const url = `${this.apiUrl}user/edit`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            token : token,
+            username : username,
+            imgProfile : imgProfile,
+            biography : biography
+        }
+
+        return this.http.post(url, body, httpOptions);
+
     }
 
 }
