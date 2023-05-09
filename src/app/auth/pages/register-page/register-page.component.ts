@@ -5,6 +5,8 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 
+
+
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
@@ -21,7 +23,7 @@ export class RegisterPageComponent {
     private authService: AuthService,
     private apiService: ApiService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {
     this.formRegister = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -44,7 +46,7 @@ export class RegisterPageComponent {
 
             const email = this.formRegister.get('email').value;
             const username = email.split('@')[0].slice(0);
-            const img = 'https://firebasestorage.googleapis.com/v0/b/tasteit-java.appspot.com/o/images%2Fno-image.png?alt=media&token=1c7acf14-d102-48bd-8e30-86f2fefb76de'
+            const img = 'https://raw.githubusercontent.com/calite/no-image/main/no-image.png'
 
             this.apiService.registerUser(response.user['uid'], username, img, 'my biography').subscribe()
 

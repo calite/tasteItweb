@@ -3,7 +3,6 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signO
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
-import { toastCoreConfig } from '@costlydeveloper/ngx-awesome-popup/ngx-awesome-popup/types/toast-notification/core/classes';
 import { ToastService } from './toast.service';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 

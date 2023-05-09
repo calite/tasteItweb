@@ -120,17 +120,21 @@ export class EditProfileComponent implements OnInit {
 
     if (this.formUser.valid) {
 
-      if(this.formUser.controls.imgProfile.dirty) { //si hay cambios en la foto
+      if (this.formUser.controls.imgProfile.dirty) { //si hay cambios en la foto
 
         this.imgUrl = await this.uploadPhoto() // subimos foto        
 
-        const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
+        if (this.currentUser.imgProfile != 'https://raw.githubusercontent.com/calite/no-image/main/no-image.png') {
+          
+          const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
 
-        deleteObject(uriOldImage).then(() => {
-          console.log('image deleted')
-        }).catch(error => {
-          console.log('something wrong happen' + error)
-        })
+          deleteObject(uriOldImage).then(() => {
+            console.log('image deleted')
+          }).catch(error => {
+            console.log('something wrong happen' + error)
+          })
+        }
+
       }
 
       let token = this.currentUser.token
@@ -139,13 +143,13 @@ export class EditProfileComponent implements OnInit {
       let biography = this.formUser.controls.biography.value
 
       this.apiService.postEditUser(token, username, imgProfile, biography)
-      .subscribe(response => {
-        //actualizamos los datos locales tras updatear la bbdd
-        this.currentUser.username = username
-        this.currentUser.imgProfile = imgProfile
-        this.currentUser.biography = biography
-        sessionStorage.setItem("currentUser",JSON.stringify(this.currentUser))
-      })
+        .subscribe(response => {
+          //actualizamos los datos locales tras updatear la bbdd
+          this.currentUser.username = username
+          this.currentUser.imgProfile = imgProfile
+          this.currentUser.biography = biography
+          sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser))
+        })
 
     }
 
@@ -153,7 +157,7 @@ export class EditProfileComponent implements OnInit {
 
   pepito() {
     alert('pasan cosas')
-    
+
   }
 
 }
