@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
 
+
+
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',

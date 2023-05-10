@@ -120,14 +120,16 @@ export class EditProfileComponent implements OnInit {
 
         this.imgUrl = await this.uploadPhoto() // subimos foto        
 
-        const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
+        if (this.currentUser.imgProfile != 'https://raw.githubusercontent.com/calite/no-image/main/no-image.png') {
+          
+          const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
 
-        deleteObject(uriOldImage).then(() => {
-          console.log('image deleted')
-        }).catch(error => {
-          console.log('something wrong happen' + error)
-        })
-
+          deleteObject(uriOldImage).then(() => {
+            console.log('image deleted')
+          }).catch(error => {
+            console.log('something wrong happen' + error)
+          })
+        }
 
       }
 

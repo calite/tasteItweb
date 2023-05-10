@@ -69,7 +69,6 @@
                         <mat-chip-set>
                             <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item | titlecase}}</mat-chip>
                         </mat-chip-set>
-                        <p>{{ recipe[0].recipe.tags }}</p>
                         <p><strong>Ingredients:</strong></p>
                         <mat-chip-set>
                             <mat-chip *ngFor="let item of recipe[0].recipe.ingredients"
