@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject,Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
@@ -30,18 +30,21 @@ export class RateDialogComponent {
     this.token = JSON.parse(sessionStorage.getItem('currentUser')).token;
     this.rid = this.data['recipeId']
   }
-  
+
   onSubmit() {
-    this.apiService.postCommentOnRecipe(
-      this.rid,
-      this.token,
-      this.formRate.controls.comment.value,
-      this.formRate.controls.rating.value
-    ).subscribe( response => {
-      this.formClosed.emit();
-      this.toastService.toastGenerator('', 'recipe commented', 4, ToastPositionEnum.BOTTOM_RIGHT)
-    })
-    this.dialogRef.close();
+    if (this.formRate.valid) {
+      this.apiService.postCommentOnRecipe(
+        this.rid,
+        this.token,
+        this.formRate.controls.comment.value,
+        this.formRate.controls.rating.value
+      ).subscribe(response => {
+        this.formClosed.emit();
+        this.toastService.toastGenerator('', 'recipe commented', 4, ToastPositionEnum.BOTTOM_RIGHT)
+      })
+      this.dialogRef.close();
+    }
+
   }
 
 }

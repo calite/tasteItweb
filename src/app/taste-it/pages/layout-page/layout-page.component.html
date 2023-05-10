@@ -4,7 +4,7 @@
         <h1>tasteIt</h1>
     </div>
 
-    <div class="flex-auto">
+    <div class="flex-auto ">
         <button *ngFor="let item of menuItems" mat-button [routerLink]="item.url">
             <mat-icon aria-hidden="false" fontIcon="{{item.icon}}"></mat-icon>{{item.label}}
         </button>

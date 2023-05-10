@@ -1,9 +1,4 @@
-img {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    border: 3px solid maroon;
-  }
+
 
   textarea {
 
@@ -12,46 +7,24 @@ img {
   }
 
   .imgProfile {
-
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       border: 3px solid maroon;
       box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+      background-image: url("https://raw.githubusercontent.com/calite/no-image/main/no-image.png");
+    }
+
+  .imgProfile:hover {
+    cursor:pointer;
+    filter: brightness(0.8);
   }
 
-  // .imgProfile:hover {
-
-  //   filter: brightness(0.4);
-  //   z-index: 100;
-
-  // }
-
   .inputImage {
-
     opacity: 1;
     position: absolute;
     top: 50%;
-
-  }
-
-  .inputImage {
     display: none;
-  }
-
-
-
-  .pepito {
-    position:relative;
-  }
-
-  .eye {
-    color: red;
-    position: absolute;
-    opacity: 1;
-    height: 50px;
-    top: 50%;
-    left:30%;
   }
 
   .imgProfile:hover .eye {

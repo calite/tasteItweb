@@ -5,13 +5,9 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
-
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { v4 as uuidv4 } from 'uuid';
 import { Storage, ref, uploadBytes, getDownloadURL, deleteObject } from '@angular/fire/storage';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
-import { BioComponent } from '../../components/bio/bio.component';
-import { provideNoopAnimations } from '@angular/platform-browser/animations';
-
 
 @Component({
   selector: 'app-edit-profile',
@@ -120,7 +116,7 @@ export class EditProfileComponent implements OnInit {
 
     if (this.formUser.valid) {
 
-      if(this.formUser.controls.imgProfile.dirty) { //si hay cambios en la foto
+      if (this.formUser.controls.imgProfile.dirty) { //si hay cambios en la foto
 
         this.imgUrl = await this.uploadPhoto() // subimos foto        
 
@@ -131,6 +127,8 @@ export class EditProfileComponent implements OnInit {
         }).catch(error => {
           console.log('something wrong happen' + error)
         })
+
+
       }
 
       let token = this.currentUser.token
@@ -139,13 +137,13 @@ export class EditProfileComponent implements OnInit {
       let biography = this.formUser.controls.biography.value
 
       this.apiService.postEditUser(token, username, imgProfile, biography)
-      .subscribe(response => {
-        //actualizamos los datos locales tras updatear la bbdd
-        this.currentUser.username = username
-        this.currentUser.imgProfile = imgProfile
-        this.currentUser.biography = biography
-        sessionStorage.setItem("currentUser",JSON.stringify(this.currentUser))
-      })
+        .subscribe(response => {
+          //actualizamos los datos locales tras updatear la bbdd
+          this.currentUser.username = username
+          this.currentUser.imgProfile = imgProfile
+          this.currentUser.biography = biography
+          sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser))
+        })
 
     }
 
@@ -153,7 +151,7 @@ export class EditProfileComponent implements OnInit {
 
   pepito() {
     alert('pasan cosas')
-    
+
   }
 
 }

@@ -5,23 +5,17 @@
 
     <div class="grid">
 
-        <div class="col-7">
+        <div class="col-7 flex flex-column align-items-center justify-content-center">
 
-            <!-- <div class="pepito"> -->
                 <label>
                     <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgProfile"
                         class="inputImage" (change)="onFileSelected($event)">
-
-                    <!-- <mat-icon class="eye">visibility</mat-icon> -->
-
-                    <img *ngIf="imgUrl" [src]="imgUrl" alt="./asests/no-image.png" class="imgProfile">
+                    <img matTooltip="Change your photo" [src]="imgUrl" alt="image profile" class="imgProfile">
                 </label>
-
-            <!-- </div> -->
 
         </div>
 
-        <div class="col-5">
+        <div class="col-5 flex flex-column align-items-center justify-content-center">
 
             <mat-form-field>
                 <input matInput type="text" placeholder="Username" name="username" formControlName="username"

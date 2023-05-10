@@ -1,15 +1,16 @@
 <div class="flex flex-column justify-content-center align-items-center">
     <img src="assets/tasteIt_logo.png">
     <span class="text-lg mb-4">
-        Registro
+        Register
     </span>
 
     <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formRegister"
         (ngSubmit)="onSubmit()">
-        
+
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email" autocomplete="username">
+            <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email"
+                autocomplete="username">
             <mat-icon matSuffix>alternate_email</mat-icon>
             <mat-error *ngIf="formRegister.controls.email.invalid">Invalid email</mat-error>
         </mat-form-field>
@@ -18,20 +19,20 @@
             <mat-label>Password</mat-label>
             <input matInput [type]="hide1 ? 'password' : 'text'" class="form-control" placeholder="Password"
                 formControlName="password" autocomplete="new-password">
-            <button mat-icon-button matSuffix (click)="showPassword(hide1)" [attr.aria-pressed]="hide1" tabindex="-1">
+            <button mat-icon-button matSuffix type="button" (click)="showPassword(1)" [attr.aria-pressed]="hide1" tabindex="-1">
                 <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="formRegister.controls.password.invalid">Fill the password</mat-error>
+            <mat-error *ngIf="formRegister.controls.password.value.length">At least 6 chars</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Repeat Password</mat-label>
             <input matInput [type]="hide2 ? 'password' : 'text'" class="form-control" placeholder="Repeat password"
                 formControlName="repeatPassword" autocomplete="current-password">
-            <button mat-icon-button matSuffix (click)="showPassword(hide2)" [attr.aria-pressed]="hide2" tabindex="-1">
+            <button mat-icon-button matSuffix type="button" (click)="showPassword(2)" [attr.aria-pressed]="hide2" tabindex="-1">
                 <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="formRegister.controls.repeatPassword.invalid">Fill the password</mat-error>
+            <mat-error *ngIf="formRegister.controls.password.value.length">At least 6 chars</mat-error>
         </mat-form-field>
 
         <button mat-flat-button color="primary" type="submit" [disabled]="formRegister.invalid">
@@ -40,6 +41,8 @@
     </form>
 
     <div class="flex justify-content-end mt-5">
-        <a routerLink="/auth/login">Already have an account?</a>
+        <button mat-flat-button routerLink="/auth/login">Already have an account?</button>
     </div>
 </div>
+
+<img id="imgHidden" src="assets/no-image.png">

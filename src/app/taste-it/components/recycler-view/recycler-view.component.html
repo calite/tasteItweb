@@ -14,14 +14,14 @@
             <img class="imgRecipeCard" [src]="decodeImg64(recipe.recipe.image!)" alt=""
                 (click)="viewRecipe(recipe.recipeId)" />
 
-                <button mat-mini-fab matTooltip="difficulty" class="difficultyContainer">
+                <button mat-mini-fab matTooltip="difficulty" class="difficultyContainer" color="primary">
                     <mat-icon>speed</mat-icon>
                     {{ recipe.recipe.difficulty }}
                 </button>
 
         </div>
         <mat-card-content matTooltip="description of the recipe" (click)="viewRecipe(recipe.recipeId)">
-            <p>{{ recipe.recipe.description | titlecase }}</p>
+            <p>{{ recipe.recipe.description | slice:0:200 }}...</p>
             <!-- <p>Difficulty: {{ recipe.recipe.difficulty }}</p>
             <p>Country: {{ recipe.recipe.country }}</p> -->
         </mat-card-content>

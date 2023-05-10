@@ -45,7 +45,7 @@ export class RecipeCreatorComponent {
   constructor(
     private apiService: ApiService,
     private toastService: ToastService,
-    private storage: Storage
+    private storage: Storage,
   ) {
     this.formRecipe = new FormGroup({
       recipeName: new FormControl('', Validators.required),
@@ -106,9 +106,14 @@ export class RecipeCreatorComponent {
 
   addStep() {
 
-    const controlName = `step${this.steps.length + 1}`;
-    this.formRecipe.addControl(controlName, new FormControl(''));
-    this.steps.push({ name: controlName, placeholder: 'Enter step details', formControlName: controlName, value: '' });
+    if (this.steps.length != 10) {
+      const controlName = `step${this.steps.length + 1}`;
+      this.formRecipe.addControl(controlName, new FormControl(''));
+      this.steps.push({ name: controlName, placeholder: 'Enter step details', formControlName: controlName, value: '' });
+    } else {
+      this.toastService.toastGenerator('','the limit of steps has been reached', 4 , ToastPositionEnum.BOTTOM_RIGHT);
+    }
+
   }
 
   removeStep(index) {
@@ -146,11 +151,7 @@ export class RecipeCreatorComponent {
 
   async onSubmit() {
 
-    console.log('pasan cosas')
-
     if (this.formRecipe.valid) {
-
-      console.log('pasan mas cosas')
 
       //obtencion de steps
       const formData = this.formRecipe.getRawValue();
@@ -179,14 +180,15 @@ export class RecipeCreatorComponent {
 
           const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
 
-          deleteObject(uriOldImage).then(() => {
-            console.log('image deleted')
-          }).catch(error => {
-            console.log('something wrong happen' + error)
-          })
-
-
-
+          try {
+            deleteObject(uriOldImage).then(() => {
+              console.log('image deleted')
+            }).catch(error => {
+              console.log('something wrong happen' + error)
+            })
+          } catch (error) {
+            console.log(error)
+          }
 
           let rid = this.recipe[0].recipeId
 

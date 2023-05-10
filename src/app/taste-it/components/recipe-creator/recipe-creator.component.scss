@@ -1,6 +1,51 @@
-img {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    border: 3px solid maroon;
-  }
+.imgRecipe {
+  width: 166px;
+  height: 166px;
+  border-radius: 50%;
+  border: 3px solid maroon;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  background-image: url("https://raw.githubusercontent.com/calite/no-image/main/no-picture.png");
+  background-size: contain;
+}
+
+.imgRecipe:hover {
+  cursor:pointer;
+  filter: brightness(0.8);
+}
+
+.inputImage {
+  opacity: 1;
+  // position: absolute;
+  // top: 50%;
+  display: none;
+}
+
+textarea {
+  text-indent: 32px;
+}
+
+textarea:first-line,
+textarea:placeholder-shown {
+  line-height: 1.6em;
+}
+
+.text-area-description {
+  width: 100%;
+}
+
+mat-chip-grid {
+  background-color: #e0e0e0;
+  padding: 5px;
+  border-bottom: 1px solid maroon;
+}
+
+.chipCustom {
+  background-color: maroon !important;
+}
+.chipCustom span {
+  color: white !important;
+}
+
+.chipIcon {
+  color: white !important;
+}

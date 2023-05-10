@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, UserCredential, User, getAuth, updatePassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, UserCredential, User, getAuth, updatePassword, sendPasswordResetEmail } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
-import { toastCoreConfig } from '@costlydeveloper/ngx-awesome-popup/ngx-awesome-popup/types/toast-notification/core/classes';
 import { ToastService } from './toast.service';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 
@@ -83,9 +82,23 @@ export class AuthService {
     updatePassword(user, newPassword).then(() => {
       this.toastService.toastGenerator('', 'password changed', 4, ToastPositionEnum.BOTTOM_RIGHT)
     }).catch(error => {
-      if(error.code == 'auth/weak-password')
-      this.toastService.toastGenerator('', 'Password should be at least 6 characters', 4, ToastPositionEnum.BOTTOM_RIGHT)
+      if (error.code == 'auth/weak-password')
+        this.toastService.toastGenerator('', 'Password should be at least 6 characters', 4, ToastPositionEnum.BOTTOM_RIGHT)
     })
+  }
+
+  resetPassword(email) {
+    const auth = getAuth()
+
+    sendPasswordResetEmail(auth, email).then(() => {
+      this.toastService.alertGeneratorWithoutCancel('', `an email was send to ${email}`, 4)
+    }).catch(error => {
+      console.log(error.code)
+      if(error.code === 'auth/user-not-found') {
+        this.toastService.toastGenerator('', 'that emails is not registered', 4, ToastPositionEnum.BOTTOM_RIGHT)
+      }
+    })
+
   }
 
 
