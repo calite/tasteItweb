@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout-page',
@@ -10,16 +11,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LayoutPageComponent {
 
-  public currentUser : UserResponse;
+  public currentUser: UserResponse;
 
-  public menuItems = [
-    {label: 'MENU', icon: 'home', url:'.'},
-    {label: 'SEARCH', icon: 'search', url:'./search'},
-    {label: 'RANDOM', icon: 'shuffle', url:'./random'},
-    {label: 'MY BOOK', icon: 'menu_book', url:'./my-book'},
-  ]
-
-  constructor(private sanitizer: DomSanitizer, private authService: AuthService) {
+  constructor(private authService: AuthService, private router : Router) {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')) //asignamos al usuario
   }
 
@@ -28,8 +22,10 @@ export class LayoutPageComponent {
     this.authService.logout();
   }
 
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
+  goProfile() {
+    console.log(this.currentUser);
+    this.router.navigateByUrl("profile/" + this.currentUser.token)
+    //window.location.reload();
   }
 
 }

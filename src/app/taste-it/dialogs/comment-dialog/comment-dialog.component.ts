@@ -37,7 +37,7 @@ export class CommentDialogComponent {
       this.formComment.controls.comment.value
     ).subscribe( ()  => {
       this.formClosed.emit();
-      this.toastService.toastGenerator('', 'recipe commented', 4, ToastPositionEnum.BOTTOM_RIGHT)
+      this.toastService.toastGenerator('', 'user commented', 4, ToastPositionEnum.BOTTOM_LEFT)
     })
     this.dialogRef.close();
   }

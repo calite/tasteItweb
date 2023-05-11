@@ -20,7 +20,6 @@ export class RandomPageComponent implements OnInit{
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -55,9 +54,5 @@ export class RandomPageComponent implements OnInit{
     this.router.navigate(['/profile/' + token]);
   }
 
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
-  }
-  
 
 }

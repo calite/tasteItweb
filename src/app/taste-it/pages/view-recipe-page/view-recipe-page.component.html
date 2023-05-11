@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h4>Recipe</h4>
+    <h1>Recipe</h1>
 
     <div *ngIf="!recipe; else divRecipe">
         <shared-loading-spinner></shared-loading-spinner>
@@ -10,13 +10,45 @@
 
         <div class="grid flex-column">
 
-
             <div class="grid flex-row align-items-center justify-content-evenly">
-                <img class="imgRecipe" [src]="decodeImg64(recipe[0].recipe.image!)" [alt]="">
+                <img class="imgRecipe" [src]="recipe[0].recipe.image" [alt]="">
 
-                <h5>{{ recipe[0].recipe.name | titlecase }}</h5>
-                <h4 [routerLink]="['../../profile', recipe[0].user.token]">{{ recipe[0].user.username | titlecase }}</h4>
+                <div class="grid flex-column align-items-center justify-content-evenly">
+
+                    <div class="recipeCard flex flex-column align-items-center justify-content-center">
+                        <h3 matTooltip="Recipe name">{{ recipe[0].recipe.name | titlecase }}</h3>
+                        <bar-rating [(rate)]="recipe[0].recipe['rating']" [max]="5" [readOnly]="true"
+                            matTooltip="Rating"></bar-rating>
+                    </div>
+
+                    <div class="user-card-little flex flex-row align-items-center justify-content-center">
+
+                        <span class="flex flex-row align-items-center justify-content-center"
+                            [routerLink]="['../../profile', recipe[0].user.token]" matTooltip="Profile">
+
+                            <img class="imgProfile" [src]="recipe[0].user.imgProfile">
+                            <button mat-button color="warm">{{recipe[0].user.username | titlecase }}</button>
+
+                        </span>
+
+                        <button mat-button color="warm" matTooltip="Follow" [disabled]="samePerson"
+                            (click)="postFollowUser()">
+                            <mat-icon *ngIf="canFollow">person_remove</mat-icon>
+                            <mat-icon *ngIf="!canFollow">person_add</mat-icon>
+                        </button>
+
+                        <button mat-button color="warm" matTooltip="Comment" [disabled]="samePerson"
+                            (click)="commentUser()">
+                            <mat-icon>comment</mat-icon>
+                        </button>
+
+                    </div>
+
+                </div>
+
             </div>
+
+
 
             <div class="col p-2 mt-2 grid flex-row align-items-center justify-content-evenly">
 
@@ -43,7 +75,8 @@
                     Report
                 </button>
 
-                <button mat-fab extended matTooltip="Edit this recipe" color="primary" *ngIf="isEditable" (click)="editRecipe()">
+                <button mat-fab extended matTooltip="Edit this recipe" color="primary" *ngIf="isEditable"
+                    (click)="editRecipe()">
                     <mat-icon>edit</mat-icon>
                     Edit
                 </button>
@@ -59,25 +92,46 @@
             <div class="col">
                 <mat-tab-group [disableRipple]=true>
                     <mat-tab label="Information" class="mat-tab-label-active">
-                        <p><strong>Description:</strong></p>
-                        <p>{{ recipe[0].recipe.description | titlecase }}</p>
-                        <p><strong>Difficulty:</strong></p>
-                        <p>{{ recipe[0].recipe.difficulty }}</p>
-                        <p><strong>country:</strong></p>
-                        <p>{{ recipe[0].recipe.country | titlecase }}</p>
-                        <p><strong>Tags:</strong></p>
-                        <mat-chip-set>
-                            <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item | titlecase}}</mat-chip>
-                        </mat-chip-set>
-                        <p><strong>Ingredients:</strong></p>
-                        <mat-chip-set>
-                            <mat-chip *ngFor="let item of recipe[0].recipe.ingredients"
-                                class="chipCustom">{{item | titlecase}}</mat-chip>
-                        </mat-chip-set>
+
+                        <div class="grid infoAdicional">
+
+                            <div class="col-6">
+                                <p><strong>Ingredients:</strong></p>
+                                <mat-chip-set>
+                                    <mat-chip *ngFor="let item of recipe[0].recipe.ingredients" class="chipCustom">
+                                        {{item |
+                                        titlecase}}</mat-chip>
+                                </mat-chip-set>
+                            </div>
+
+                            <div class="col-6">
+                                <p><strong>Description:</strong></p>
+                                <p>{{ recipe[0].recipe.description }}</p>
+                                <p><strong>Difficulty:</strong></p>
+                                <p>{{ recipe[0].recipe.difficulty }}</p>
+                                <p><strong>country:</strong></p>
+                                <p>{{ recipe[0].recipe.country | titlecase }}</p>
+                            </div>
+
+                            <div class="col-12">
+                                <p><strong>Tags:</strong></p>
+                                <mat-chip-set>
+                                    <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item |
+                                        titlecase}}
+                                    </mat-chip>
+                                </mat-chip-set>
+                            </div>
+
+                        </div>
+
+
+
                     </mat-tab>
                     <mat-tab label="Steps">
-                        <p><strong>Steps:</strong></p>
-                        <div class="stepsCustom" *ngFor="let item of recipe[0].recipe.steps">{{ item | titlecase }}</div>
+                        <div class="stepsCustom" *ngFor="let item of recipe[0].recipe.steps; let i = index">
+                            <h3><u>Step {{i+1}}</u></h3>
+                            <p class="ml-5">{{ item }}</p>
+                        </div>
                     </mat-tab>
                     <mat-tab label="Comments">
                         <app-comments-on-recipe [comments]="comments"></app-comments-on-recipe>

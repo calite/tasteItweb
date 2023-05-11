@@ -108,7 +108,7 @@ export class EditProfileComponent implements OnInit {
       if (password === confirmPassword && password.length > 0) {
         this.authService.changePassword(password)
       } else {
-        this.toastService.toastGenerator('', 'password are not equals', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        this.toastService.toastGenerator('', 'password are not equals', 4, ToastPositionEnum.BOTTOM_LEFT)
       }
 
     }
@@ -145,14 +145,13 @@ export class EditProfileComponent implements OnInit {
           this.currentUser.imgProfile = imgProfile
           this.currentUser.biography = biography
           sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser))
+
+          this.toastService.toastGenerator('','Perfil updated',4,ToastPositionEnum.BOTTOM_LEFT)
+
+          this.route.navigate([`./profile/${this.currentUser.token}`])
         })
 
     }
-
-  }
-
-  pepito() {
-    alert('pasan cosas')
 
   }
 

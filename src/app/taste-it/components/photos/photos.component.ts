@@ -69,7 +69,4 @@ export class PhotosComponent implements OnInit {
     this.router.navigate(['/recipe/' + recipeId]);
   }
 
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
-  }
 }

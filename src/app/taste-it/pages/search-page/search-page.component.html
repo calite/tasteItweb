@@ -8,10 +8,15 @@
         (ngSubmit)="onSubmit()">
         <mat-form-field color="primary">
           <mat-label>Search</mat-label>
+
           <input matInput type="text" class="form-control" placeholder="Search" formControlName="search"
             color="primary">
+          <button mat-icon-button matSuffix disabled>
+            <mat-icon>search</mat-icon>
+          </button>
         </mat-form-field>
       </form>
+      
     </div>
 
 

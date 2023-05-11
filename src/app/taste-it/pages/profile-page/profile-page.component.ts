@@ -47,18 +47,15 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute,
     private route : Router,
     private commentDialog: MatDialog,
-    private recipeDialog: MatDialog,
     private toastService: ToastService
   ) {
     this.comments = []
   }
 
   ngOnInit(): void {
-
     this.token = this.activatedRoute.snapshot.paramMap.get('token');
     this.apiService.getUserByToken(this.token).subscribe(
       response => {
@@ -134,9 +131,9 @@ export class ProfilePageComponent implements OnInit {
     ).subscribe(response => {
       this.checkFollow()
       if (!this.canFollow) {
-        this.toastService.toastGenerator('', 'start following', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        this.toastService.toastGenerator('', 'start following', 4, ToastPositionEnum.BOTTOM_LEFT)
       } else {
-        this.toastService.toastGenerator('', 'stop following', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        this.toastService.toastGenerator('', 'stop following', 4, ToastPositionEnum.BOTTOM_LEFT)
       }
     })
   }
@@ -179,12 +176,6 @@ export class ProfilePageComponent implements OnInit {
     const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
       data: { userToken: this.token , option: 'following'}
     })
-  }
-
-
-
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
   }
 
 }

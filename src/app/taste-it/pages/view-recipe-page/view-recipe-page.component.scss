@@ -6,9 +6,10 @@
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 }
 
-.chipCustom{
+.chipCustom {
   background-color: maroon !important;
 }
+
 .chipCustom span {
   color: white !important;
 }
@@ -34,28 +35,34 @@ p strong {
   color: maroon;
 }
 
-.horizontal-line {
-  margin-top: 20px;
-  height: 2px;
-  background-color: maroon;
-}
-
-.mat-mdc-tab {
+.user-card-little {
+  padding: 15px;
+  margin: 50px;
   background-color: maroon !important;
+  color: white;
+  border-radius: 45px 45px 45px 45px;
 }
 
-.mdc-tab__text-label {
-  color: white !important;
+.user-card-little img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #b92617;
+  object-fit: cover;
+  cursor: pointer;
 }
 
-.mdc-tab--active {
-  background-color: rgb(215, 135, 135) !important;
+.recipeCard {
+  padding: 15px;
+  background-color: maroon !important;
+  color: white;
+  border-radius: 25px 25px 25px 25px;
+}
 
-  .mdc-tab__text-label {
-    color: maroon !important;
-  }
-
-  .mdc-tab-indicator__content {
-    border-color: maroon !important;
-  }
+.infoAdicional {
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  justify-content: center;
+  width: 99%;
 }

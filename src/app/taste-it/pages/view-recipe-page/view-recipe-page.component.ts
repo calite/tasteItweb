@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RateDialogComponent } from '../../dialogs/rate-dialog/rate-dialog.component';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { CommentDialogComponent } from '../../dialogs/comment-dialog/comment-dialog.component';
 
 @Component({
   selector: 'app-view-recipe-page',
@@ -32,6 +33,8 @@ export class ViewRecipePageComponent implements OnInit {
   public isLiked: boolean = false;
   public isEditable: boolean = false;
   public isReportable: boolean = true;
+  public samePerson: boolean = false;
+  public canFollow: boolean = false;
   private skipper: number = 0;
 
 
@@ -48,13 +51,13 @@ export class ViewRecipePageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
-    private sanitizer: DomSanitizer,
     private reportDialog: MatDialog,
     private rateDialog: MatDialog,
     private toastService: ToastService,
     private route: Router,
+    private commentDialog: MatDialog,
   ) {
-    this.comments = []
+    this.comments = [] 
   }
 
   ngOnInit(): void {
@@ -63,6 +66,8 @@ export class ViewRecipePageComponent implements OnInit {
 
     this.loadRecipe();
     this.loadComments(0);
+
+
   }
 
   loadRecipe() {
@@ -74,9 +79,11 @@ export class ViewRecipePageComponent implements OnInit {
       )
       .subscribe(recipe => {
         this.recipe = recipe;
+        this.checkFollow();
         if (recipe[0].user.token === this.currentUser.token) {
           this.isEditable = true
           this.isReportable = false;
+          this.samePerson = true;
         }
         this.isLoading = false;
       })
@@ -94,12 +101,7 @@ export class ViewRecipePageComponent implements OnInit {
       )
       .subscribe(comments => {
         this.comments.push(...comments)
-        console.log(this.comments)
         this.isLoading = false;
-
-        // if (comments.length == 0 && this.comments.length != 0) {
-        //   // this.toastService.toastGenerator('', 'There is no more comments', 4, ToastPositionEnum.BOTTOM_RIGHT)
-        // }
       });
 
     this.skipper = this.skipper + 10;
@@ -131,9 +133,9 @@ export class ViewRecipePageComponent implements OnInit {
       ).subscribe(response => {
         this.checkLike()
         if (!this.isLiked) {
-          this.toastService.toastGenerator('', 'recipe liked', 4, ToastPositionEnum.BOTTOM_RIGHT)
+          this.toastService.toastGenerator('', 'recipe liked', 4, ToastPositionEnum.BOTTOM_LEFT)
         } else {
-          this.toastService.toastGenerator('', 'recipe disliked', 4, ToastPositionEnum.BOTTOM_RIGHT)
+          this.toastService.toastGenerator('', 'recipe disliked', 4, ToastPositionEnum.BOTTOM_LEFT)
         }
       })
 
@@ -152,6 +154,7 @@ export class ViewRecipePageComponent implements OnInit {
     dialogRef.componentInstance.formClosed.subscribe(() => {
       this.comments = []
       this.skipper = 0;
+      this.loadRecipe()
       this.loadComments(this.skipper)
     })
   }
@@ -168,9 +171,44 @@ export class ViewRecipePageComponent implements OnInit {
     this.route.navigate([`/edit-recipe/${rid}/${token}`])
   }
 
+  checkFollow() {
+    this.apiService.getCheckFollowingUser(
+      JSON.parse(sessionStorage.getItem('currentUser')).token,
+      this.recipe[0].user.token
+    ).subscribe(response => {
+      console.log(response)
+      if (response) {
+        this.canFollow = true;
+      } else {
+        this.canFollow = false;
+      }
 
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
+    })
+  }
+
+  postFollowUser() {
+    this.apiService.postFollowUser(
+      JSON.parse(sessionStorage.getItem('currentUser')).token,
+      this.recipe[0].user.token
+    ).subscribe(response => {
+      this.checkFollow()
+      if (!this.canFollow) {
+        this.toastService.toastGenerator('', 'start following', 4, ToastPositionEnum.BOTTOM_LEFT)
+      } else {
+        this.toastService.toastGenerator('', 'stop following', 4, ToastPositionEnum.BOTTOM_LEFT)
+      }
+    })
+  }
+
+  commentUser() {
+    const dialogRef = this.commentDialog.open(CommentDialogComponent, {
+      data: { receiverToken: this.recipe[0].user.token }
+    });
+    dialogRef.componentInstance.formClosed.subscribe(() => {
+      this.comments = []
+      this.skipper = 0;
+      this.loadComments(this.skipper)
+    })
   }
 
 }

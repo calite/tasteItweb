@@ -4,7 +4,7 @@
 
     <div *ngFor="let recipe of recipes" class="flex-auto flex align-items-center  align-content-center mt-2 mini-card">
         <div>
-            <img class="imgRecipe" [src]="decodeImg64(recipe.recipe.image!)">
+            <img class="imgRecipe" [src]="recipe.recipe.image">
         </div>
         <div class="ml-2">
             <p>{{recipe.recipe.name | titlecase}}</p>

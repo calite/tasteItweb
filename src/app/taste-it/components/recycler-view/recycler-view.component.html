@@ -11,8 +11,13 @@
                 }}</mat-card-subtitle>
         </mat-card-header>
         <div class="imgContainer">
-            <img class="imgRecipeCard" [src]="decodeImg64(recipe.recipe.image!)" alt=""
+            <img class="imgRecipeCard" [src]="recipe.recipe.image" alt=""
                 (click)="viewRecipe(recipe.recipeId)" />
+
+                <button mat-mini-fab matTooltip="rating" class="ratingContainer" color="primary">
+                    <mat-icon>star</mat-icon>
+                    {{ recipe.recipe.rating | number: '1.0-0' }}
+                </button>
 
                 <button mat-mini-fab matTooltip="difficulty" class="difficultyContainer" color="primary">
                     <mat-icon>speed</mat-icon>

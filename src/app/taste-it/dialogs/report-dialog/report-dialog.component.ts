@@ -35,7 +35,7 @@ export class ReportDialogComponent {
       this.token,
       this.formReport.controls.comment.value
     ).subscribe( response => {
-      this.toastService.toastGenerator('', 'recipe reported', 4, ToastPositionEnum.BOTTOM_RIGHT)
+      this.toastService.toastGenerator('', 'recipe reported', 4, ToastPositionEnum.BOTTOM_LEFT)
     })
     this.dialogRef.close();
   }

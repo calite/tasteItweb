@@ -17,7 +17,6 @@ export class CommentsOnUserComponent {
   commentsChange = new EventEmitter<CommentsOnUserResponse[]>();
 
   constructor(
-    private sanitizer: DomSanitizer,
     private router: Router,
   ){
     

@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-creator',
@@ -46,6 +47,7 @@ export class RecipeCreatorComponent {
     private apiService: ApiService,
     private toastService: ToastService,
     private storage: Storage,
+    private route : Router
   ) {
     this.formRecipe = new FormGroup({
       recipeName: new FormControl('', Validators.required),
@@ -111,7 +113,7 @@ export class RecipeCreatorComponent {
       this.formRecipe.addControl(controlName, new FormControl(''));
       this.steps.push({ name: controlName, placeholder: 'Enter step details', formControlName: controlName, value: '' });
     } else {
-      this.toastService.toastGenerator('','the limit of steps has been reached', 4 , ToastPositionEnum.BOTTOM_RIGHT);
+      this.toastService.toastGenerator('', 'the limit of steps has been reached', 4, ToastPositionEnum.BOTTOM_LEFT);
     }
 
   }
@@ -151,6 +153,8 @@ export class RecipeCreatorComponent {
 
   async onSubmit() {
 
+    //console.log(this.editRecipe)
+
     if (this.formRecipe.valid) {
 
       //obtencion de steps
@@ -176,39 +180,43 @@ export class RecipeCreatorComponent {
       if (this.formRecipe.controls.imgRecipe.dirty) {
         this.imgUrl = await this.uploadPhoto() //subimos la foto nueva
 
-        if (this.editRecipe) { //si es edicion
+        const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
 
-          const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
-
-          try {
-            deleteObject(uriOldImage).then(() => {
-              console.log('image deleted')
-            }).catch(error => {
-              console.log('something wrong happen' + error)
-            })
-          } catch (error) {
-            console.log(error)
-          }
-
-          let rid = this.recipe[0].recipeId
-
-          this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
-            .subscribe(response => {
-              console.log('editado')
-              this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_RIGHT)
-            })
-
-        } else {
-
-          this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
-            .subscribe(response => {
-              console.log('creado')
-              this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_RIGHT)
-            })
-
+        try {
+          deleteObject(uriOldImage).then(() => {
+            console.log('image deleted')
+          }).catch(error => {
+            console.log('something wrong happen' + error)
+          })
+        } catch (error) {
+          console.log(error)
         }
 
       }
+
+      if (this.editRecipe) { //si es edicion
+
+        let rid = this.recipe[0].recipeId
+
+        this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+          .subscribe(response => {
+            //console.log('editado')
+            this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_LEFT)
+            this.route.navigate([`./recipe/${rid}`])
+          })
+
+      } else {
+
+        this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+          .subscribe(response => {
+            //console.log('creado')
+            this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_LEFT)
+            this.route.navigate([`./recipe/${response[0].recipeId}`])
+          })
+
+      }
+
+
 
     }
 

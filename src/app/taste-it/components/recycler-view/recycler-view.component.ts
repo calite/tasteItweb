@@ -18,7 +18,6 @@ export class RecyclerViewComponent {
   public isLoading : boolean = false;
 
   constructor(
-    private sanitizer: DomSanitizer,
     private router: Router
   ){
 
@@ -30,10 +29,6 @@ export class RecyclerViewComponent {
 
   viewProfileCreator(token : string) {
     this.router.navigate(['/profile/' + token]);
-  }
-
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
   }
   
 }

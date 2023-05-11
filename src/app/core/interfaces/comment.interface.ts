@@ -7,7 +7,7 @@ export interface CommentsOnUserResponse {
 
 export interface Comment {
     comment: string;
-    dateCreated: string;
+    dateCreated: Date;
 }
 
 export interface CommentsOnRecipeResponse {
@@ -19,8 +19,8 @@ export interface CommentsOnRecipeResponse {
 
 export interface CommentRating {
     comment: string;
-    dateCreated: string;
-    rating: string;
+    dateCreated: Date;
+    rating: number;
 }
 
 export interface ReportOnRecipeResponse {

@@ -26,6 +26,23 @@
     right: 10px;
 }
 
+.difficultyContainer mat-icon {
+    background: -webkit-linear-gradient(orange, red, pink, yellow, white);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ratingContainer {
+    position: absolute;
+    top: 300px;
+    right: 10px;
+}
+
+.ratingContainer mat-icon {
+    color: yellow;
+}
+
+
 mat-card-subtitle {
     font-style: italic;
     color: azure;

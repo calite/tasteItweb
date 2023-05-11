@@ -21,7 +21,7 @@
                             slice:0:20 }}</mat-card-subtitle>
                     </mat-card-header>
 
-                    <img class="imgRecipeCard" [src]="decodeImg64(recipes[counter].recipe.image!)" alt=""
+                    <img class="imgRecipeCard" [src]="recipes[counter].recipe.image" alt=""
                         (click)="viewRecipe(recipes[counter].recipeId)" />
 
                     <mat-card-content (click)="viewRecipe(recipes[counter].recipeId)">

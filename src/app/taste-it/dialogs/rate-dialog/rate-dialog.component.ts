@@ -40,7 +40,7 @@ export class RateDialogComponent {
         this.formRate.controls.rating.value
       ).subscribe(response => {
         this.formClosed.emit();
-        this.toastService.toastGenerator('', 'recipe commented', 4, ToastPositionEnum.BOTTOM_RIGHT)
+        this.toastService.toastGenerator('', 'recipe commented', 4, ToastPositionEnum.BOTTOM_LEFT)
       })
       this.dialogRef.close();
     }

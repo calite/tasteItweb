@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/core/services/api.service';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
@@ -10,7 +10,7 @@ import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
   templateUrl: './followed.component.html',
   styleUrls: ['./followed.component.scss'],
 })
-export class FollowedComponent {
+export class FollowedComponent implements OnInit {
 
   public recipes: RecipesResponse[] = [];
   private currentUser: UserResponse;

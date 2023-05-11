@@ -1,37 +1,50 @@
 <mat-toolbar color="primary">
 
-    <div class="flex-auto">
-        <h1>tasteIt</h1>
-    </div>
+  <div class="flex-auto">
+    <h1>tasteIt</h1>
+  </div>
 
-    <div class="flex-auto ">
-        <button *ngFor="let item of menuItems" mat-button [routerLink]="item.url">
-            <mat-icon aria-hidden="false" fontIcon="{{item.icon}}"></mat-icon>{{item.label}}
-        </button>
-    </div>
+  <div class="flex-auto flex-column align-items-center justify-content-center">
+    <button mat-button [routerLink]="['.']">
+      <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>HOME
+    </button>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item disabled>
-          <mat-icon>bedtime</mat-icon>
-          <span>Night Mode</span>
-        </button>
-        <button mat-menu-item (click)="onLogout()">
-          <mat-icon>logout</mat-icon>
-          <span>Logout</span>
-        </button>
-      </mat-menu>
-      
+    <button mat-button [routerLink]="['./search']">
+      <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>SEARCH
+    </button>
 
-    <div class="flex-end" [routerLink]="['./profile', currentUser.token]">
-            <img matTooltip="Your profile" [src]="currentUser.imgProfile!">
-    </div>
+    <button mat-button [routerLink]="['./random']">
+      <mat-icon aria-hidden="false" fontIcon="shuffle"></mat-icon>RANDOM
+    </button>
+
+    <button mat-button [routerLink]="['./my-book']">
+      <mat-icon aria-hidden="false" fontIcon="book"></mat-icon>MY BOOK
+    </button>
+  </div>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+      <mat-icon>bedtime</mat-icon>
+      <span>Night Mode</span>
+    </button>
+    <button mat-menu-item (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+
+
+  <div class="flex-end" (click)="goProfile()">
+    <img matTooltip="Your profile" [src]="currentUser.imgProfile!">
+  </div>
 </mat-toolbar>
 
 
 
 <div class="container p-2">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
+

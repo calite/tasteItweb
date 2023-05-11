@@ -15,6 +15,7 @@ import { CommentsOnRecipeComponent } from './comments-on-recipe/comments-on-reci
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgModel, ReactiveFormsModule } from '@angular/forms';
 import { RecipeCreatorComponent } from './recipe-creator/recipe-creator.component';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 
 
@@ -37,6 +38,7 @@ import { RecipeCreatorComponent } from './recipe-creator/recipe-creator.componen
     MaterialModule,
     SharedModule,
     ReactiveFormsModule,
+    BarRatingModule
   ]
   , exports: [
     BioComponent,

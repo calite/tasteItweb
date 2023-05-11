@@ -56,9 +56,5 @@ export class ViewRecipesDialogComponent implements OnInit {
 
   }
 
-  decodeImg64(img: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
-  }
-
 
 }

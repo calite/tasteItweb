@@ -17,6 +17,7 @@ import { DialogsModule } from './dialogs/dialogs.module';
 import { CreateRecipePageComponent } from './pages/create-recipe-page/create-recipe-page.component';
 import { EditRecipePageComponent } from './pages/edit-recipe-page/edit-recipe-page.component';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { EditProfileComponent } from './pages/edit-profile/edit-profile.componen
         SharedModule,
         ComponentsModule,
         DialogsModule,
+        BarRatingModule
     ]
 })
 export class TasteItModule { }

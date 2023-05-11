@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 
+import { BarRatingModule } from "ngx-bar-rating";
 
 import {
   NgxAwesomePopupModule,
@@ -43,11 +44,13 @@ import {
     NgxAwesomePopupModule.forRoot(), // Essential, mandatory main module.
     DialogConfigModule.forRoot(), // Needed for instantiating dynamic components.
     ConfirmBoxConfigModule.forRoot(), // Needed for instantiating confirm boxes.
-    ToastNotificationConfigModule.forRoot(), provideStorage(() => getStorage()) // Needed for instantiating toast notifications.
+    ToastNotificationConfigModule.forRoot(), provideStorage(() => getStorage()), // Needed for instantiating toast notifications.
+    BarRatingModule
   ],
   exports: [
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    BarRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

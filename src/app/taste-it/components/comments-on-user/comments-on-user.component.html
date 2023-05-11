@@ -4,9 +4,9 @@
             <img class="imgProfile" [src]="comment.user.imgProfile!">
         </div>
         <mat-card-title class="ml-2">{{comment.user.username | titlecase}}</mat-card-title>
-        <mat-card-subtitle class="ml-2">{{comment.comment.dateCreated | date }}</mat-card-subtitle>
+        <mat-card-subtitle class="ml-2">{{comment.comment.dateCreated | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p><b>Said:</b> {{comment.comment.comment}}</p>
+        <p>{{comment.comment.comment}}</p>
     </mat-card-content>
 </mat-card>

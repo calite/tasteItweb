@@ -10,6 +10,7 @@ export interface Recipe {
     difficulty:  number;
     image:       string;
     dateCreated: Date;
+    rating :     number;
     country:     string;
     ingredients: string[];
     tags:        string[];

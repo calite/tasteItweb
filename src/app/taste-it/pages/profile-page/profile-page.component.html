@@ -5,7 +5,7 @@
 <ng-template #divProfile>
 
     <div class="grid flex-column">
-        <h4>Profile</h4>
+        <h1>Profile</h1>
 
         <div class="grid flex-row align-items-center justify-content-evenly">
 
@@ -15,39 +15,37 @@
                 <h2>{{currentUser.username | titlecase }}</h2>
             </div>
 
-        </div>
+            <div class="grid p-2 mt-2 flex-column align-items-center justify-content-evenly botones">
 
-        <div class="grid p-2 mt-2 flex-row align-items-center justify-content-evenly">
+                <button mat-fab extended matTooltip="Follow this user" color="primary" *ngIf="samePerson && !canFollow"
+                    (click)="postFollowUser()">
+                    <mat-icon>person_add</mat-icon>
+                    Follow
+                </button>
 
-            <button mat-fab extended matTooltip="Follow this user" color="primary" 
-            *ngIf="samePerson && !canFollow"
-            (click)="postFollowUser()">
-                <mat-icon>person_add</mat-icon>
-                Follow
-            </button>
+                <button mat-fab extended matTooltip="Unfollow this user" color="primary" *ngIf="samePerson && canFollow"
+                    (click)="postFollowUser()">
+                    <mat-icon>person_remove</mat-icon>
+                    Unfollow
+                </button>
 
-            <button mat-fab extended matTooltip="Unfollow this user" color="primary" 
-            *ngIf="samePerson && canFollow"
-            (click)="postFollowUser()">
-                <mat-icon>person_remove</mat-icon>
-                Unfollow
-            </button>
+                <button mat-fab extended matTooltip="Like this recipe" color="primary" *ngIf="samePerson"
+                    (click)="commentUser()">
+                    <mat-icon>comment</mat-icon>
+                    Comment
+                </button>
 
-            <button mat-fab extended matTooltip="Like this recipe" color="primary" 
-            *ngIf="samePerson"
-            (click)="commentUser()">
-                <mat-icon>comment</mat-icon>
-                Comment
-            </button>
+                <button mat-fab extended matTooltip="Edit your profile" color="primary" *ngIf="!samePerson"
+                    (click)="editUser()">
+                    <mat-icon>edit</mat-icon>
+                    Edit Profile
+                </button>
 
-            <button mat-fab extended matTooltip="Edit your profile" color="primary" 
-            *ngIf="!samePerson"
-            (click)="editUser()">
-                <mat-icon>edit</mat-icon>
-                Edit Profile
-            </button>
+            </div>
 
         </div>
+
+
 
         <div class="grid mt-3">
 

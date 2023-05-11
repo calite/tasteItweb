@@ -37,10 +37,7 @@ export class HomePageComponent implements OnInit {
     private toastService: ToastService,
     private router: Router
   ) {
-
-
     this.currentUser = this.authService.getUser(); //traemos el usuario de local
-
   }
 
   ngOnInit() {
@@ -52,7 +49,6 @@ export class HomePageComponent implements OnInit {
 
     timer.subscribe(
       x => {
-        console.log('yep')
         this.authService.renewIdToken()
         this.apiService.updateApiKey()
       }
