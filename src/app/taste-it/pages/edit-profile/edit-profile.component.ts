@@ -120,7 +120,7 @@ export class EditProfileComponent implements OnInit {
 
         this.imgUrl = await this.uploadPhoto() // subimos foto        
 
-        if (this.currentUser.imgProfile != 'https://raw.githubusercontent.com/calite/no-image/main/no-image.png') {
+        //if (this.currentUser.imgProfile != 'https://raw.githubusercontent.com/calite/no-image/main/no-image.png') {
           
           const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
 
@@ -129,7 +129,7 @@ export class EditProfileComponent implements OnInit {
           }).catch(error => {
             console.log('something wrong happen' + error)
           })
-        }
+        //}
 
       }
 
