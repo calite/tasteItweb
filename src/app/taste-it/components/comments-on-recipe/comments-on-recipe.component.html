@@ -1,17 +1,20 @@
 <div class="grid">
-    <div class="col" >
+    <div class="col">
         <mat-card class="user-cards" *ngFor="let comment of comments">
             <mat-card-header>
                 <div mat-card-avatar>
                     <img class="imgProfile" [src]="comment.user.imgProfile!" matTooltip="Profile">
                 </div>
-                <mat-card-title (click)="viewProfileCreator(comment.user.token)" class="ml-2" matTooltip="Username">{{comment.user.username | titlecase }}</mat-card-title>
+
+                <mat-card-title (click)="viewProfileCreator(comment.user.token)" class="ml-2"
+                    matTooltip="Username">{{comment.user.username | titlecase }}</mat-card-title>
                 <mat-card-subtitle class="ml-2">{{comment.c.dateCreated | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
                 <bar-rating [(rate)]="comment.c.rating" [max]="5" [readOnly]="true"></bar-rating>
+
             </mat-card-header>
             <mat-card-content>
                 <p>{{comment.c.comment }}</p>
-                
+
             </mat-card-content>
         </mat-card>
     </div>

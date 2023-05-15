@@ -8,10 +8,13 @@
             <mat-error *ngIf="formRate.controls.comment.invalid">Fill the comment</mat-error>
         </mat-form-field>
 
-        <mat-slider min="0" max="5" step="1" showTickMarks discrete >
+        <!-- <mat-slider min="0" max="5" step="1" showTickMarks discrete >
             <input type="range" matSliderThumb formControlName="rating">
             <mat-error *ngIf="formRate.controls.rating.invalid">Give a rating</mat-error>
-        </mat-slider>
+        </mat-slider> -->
+
+        <bar-rating [(rate)]="rate" [max]="5" formControlName="rating"></bar-rating>
+
     </form>
 </div>
 <div mat-dialog-actions>

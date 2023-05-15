@@ -1,6 +1,8 @@
 <h1 *ngIf="!editRecipe">Create recipe</h1>
 <h1 *ngIf="editRecipe">Edit recipe</h1>
 
+<button mat-button (click)="deleteRecipe()" color="warn">Delete Recipe</button>
+
 <!-- flex flex-column align-items-center justify-content-center -->
 
 <!-- <div *ngIf="!recipe; else divRecipe">

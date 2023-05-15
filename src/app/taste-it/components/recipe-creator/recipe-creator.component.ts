@@ -181,24 +181,21 @@ export class RecipeCreatorComponent {
 
         this.imgUrl = await this.uploadPhoto() //subimos la foto nueva
 
-        if (this.editRecipe) {
-
-          const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
-
-          try {
-            deleteObject(uriOldImage).then(() => {
-              console.log('image deleted')
-            }).catch(error => {
-              console.log('something wrong happen' + error)
-            })
-          } catch (error) {
-            console.log(error)
-          }
-        }
-
       }
 
       if (this.editRecipe) { //si es edicion
+
+        const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
+
+        try {
+          deleteObject(uriOldImage).then(() => {
+            console.log('image deleted')
+          }).catch(error => {
+            console.log('something wrong happen' + error)
+          })
+        } catch (error) {
+          console.log(error)
+        }
 
         let rid = this.recipe[0].recipeId
 
@@ -222,10 +219,33 @@ export class RecipeCreatorComponent {
 
       }
 
-
-
     }
 
+  }
+
+  deleteRecipe() {
+
+    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? the data will be lost', 4)
+    
+      .subscribe((result) => {
+        if (result.success === true) {
+
+          const rid = this.recipe[0].recipeId;
+
+          this.apiService.postDeleteRecipe(rid).subscribe();
+
+          const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto de la receta
+
+          deleteObject(uriOldImage).then(() => {
+            console.log('image deleted')
+          }).catch(error => {
+            console.log('something wrong happen' + error)
+          })
+
+          this.route.navigate(['./home']);
+
+        }
+      });
 
   }
 

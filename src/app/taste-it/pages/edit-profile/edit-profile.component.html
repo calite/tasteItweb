@@ -2,7 +2,6 @@
 
 <form class="flex flex-column align-items-center justify-content-center" [formGroup]="formUser">
 
-
     <div class="grid">
 
         <div class="col-7 flex flex-column align-items-center justify-content-center">
@@ -51,12 +50,6 @@
 
     </div>
 
-
-
-
-
-
-
-
     <button mat-raised-button color="primary" (click)="onSubmit()" class="mt-2">Edit user</button>
+    <button mat-button (click)="deleteAccount()" class="mt-8" color="warn">Delete Account</button>
 </form>

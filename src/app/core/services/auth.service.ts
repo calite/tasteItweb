@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, UserCredential, User, getAuth, updatePassword, sendPasswordResetEmail } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, UserCredential, User, getAuth, updatePassword, sendPasswordResetEmail, deleteUser } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
@@ -94,10 +94,24 @@ export class AuthService {
       this.toastService.alertGeneratorWithoutCancel('', `an email was send to ${email}`, 4)
     }).catch(error => {
       console.log(error.code)
-      if(error.code === 'auth/user-not-found') {
+      if (error.code === 'auth/user-not-found') {
         this.toastService.toastGenerator('', 'that emails is not registered', 4, ToastPositionEnum.BOTTOM_LEFT)
       }
     })
+
+  }
+
+  deleteUser() {
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    deleteUser(user).then(() => {
+      // User deleted.
+    }).catch((error) => {
+      // An error ocurred
+      // ...
+    });
 
   }
 

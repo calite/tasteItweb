@@ -16,6 +16,7 @@ export class RateDialogComponent {
   private token;
   private rid;
   @Output() formClosed = new EventEmitter();
+  rate = 0.0
 
   constructor(
     private apiService: ApiService,
@@ -32,12 +33,13 @@ export class RateDialogComponent {
   }
 
   onSubmit() {
+    
     if (this.formRate.valid) {
       this.apiService.postCommentOnRecipe(
         this.rid,
         this.token,
         this.formRate.controls.comment.value,
-        this.formRate.controls.rating.value
+        this.rate
       ).subscribe(response => {
         this.formClosed.emit();
         this.toastService.toastGenerator('', 'recipe commented', 4, ToastPositionEnum.BOTTOM_LEFT)

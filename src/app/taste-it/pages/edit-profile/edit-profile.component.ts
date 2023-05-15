@@ -121,14 +121,14 @@ export class EditProfileComponent implements OnInit {
         this.imgUrl = await this.uploadPhoto() // subimos foto        
 
         //if (this.currentUser.imgProfile != 'https://raw.githubusercontent.com/calite/no-image/main/no-image.png') {
-          
-          const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
 
-          deleteObject(uriOldImage).then(() => {
-            console.log('image deleted')
-          }).catch(error => {
-            console.log('something wrong happen' + error)
-          })
+        const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
+
+        deleteObject(uriOldImage).then(() => {
+          console.log('image deleted')
+        }).catch(error => {
+          console.log('something wrong happen' + error)
+        })
         //}
 
       }
@@ -146,12 +146,39 @@ export class EditProfileComponent implements OnInit {
           this.currentUser.biography = biography
           sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser))
 
-          this.toastService.toastGenerator('','Perfil updated',4,ToastPositionEnum.BOTTOM_LEFT)
+          this.toastService.toastGenerator('', 'Perfil updated', 4, ToastPositionEnum.BOTTOM_LEFT)
 
           this.route.navigate([`./profile/${this.currentUser.token}`])
         })
 
     }
+
+  }
+
+  deleteAccount() {
+
+    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? All your data will be lost', 4)
+      .subscribe((result) => {
+        if (result.success === true) {
+
+          this.apiService.postDeleteUser(this.currentUser.token).subscribe()
+
+          const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto del usuario
+
+          deleteObject(uriOldImage).then(() => {
+            console.log('image deleted')
+          }).catch(error => {
+            console.log('something wrong happen' + error)
+          })
+
+          this.authService.deleteUser();
+
+          sessionStorage.clear();
+
+          this.route.navigate(['./home']);
+
+        }
+      });
 
   }
 

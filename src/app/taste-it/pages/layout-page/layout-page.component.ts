@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
@@ -23,9 +22,11 @@ export class LayoutPageComponent {
   }
 
   goProfile() {
-    console.log(this.currentUser);
-    this.router.navigateByUrl("profile/" + this.currentUser.token)
-    //window.location.reload();
+
+    this.router.navigate(['']).then(() => {
+      this.router.navigate(['/profile/' + this.currentUser.token]);
+    });
+
   }
 
 }

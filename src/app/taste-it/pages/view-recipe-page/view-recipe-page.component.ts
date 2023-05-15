@@ -176,7 +176,7 @@ export class ViewRecipePageComponent implements OnInit {
       JSON.parse(sessionStorage.getItem('currentUser')).token,
       this.recipe[0].user.token
     ).subscribe(response => {
-      console.log(response)
+      //console.log(response)
       if (response) {
         this.canFollow = true;
       } else {

@@ -116,7 +116,7 @@ export class ApiService {
 
     }
 
-    getCommentsOnRecipe(rid: number, skipper : number): Observable<CommentsOnRecipeResponse[]> {
+    getCommentsOnRecipe(rid: number, skipper: number): Observable<CommentsOnRecipeResponse[]> {
 
         const url = `${this.apiUrl}recipe/comments/${rid}/${skipper}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
@@ -289,20 +289,20 @@ export class ApiService {
 
     }
 
-    getFollowing(sender_token : string, skipper: number) : Observable<UserResponse[]> {
+    getFollowing(sender_token: string, skipper: number): Observable<UserResponse[]> {
         const url = `${this.apiUrl}user/following_user/${sender_token}/${skipper}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<UserResponse[]>(url, { headers });
     }
 
-    getFollowers(sender_token : string, skipper: number) : Observable<UserResponse[]> {
+    getFollowers(sender_token: string, skipper: number): Observable<UserResponse[]> {
         const url = `${this.apiUrl}user/followers_user/${sender_token}/${skipper}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<UserResponse[]>(url, { headers });
     }
 
 
-    registerUser(token : string, username : string, imgProfile : string, biography : string) {
+    registerUser(token: string, username: string, imgProfile: string, biography: string) {
         const url = `${this.apiUrl}user/register`;
         const httpOptions = {
             headers: new HttpHeaders({
@@ -313,14 +313,14 @@ export class ApiService {
         const body = {
             token: token,
             username: username,
-            imgProfile : imgProfile,
+            imgProfile: imgProfile,
             biography: biography,
         }
 
         return this.http.post(url, body, httpOptions);
     }
 
-    postCreateRecipe(token: string, name : string, description : string, country : string, image : string, difficulty : number, ingredients : string[], steps : string[]) {
+    postCreateRecipe(token: string, name: string, description: string, country: string, image: string, difficulty: number, ingredients: string[], steps: string[]) {
         const url = `${this.apiUrl}recipe/create`;
         const httpOptions = {
             headers: new HttpHeaders({
@@ -331,7 +331,7 @@ export class ApiService {
         const body = {
             token: token,
             name: name,
-            description : description,
+            description: description,
             country: country,
             image: image,
             difficulty: difficulty,
@@ -342,13 +342,13 @@ export class ApiService {
         return this.http.post(url, body, httpOptions);
     }
 
-    getCheckOwnerRecipe(rid: string, token : string) {
+    getCheckOwnerRecipe(rid: string, token: string) {
         const url = `${this.apiUrl}recipe/check_owner/${rid}/${token}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<boolean>(url, { headers });
     }
 
-    postEditRecipe( rid: number, name : string, description : string, country : string, image : string, difficulty : number, ingredients : string[] , steps : string[] ) {
+    postEditRecipe(rid: number, name: string, description: string, country: string, image: string, difficulty: number, ingredients: string[], steps: string[]) {
         const url = `${this.apiUrl}recipe/edit`;
         const httpOptions = {
             headers: new HttpHeaders({
@@ -357,9 +357,9 @@ export class ApiService {
             })
         };
         const body = {
-            rid : rid,
+            rid: rid,
             name: name,
-            description : description,
+            description: description,
             country: country,
             image: image,
             difficulty: difficulty,
@@ -370,7 +370,7 @@ export class ApiService {
         return this.http.post(url, body, httpOptions);
     }
 
-    postEditUser(token : string, username : string, imgProfile : string, biography: string) {
+    postEditUser(token: string, username: string, imgProfile: string, biography: string) {
 
         const url = `${this.apiUrl}user/edit`;
         const httpOptions = {
@@ -380,14 +380,48 @@ export class ApiService {
             })
         };
         const body = {
-            token : token,
-            username : username,
-            imgProfile : imgProfile,
-            biography : biography
+            token: token,
+            username: username,
+            imgProfile: imgProfile,
+            biography: biography
         }
 
         return this.http.post(url, body, httpOptions);
 
     }
+
+    postDeleteUser(token: string) {
+
+        const url = `${this.apiUrl}user/delete`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            token: token
+        }
+
+        return this.http.post(url, body, httpOptions);
+    }
+
+    postDeleteRecipe(recipeId: number) {
+
+        const url = `${this.apiUrl}recipe/delete`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            recipeId: recipeId
+        }
+
+        return this.http.post(url, body, httpOptions);
+    }
+
+
 
 }
