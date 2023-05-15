@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
 
   <div class="flex-auto">
-    <h1>tasteIt</h1>
+    <img class="logo_mini" src="assets/tasteIt_logo3.png">
+    <!-- <h1>tasteIt</h1> -->
   </div>
 
   <div class="flex-auto flex-column align-items-center justify-content-center">
@@ -38,7 +39,7 @@
 
 
   <div class="flex-end" (click)="goProfile()">
-    <img matTooltip="Your profile" [src]="currentUser.imgProfile!">
+    <img class="imgProfile" matTooltip="Your profile" [src]="currentUser.imgProfile!">
   </div>
 </mat-toolbar>
 

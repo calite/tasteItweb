@@ -3,11 +3,11 @@
 
 <!-- flex flex-column align-items-center justify-content-center -->
 
-<div *ngIf="!recipe; else divRecipe">
+<!-- <div *ngIf="!recipe; else divRecipe">
     <shared-loading-spinner></shared-loading-spinner>
-</div>
+</div> -->
 
-<ng-template #divRecipe>
+<!-- <ng-template #divRecipe> -->
 
     <form class="" [formGroup]="formRecipe">
 
@@ -34,13 +34,21 @@
 
                 <mat-form-field class="col-6">
                     <mat-label>Recipe Name</mat-label>
-                    <input matInput type="text" placeholder="Recipe Name" name="recipeName"
-                        formControlName="recipeName">
+                    <input 
+                    matInput type="text" 
+                    placeholder="Recipe Name" 
+                    name="recipeName"
+                    formControlName="recipeName">
                     <mat-error *ngIf="formRecipe.controls.recipeName.invalid">name needed</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="col-6">
-                    <input matInput type="text" placeholder="Country" name="country" formControlName="country">
+                    <mat-label>Country</mat-label>
+                    <input 
+                    matInput type="text" 
+                    placeholder="Country" 
+                    name="country" 
+                    formControlName="country">
                     <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error>
                 </mat-form-field>
 
@@ -123,4 +131,4 @@
 
     </form>
 
-</ng-template>
+<!-- </ng-template> -->

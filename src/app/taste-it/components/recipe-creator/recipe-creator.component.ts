@@ -41,13 +41,13 @@ export class RecipeCreatorComponent {
 
   //edit
   @Input()
-  recipe: RecipesResponse[]
+  recipe: RecipesResponse[] = []
 
   constructor(
     private apiService: ApiService,
     private toastService: ToastService,
     private storage: Storage,
-    private route : Router
+    private route: Router
   ) {
     this.formRecipe = new FormGroup({
       recipeName: new FormControl('', Validators.required),
@@ -175,21 +175,25 @@ export class RecipeCreatorComponent {
       //console.log(steps)
       // console.log(formData)
       //console.log(stepsData)
-      //console.log(this.editRecipe)
+      // console.log(this.editRecipe)
 
       if (this.formRecipe.controls.imgRecipe.dirty) {
+
         this.imgUrl = await this.uploadPhoto() //subimos la foto nueva
 
-        const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
+        if (this.editRecipe) {
 
-        try {
-          deleteObject(uriOldImage).then(() => {
-            console.log('image deleted')
-          }).catch(error => {
-            console.log('something wrong happen' + error)
-          })
-        } catch (error) {
-          console.log(error)
+          const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
+
+          try {
+            deleteObject(uriOldImage).then(() => {
+              console.log('image deleted')
+            }).catch(error => {
+              console.log('something wrong happen' + error)
+            })
+          } catch (error) {
+            console.log(error)
+          }
         }
 
       }
@@ -200,18 +204,20 @@ export class RecipeCreatorComponent {
 
         this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
           .subscribe(response => {
-            //console.log('editado')
+
             this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_LEFT)
             this.route.navigate([`./recipe/${rid}`])
+
           })
 
       } else {
 
         this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
           .subscribe(response => {
-            //console.log('creado')
+            // console.log(response)
             this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_LEFT)
-            this.route.navigate([`./recipe/${response[0].recipeId}`])
+            this.route.navigate([`./home`])
+
           })
 
       }
