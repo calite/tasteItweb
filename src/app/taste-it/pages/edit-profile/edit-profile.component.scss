@@ -1,22 +1,20 @@
-
-
   textarea {
 
-    width: 55vw;
+    width: 50vw;
 
   }
 
   .imgProfile {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 3px solid maroon;
-      box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-      background-image: url("https://raw.githubusercontent.com/calite/no-image/main/no-image.png");
-    }
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid maroon;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    background-image: url("https://raw.githubusercontent.com/calite/no-image/main/no-image.png");
+  }
 
   .imgProfile:hover {
-    cursor:pointer;
+    cursor: pointer;
     filter: brightness(0.8);
   }
 
@@ -32,3 +30,12 @@
     z-index: 1000;
   }
 
+  textarea:first-line,
+  textarea:placeholder-shown {
+    line-height: 1.6em;
+  }
+
+  .text-area-biography {
+    width: 99%;
+    font-size: large;
+  }

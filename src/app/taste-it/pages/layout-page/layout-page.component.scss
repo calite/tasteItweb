@@ -3,13 +3,30 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    cursor:pointer;
+    cursor: pointer;
     border: 3px solid #b92617;
 }
 
 .logo_mini {
-    width: 250px;
-    height: 70px;
+    width: 200px;
+    height: 60px;
 }
 
+/* Estilos para dispositivos móviles */
+@media (max-width:767px) {
+    .logo_mini {
+        display: none;
+    }
 
+    .menu-desktop {
+        display: none !important;
+    }
+
+}
+
+/* Estilos para dispositivos de escritorio */
+@media (min-width: 768px) {
+    .menu_mobile {
+        display: none !important;
+    }
+}

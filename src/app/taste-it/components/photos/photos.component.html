@@ -3,7 +3,7 @@
 <div class="grid flex-row align-items-center justify-content-evenly">
     <mat-card *ngFor="let recipe of recipes" class="cards" (click)="viewRecipe(recipe.recipeId)">
         <mat-card-header>
-            <mat-card-title>{{recipe.recipe.name | slice:0:25}}</mat-card-title>
+            <mat-card-title [matTooltip]="recipe.recipe.name">{{recipe.recipe.name | slice:0:20}}...</mat-card-title>
         </mat-card-header>
         <img [src]="recipe.recipe.image">
     </mat-card>

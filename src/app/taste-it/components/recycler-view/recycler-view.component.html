@@ -25,8 +25,8 @@
                 </button>
 
         </div>
-        <mat-card-content matTooltip="description of the recipe" (click)="viewRecipe(recipe.recipeId)">
-            <p>{{ recipe.recipe.description | slice:0:200 }}...</p>
+        <mat-card-content [matTooltip]="recipe.recipe.description" (click)="viewRecipe(recipe.recipeId)">
+            <p>{{ recipe.recipe.description | slice:0:55 }}...</p>
             <!-- <p>Difficulty: {{ recipe.recipe.difficulty }}</p>
             <p>Country: {{ recipe.recipe.country }}</p> -->
         </mat-card-content>

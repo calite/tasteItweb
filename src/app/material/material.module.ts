@@ -20,6 +20,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import { MatSliderModule } from "@angular/material/slider"
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSliderModule,
     MatTooltipModule,
     MatChipsModule,
-
+    MatBadgeModule
   ]
 })
 export class MaterialModule { }

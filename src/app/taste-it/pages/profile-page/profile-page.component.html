@@ -1,126 +1,110 @@
-<div *ngIf="!isLoading; else divProfile" class="alert alert-info">
-    <shared-loading-spinner *ngIf="!isLoading"></shared-loading-spinner>
-</div>
+<div class="container">
 
-<ng-template #divProfile>
+    <h1>Profile</h1>
 
-    <div class="grid flex-column">
-        <h1>Profile</h1>
-
-        <div class="grid flex-row align-items-center justify-content-evenly">
-
-            <img class="imgProfile" [src]="currentUser.imgProfile!">
-
-            <div class="d-flex justify-content-center align-items-center">
-                <h2>{{currentUser.username | titlecase }}</h2>
-            </div>
-
-            <div class="grid p-2 mt-2 flex-column align-items-center justify-content-evenly botones">
-
-                <button mat-fab extended matTooltip="Follow this user" color="primary" *ngIf="samePerson && !canFollow"
-                    (click)="postFollowUser()">
-                    <mat-icon>person_add</mat-icon>
-                    Follow
-                </button>
-
-                <button mat-fab extended matTooltip="Unfollow this user" color="primary" *ngIf="samePerson && canFollow"
-                    (click)="postFollowUser()">
-                    <mat-icon>person_remove</mat-icon>
-                    Unfollow
-                </button>
-
-                <button mat-fab extended matTooltip="Like this recipe" color="primary" *ngIf="samePerson"
-                    (click)="commentUser()">
-                    <mat-icon>comment</mat-icon>
-                    Comment
-                </button>
-
-                <button mat-fab extended matTooltip="Edit your profile" color="primary" *ngIf="!samePerson"
-                    (click)="editUser()">
-                    <mat-icon>edit</mat-icon>
-                    Edit Profile
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="grid mt-3">
-
-            <div class="col-3 flex flex-row align-items-center justify-content-center">
-
-                <mat-card matTooltip="View recipes" class="cardsCounts" (click)="viewRecipes()">
-                    <mat-card-content>
-                        <p>
-                            {{recipesCount}}
-                        </p>
-                        <p>
-                            Recipes
-                        </p>
-                    </mat-card-content>
-                </mat-card>
-
-            </div>
-            <div class="col-3 flex flex-row align-items-center justify-content-center">
-
-                <mat-card matTooltip="View followers" class="cardsCounts" (click)="viewFollowers()">
-                    <mat-card-content>
-                        <p>
-                            {{followersCount}}
-                        </p>
-                        <p>
-                            Followers
-                        </p>
-                    </mat-card-content>
-                </mat-card>
-
-            </div>
-            <div class="col-3 flex flex-row align-items-center justify-content-center">
-
-                <mat-card matTooltip="View following" class="cardsCounts" (click)="viewFollowing()">
-                    <mat-card-content>
-                        <p>
-                            {{followingCount}}
-                        </p>
-                        <p>
-                            Following
-                        </p>
-                    </mat-card-content>
-                </mat-card>
-
-            </div>
-            <div class="col-3 flex flex-row align-items-center justify-content-center">
-
-                <mat-card matTooltip="View likes" class="cardsCounts" (click)="viewLikes()">
-                    <mat-card-content>
-                        <p>
-                            {{likesCount}}
-                        </p>
-                        <p>
-                            Likes
-                        </p>
-                    </mat-card-content>
-                </mat-card>
-
-            </div>
-
-        </div>
-
-        <div class="mt-3">
-            <mat-tab-group [disableRipple]=true>
-                <mat-tab label="Biography" class="mat-tab-label-active">
-                    <app-bio [biography]="currentUser.biography"></app-bio>
-                </mat-tab>
-                <mat-tab label="Photos">
-                    <app-photos></app-photos>
-                </mat-tab>
-                <mat-tab label="Comments">
-                    <app-comments-on-user [comments]="comments"></app-comments-on-user>
-                </mat-tab>
-            </mat-tab-group>
-        </div>
+    <div *ngIf="!isLoading; else divProfile" class="alert alert-info">
+        <shared-loading-spinner *ngIf="!isLoading"></shared-loading-spinner>
     </div>
 
-</ng-template>
+    <ng-template #divProfile>
+
+
+
+        <div class="grid flex-column">
+
+
+            <div class="grid flex-row align-items-center justify-content-evenly">
+
+                <img class="img-profile" [src]="currentUser.imgProfile!">
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <h2>{{currentUser.username | titlecase }}</h2>
+                </div>
+
+                <div class="grid p-2 mt-2 flex-column align-items-center justify-content-evenly botones">
+
+                    <button mat-fab extended matTooltip="Follow this user" color="primary"
+                        *ngIf="samePerson && !canFollow" (click)="postFollowUser()">
+                        <mat-icon>person_add</mat-icon>
+                        Follow
+                    </button>
+
+                    <button mat-fab extended matTooltip="Unfollow this user" color="primary"
+                        *ngIf="samePerson && canFollow" (click)="postFollowUser()">
+                        <mat-icon>person_remove</mat-icon>
+                        Unfollow
+                    </button>
+
+                    <button mat-fab extended matTooltip="Like this recipe" color="primary" *ngIf="samePerson"
+                        (click)="commentUser()">
+                        <mat-icon>comment</mat-icon>
+                        Comment
+                    </button>
+
+                    <button mat-fab extended matTooltip="Edit your profile" color="primary" *ngIf="!samePerson"
+                        (click)="editUser()">
+                        <mat-icon>edit</mat-icon>
+                        Edit Profile
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grid flex align-items-center justify-content-center mt-3">
+
+                <div class="col-6 sm:col-3 flex align-items-center justify-content-center">
+
+                    <button mat-fab extended [matBadge]="recipesCount" matBadgeColor="warn" matTooltip="View recipes"
+                        color="primary" (click)="viewRecipes()">
+                        Recipes
+                    </button>
+
+                </div>
+                <div class="col-6 sm:col-3 flex align-items-center justify-content-center">
+
+                    <button mat-fab extended [matBadge]="likesCount" matBadgeColor="warn" matTooltip="View likes"
+                        color="primary" (click)="viewLikes()">
+                        Likes
+                    </button>
+
+                </div>
+                <div class="col-6 sm:col-3 flex align-items-center justify-content-center">
+
+                    <button mat-fab extended [matBadge]="followersCount" matBadgeColor="warn"
+                        matTooltip="View Followers" color="primary" (click)="viewFollowers()">
+                        Followers
+                    </button>
+
+                </div>
+                <div class="col-6 sm:col-3 flex align-items-center justify-content-center">
+
+                    <button mat-fab extended [matBadge]="followingCount" matBadgeColor="warn"
+                        matTooltip="View Following" color="primary" (click)="viewFollowing()">
+                        Following
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="mt-3">
+                <mat-tab-group [disableRipple]=true>
+                    <mat-tab label="Biography" class="mat-tab-label-active text-area-biography">
+                        <app-bio [biography]="currentUser.biography"></app-bio>
+                    </mat-tab>
+                    <mat-tab label="Photos">
+                        <app-photos></app-photos>
+                    </mat-tab>
+                    <mat-tab label="Comments">
+                        <app-comments-on-user [comments]="comments"></app-comments-on-user>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+
+    </ng-template>
+
+</div>

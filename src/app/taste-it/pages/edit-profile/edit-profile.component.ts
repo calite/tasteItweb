@@ -182,4 +182,8 @@ export class EditProfileComponent implements OnInit {
 
   }
 
+  backToProfile() {
+    this.route.navigate([`./profile/${this.currentUser.token}`])
+  }
+
 }

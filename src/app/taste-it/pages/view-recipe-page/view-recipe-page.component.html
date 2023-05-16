@@ -15,7 +15,7 @@
 
                 <div class="grid flex-column align-items-center justify-content-evenly">
 
-                    <div class="recipeCard flex flex-column align-items-center justify-content-center">
+                    <div class="recipeCard flex flex-column align-items-center justify-content-center m-4">
                         <h3 matTooltip="Recipe name">{{ recipe[0].recipe.name | titlecase }}</h3>
                         <bar-rating [(rate)]="recipe[0].recipe['rating']" [max]="5" [readOnly]="true"
                             matTooltip="Rating"></bar-rating>
@@ -52,19 +52,19 @@
 
             <div class="col p-2 mt-2 grid flex-row align-items-center justify-content-evenly">
 
-                <button mat-fab extended matTooltip="Like this recipe" color="primary" *ngIf="!isLiked"
+                <button mat-fab extended [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="Like this recipe" color="primary" *ngIf="!isLiked"
                     (click)="likeRecipe()">
                     <mat-icon>thumb_up</mat-icon>
                     Like
                 </button>
 
-                <button mat-fab extended matTooltip="Dislike this recipe" color="primary" *ngIf="isLiked"
+                <button mat-fab extended [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="Dislike this recipe" color="primary" *ngIf="isLiked"
                     (click)="likeRecipe()">
                     <mat-icon>thumb_down</mat-icon>
                     Dislike
                 </button>
 
-                <button mat-fab extended matTooltip="Rate this recipe" color="primary" (click)="rateRecipe()">
+                <button mat-fab extended [matBadge]="comments.length" matBadgeColor="warn" matTooltip="Rate this recipe" color="primary" (click)="rateRecipe()">
                     <mat-icon>star_rate</mat-icon>
                     Rate
                 </button>

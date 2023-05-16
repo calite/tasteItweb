@@ -36,7 +36,7 @@ export class ViewRecipePageComponent implements OnInit {
   public samePerson: boolean = false;
   public canFollow: boolean = false;
   private skipper: number = 0;
-
+  public likesCounter: number;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event) {
@@ -57,7 +57,7 @@ export class ViewRecipePageComponent implements OnInit {
     private route: Router,
     private commentDialog: MatDialog,
   ) {
-    this.comments = [] 
+    this.comments = []
   }
 
   ngOnInit(): void {
@@ -66,7 +66,6 @@ export class ViewRecipePageComponent implements OnInit {
 
     this.loadRecipe();
     this.loadComments(0);
-
 
   }
 
@@ -89,6 +88,7 @@ export class ViewRecipePageComponent implements OnInit {
       })
 
     this.checkLike()
+    this.getLikesCounter();
 
   }
 
@@ -137,6 +137,8 @@ export class ViewRecipePageComponent implements OnInit {
         } else {
           this.toastService.toastGenerator('', 'recipe disliked', 4, ToastPositionEnum.BOTTOM_LEFT)
         }
+
+        this.getLikesCounter();
       })
 
   }
@@ -209,6 +211,17 @@ export class ViewRecipePageComponent implements OnInit {
       this.skipper = 0;
       this.loadComments(this.skipper)
     })
+  }
+
+  getLikesCounter() {
+
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({ recipeId }) => this.apiService.getLikesOnRecipe(recipeId)),
+      ).subscribe(response => {
+        this.likesCounter = response;
+      })
+
   }
 
 }

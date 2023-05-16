@@ -21,7 +21,7 @@
 }
 
 textarea {
-  text-indent: 32px;
+  // text-indent: 32px;
 }
 
 textarea:first-line,
@@ -49,3 +49,28 @@ mat-chip-grid {
 .chipIcon {
   color: white !important;
 }
+
+
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .form-mobile {
+    display: block;
+  }
+
+  .form-desktop {
+    display: none;
+  }
+}
+
+/* Estilos para dispositivos de escritorio */
+@media (min-width: 768px) {
+  .form-mobile {
+    display: none;
+  }
+
+  .form-desktop {
+    display: block;
+  }
+}
+

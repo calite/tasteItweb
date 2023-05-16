@@ -422,6 +422,12 @@ export class ApiService {
         return this.http.post(url, body, httpOptions);
     }
 
+    getLikesOnRecipe(rid : number) {
+        const url = `${this.apiUrl}recipe/likes_on_recipes/${rid}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<number>(url, { headers });
+    }
+
 
 
 }

@@ -1,9 +1,9 @@
-<mat-card class="user-cards" *ngFor="let comment of comments" (click)="viewProfileCreator(comment.user.token)">
+<mat-card class="user-cards" *ngFor="let comment of comments">
     <mat-card-header>
         <div mat-card-avatar>
-            <img class="imgProfile" [src]="comment.user.imgProfile!">
+            <img class="imgProfile" [src]="comment.user.imgProfile!" (click)="viewProfileCreator(comment.user.token)">
         </div>
-        <mat-card-title class="ml-2">{{comment.user.username | titlecase}}</mat-card-title>
+        <mat-card-title class="ml-2" (click)="viewProfileCreator(comment.user.token)">{{comment.user.username | titlecase}}</mat-card-title>
         <mat-card-subtitle class="ml-2">{{comment.comment.dateCreated | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

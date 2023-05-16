@@ -6,21 +6,54 @@
 
       <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formSearch"
         (ngSubmit)="onSubmit()">
-        <mat-form-field color="primary">
-          <mat-label>Search</mat-label>
 
-          <input matInput type="text" class="form-control" placeholder="Search" formControlName="search"
+        <mat-form-field color="primary">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Search by name" formControlName="nameRecipe"
             color="primary">
-          <button mat-icon-button matSuffix>
-            <mat-icon>search</mat-icon>
-          </button>
         </mat-form-field>
+
+        <mat-form-field color="primary">
+          <mat-label>Country</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Search by country" formControlName="countryRecipe"
+            color="primary">
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <mat-label>Tags</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Search by tags" formControlName="tagsRecipe"
+            color="primary">
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <mat-label>Ingredients</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Search by ingredients" formControlName="ingredientsRecipe"
+            color="primary">
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <mat-label>Difficulty</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Search by difficulty" formControlName="difficultyRecipe"
+            color="primary">
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <mat-label>Rating</mat-label>
+          <input matInput type="text" class="form-control" placeholder="Search by rating" formControlName="ratingRecipe"
+            color="primary">
+        </mat-form-field>
+
+        <button mat-button color="primary">
+          Search
+        </button>
+
       </form>
       
     </div>
 
 
     <div *ngIf="!recipes; else divSearch">
+      
     </div>
 
 
@@ -30,19 +63,19 @@
 
         <mat-tab-group [disableRipple]=true>
 
-          <mat-tab label="Recipes" class="mat-tab-label-active">
+          <mat-tab label="by Name" *ngIf="anyRecipes">
             <taste-it-recycler-view [recipes]="recipes"></taste-it-recycler-view>
           </mat-tab>
 
-          <mat-tab label="Users">
+          <mat-tab label="Users" *ngIf="anyUsers">
 
             <div class="grid p-3 flex-row align-items-center justify-content-evenly">
 
-              <mat-card class="col-12 sm:col-3 user-cards" *ngFor="let user of users"
+              <mat-card class="col-12 sm:col-3 user-cards-search" *ngFor="let user of users"
                 (click)="viewProfileCreator(user.token)">
                 <mat-card-header>
                   <div mat-card-avatar>
-                    <img class="imgProfile" [src]="user.imgProfile!">
+                    <img class="img-profile-card" [src]="user.imgProfile!">
                   </div>
                   <mat-card-title>{{user.username}}</mat-card-title>
                 </mat-card-header>
@@ -54,15 +87,15 @@
             </div>
 
           </mat-tab>
-          <mat-tab label="Tags">
+          <mat-tab label="by Tags" *ngIf="anyRecipesByTags">
             <taste-it-recycler-view [recipes]="recipesByTags"></taste-it-recycler-view>
           </mat-tab>
 
-          <mat-tab label="Ingredients">
+          <mat-tab label="by Ingredients" *ngIf="anyRecipesByIngredients">
             <taste-it-recycler-view [recipes]="recipesByIngredients"></taste-it-recycler-view>
           </mat-tab>
 
-          <mat-tab label="Country">
+          <mat-tab label="by Country" *ngIf="anyRecipesByCountry">
             <taste-it-recycler-view [recipes]="recipesByCountry"></taste-it-recycler-view>
           </mat-tab>
 

@@ -31,7 +31,7 @@ export class RecipeCreatorComponent {
   ingredients: string[] = []
   steps: { name: string, placeholder: string, formControlName: string, value: string }[] = [];
   imgSelected: File;
-  imgUrl: string;
+  imgUrl: string = '';
 
   private currentUser: UserResponse;
   private token: string;
@@ -55,7 +55,7 @@ export class RecipeCreatorComponent {
       difficulty: new FormControl(0, Validators.required),
       country: new FormControl('', Validators.required),
       newIngredient: new FormControl(''),
-      imgRecipe: new FormControl(this.imgUrl)
+      imgRecipe: new FormControl('')
     })
 
     this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -108,7 +108,7 @@ export class RecipeCreatorComponent {
 
   addStep() {
 
-    if (this.steps.length != 10) {
+    if (this.steps.length != 20) {
       const controlName = `step${this.steps.length + 1}`;
       this.formRecipe.addControl(controlName, new FormControl(''));
       this.steps.push({ name: controlName, placeholder: 'Enter step details', formControlName: controlName, value: '' });
@@ -151,11 +151,17 @@ export class RecipeCreatorComponent {
     }
   }
 
-  async onSubmit() {
+  async onSubmitCreate() {
 
-    //console.log(this.editRecipe)
+    console.log(this.imgUrl)
 
-    if (this.formRecipe.valid) {
+    if(this.imgUrl === '') {
+      this.toastService.toastGenerator('', 'pick the image', 4, ToastPositionEnum.BOTTOM_LEFT)
+    }
+
+    if (this.formRecipe.valid && this.imgUrl !== '') {
+
+      this.imgUrl = await this.uploadPhoto() //subimos la foto nueva
 
       //obtencion de steps
       const formData = this.formRecipe.getRawValue();
@@ -165,25 +171,35 @@ export class RecipeCreatorComponent {
       let description = this.formRecipe.controls.description.value
       let difficulty = this.formRecipe.controls.difficulty.value
       let country = this.formRecipe.controls.country.value
-      //let steps = this.steps.map(step => step.value)
 
-      // console.log(this.formRecipe.controls.recipeName.value)
-      // console.log(this.formRecipe.controls.description.value)
-      // console.log(this.formRecipe.controls.difficulty.value)
-      // console.log(this.formRecipe.controls.country.value)
-      // console.log(this.ingredients)
-      //console.log(steps)
-      // console.log(formData)
-      //console.log(stepsData)
-      // console.log(this.editRecipe)
+      this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+        .subscribe(response => {
+
+          this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_LEFT)
+          this.route.navigate([`./home`])
+
+        })
+
+    }
+
+  }
+
+  async onSubmitEdit() {
+
+    if (this.formRecipe.valid && this.imgUrl !== '') {
+
+      //obtencion de steps
+      const formData = this.formRecipe.getRawValue();
+      const stepsData = this.steps.map(step => formData[step.name]);
+
+      let name = this.formRecipe.controls.recipeName.value;
+      let description = this.formRecipe.controls.description.value
+      let difficulty = this.formRecipe.controls.difficulty.value
+      let country = this.formRecipe.controls.country.value
 
       if (this.formRecipe.controls.imgRecipe.dirty) {
 
         this.imgUrl = await this.uploadPhoto() //subimos la foto nueva
-
-      }
-
-      if (this.editRecipe) { //si es edicion
 
         const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto vieja
 
@@ -197,27 +213,18 @@ export class RecipeCreatorComponent {
           console.log(error)
         }
 
-        let rid = this.recipe[0].recipeId
-
-        this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
-          .subscribe(response => {
-
-            this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_LEFT)
-            this.route.navigate([`./recipe/${rid}`])
-
-          })
-
-      } else {
-
-        this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
-          .subscribe(response => {
-            // console.log(response)
-            this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_LEFT)
-            this.route.navigate([`./home`])
-
-          })
-
       }
+
+      let rid = this.recipe[0].recipeId
+
+      this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+        .subscribe(response => {
+
+          this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_LEFT)
+          this.route.navigate([`./recipe/${rid}`])
+
+        })
+
 
     }
 
@@ -226,7 +233,7 @@ export class RecipeCreatorComponent {
   deleteRecipe() {
 
     this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? the data will be lost', 4)
-    
+
       .subscribe((result) => {
         if (result.success === true) {
 
@@ -246,6 +253,16 @@ export class RecipeCreatorComponent {
 
         }
       });
+
+  }
+
+  onCancel() {
+
+    if(!this.editRecipe) {
+      this.route.navigate(['./home'])
+    } else {
+      this.route.navigate([`./recipe/${this.recipe[0].recipeId}`])
+    }
 
   }
 
