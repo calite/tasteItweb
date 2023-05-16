@@ -68,7 +68,7 @@ export class AuthService {
         user.getIdToken(true).then(newToken => {
           sessionStorage.setItem('accessToken', newToken);
         }).catch(error => {
-          console.log('Fail to refresh token: ' + error)
+          //console.log('Fail to refresh token: ' + error)
         });
       }
     });
@@ -93,7 +93,7 @@ export class AuthService {
     sendPasswordResetEmail(auth, email).then(() => {
       this.toastService.alertGeneratorWithoutCancel('', `an email was send to ${email}`, 4)
     }).catch(error => {
-      console.log(error.code)
+      //console.log(error.code)
       if (error.code === 'auth/user-not-found') {
         this.toastService.toastGenerator('', 'that emails is not registered', 4, ToastPositionEnum.BOTTOM_LEFT)
       }

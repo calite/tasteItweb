@@ -10,6 +10,11 @@
     color: white;
     cursor: pointer;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s;
+}
+
+.cards:hover {
+    transform: scale(1.05);
 }
 
 .imgProfile {
@@ -27,7 +32,7 @@
 }
 
 .difficultyContainer mat-icon {
-    background: -webkit-linear-gradient(right, maroon, red, yellow,pink, white);
+    background: -webkit-linear-gradient(right, maroon, red, yellow, pink, white);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -41,7 +46,6 @@
 .ratingContainer mat-icon {
     color: yellow;
 }
-
 
 mat-card-subtitle {
     font-style: italic;

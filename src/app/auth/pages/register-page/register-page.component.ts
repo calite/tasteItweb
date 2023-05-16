@@ -75,10 +75,10 @@ export class RegisterPageComponent {
     try {
       await uploadBytes(imgRef, imgBlob);
       const url = await getDownloadURL(imgRef);
-      console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
+      //console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
       return url;
     } catch (error) {
-      console.log(`Error al subir la imagen: ${error}`);
+      //console.log(`Error al subir la imagen: ${error}`);
       return '';
     }
   }
@@ -95,11 +95,11 @@ export class RegisterPageComponent {
             const username = email.split('@')[0].slice(0);
             const img = await this.uploadPhoto()
 
-            console.log(img)
+            //console.log(img)
 
             this.apiService.registerUser(response.user['uid'], username, img, 'my biography').subscribe()
 
-            this.toastService.alertGenerator('Great!', 'almost done, just log in to start!', 4)
+            this.toastService.alertGenerator('Great!', 'almost done, just log in to start!', 1)
 
             this.router.navigate(['/login'])
 

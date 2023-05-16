@@ -1,108 +1,77 @@
-<div class="container">
+<div class="mt-7">
 
-  <div class="row col-12">
+  <div class="grid">
 
-    <div class="col-12">
+    <div class="col-3 filter-box flex flex-column align-items-center">
 
-      <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formSearch"
-        (ngSubmit)="onSubmit()">
+      <h2>Search</h2>
 
-        <mat-form-field color="primary">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" class="form-control" placeholder="Search by name" formControlName="nameRecipe"
-            color="primary">
-        </mat-form-field>
+      <form [formGroup]="formSearch" (ngSubmit)="onSubmit()">
 
-        <mat-form-field color="primary">
-          <mat-label>Country</mat-label>
-          <input matInput type="text" class="form-control" placeholder="Search by country" formControlName="countryRecipe"
-            color="primary">
-        </mat-form-field>
+        <div class="col flex flex-column justify-content-center align-items-center">
 
-        <mat-form-field color="primary">
-          <mat-label>Tags</mat-label>
-          <input matInput type="text" class="form-control" placeholder="Search by tags" formControlName="tagsRecipe"
-            color="primary">
-        </mat-form-field>
+          <mat-form-field color="primary">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" class="form-control" placeholder="By name" formControlName="name"
+              color="primary">
+          </mat-form-field>
 
-        <mat-form-field color="primary">
-          <mat-label>Ingredients</mat-label>
-          <input matInput type="text" class="form-control" placeholder="Search by ingredients" formControlName="ingredientsRecipe"
-            color="primary">
-        </mat-form-field>
+          <mat-form-field color="primary">
+            <mat-label>Country</mat-label>
+            <input matInput type="text" class="form-control" placeholder="By country" formControlName="country"
+              color="primary">
+          </mat-form-field>
 
-        <mat-form-field color="primary">
-          <mat-label>Difficulty</mat-label>
-          <input matInput type="text" class="form-control" placeholder="Search by difficulty" formControlName="difficultyRecipe"
-            color="primary">
-        </mat-form-field>
+          <mat-form-field color="primary">
+            <mat-label>Difficulty</mat-label>
+            <input matInput type="text" class="form-control" placeholder="By difficulty"
+              formControlName="difficulty" color="primary">
+          </mat-form-field>
 
-        <mat-form-field color="primary">
-          <mat-label>Rating</mat-label>
-          <input matInput type="text" class="form-control" placeholder="Search by rating" formControlName="ratingRecipe"
-            color="primary">
-        </mat-form-field>
+          <mat-form-field color="primary">
+            <mat-label>Rating</mat-label>
+            <input matInput type="text" class="form-control" placeholder="By rating" formControlName="rating"
+              color="primary">
+          </mat-form-field>
 
-        <button mat-button color="primary">
-          Search
-        </button>
+          <mat-form-field color="primary">
+            <mat-label>Tags</mat-label>
+            <input matInput type="text" class="form-control" placeholder="By tags" formControlName="tags"
+              color="primary">
+          </mat-form-field>
+
+          <mat-form-field color="primary">
+            <mat-label>Ingredients</mat-label>
+            <input matInput type="text" class="form-control" placeholder="By ingredients"
+              formControlName="ingredients" color="primary">
+          </mat-form-field>
+
+          <button mat-flat-button>
+            Search
+          </button>
+
+        </div>
 
       </form>
-      
+
     </div>
 
 
     <div *ngIf="!recipes; else divSearch">
-      
+
     </div>
 
 
     <ng-template #divSearch>
 
-      <div class="col-12">
+      <div class="col-9 background-cards">
 
-        <mat-tab-group [disableRipple]=true>
-
-          <mat-tab label="by Name" *ngIf="anyRecipes">
-            <taste-it-recycler-view [recipes]="recipes"></taste-it-recycler-view>
-          </mat-tab>
-
-          <mat-tab label="Users" *ngIf="anyUsers">
-
-            <div class="grid p-3 flex-row align-items-center justify-content-evenly">
-
-              <mat-card class="col-12 sm:col-3 user-cards-search" *ngFor="let user of users"
-                (click)="viewProfileCreator(user.token)">
-                <mat-card-header>
-                  <div mat-card-avatar>
-                    <img class="img-profile-card" [src]="user.imgProfile!">
-                  </div>
-                  <mat-card-title>{{user.username}}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  {{user.biography | slice:0:100 }}
-                </mat-card-content>
-              </mat-card>
-
-            </div>
-
-          </mat-tab>
-          <mat-tab label="by Tags" *ngIf="anyRecipesByTags">
-            <taste-it-recycler-view [recipes]="recipesByTags"></taste-it-recycler-view>
-          </mat-tab>
-
-          <mat-tab label="by Ingredients" *ngIf="anyRecipesByIngredients">
-            <taste-it-recycler-view [recipes]="recipesByIngredients"></taste-it-recycler-view>
-          </mat-tab>
-
-          <mat-tab label="by Country" *ngIf="anyRecipesByCountry">
-            <taste-it-recycler-view [recipes]="recipesByCountry"></taste-it-recycler-view>
-          </mat-tab>
-
-        </mat-tab-group>
+        <taste-it-recycler-view [recipes]="recipes"></taste-it-recycler-view>
 
       </div>
 
     </ng-template>
 
   </div>
+
+</div>

@@ -22,7 +22,7 @@ export class MeComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event) {
-    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const pos = window.pageYOffset + window.innerHeight;
     const max = document.documentElement.scrollHeight;
 
     if (pos === max) {

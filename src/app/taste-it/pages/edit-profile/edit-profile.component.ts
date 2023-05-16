@@ -90,10 +90,10 @@ export class EditProfileComponent implements OnInit {
     try {
       await uploadBytes(imgRef, file);
       const url = await getDownloadURL(imgRef);
-      console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
+      //console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
       return url;
     } catch (error) {
-      console.log(`Error al subir la imagen: ${error}`);
+      //console.log(`Error al subir la imagen: ${error}`);
       return '';
     }
   }
@@ -125,9 +125,9 @@ export class EditProfileComponent implements OnInit {
         const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
 
         deleteObject(uriOldImage).then(() => {
-          console.log('image deleted')
+          //console.log('image deleted')
         }).catch(error => {
-          console.log('something wrong happen' + error)
+          //console.log('something wrong happen' + error)
         })
         //}
 
@@ -157,18 +157,22 @@ export class EditProfileComponent implements OnInit {
 
   deleteAccount() {
 
-    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? All your data will be lost', 4)
+    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? All your data will be lost', 3)
       .subscribe((result) => {
         if (result.success === true) {
 
-          this.apiService.postDeleteUser(this.currentUser.token).subscribe()
+          this.apiService.postDeleteUser(this.currentUser.token).subscribe(
+            response => {
+              //console.log(response)
+            }
+          )
 
           const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto del usuario
 
           deleteObject(uriOldImage).then(() => {
-            console.log('image deleted')
+            //console.log('image deleted')
           }).catch(error => {
-            console.log('something wrong happen' + error)
+            //console.log('something wrong happen' + error)
           })
 
           this.authService.deleteUser();

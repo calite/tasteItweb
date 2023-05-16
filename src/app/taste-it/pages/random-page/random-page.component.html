@@ -1,54 +1,59 @@
-<div class="flex flex-column justify-content-center align-items-center">
+<div class="mt-8">
 
-    <shared-loading-spinner *ngIf="isLoading ; else divRecipes"></shared-loading-spinner>
+    <div class="flex flex-column justify-content-center align-items-center">
+
+        <shared-loading-spinner *ngIf="isLoading ; else divRecipes"></shared-loading-spinner>
 
 
-    <ng-template #divRecipes>
-        <div class="grid flex flex-column justify-content-center align-items-center">
+        <ng-template #divRecipes>
+            <div class="grid flex flex-column justify-content-center align-items-center">
 
-            <div class="col-12">
+                <div class="col-12">
 
-                <mat-card class="cards">
-                    <mat-card-header>
-                        <div mat-card-avatar>
-                            <img class="imgProfile" [src]="recipes[counter].user.imgProfile!"
-                                (click)="viewProfileCreator(recipes[counter].user.token)">
+                    <mat-card class="cards">
+                        <mat-card-header>
+                            <div mat-card-avatar>
+                                <img class="imgProfile" [src]="recipes[counter].user.imgProfile!"
+                                    (click)="viewProfileCreator(recipes[counter].user.token)">
+                            </div>
+                            <mat-card-title (click)="viewProfileCreator(recipes[counter].user.token)">{{
+                                recipes[counter].user.username }}</mat-card-title>
+                            <mat-card-subtitle (click)="viewRecipe(recipes[counter].recipeId)">{{
+                                recipes[counter].recipe.name |
+                                slice:0:20 }}</mat-card-subtitle>
+                        </mat-card-header>
+
+                        <img class="imgRecipeCard" [src]="recipes[counter].recipe.image" alt=""
+                            (click)="viewRecipe(recipes[counter].recipeId)" />
+
+                        <mat-card-content (click)="viewRecipe(recipes[counter].recipeId)">
+                            <p>{{ recipes[counter].recipe.description }}</p>
+                            <p>Difficulty: {{ recipes[counter].recipe.difficulty }}</p>
+                            <p>Country: {{ recipes[counter].recipe.country }}</p>
+                        </mat-card-content>
+                    </mat-card>
+
+                </div>
+
+                <div class="col-12">
+                    <div class="grid">
+                        <div class="col-6 flex flex-column justify-content-center align-items-start">
+                            <button mat-fab color="primary" *ngIf="counter != 0" (click)="previewRecipe()">
+                                <mat-icon>arrow_back_ios</mat-icon>
+                            </button>
+
                         </div>
-                        <mat-card-title (click)="viewProfileCreator(recipes[counter].user.token)">{{
-                            recipes[counter].user.username }}</mat-card-title>
-                        <mat-card-subtitle (click)="viewRecipe(recipes[counter].recipeId)">{{
-                            recipes[counter].recipe.name |
-                            slice:0:20 }}</mat-card-subtitle>
-                    </mat-card-header>
-
-                    <img class="imgRecipeCard" [src]="recipes[counter].recipe.image" alt=""
-                        (click)="viewRecipe(recipes[counter].recipeId)" />
-
-                    <mat-card-content (click)="viewRecipe(recipes[counter].recipeId)">
-                        <p>{{ recipes[counter].recipe.description }}</p>
-                        <p>Difficulty: {{ recipes[counter].recipe.difficulty }}</p>
-                        <p>Country: {{ recipes[counter].recipe.country }}</p>
-                    </mat-card-content>
-                </mat-card>
-
-            </div>
-
-            <div class="col-12">
-                <div class="grid">
-                    <div class="col-6 flex flex-column justify-content-center align-items-start">
-                        <button mat-fab color="primary" *ngIf="counter != 0" (click)="previewRecipe()">
-                            <mat-icon>arrow_back_ios</mat-icon>
-                        </button>
-
-                    </div>
-                    <div class="col-6 flex flex-column justify-content-center align-items-end">
-                        <button mat-fab color="primary" *ngIf="counter != recipes.length - 1" (click)="nextRecipe()">
-                            <mat-icon>arrow_forward_ios</mat-icon>
-                        </button>
+                        <div class="col-6 flex flex-column justify-content-center align-items-end">
+                            <button mat-fab color="primary" *ngIf="counter != recipes.length - 1"
+                                (click)="nextRecipe()">
+                                <mat-icon>arrow_forward_ios</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </ng-template>
+        </ng-template>
+
+    </div>
 
 </div>

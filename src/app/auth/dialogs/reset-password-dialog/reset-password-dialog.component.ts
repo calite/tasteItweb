@@ -21,6 +21,10 @@ export class ResetPasswordDialogComponent {
     })
   }
 
+  closeDialog() {
+    
+  }
+
   onSubmit() {
     
     if(this.formReset.valid) {

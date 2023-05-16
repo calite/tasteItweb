@@ -1,5 +1,10 @@
 .filter-box {
-    
+    margin-top: 2px;
+    background-color: maroon;
+}
+
+.filter-box h2 {
+    color: white;
 }
 
 .img-profile-card {
@@ -14,7 +19,6 @@
 
 .user-cards-search {
     margin: 20px;
-    // padding: 5px;
     max-width: 325px;
     background-color: maroon !important;
     color: white;
@@ -32,25 +36,8 @@
     color: maroon !important;
 }
 
-.mat-mdc-tab {
-    background-color: maroon !important;
-    border: 1px solid maroon !important;
-}
-
-.mdc-tab__text-label {
-    color: white !important;
-}
-
-
-
-.mdc-tab--active {
-    background-color: rgb(215, 135, 135) !important;
-
-    .mdc-tab__text-label {
-        color: maroon !important;
-    }
-
-    .mdc-tab-indicator__content {
-        border-color: maroon !important;
-    }
-}
+// .background-cards{
+//     margin-top: 3px;
+//     border: 2px solid #b92617;
+//     background-color: rgb(215, 135, 135) !important;
+// }

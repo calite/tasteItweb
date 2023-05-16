@@ -143,17 +143,17 @@ export class RecipeCreatorComponent {
     try {
       await uploadBytes(imgRef, file);
       const url = await getDownloadURL(imgRef);
-      console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
+      //console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
       return url;
     } catch (error) {
-      console.log(`Error al subir la imagen: ${error}`);
+      //console.log(`Error al subir la imagen: ${error}`);
       return '';
     }
   }
 
   async onSubmitCreate() {
 
-    console.log(this.imgUrl)
+    //console.log(this.imgUrl)
 
     if(this.imgUrl === '') {
       this.toastService.toastGenerator('', 'pick the image', 4, ToastPositionEnum.BOTTOM_LEFT)
@@ -205,12 +205,12 @@ export class RecipeCreatorComponent {
 
         try {
           deleteObject(uriOldImage).then(() => {
-            console.log('image deleted')
+            //console.log('image deleted')
           }).catch(error => {
-            console.log('something wrong happen' + error)
+            //console.log('something wrong happen' + error)
           })
         } catch (error) {
-          console.log(error)
+          //console.log(error)
         }
 
       }
@@ -232,7 +232,7 @@ export class RecipeCreatorComponent {
 
   deleteRecipe() {
 
-    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? the data will be lost', 4)
+    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? the data will be lost', 3)
 
       .subscribe((result) => {
         if (result.success === true) {
@@ -244,9 +244,9 @@ export class RecipeCreatorComponent {
           const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto de la receta
 
           deleteObject(uriOldImage).then(() => {
-            console.log('image deleted')
+            //console.log('image deleted')
           }).catch(error => {
-            console.log('something wrong happen' + error)
+            //console.log('something wrong happen' + error)
           })
 
           this.route.navigate(['./home']);

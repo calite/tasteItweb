@@ -1,18 +1,20 @@
-<div class="container">
+<div class="mt-8">
+
     <div class="d-flex justify-content-center">
         <h2>Recipes</h2>
     </div>
     <div>
         <mat-tab-group [disableRipple]=true>
-            <mat-tab label="Me" class="mat-tab-label-active">
+            <mat-tab label="My Recipes" class="mat-tab-label-active">
                 <app-me></app-me>
             </mat-tab>
-            <mat-tab label="Liked">
+            <mat-tab label="My Recipes Liked">
                 <app-liked></app-liked>
             </mat-tab>
-            <mat-tab label="Followed">
+            <mat-tab label="My Users Followed">
                 <app-followed></app-followed>
             </mat-tab>
         </mat-tab-group>
     </div>
+    
 </div>

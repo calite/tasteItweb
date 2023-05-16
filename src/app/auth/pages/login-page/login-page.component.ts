@@ -53,7 +53,7 @@ export class LoginPageComponent {
 
         })
         .catch(error => {
-          console.log(error)
+          //console.log(error)
           if (error.code === 'auth/wrong-password') {
             this.toastService.alertGeneratorWithoutCancel('Error!', 'email or password wrong!', 4)
           }
