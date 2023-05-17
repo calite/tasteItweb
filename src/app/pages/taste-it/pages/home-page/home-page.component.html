@@ -1,0 +1,14 @@
+<div class="container">
+
+  <taste-it-recycler-view [recipes]="recipes" [isLoading]="isLoading"></taste-it-recycler-view>
+  <div class="fab-container">
+    <button mat-fab class="create-recipe" (click)="createRecipe()" color="primary" matTooltip="Create recipe">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button mat-mini-fab class="create-recipe-mini" (click)="createRecipe()" color="primary" matTooltip="Create recipe">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+</div>

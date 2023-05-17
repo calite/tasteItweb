@@ -5,6 +5,7 @@ export interface UserResponse {
     username:   string;
     imgProfile: string;
     biography:  string;
+    profile: number;
 }
 
 export interface UserFollowingResponse {

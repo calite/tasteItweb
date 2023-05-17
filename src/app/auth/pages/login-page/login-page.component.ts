@@ -25,8 +25,8 @@ export class LoginPageComponent {
     private resetPasswordDialog: MatDialog,
   ) {
     this.formLogin = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      email: new FormControl('daniel.campostello@gmail.com', [Validators.required, Validators.email]),
+      password: new FormControl('Nomelase123', [Validators.required, Validators.minLength(6)])
     })
   }
 
@@ -48,7 +48,7 @@ export class LoginPageComponent {
           this.apiService.getUserByToken(response.user.uid)
             .subscribe(response => { //almacenamos los datos del usuario desde neo en local
               sessionStorage.setItem('currentUser', JSON.stringify(response));
-              this.router.navigate(['/home']);
+              this.router.navigate(['/taste-it']);
             })
 
         })

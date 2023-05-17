@@ -1,0 +1,76 @@
+<div class="mt-8">
+
+    <h2>Edit Profile</h2>
+
+    <form class="flex flex-column align-items-center justify-content-center" [formGroup]="formUser">
+
+        <div class="grid">
+
+            <div class="col-12 md:col-6 lg:col-6  flex flex-column align-items-center justify-content-center">
+
+                <label>
+                    <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgProfile"
+                        class="inputImage" (change)="onFileSelected($event)">
+                    <img matTooltip="Change your photo" [src]="imgUrl" alt="image profile" class="imgProfile">
+                </label>
+
+            </div>
+
+            <div class="col-12 md:col-6 lg:col-6 flex flex-column align-items-center justify-content-center">
+
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Username" name="username" formControlName="username"
+                        autocomplete="username">
+                    <mat-error *ngIf="formUser.controls.username.invalid">Username needed</mat-error>
+                </mat-form-field>
+
+                <div class="grid flex-auto flex-column">
+
+                    <mat-form-field>
+                        <input matInput type="password" placeholder="Password" name="password"
+                            formControlName="password" autocomplete="new-password">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="password" placeholder="Confirm password" name="confirmPassword"
+                            formControlName="confirmPassword" autocomplete="current-password">
+                    </mat-form-field>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 flex align-items-center justify-content-center">
+
+                <mat-form-field class="col-11">
+                    <textarea matInput type="text" placeholder="Biography" name="biography" formControlName="biography"
+                        rows="8" class="text-area-biography"></textarea>
+                    <mat-error *ngIf="formUser.controls.biography.invalid">Biography needed</mat-error>
+                </mat-form-field>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 flex-column align-items-center justify-content-center mt-2">
+
+            <div class="col flex align-items-center justify-content-around">
+
+                <button mat-button color="warn" (click)="backToProfile()">Cancel</button>
+
+                <button mat-raised-button color="primary" (click)="onSubmit()">Edit user</button>
+
+            </div>
+
+            <div class="col flex align-items-center justify-content-center">
+
+                <button mat-button (click)="deleteAccount()" class="mt-8" color="warn">Delete Account</button>
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+</div>

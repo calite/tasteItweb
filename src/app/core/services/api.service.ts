@@ -12,8 +12,8 @@ import { UserFollowingResponse, UserResponse } from '../interfaces/user.interfac
 export class ApiService {
 
 
-    private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
-    //private apiUrl: string = 'https://localhost:7076/';
+    //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
+    private apiUrl: string = 'https://localhost:7076/';
     private apiKey: string = sessionStorage.getItem('accessToken')
 
 
@@ -41,7 +41,7 @@ export class ApiService {
 
     getUserByToken(token: string): Observable<User> {
 
-        const url = `${this.apiUrl}user/bytoken/${token}`;
+        const url = `${this.apiUrl}user/bytoken-web/${token}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
 
         return this.http.get<User>(url, { headers });

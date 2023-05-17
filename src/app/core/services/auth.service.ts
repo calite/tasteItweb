@@ -5,6 +5,7 @@ import { ApiService } from './api.service';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { UserResponse } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -36,18 +37,6 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  // saveUser(user: any) { //promesa para que se ejecute el metodo una vez se reciba la respuesta del servidor de firebase
-  //   return new Promise<void>((resolve, reject) => {
-  //     this.apiService.getUserByToken(user.uid)
-  //       .subscribe(response => {
-  //         sessionStorage.setItem('currentUser', JSON.stringify(response)); //almacenamos el usuario
-  //         resolve();
-  //       }, error => {
-  //         reject(error);
-  //       });
-  //   });
-  // }
-
   getUser() {
     this.currentUser = sessionStorage.getItem('currentUser'); //recogemos el usuario
     return JSON.parse(this.currentUser);
@@ -57,9 +46,26 @@ export class AuthService {
     sessionStorage.clear();
   }
 
-  checkAuth(): Observable<boolean> {
-    if (!sessionStorage.getItem('currentUser')) return of(false)
-    return of(true)
+  saveUser(user: any) {
+    sessionStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUser = user;
+  }
+
+  checkAuth(): boolean {
+    if (!sessionStorage.getItem('currentUser')) return false
+    return true
+  }
+
+  checkAdmin() : boolean {
+    
+    let aux : UserResponse = JSON.parse(sessionStorage.getItem('currentUser'));
+
+    if(aux.profile === 101) {
+      return true;
+    }else {
+      return false;
+    }
+
   }
 
   renewIdToken() {

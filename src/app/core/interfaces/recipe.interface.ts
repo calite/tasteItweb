@@ -22,4 +22,5 @@ export interface User {
     username:   string;
     imgProfile: null;
     biography:  null;
+    profile: null;
 }

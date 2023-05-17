@@ -6,7 +6,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanMatch {
+export class AdminGuard implements CanActivate, CanMatch {
 
   constructor(
     private authService: AuthService,
@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate, CanMatch {
 
 
   private checkAuthState(): boolean | Observable<boolean> {
-    return this.authService.checkAuth()
+    return this.authService.checkAdmin()
   }
 
 
