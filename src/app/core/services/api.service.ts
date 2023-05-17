@@ -4,6 +4,7 @@ import { Recipe, RecipesResponse, User } from '../interfaces/recipe.interface';
 import { Observable, finalize } from 'rxjs';
 import { CommentsOnRecipeResponse, CommentsOnUserResponse, ReportOnRecipeResponse } from '../interfaces/comment.interface';
 import { UserFollowingResponse, UserResponse } from '../interfaces/user.interface';
+import { RecipeReported } from '../interfaces/recipeReported.interface';
 
 
 @Injectable({
@@ -464,6 +465,32 @@ export class ApiService {
         }
 
         return this.http.get<RecipesResponse[]>(`${this.apiUrl}recipe/search`, { params });
+    }
+
+
+    //ADMINISTRACION
+    getRecipesReported(skipper : number) {
+        const url = `${this.apiUrl}admin/recipes/all/${skipper}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<RecipeReported[]>(url, { headers });
+    }
+
+    postChangeStateRecipe(rid : number, value : boolean) {
+
+        const url = `${this.apiUrl}admin/recipe/change_state`;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.apiKey
+            })
+        };
+        const body = {
+            rid: rid,
+            value : value
+        }
+
+        return this.http.post(url, body, httpOptions);
+
     }
 
 

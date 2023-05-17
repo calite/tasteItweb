@@ -16,12 +16,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from "@angular/material/slider"
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatBadgeModule} from '@angular/material/badge';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   exports: [
@@ -46,7 +48,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSliderModule,
     MatTooltipModule,
     MatChipsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }

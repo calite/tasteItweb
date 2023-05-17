@@ -1,2 +1,36 @@
-<p>backend works!</p>
-<router-outlet></router-outlet>
+<mat-toolbar class="flex justify-content-between flex-wrap menu-bar" color="primary">
+
+    <!-- Menu desktop -->
+
+    <div class="flex align-items-center justify-content-center">
+
+        <img class="logo_mini" src="assets/tasteIt_logo3.png">
+
+    </div>
+
+    <div class="flex align-items-center justify-content-center menu-desktop">
+
+        <button mat-button [routerLink]="['./recipes']">
+            <mat-icon aria-hidden="false" fontIcon="article"></mat-icon>RECIPES
+        </button>
+
+        <button mat-button [routerLink]="['./users']" disabled>
+            <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>USERS
+        </button>
+
+    </div>
+
+    <!--FIN Menu desktop-->
+
+
+    <div class="flex align-items-center justify-content-center">
+
+        <button mat-button (click)="goFront()" matTooltip="frontend"><mat-icon fontIcon="public"></mat-icon></button>
+
+    </div>
+
+</mat-toolbar>
+
+<div class="mt-8">
+    <router-outlet></router-outlet>
+</div>
