@@ -3,6 +3,7 @@ import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { RecipeReported } from 'src/app/core/interfaces/recipeReported.interface';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes-page',
@@ -11,7 +12,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 })
 export class RecipesPageComponent implements OnInit {
 
-  public recipes : RecipeReported[] = [];
+  public recipes: RecipeReported[] = [];
   private skipper: number = 0;
 
   @HostListener('window:scroll', ['$event'])
@@ -24,7 +25,7 @@ export class RecipesPageComponent implements OnInit {
     }
   }
 
-  constructor(private apiService: ApiService, private toastService : ToastService) {
+  constructor(private apiService: ApiService, private toastService: ToastService, private router: Router) {
   }
 
   ngOnInit() {
@@ -34,9 +35,8 @@ export class RecipesPageComponent implements OnInit {
   }
 
   loadRecipesReported(skipper: number) {
-    
+
     this.apiService.getRecipesReported(skipper).subscribe((response) => {
-      console.log(response)
       this.recipes.push(...response);
 
       if (response.length == 0) {
@@ -48,15 +48,15 @@ export class RecipesPageComponent implements OnInit {
   }
 
   publishRecipe(rid) {
-    this.apiService.postChangeStateRecipe(rid,true).subscribe( () => window.location.reload() );
+    this.apiService.postChangeStateRecipe(rid, true).subscribe(() => window.location.reload());
 
   }
 
   unpublishRecipe(rid) {
-    this.apiService.postChangeStateRecipe(rid,false).subscribe( () => window.location.reload() );
+    this.apiService.postChangeStateRecipe(rid, false).subscribe(() => window.location.reload());
   }
 
   viewDetails(rid) {
-    console.log(rid)
+    this.router.navigate([`./backend/view-recipe/${rid}`])
   }
 }

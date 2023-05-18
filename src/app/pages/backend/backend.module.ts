@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material/material.module';
 import { RecipesPageComponent } from './recipes-page/recipes-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
+import { ViewRecipeReportedComponent } from './view-recipe-reported/view-recipe-reported.component';
 
 
 
@@ -13,7 +14,8 @@ import { UsersPageComponent } from './users-page/users-page.component';
   declarations: [
     BackendComponent,
     RecipesPageComponent,
-    UsersPageComponent
+    UsersPageComponent,
+    ViewRecipeReportedComponent
   ],
   imports: [
     CommonModule,

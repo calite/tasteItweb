@@ -7,6 +7,7 @@
             <th>Reports</th>
             <th>Active</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -16,13 +17,13 @@
             <td>{{item.creator.username}}</td>
             <td>{{item.reportsCount}}</td>
             <td>{{item.recipe.active}}</td>
-            <!-- <td><button mat-raised-button color="primary" (click)="viewDetails(item.recipeId)">View</button></td> -->
             <td>
                 <button *ngIf="!item.recipe.active" mat-raised-button color="warn"
                     (click)="publishRecipe(item.recipeId)">Publish</button>
                 <button *ngIf="item.recipe.active" mat-raised-button color="primary"
                     (click)="unpublishRecipe(item.recipeId)">Unpublish</button>
             </td>
+            <td><button mat-raised-button color="primary" (click)="viewDetails(item.recipeId)">View</button></td>
         </tr>
     </tbody>
 </table>

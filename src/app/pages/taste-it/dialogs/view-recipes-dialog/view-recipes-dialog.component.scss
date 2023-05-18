@@ -3,7 +3,9 @@
     margin-left: 5px;
     width: 120px;
     height: 120px;
-    border: 1px solid maroon;
+    border: 2px solid maroon;
+    border-radius: 10px 10px 10px 10px;
+    cursor : pointer;
 }
 
 .container {
@@ -15,4 +17,21 @@
 .mini-card {
     background-color: rgb(215, 135, 135);
     border: 1px solid maroon;
+}
+
+.chipCustom {
+    background-color: maroon !important;
+}
+
+.chipCustom span {
+    color: white !important;
+}
+
+.imgProfileAvatar {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid maroon;
 }

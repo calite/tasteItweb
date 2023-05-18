@@ -5,6 +5,7 @@ import { Observable, finalize } from 'rxjs';
 import { CommentsOnRecipeResponse, CommentsOnUserResponse, ReportOnRecipeResponse } from '../interfaces/comment.interface';
 import { UserFollowingResponse, UserResponse } from '../interfaces/user.interface';
 import { RecipeReported } from '../interfaces/recipeReported.interface';
+import { ReportResponse } from '../interfaces/report.interface';
 
 
 @Injectable({
@@ -493,6 +494,11 @@ export class ApiService {
 
     }
 
+    getReportsOnRecipe(rid) {
+        const url = `${this.apiUrl}admin/reports-recipe/${rid}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<ReportResponse[]>(url, { headers });
+    }
 
 
 }

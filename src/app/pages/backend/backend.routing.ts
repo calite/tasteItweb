@@ -4,6 +4,7 @@ import { BackendComponent } from './backend.component';
 import { UsersPageComponent } from '../backend/users-page/users-page.component';
 import { RecipesPageComponent } from '../backend/recipes-page/recipes-page.component';
 import { Routes, RouterModule } from '@angular/router';
+import { ViewRecipeReportedComponent } from './view-recipe-reported/view-recipe-reported.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: BackendComponent,
     children: [
       { path: 'recipes', component: RecipesPageComponent },
+      { path: 'view-recipe/:rid', component: ViewRecipeReportedComponent },
       { path: 'users', component: UsersPageComponent },
       { path: '**', redirectTo: 'home' },
 

@@ -128,9 +128,9 @@
 
                     </mat-tab>
                     <mat-tab label="Steps">
-                        <div class="stepsCustom" *ngFor="let item of recipe[0].recipe.steps; let i = index">
+                        <div class="pr-3 pl-2 stepsCustom" *ngFor="let item of recipe[0].recipe.steps; let i = index">
                             <h3><u>Step {{i+1}}</u></h3>
-                            <p class="ml-5">{{ item }}</p>
+                            <textarea class="text-area-step" disabled>{{ item }}</textarea>
                         </div>
                     </mat-tab>
                     <mat-tab label="Comments">

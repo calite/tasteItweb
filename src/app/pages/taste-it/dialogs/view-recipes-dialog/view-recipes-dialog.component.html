@@ -2,26 +2,66 @@
 
     <h3>{{option | titlecase }}</h3>
 
-    <div *ngFor="let recipe of recipes" class="flex-auto flex align-items-center  align-content-center mt-2 mini-card">
-        <div>
-            <img class="imgRecipe" [src]="recipe.recipe.image">
+
+    <div *ngFor="let recipe of recipes" class="grid mt-2 mini-card">
+
+        <div class="col-4">
+            <img class="imgRecipe" [src]="recipe.recipe.image" (click)="viewRecipe(recipe.recipeId)">
         </div>
-        <div class="ml-2">
-            <p>{{recipe.recipe.name | titlecase}}</p>
+
+        <div class="col-8 flex flex-column align-items-start justify-content-center">
+            <div>
+                <h3>{{recipe.recipe.name | slice:0:30}}<span *ngIf="recipe.recipe.name.length >= 30">...</span></h3>
+                <p>{{recipe.user.username}}</p>
+            </div>
+        </div>
+        <div class="col-12">
+            <p>
+                {{recipe.recipe.description | slice:0:100}}<span
+                    *ngIf="recipe.recipe.description.length >= 100">...</span>
+            </p>
+        </div>
+        <div class="col-12">
+            <mat-chip-listbox>
+                <mat-chip *ngFor="let item of recipe.recipe.tags" class="chipCustom">
+                    {{item}}
+                </mat-chip>
+            </mat-chip-listbox>
         </div>
     </div>
+
 </div>
 
 <div class="container" *ngIf="option == 'followers' || option =='following'">
 
     <h3>{{option | titlecase }}</h3>
 
-    <div *ngFor="let user of users" class="flex-auto flex align-items-center  align-content-center mt-2 mini-card">
-        <div>
-            <img class="imgRecipe" [src]="user.imgProfile!">
+    <div *ngFor="let user of users" class="grid mt-2 mini-card">
+        <div class="col-3">
+            <img class="imgProfileAvatar" [src]="user.imgProfile!" (click)="viewProfile(user.token)">
         </div>
-        <div class="ml-2">
+        <div class="col-3">
             <p>{{user.username | titlecase}}</p>
+        </div>
+        <div class="col-6">
+
+            <div class="flex flex-column align-items-end justify-content-center">
+
+                <!-- <button mat-fab extended matTooltip="Follow this user" color="primary" (click)="postFollowUser(0)">
+                    <mat-icon>person_add</mat-icon>
+                    Follow
+                </button>
+
+                <button mat-fab extended matTooltip="Unfollow this user" color="primary" (click)="postFollowUser(0)">
+                    <mat-icon>person_remove</mat-icon>
+                    Unfollow
+                </button> -->
+
+            </div>
+
+        </div>
+        <div class="col-12">
+            {{user.biography | slice:0:100}}<span *ngIf="user.biography.length >= 100">...</span>
         </div>
     </div>
 </div>

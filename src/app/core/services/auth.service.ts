@@ -86,7 +86,7 @@ export class AuthService {
     const user = auth.currentUser;
 
     updatePassword(user, newPassword).then(() => {
-      this.toastService.toastGenerator('', 'password changed', 4, ToastPositionEnum.BOTTOM_LEFT)
+      //this.toastService.toastGenerator('', 'password changed', 4, ToastPositionEnum.BOTTOM_LEFT)
     }).catch(error => {
       if (error.code == 'auth/weak-password')
         this.toastService.toastGenerator('', 'Password should be at least 6 characters', 4, ToastPositionEnum.BOTTOM_LEFT)

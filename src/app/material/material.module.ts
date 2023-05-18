@@ -25,6 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
+
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -51,7 +52,7 @@ import { MatTableModule } from '@angular/material/table';
     MatBadgeModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
   ]
 })
 export class MaterialModule { }

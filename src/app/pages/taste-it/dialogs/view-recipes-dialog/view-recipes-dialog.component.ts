@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
-import { CommentDialogComponent } from '../comment-dialog/comment-dialog.component';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
-import { DomSanitizer } from '@angular/platform-browser';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-recipes-dialog',
@@ -20,9 +19,11 @@ export class ViewRecipesDialogComponent implements OnInit {
   public option: string
   private userToken;
 
+  private pepito: [UserResponse,boolean]
+
   constructor(
     private apiService: ApiService,
-    private sanitizer: DomSanitizer,
+    private router : Router,
     private dialogRef: MatDialogRef<ViewRecipesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: string[],
   ) {
@@ -45,6 +46,7 @@ export class ViewRecipesDialogComponent implements OnInit {
     if(this.option == 'followers'){
       this.apiService.getFollowers(this.userToken, 0).subscribe(response => {
         this.users = response
+
       });
     }
 
@@ -54,6 +56,18 @@ export class ViewRecipesDialogComponent implements OnInit {
       });
     }
 
+  }
+
+  viewRecipe(rid){
+    this.dialogRef.close()
+    this.router.navigate([`./taste-it/recipe/${rid}`])
+  }
+
+  viewProfile(token) {
+    this.dialogRef.close()
+    this.router.navigate(['']).then(() => {
+      this.router.navigate([`./taste-it/profile/${token}`]);
+    });
   }
 
 

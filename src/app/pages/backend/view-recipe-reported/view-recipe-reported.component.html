@@ -1,0 +1,63 @@
+<div class="grid">
+
+    <div class="col-8">
+
+        <div class="grid">
+
+            <div class="col-6">
+                <img class="imgRecipe" [src]="recipe[0].recipe.image" [alt]="">
+            </div>
+
+            <div class="col-6">
+                <img class="imgUser" [src]="recipe[0].user.imgProfile">
+            </div>
+
+            <div class="col-6">
+                <p>{{recipe[0].recipe.name}}</p>
+                <p>{{recipe[0].recipe.description | slice:0:250}}</p>
+            </div>
+
+            <div class="col-6">
+                <p>{{recipe[0].user.username}}</p>
+                <p>{{recipe[0].user.biography | slice:0:250}}</p>
+            </div>
+
+            <div class="col-6">
+
+                <p *ngFor="let item of recipe[0].recipe.steps">{{item}}</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-4">
+
+        <div class="grid" *ngFor="let item of reports">
+
+
+
+                <div class="col-4">
+
+                    <img class="imgUserReport" [src]="item.user.imgProfile">
+
+                    {{item.report.comment}}
+
+                </div>
+
+                <div class="col-4">
+                    {{item.user.username}}
+                </div>
+
+
+
+            <div class="col-4">
+                {{item.report.dateCreated}}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

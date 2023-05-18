@@ -45,7 +45,8 @@
                 <mat-form-field class="col-11">
                     <textarea matInput type="text" placeholder="Biography" name="biography" formControlName="biography"
                         rows="8" class="text-area-biography"></textarea>
-                    <mat-error *ngIf="formUser.controls.biography.invalid">Biography needed</mat-error>
+                        <mat-error *ngIf="this.formUser.get('biography').value.length > 250">Biography too large</mat-error>
+                        <mat-error *ngIf="formUser.controls.biography.invalid">Biography needed</mat-error>
                 </mat-form-field>
 
             </div>

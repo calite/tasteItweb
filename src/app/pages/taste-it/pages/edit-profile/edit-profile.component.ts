@@ -34,7 +34,7 @@ export class EditProfileComponent implements OnInit {
   ) {
     this.formUser = new FormGroup({
       username: new FormControl('', Validators.required),
-      biography: new FormControl('', Validators.required),
+      biography: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       password: new FormControl(''),
       confirmPassword: new FormControl(''),
       imgProfile: new FormControl('')
@@ -109,6 +109,7 @@ export class EditProfileComponent implements OnInit {
         this.authService.changePassword(password)
       } else {
         this.toastService.toastGenerator('', 'password are not equals', 4, ToastPositionEnum.BOTTOM_LEFT)
+        return
       }
 
     }
@@ -148,7 +149,7 @@ export class EditProfileComponent implements OnInit {
 
           this.toastService.toastGenerator('', 'Perfil updated', 4, ToastPositionEnum.BOTTOM_LEFT)
 
-          this.route.navigate([`.taste-it/profile/${this.currentUser.token}`])
+          this.route.navigate([`./taste-it/profile/${this.currentUser.token}`])
         })
 
     }

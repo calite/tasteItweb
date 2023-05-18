@@ -1,6 +1,8 @@
 .imgRecipeCard {
-    height: 325px;
-    width: 325px;
+    height: 320px;
+    width: 320px;
+    border: 2px solid #b92617;
+    border-radius: 25px 25px 25px 25px;
 }
 
 .cards {
@@ -11,10 +13,12 @@
     cursor: pointer;
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
     transition: transform 0.3s;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .cards:hover {
     transform: scale(1.05);
+    box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.4), 0px 12px 20px 0px rgba(0, 0, 0, 0.28), 0px 2px 36px 0px rgba(0, 0, 0, 0.24);
 }
 
 .imgProfile {

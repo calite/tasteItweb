@@ -51,7 +51,7 @@ export class LayoutPageComponent {
     this.checkAdmin()
 
     if(this.isAdmin) {
-      this.router.navigate(['./backend'])
+      this.router.navigate(['./backend/recipes'])
     }
 
   }
