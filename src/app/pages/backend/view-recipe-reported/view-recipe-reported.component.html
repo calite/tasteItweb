@@ -1,59 +1,78 @@
-<div class="grid">
+<div class="grid m-2" *ngIf="recipe">
 
-    <div class="col-8">
+    <div class="col-4 mt-3">
 
-        <div class="grid">
-
-            <div class="col-6">
-                <img class="imgRecipe" [src]="recipe[0].recipe.image" [alt]="">
+        <div class="col-11 flex flex-column align-items-center justify-content-start card">
+            <div class="">
+                <img class="img-user" [src]="recipe[0].user.imgProfile">
             </div>
 
-            <div class="col-6">
-                <img class="imgUser" [src]="recipe[0].user.imgProfile">
-            </div>
-
-            <div class="col-6">
-                <p>{{recipe[0].recipe.name}}</p>
-                <p>{{recipe[0].recipe.description | slice:0:250}}</p>
-            </div>
-
-            <div class="col-6">
-                <p>{{recipe[0].user.username}}</p>
+            <div class="flex flex-column align-items-center justify-content-center">
+                <h3>{{recipe[0].user.username}}</h3>
                 <p>{{recipe[0].user.biography | slice:0:250}}</p>
             </div>
-
-            <div class="col-6">
-
-                <p *ngFor="let item of recipe[0].recipe.steps">{{item}}</p>
-
-            </div>
-
         </div>
 
     </div>
 
+
+    <div class="col-4 mt-3">
+
+        <div class="col-11 flex align-items-center justify-content-center">
+
+            <button *ngIf="!recipe[0].recipe.active" mat-raised-button color="warn"
+                (click)="publishRecipe(recipe[0].recipeId)">Publish</button>
+
+            <button *ngIf="recipe[0].recipe.active" mat-raised-button color="primary"
+                (click)="unpublishRecipe(recipe[0].recipeId)">Unpublish</button>
+
+        </div>
+
+        <div class="col-11 card">
+
+            <div class="flex align-items-center justify-content-center">
+                <img class="img-recipe" [src]="recipe[0].recipe.image" [alt]="">
+            </div>
+
+            <div class="flex flex-column align-items-center justify-content-center">
+                <h2>{{recipe[0].recipe.name}}</h2>
+                <p>{{recipe[0].recipe.description | slice:0:250}}</p>
+            </div>
+
+            <div class="step-recipe" *ngFor="let item of recipe[0].recipe.steps; let i = index">
+                <h3>Step {{i+1}}</h3>
+                <p>{{item}}</p>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
     <div class="col-4">
 
-        <div class="grid" *ngFor="let item of reports">
+        <div class="col-11">
 
+            <div class="grid mt-2 pl-3 card" *ngFor="let item of reports">
 
-
-                <div class="col-4">
-
-                    <img class="imgUserReport" [src]="item.user.imgProfile">
-
-                    {{item.report.comment}}
-
+                <div class="col-2 flex align-items-center justify-content-center">
+                    <img class="img-user-report" [src]="item.user.imgProfile">
                 </div>
 
-                <div class="col-4">
+                <h3 class="col-6 flex align-items-center justify-content-start">
                     {{item.user.username}}
+                </h3>
+
+                <div class="col-4 flex align-items-start justify-content-end">
+                    {{item.report.dateCreated | date}}
                 </div>
 
+                <div class="col-12">
+                    {{item.report.comment}}
+                </div>
 
-
-            <div class="col-4">
-                {{item.report.dateCreated}}
             </div>
 
         </div>

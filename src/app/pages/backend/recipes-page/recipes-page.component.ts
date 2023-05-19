@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, SimpleChanges } from '@angular/core';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
-import { RecipeReported } from 'src/app/core/interfaces/recipeReported.interface';
+import { RecipesReported } from 'src/app/core/interfaces/recipeReported.interface';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RecipesPageComponent implements OnInit {
 
-  public recipes: RecipeReported[] = [];
+  public recipes: RecipesReported[] = [];
   private skipper: number = 0;
 
   @HostListener('window:scroll', ['$event'])

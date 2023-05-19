@@ -4,7 +4,7 @@ import { Recipe, RecipesResponse, User } from '../interfaces/recipe.interface';
 import { Observable, finalize } from 'rxjs';
 import { CommentsOnRecipeResponse, CommentsOnUserResponse, ReportOnRecipeResponse } from '../interfaces/comment.interface';
 import { UserFollowingResponse, UserResponse } from '../interfaces/user.interface';
-import { RecipeReported } from '../interfaces/recipeReported.interface';
+import { RecipeReported, RecipesReported } from '../interfaces/recipeReported.interface';
 import { ReportResponse } from '../interfaces/report.interface';
 
 
@@ -470,10 +470,23 @@ export class ApiService {
 
 
     //ADMINISTRACION
+
     getRecipesReported(skipper : number) {
         const url = `${this.apiUrl}admin/recipes/all/${skipper}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<RecipesReported[]>(url, { headers });
+    }
+
+    getRecipeReportedById(rid : number) {
+        const url = `${this.apiUrl}admin/recipe/${rid}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<RecipeReported[]>(url, { headers });
+    }
+
+    getReportsOnRecipe(rid) {
+        const url = `${this.apiUrl}admin/reports-recipe/${rid}`;
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+        return this.http.get<ReportResponse[]>(url, { headers });
     }
 
     postChangeStateRecipe(rid : number, value : boolean) {
@@ -494,11 +507,9 @@ export class ApiService {
 
     }
 
-    getReportsOnRecipe(rid) {
-        const url = `${this.apiUrl}admin/reports-recipe/${rid}`;
-        const headers = { Authorization: `Bearer ${this.apiKey}` }
-        return this.http.get<ReportResponse[]>(url, { headers });
-    }
+
+
+
 
 
 }

@@ -1,7 +1,7 @@
 .imgRecipeCard {
     height: 320px;
     width: 320px;
-    border: 2px solid #b92617;
+    border: 3px solid #b92617;
     border-radius: 25px 25px 25px 25px;
 }
 
@@ -55,4 +55,30 @@ mat-card-subtitle {
     font-style: italic;
     color: azure;
     font-size: small;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .imgRecipeCard {
+        height: 250px;
+        width: 250px;
+    }
+
+    .difficultyContainer {
+        top: 230px;
+        right: 10px;
+    }
+
+    .ratingContainer {
+        position: absolute;
+        top: 275px;
+        right: 10px;
+    }
+
+    .cards {
+        max-width: 255px;
+    }
+    
+
 }

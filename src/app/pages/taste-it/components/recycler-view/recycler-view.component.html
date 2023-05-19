@@ -1,6 +1,6 @@
 <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
 
-<div class="grid p-3 flex-row align-items-center justify-content-center">
+<div class="grid p-3 flex align-items-center justify-content-center">
     <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3" class="cards">
         <mat-card-header>
             <div mat-card-avatar>
@@ -10,7 +10,7 @@
             <mat-card-subtitle matTooltip="name of the recipe" (click)="viewRecipe(recipe.recipeId)">{{ recipe.recipe.name | slice:0:40
                 }}</mat-card-subtitle>
         </mat-card-header>
-        <div class="imgContainer">
+        <div class="flex align-items-center justify-content-center imgContainer">
             <img class="imgRecipeCard" [src]="recipe.recipe.image" alt=""
                 (click)="viewRecipe(recipe.recipeId)" />
 

@@ -14,11 +14,9 @@ import { ApiService } from 'src/app/core/services/api.service';
 export class SearchPageComponent {
 
   formSearch: FormGroup;
-
   public recipes: RecipesResponse[]
   public users: UserResponse[]
 
-  
   constructor(
     private apiService: ApiService,
     private router: Router,

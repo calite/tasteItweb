@@ -1,8 +1,14 @@
-export interface RecipeReported {
+export interface RecipesReported {
     recipeId: number;
     recipe: Recipe;
     creator: Creator;
     reportsCount: number | null;
+}
+
+export interface RecipeReported {
+    recipeId: number;
+    recipe: Recipe;
+    user: Creator;
 }
 
 export interface Creator {

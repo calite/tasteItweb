@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommentsOnRecipeResponse } from 'src/app/core/interfaces/comment.interface';
-import { RecipesResponse, User } from 'src/app/core/interfaces/recipe.interface';
 import { ReportResponse } from 'src/app/core/interfaces/report.interface';
 import { ApiService } from '../../../core/services/api.service';
 import { switchMap } from 'rxjs';
+import {  RecipeReported } from 'src/app/core/interfaces/recipeReported.interface';
 
 @Component({
   selector: 'app-view-recipe-reported',
   templateUrl: './view-recipe-reported.component.html',
   styleUrls: ['./view-recipe-reported.component.scss']
 })
-export class ViewRecipeReportedComponent {
+export class ViewRecipeReportedComponent implements OnInit {
 
-  public recipe: RecipesResponse[];
+  public recipe: RecipeReported[];
   public reports: ReportResponse[];
 
   constructor(
@@ -31,7 +30,7 @@ export class ViewRecipeReportedComponent {
 
     this.activatedRoute.params
       .pipe(
-        switchMap(({ rid }) => this.apiService.getRecipeById(rid)),
+        switchMap(({ rid }) => this.apiService.getRecipeReportedById(rid)),
       )
       .subscribe(response => {
         this.recipe = response
@@ -44,9 +43,17 @@ export class ViewRecipeReportedComponent {
       )
       .subscribe(response => {
         this.reports = response
-        console.log(response)
+        //console.log(response)
       })
 
+  }
+
+  publishRecipe(rid) {
+    this.apiService.postChangeStateRecipe(rid, true).subscribe(() => window.location.reload());
+  }
+
+  unpublishRecipe(rid) {
+    this.apiService.postChangeStateRecipe(rid, false).subscribe(() => window.location.reload());
   }
 
 }
