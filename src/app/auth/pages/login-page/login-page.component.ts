@@ -25,8 +25,8 @@ export class LoginPageComponent {
     private resetPasswordDialog: MatDialog,
   ) {
     this.formLogin = new FormGroup({
-      email: new FormControl('daniel.campostello@gmail.com', [Validators.required, Validators.email]),
-      password: new FormControl('Nomelase123', [Validators.required, Validators.minLength(6)])
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 

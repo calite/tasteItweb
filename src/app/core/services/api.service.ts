@@ -14,8 +14,8 @@ import { ReportResponse } from '../interfaces/report.interface';
 export class ApiService {
 
 
-    //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
-    private apiUrl: string = 'https://localhost:7076/';
+    private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
+    //private apiUrl: string = 'https://localhost:7076/';
     private apiKey: string = sessionStorage.getItem('accessToken')
 
 
@@ -440,6 +440,7 @@ export class ApiService {
     ): Observable<RecipesResponse[]> {
 
         let params = new HttpParams();
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
 
         if (name) {
             params = params.set('name', name);
@@ -465,7 +466,7 @@ export class ApiService {
             params = params.set('tags', tags);
         }
 
-        return this.http.get<RecipesResponse[]>(`${this.apiUrl}recipe/search`, { params });
+        return this.http.get<RecipesResponse[]>(`${this.apiUrl}recipe/search`, { params, headers });
     }
 
 
