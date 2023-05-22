@@ -35,15 +35,23 @@ export class ProfilePageComponent implements OnInit {
   public canFollow: boolean = false;
   private skipper: number = 0;
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(event) {
-    const pos = window.pageYOffset + window.innerHeight;
-    const max = document.documentElement.scrollHeight;
+  private timer: any;
 
-    if (pos >= max) {
-      this.loadComments(this.skipper);
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
+
+    this.timer = setTimeout(() => {
+      if (window.pageYOffset + window.innerHeight > document.documentElement.scrollHeight - 100) {
+        this.loadComments(this.skipper);
+      }
+    }, 200);
+
   }
+
 
   constructor(
     private apiService: ApiService,

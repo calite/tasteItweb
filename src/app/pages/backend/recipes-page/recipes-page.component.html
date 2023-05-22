@@ -1,3 +1,36 @@
+<form class="flex align-items-center justify-content-center" [formGroup]="formFilter" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+        <mat-label>Recipe Name</mat-label>
+        <input type="text" matInput placeholder="Name Recipe" name="Name Recipe" formControlName="nameRecipe">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Creator Name</mat-label>
+        <input type="text" matInput placeholder="Creator Recipe" name="Creator Recipe" formControlName="creatorRecipe">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="active" name="activeRecipe" formControlName="activeRecipe">
+            <mat-option value="true">
+                true
+            </mat-option>
+            <mat-option value="false">
+                false
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="p-2 flex flex-column align-items-center justify-content-center">
+        <button mat-raised-button color="primary">Apply filter</button>
+
+        <button mat-button (click)="resetFilter()" color="primary">reset</button>
+    </div>
+
+</form>
+
+
+
 <table>
     <thead>
         <tr>
@@ -5,8 +38,7 @@
             <th>Name Recipe</th>
             <th>Creator</th>
             <th>Reports</th>
-            <th>Active</th>
-            <th></th>
+            <th>State</th>
             <th></th>
         </tr>
     </thead>
@@ -16,7 +48,6 @@
             <td>{{item.recipe.name}}</td>
             <td>{{item.creator.username}}</td>
             <td>{{item.reportsCount}}</td>
-            <td>{{item.recipe.active}}</td>
             <td>
                 <button *ngIf="!item.recipe.active" mat-raised-button color="warn"
                     (click)="publishRecipe(item.recipeId)">Publish</button>

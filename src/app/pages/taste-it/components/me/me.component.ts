@@ -20,15 +20,23 @@ export class MeComponent implements OnInit {
   private token: string;
   private skipper: number = 0;
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(event) {
-    const pos = window.pageYOffset + window.innerHeight;
-    const max = document.documentElement.scrollHeight;
+  private timer: any;
 
-    if (pos === max) {
-      this.loadRecipes(this.skipper)
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
+
+    this.timer = setTimeout(() => {
+      if (window.pageYOffset + window.innerHeight > document.documentElement.scrollHeight - 100) {
+        this.loadRecipes(this.skipper);
+      }
+    }, 200);
+
   }
+
 
   constructor(
     private apiService: ApiService,

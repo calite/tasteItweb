@@ -1,5 +1,5 @@
 <div class="mt-8">
-    
+
     <h1 *ngIf="!editRecipe">Create recipe</h1>
     <h1 *ngIf="editRecipe">Edit recipe</h1>
 
@@ -46,9 +46,17 @@
                 </mat-form-field>
 
                 <mat-form-field class="col-6">
-                    <mat-label>Country</mat-label>
+                    <!-- <mat-label>Country</mat-label>
                     <input matInput type="text" placeholder="Country" name="country" formControlName="country">
-                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error>
+                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error> -->
+
+                    <mat-label>Country</mat-label>
+                    <mat-select placeholder="Country" name="country" formControlName="country">
+                        <mat-option *ngFor="let item of countries" [value]="item">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+
                 </mat-form-field>
 
                 <section>
@@ -173,9 +181,18 @@
                 </mat-form-field>
 
                 <mat-form-field class="col-6">
-                    <mat-label>Country</mat-label>
+                    <!-- <mat-label>Country</mat-label>
                     <input matInput type="text" placeholder="Country" name="country" formControlName="country">
-                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error>
+                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error> -->
+
+                    <mat-label>Country</mat-label>
+                    <mat-select placeholder="Country" name="country" formControlName="country">
+                        <mat-option *ngFor="let item of countries" [value]="item">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+
+
                 </mat-form-field>
 
                 <section>

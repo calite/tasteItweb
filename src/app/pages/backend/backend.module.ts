@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { RecipesPageComponent } from './recipes-page/recipes-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { ViewRecipeReportedComponent } from './view-recipe-reported/view-recipe-reported.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +22,8 @@ import { ViewRecipeReportedComponent } from './view-recipe-reported/view-recipe-
     CommonModule,
     RouterModule,
     BackRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class BackendModule { }

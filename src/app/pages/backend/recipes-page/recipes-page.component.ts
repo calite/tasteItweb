@@ -4,6 +4,8 @@ import { RecipesReported } from 'src/app/core/interfaces/recipeReported.interfac
 import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { _MatTabGroupBase } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-recipes-page',
@@ -13,19 +15,40 @@ import { Router } from '@angular/router';
 export class RecipesPageComponent implements OnInit {
 
   public recipes: RecipesReported[] = [];
+  public recipesFiltered : RecipesReported[] = [];
+  
   private skipper: number = 0;
+  private timer: any
+
+  formFilter: FormGroup;
 
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll(event) {
-    const pos = window.pageYOffset + window.innerHeight;
-    const max = document.documentElement.scrollHeight;
+  onWindowScroll() {
 
-    if (pos >= max) {
-      this.loadRecipesReported(this.skipper);
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
+
+    this.timer = setTimeout(() => {
+      if (window.pageYOffset + window.innerHeight > document.documentElement.scrollHeight - 100) {
+        this.loadRecipesReported(this.skipper);
+      }
+    }, 200);
+
   }
 
-  constructor(private apiService: ApiService, private toastService: ToastService, private router: Router) {
+
+  constructor(
+    private apiService: ApiService,
+    private toastService: ToastService,
+    private router: Router,
+    private fb: FormBuilder,
+  ) {
+    this.formFilter = this.fb.group({
+      nameRecipe : '',
+      creatorRecipe: '',
+      activeRecipe : '',
+    });
   }
 
   ngOnInit() {
@@ -44,7 +67,7 @@ export class RecipesPageComponent implements OnInit {
       }
     });
 
-    this.skipper = this.skipper + 10;
+    this.skipper = this.skipper + 20;
   }
 
   publishRecipe(rid) {
@@ -58,5 +81,25 @@ export class RecipesPageComponent implements OnInit {
 
   viewDetails(rid) {
     this.router.navigate([`./backend/view-recipe/${rid}`])
+  }
+
+  onSubmit() {
+
+    const nameRecipe = this.formFilter.controls.nameRecipe.value
+    const creatorRecipe = this.formFilter.controls.creatorRecipe.value
+    const activeRecipe = this.formFilter.controls.activeRecipe.value
+
+    this.recipes.forEach(element => {
+      if(element.recipe.name.toLowerCase().includes(nameRecipe))
+        this.recipesFiltered.push(element)
+    }); 
+    this.recipes = this.recipesFiltered;
+
+  }
+
+  resetFilter() {
+    this.formFilter.reset()
+    this.recipes = []
+    this.loadRecipesReported(0)
   }
 }

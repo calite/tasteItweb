@@ -21,14 +21,21 @@ export class HomePageComponent implements OnInit {
   private skipper: number = 0;
   private currentUser: UserResponse;
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(event) {
-    const pos = window.pageYOffset + window.innerHeight;
-    const max = document.documentElement.scrollHeight;
+  private timer: any;
 
-    if (pos >= max) {
-      this.loadRecipes(this.skipper);
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
+
+    this.timer = setTimeout(() => {
+      if (window.pageYOffset + window.innerHeight > document.documentElement.scrollHeight - 100) {
+        this.loadRecipes(this.skipper);
+      }
+    }, 200);
+
   }
 
   constructor(
@@ -60,12 +67,12 @@ export class HomePageComponent implements OnInit {
     this.isLoading = true;
 
     this.apiService.getRecipesHome(skipper)
-      .subscribe(recipes => {
+      .subscribe(response => {
 
-        this.recipes.push(...recipes);
+        this.recipes.push(...response);
         this.isLoading = false;
 
-        if (recipes.length == 0) {
+        if (response.length == 0) {
           this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
         }
 

@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, ɵisEnvironmentProviders } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -11,6 +11,9 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { Router } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
+
+
 
 @Component({
   selector: 'app-recipe-creator',
@@ -38,6 +41,7 @@ export class RecipeCreatorComponent {
 
   public editRecipe: boolean = false;
 
+  countries = environment.countriesArray;
 
   //edit
   @Input()
@@ -57,7 +61,6 @@ export class RecipeCreatorComponent {
       newIngredient: new FormControl(''),
       imgRecipe: new FormControl('')
     })
-
     this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.token = this.currentUser.token;
   }
@@ -67,7 +70,7 @@ export class RecipeCreatorComponent {
       this.recipe = changes[recipe].currentValue
     }
 
-    if (this.recipe) { //jeje
+    if (this.recipe) {
 
       this.formRecipe.get('recipeName').setValue(this.recipe[0]['recipe'].name)
       this.formRecipe.get('description').setValue(this.recipe[0]['recipe'].description)

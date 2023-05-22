@@ -38,15 +38,23 @@ export class ViewRecipePageComponent implements OnInit {
   private skipper: number = 0;
   public likesCounter: number;
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(event) {
-    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    const max = document.documentElement.scrollHeight;
+  private timer: any;
 
-    if (pos === max) {
-      this.loadComments(this.skipper)
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+
+    if (this.timer) {
+      clearTimeout(this.timer);
     }
+
+    this.timer = setTimeout(() => {
+      if (window.pageYOffset + window.innerHeight > document.documentElement.scrollHeight - 100) {
+        this.loadComments(this.skipper);
+      }
+    }, 200);
+
   }
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
