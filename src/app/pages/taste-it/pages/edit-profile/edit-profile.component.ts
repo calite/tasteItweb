@@ -64,7 +64,7 @@ export class EditProfileComponent implements OnInit {
 
     if (tokenFromUrl != token) {
       this.toastService.toastGenerator('', 'You are not the owner of this account', 4, ToastPositionEnum.BOTTOM_RIGHT);
-      this.route.navigate(['.taste-it/home']); //enviamos al home si no lo es
+      this.route.navigate(['./taste-it/home']); //enviamos al home si no lo es
 
     }
 
@@ -180,7 +180,7 @@ export class EditProfileComponent implements OnInit {
 
           sessionStorage.clear();
 
-          this.route.navigate(['./home']);
+          this.route.navigate(['./auth/login']);
 
         }
       });

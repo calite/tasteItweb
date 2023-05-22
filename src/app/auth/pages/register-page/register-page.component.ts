@@ -101,7 +101,7 @@ export class RegisterPageComponent {
 
             this.toastService.alertGenerator('Great!', 'almost done, just log in to start!', 1)
 
-            this.router.navigate(['/login'])
+            this.router.navigate(['./auth/login'])
 
           })
           .catch(error => {

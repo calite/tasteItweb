@@ -179,7 +179,7 @@ export class RecipeCreatorComponent {
         .subscribe(response => {
 
           this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_LEFT)
-          this.route.navigate([`./taste-it/home`])
+          this.route.navigate([`./taste-it`])
 
         })
 
