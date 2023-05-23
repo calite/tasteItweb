@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RandomPageComponent } from './pages/random-page/random-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { MyBookPageComponent } from './pages/my-book-page/my-book-page.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { ViewRecipePageComponent } from './pages/view-recipe-page/view-recipe-page.component';
-import { CreateRecipePageComponent } from './pages/create-recipe-page/create-recipe-page.component';
-import { EditRecipePageComponent } from './pages/edit-recipe-page/edit-recipe-page.component';
-import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { RandomPageComponent } from './random-page/random-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LayoutPageComponent } from './layout-page/layout-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
+import { MyBookPageComponent } from './my-book-page/my-book-page.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ViewRecipePageComponent } from './view-recipe-page/view-recipe-page.component';
+import { CreateRecipePageComponent } from './create-recipe-page/create-recipe-page.component';
+import { EditRecipePageComponent } from './edit-recipe-page/edit-recipe-page.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 

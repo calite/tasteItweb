@@ -117,6 +117,7 @@ $tasteItWeb-theme: mat.define-light-theme((color: (primary: $tasteItWeb-primary,
 
 //BAR RATING - STARS
 $star-utf8: '\2605';
+
 .br-default {
   --br-font-size: 26px;
 
@@ -205,18 +206,76 @@ $star-utf8: '\2605';
   border: 3px solid maroon;
 }
 
-// mat-card {
-//   background-color: rgb(215, 135, 135) !important;
-//   margin-top: 2px;
-// }
-
-
 //rating
 .star {
   color: yellow;
 }
 
-body{
+body {
   margin: 0px;
   padding: 0px;
+}
+
+
+//EFECTOS CSS
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  // -webkit-animation-fill-mode: both;
+  // animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    height: 0px;
+    // display: none !important;
+  }
 }

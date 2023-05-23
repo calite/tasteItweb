@@ -1,10 +1,9 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
-import { User } from 'src/app/core/interfaces/recipe.interface';
+import { RecipesResponse, User } from 'src/app/core/interfaces/recipe.interface';
+import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { ApiService } from '../../../../core/services/api.service';
-import { RecipesResponse } from '../../../../core/interfaces/recipe.interface';
 
 @Component({
   selector: 'app-edit-recipe-page',

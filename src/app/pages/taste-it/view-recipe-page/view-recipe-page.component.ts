@@ -1,19 +1,18 @@
-import { Component, EventEmitter, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { Component, Output, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { HostListener } from '@angular/core';
-import { catchError, switchMap, tap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { RecipesResponse, User } from 'src/app/core/interfaces/recipe.interface';
 import { ApiService } from 'src/app/core/services/api.service';
-import { CommentsOnRecipeComponent } from '../../components/comments-on-recipe/comments-on-recipe.component';
 import { CommentsOnRecipeResponse } from 'src/app/core/interfaces/comment.interface';
-import { ReportDialogComponent } from '../../dialogs/report-dialog/report-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { RateDialogComponent } from '../../dialogs/rate-dialog/rate-dialog.component';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { CommentDialogComponent } from '../../dialogs/comment-dialog/comment-dialog.component';
+import { ReportDialogComponent } from 'src/app/shared/report-dialog/report-dialog.component';
+import { RateDialogComponent } from 'src/app/shared/rate-dialog/rate-dialog.component';
+import { CommentDialogComponent } from 'src/app/shared/comment-dialog/comment-dialog.component';
+
 
 @Component({
   selector: 'app-view-recipe-page',

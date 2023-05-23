@@ -11,8 +11,8 @@
 
             <div class="ml-2 flex flex-column align-items-center justify-content-around">
 
-                <button mat-mini-fab [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="likes" class="button-custom"
-                    (click)="likeRecipe()">
+                <button mat-mini-fab [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="likes"
+                    class="button-custom" (click)="likeRecipe()">
                     <mat-icon>thumb_up</mat-icon>
                 </button>
 
@@ -41,18 +41,20 @@
 
             <div class="col-12 flex flex-column align-items-center justify-content-center">
 
-                <div class="flex align-items-center justify-content-center" (click)="viewProfileCreator(this.recipes[counter].user.token)">
-                    <img class="img-profile" [src]="recipes[counter].user.imgProfile">
+                <div class="flex flex-column align-items-center justify-content-center">
 
-                    <h4 class="ml-2">{{recipes[counter].user.username | titlecase }}</h4>
+                    <div class="flex align-items-center justify-content-center"
+                        (click)="viewProfileCreator(this.recipes[counter].user.token)">
 
-                    <button class="ml-2" mat-raised-button [matBadge]="followersCounter" matBadgeColor="warn" color="primary">
+                        <img class="img-profile" [src]="recipes[counter].user.imgProfile">
+                        <h4 class="ml-2">{{recipes[counter].user.username | titlecase }}</h4>
+
+                    </div>
+
+                    <button class="ml-2" mat-raised-button [matBadge]="followersCounter" matBadgeColor="warn"
+                        color="primary" (click)="viewFollowers()">
                         followers
                     </button>
-                </div>
-
-                <div>
-
                 </div>
 
             </div>

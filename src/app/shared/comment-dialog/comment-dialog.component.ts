@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { RateDialogComponent } from '../rate-dialog/rate-dialog.component';
+
 
 @Component({
   selector: 'app-comment-dialog',

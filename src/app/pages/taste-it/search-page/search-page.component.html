@@ -2,11 +2,24 @@
 
   <div class="grid">
 
-    <div class="col-5 sm:col-3 filter-box flex flex-column align-items-center">
+    <div class="show-menu-button">
+      <button mat-mini-fab color="primary" class="ml-2" (click)="showHideMenu()" matTooltip="Show/hide search box">
+        <mat-icon>tune</mat-icon>
+      </button>
+    </div>
+
+    <div class="col-12 filter-box flex flex-column align-items-center"
+      [ngClass]="{fadeInDown: isVisibleSearch , fadeOut: !isVisibleSearch }">
 
       <h2>Search</h2>
 
-      <form [formGroup]="formSearch" (ngSubmit)="onSubmit()">
+      <div>
+        <button mat-button color="primary" (click)="advancedSearch()">
+          advanced filter
+        </button>
+      </div>
+
+      <form [formGroup]="formSearch">
 
         <div class="col flex flex-column justify-content-center align-items-center">
 
@@ -16,25 +29,25 @@
               color="primary">
           </mat-form-field>
 
-          <mat-form-field color="primary">
+          <mat-form-field color="primary" *ngIf="isAdvancedSearch">
             <mat-label>Country</mat-label>
             <input matInput type="text" class="form-control" placeholder="By country" formControlName="country"
               color="primary">
           </mat-form-field>
 
-          <mat-form-field color="primary">
+          <mat-form-field color="primary" *ngIf="isAdvancedSearch">
             <mat-label>Difficulty</mat-label>
-            <input matInput type="text" class="form-control" placeholder="By difficulty"
-              formControlName="difficulty" color="primary">
+            <input matInput type="text" class="form-control" placeholder="By difficulty" formControlName="difficulty"
+              color="primary">
           </mat-form-field>
 
-          <mat-form-field color="primary">
+          <mat-form-field color="primary" *ngIf="isAdvancedSearch">
             <mat-label>Rating</mat-label>
             <input matInput type="text" class="form-control" placeholder="By rating" formControlName="rating"
               color="primary">
           </mat-form-field>
 
-          <mat-form-field color="primary">
+          <mat-form-field color="primary" *ngIf="isAdvancedSearch">
             <mat-label>Tags</mat-label>
             <input matInput type="text" class="form-control" placeholder="By tags" formControlName="tags"
               color="primary">
@@ -42,13 +55,18 @@
 
           <mat-form-field color="primary">
             <mat-label>Ingredients</mat-label>
-            <input matInput type="text" class="form-control" placeholder="By ingredients"
-              formControlName="ingredients" color="primary">
+            <input matInput type="text" class="form-control" placeholder="By ingredients" formControlName="ingredients"
+              color="primary">
           </mat-form-field>
 
-          <button mat-flat-button>
-            Search
-          </button>
+          <div>
+            <button mat-flat-button color="primary" (click)="onSubmit()">
+              Search
+            </button>
+            <button mat-button class="ml-2" color="primary" (click)="resetForm()">
+              reset
+            </button>
+          </div>
 
         </div>
 
@@ -64,7 +82,7 @@
 
     <ng-template #divSearch>
 
-      <div class="col-7 sm:col-9 background-cards">
+      <div class="col-12 background-cards">
 
         <taste-it-recycler-view [recipes]="recipes"></taste-it-recycler-view>
 

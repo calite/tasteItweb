@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { ToastService } from '../../../../core/services/toast.service';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { v4 as uuidv4 } from 'uuid';
 import { Storage, ref, uploadBytes, getDownloadURL, deleteObject } from '@angular/fire/storage';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-edit-profile',

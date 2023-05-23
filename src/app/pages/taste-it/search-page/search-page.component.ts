@@ -1,5 +1,5 @@
-import { Component, Input, Output, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
@@ -14,8 +14,11 @@ import { ApiService } from 'src/app/core/services/api.service';
 export class SearchPageComponent {
 
   formSearch: FormGroup;
-  public recipes: RecipesResponse[]
+  public recipes: RecipesResponse[] = [];
   public users: UserResponse[]
+
+  public isVisibleSearch = true
+  public isAdvancedSearch = false
 
   constructor(
     private apiService: ApiService,
@@ -48,15 +51,22 @@ export class SearchPageComponent {
     this.apiService.getFilteredRecipes(name, country, difficulty, rating, ingredients, tags)
       .subscribe(response => {
         this.recipes = response;
+        this.isVisibleSearch = false
       });
 
-    // this.apiService.getUsersByName(term, 0).subscribe(
-    //   response => {
-    //     this.users = response;
-    //     if (response.length > 0) this.anyUsers = true;
-    //     if (response.length == 0) this.anyUsers = false;
-    //   })
+  }
 
+  resetForm() {
+    this.formSearch.reset();
+  }
+
+  showHideMenu() {
+    this.isVisibleSearch = !this.isVisibleSearch
+  }
+
+
+  advancedSearch() {
+    this.isAdvancedSearch = !this.isAdvancedSearch
   }
 
 }

@@ -1,4 +1,4 @@
-<form class="flex align-items-center justify-content-center" [formGroup]="formFilter" (ngSubmit)="onSubmit()">
+<form class="flex align-items-center justify-content-center" [formGroup]="formFilter">
 
     <mat-form-field>
         <mat-label>Recipe Name</mat-label>
@@ -12,23 +12,24 @@
 
     <mat-form-field>
         <mat-select placeholder="active" name="activeRecipe" formControlName="activeRecipe">
+            <mat-option value="">
+                N/A
+            </mat-option>
             <mat-option value="true">
-                true
+                True
             </mat-option>
             <mat-option value="false">
-                false
+                False
             </mat-option>
         </mat-select>
     </mat-form-field>
 
     <div class="p-2 flex flex-column align-items-center justify-content-center">
-        <button mat-raised-button color="primary">Apply filter</button>
-
+        <button mat-raised-button color="primary" (click)="onSubmit()">Apply filter</button>
         <button mat-button (click)="resetFilter()" color="primary">reset</button>
     </div>
 
 </form>
-
 
 
 <table>
@@ -43,7 +44,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of recipes">
+        <tr *ngFor="let item of recipesFiltered">
             <td>{{item.recipeId}}</td>
             <td>{{item.recipe.name}}</td>
             <td>{{item.creator.username}}</td>

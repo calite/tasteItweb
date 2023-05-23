@@ -15,8 +15,8 @@ import { _MatTabGroupBase } from '@angular/material/tabs';
 export class RecipesPageComponent implements OnInit {
 
   public recipes: RecipesReported[] = [];
-  public recipesFiltered : RecipesReported[] = [];
-  
+  public recipesFiltered: RecipesReported[] = [];
+
   private skipper: number = 0;
   private timer: any
 
@@ -45,9 +45,9 @@ export class RecipesPageComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.formFilter = this.fb.group({
-      nameRecipe : '',
+      nameRecipe: '',
       creatorRecipe: '',
-      activeRecipe : '',
+      activeRecipe: '',
     });
   }
 
@@ -57,10 +57,12 @@ export class RecipesPageComponent implements OnInit {
 
   }
 
-  loadRecipesReported(skipper: number) {
+  loadRecipesReported( skipper : number ) {
 
     this.apiService.getRecipesReported(skipper).subscribe((response) => {
+
       this.recipes.push(...response);
+      this.recipesFiltered = this.recipes;
 
       if (response.length == 0) {
         this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
@@ -85,21 +87,26 @@ export class RecipesPageComponent implements OnInit {
 
   onSubmit() {
 
-    const nameRecipe = this.formFilter.controls.nameRecipe.value
-    const creatorRecipe = this.formFilter.controls.creatorRecipe.value
-    const activeRecipe = this.formFilter.controls.activeRecipe.value
+    const nameRecipe:string = this.formFilter.controls.nameRecipe.value
+    const creatorRecipe:string = this.formFilter.controls.creatorRecipe.value
+    const activeRecipe:string = this.formFilter.controls.activeRecipe.value
 
-    this.recipes.forEach(element => {
-      if(element.recipe.name.toLowerCase().includes(nameRecipe))
-        this.recipesFiltered.push(element)
-    }); 
-    this.recipes = this.recipesFiltered;
+    this.recipesFiltered = this.recipes;
 
+    if (nameRecipe != '') {
+      this.recipesFiltered = this.recipesFiltered.filter(receta => receta.recipe.name.toLowerCase().includes(nameRecipe.toLowerCase()));
+    }
+    if (creatorRecipe != '') {
+      this.recipesFiltered = this.recipesFiltered.filter(receta => receta.creator.username.toLowerCase().includes(creatorRecipe.toLowerCase()));
+    }
+    if (activeRecipe == 'true' || activeRecipe == 'false') {
+      const active = (activeRecipe == 'true') ? true : false;
+      this.recipesFiltered = this.recipesFiltered.filter(receta => receta.recipe.active == active);
+    }
   }
 
   resetFilter() {
-    this.formFilter.reset()
-    this.recipes = []
-    this.loadRecipesReported(0)
+    this.formFilter.reset();
+    this.recipesFiltered = this.recipes;
   }
 }

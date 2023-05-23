@@ -1,15 +1,14 @@
 import { Component, Input, Output, ViewEncapsulation, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { CommentDialogComponent } from '../../dialogs/comment-dialog/comment-dialog.component';
-import { ViewRecipesDialogComponent } from '../../dialogs/view-recipes-dialog/view-recipes-dialog.component';
 import { CommentsOnUserResponse } from 'src/app/core/interfaces/comment.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { CommentDialogComponent } from 'src/app/shared/comment-dialog/comment-dialog.component';
+import { ViewRecipesDialogComponent } from 'src/app/shared/view-recipes-dialog/view-recipes-dialog.component';
 
 @Component({
   selector: 'app-profile-page',

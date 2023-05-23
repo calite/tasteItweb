@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastNotificationInitializer, DialogLayoutDisplay, ToastProgressBarEnum, ToastUserViewTypeEnum, AppearanceAnimation, DisappearanceAnimation, ToastPositionEnum, ConfirmBoxInitializer, IConfirmBoxPublicResponse } from '@costlydeveloper/ngx-awesome-popup';
+import { ToastNotificationInitializer, ToastProgressBarEnum, ToastUserViewTypeEnum, AppearanceAnimation, DisappearanceAnimation, ToastPositionEnum, ConfirmBoxInitializer, IConfirmBoxPublicResponse } from '@costlydeveloper/ngx-awesome-popup';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

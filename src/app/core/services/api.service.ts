@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Recipe, RecipesResponse, User } from '../interfaces/recipe.interface';
-import { Observable, finalize } from 'rxjs';
+import { RecipesResponse, User } from '../interfaces/recipe.interface';
+import { Observable } from 'rxjs';
 import { CommentsOnRecipeResponse, CommentsOnUserResponse, ReportOnRecipeResponse } from '../interfaces/comment.interface';
 import { UserFollowingResponse, UserResponse } from '../interfaces/user.interface';
 import { RecipeReported, RecipesReported } from '../interfaces/recipeReported.interface';
@@ -14,8 +14,8 @@ import { ReportResponse } from '../interfaces/report.interface';
 export class ApiService {
 
 
-    //private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
-    private apiUrl: string = 'https://localhost:7076/';
+    private apiUrl: string = 'https://great-dhawan.212-227-50-151.plesk.page/';
+    //private apiUrl: string = 'https://localhost:7076/';
     private apiKey: string = sessionStorage.getItem('accessToken')
 
 

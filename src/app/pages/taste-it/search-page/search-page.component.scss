@@ -1,11 +1,3 @@
-.filter-box {
-    background-color: maroon;
-}
-
-.filter-box h2 {
-    color: white;
-}
-
 .img-profile-card {
     width: 40px;
     height: 40px;
@@ -31,4 +23,22 @@
 
 .card-title {
     color: maroon !important;
+}
+
+.show-menu-button {
+    position: fixed;
+    top: 8%;
+    left: 10%;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+
+    .show-menu-button {
+        position: fixed;
+        top: 8%;
+        left: 3%;
+        z-index: 100;
+    }
+
 }

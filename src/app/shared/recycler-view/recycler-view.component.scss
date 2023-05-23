@@ -5,22 +5,6 @@
     border-radius: 25px 25px 25px 25px;
 }
 
-.cards {
-    margin: 20px;
-    max-width: 325px;
-    background-color: maroon;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s;
-    border-radius: 10px 10px 10px 10px;
-}
-
-.cards:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.4), 0px 12px 20px 0px rgba(0, 0, 0, 0.28), 0px 2px 36px 0px rgba(0, 0, 0, 0.24);
-}
-
 .imgProfile {
     width: 40px;
     height: 40px;
@@ -57,6 +41,25 @@ mat-card-subtitle {
     font-size: small;
 }
 
+
+.cards {
+    margin: 20px;
+    max-width: 325px;
+    background-color: maroon;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s;
+    border-radius: 10px;
+}
+
+.cards:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px -2px rgba(0, 0, 0, 0.4), 0px 12px 20px 0px rgba(0, 0, 0, 0.28), 0px 2px 36px 0px rgba(0, 0, 0, 0.24);
+}
+
+
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 767px) {
 
@@ -79,6 +82,6 @@ mat-card-subtitle {
     .cards {
         max-width: 255px;
     }
-    
+
 
 }

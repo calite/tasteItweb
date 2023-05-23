@@ -37,8 +37,6 @@
     color: white;
     border-radius: 45px 45px 0px 0px;
     border: 5px solid rgb(215, 135, 135);
-    //box-shadow: 0px 20px 25px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-    //box-shadow: 5px 5px 5px 5px black;
     z-index: 100;
 }
 
@@ -68,20 +66,22 @@
     position: fixed;
     top: 50%;
     left: 10%;
+    z-index: 100;
 }
 
 .forward-button {
     position: fixed;
     top: 50%;
     right: 10%;
+    z-index: 100;
 }
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 767px) {
 
     .img-recipe {
-        height: 150px;
-        width: 150px;
+        height: 90px;
+        width: 90px;
     }
 
     .back-button {

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
-import { ApiService } from '../../../../core/services/api.service';
+import { ApiService } from '../../../core/services/api.service';
 import { Router } from '@angular/router';
-import { UserResponse } from '../../../../core/interfaces/user.interface';
+import { UserResponse } from '../../../core/interfaces/user.interface';
+import { ViewRecipesDialogComponent } from 'src/app/shared/view-recipes-dialog/view-recipes-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-random-page',
@@ -22,6 +24,7 @@ export class RandomPageComponent implements OnInit{
   constructor(
     private apiService: ApiService,
     private router: Router,
+    private commentDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +81,12 @@ export class RandomPageComponent implements OnInit{
   likeRecipe(){
     this.apiService.postLikeOnRecipe(this.recipes[this.counter].recipeId, this.currentUser.token).subscribe(() => {
       this.loadLikes();
+    })
+  }
+
+  viewFollowers() {
+    const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
+      data: { userToken: this.recipes[this.counter].user.token , option: 'followers'}
     })
   }
 
