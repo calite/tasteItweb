@@ -20,6 +20,29 @@
     z-index: 9999;
 }
 
+.fab-container {
+    position: fixed;
+    bottom: 80px;
+    left: 80px;
+    z-index: 1;
+}
+
+button.mat-fab {
+    position: relative;
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateZ(0);
+    transition: transform 0.2s ease-out;
+}
+
+.go-top-mini {
+    display: none;
+}
+
+
 /* Estilos para dispositivos móviles */
 @media (max-width:767px) {
     .logo_mini {
@@ -28,6 +51,19 @@
 
     .menu-desktop {
         display: none !important;
+    }
+
+    .fab-container {
+        bottom: 40px;
+        left: 15px;
+    }
+
+    .go-top {
+        display: none;
+    }
+
+    .go-top-mini {
+        display: block;
     }
 
 }

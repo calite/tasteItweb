@@ -45,7 +45,6 @@ export class ApiService {
 
         const url = `${this.apiUrl}user/bytoken-web/${token}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
-
         return this.http.get<User>(url, { headers });
 
     }

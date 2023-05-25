@@ -25,7 +25,6 @@ export class ViewRecipePageComponent implements OnInit {
 
   @Output()
   comments: CommentsOnRecipeResponse[];
-
   public recipe: RecipesResponse[];
   private currentUser: User;
   public isLoading: boolean = false;
@@ -36,7 +35,7 @@ export class ViewRecipePageComponent implements OnInit {
   public canFollow: boolean = false;
   private skipper: number = 0;
   public likesCounter: number;
-
+  public showError: boolean = true;
   private timer: any;
 
   @HostListener('window:scroll', ['$event'])
@@ -64,7 +63,9 @@ export class ViewRecipePageComponent implements OnInit {
     private route: Router,
     private commentDialog: MatDialog,
   ) {
+
     this.comments = []
+    this.recipe = []
   }
 
   ngOnInit(): void {
@@ -72,35 +73,46 @@ export class ViewRecipePageComponent implements OnInit {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
 
     this.loadRecipe();
-    this.loadComments(0);
 
   }
 
   loadRecipe() {
-    this.isLoading = true;
+    // this.isLoading = true;
 
     this.activatedRoute.params
       .pipe(
         switchMap(({ recipeId }) => this.apiService.getRecipeById(recipeId)),
       )
       .subscribe(recipe => {
-        this.recipe = recipe;
-        this.checkFollow();
-        if (recipe[0].user.token === this.currentUser.token) {
-          this.isEditable = true
-          this.isReportable = false;
-          this.samePerson = true;
+
+        if (recipe.length == 0) {
+          this.showError = true;
+        } else {
+          
+          this.recipe = recipe;
+
+          if (recipe[0].user.token === this.currentUser.token) {
+            this.isEditable = true
+            this.isReportable = false;
+            this.samePerson = true;
+          }
+
+          this.checkFollow();
+          this.checkLike()
+          this.getLikesCounter();
+          this.loadComments(0);
+
+          this.showError = false;
+          // this.isLoading = false;
         }
-        this.isLoading = false;
       })
 
-    this.checkLike()
-    this.getLikesCounter();
+
 
   }
 
   loadComments(skipper: number) {
-    this.isLoading = true;
+    //this.isLoading = true;
 
     this.activatedRoute.params
       .pipe(
@@ -108,7 +120,7 @@ export class ViewRecipePageComponent implements OnInit {
       )
       .subscribe(comments => {
         this.comments.push(...comments)
-        this.isLoading = false;
+        //this.isLoading = false;
       });
 
     this.skipper = this.skipper + 10;

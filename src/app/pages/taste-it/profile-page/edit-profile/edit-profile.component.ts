@@ -65,7 +65,6 @@ export class EditProfileComponent implements OnInit {
     if (tokenFromUrl != token) {
       this.toastService.toastGenerator('', 'You are not the owner of this account', 4, ToastPositionEnum.BOTTOM_RIGHT);
       this.route.navigate(['./taste-it/home']); //enviamos al home si no lo es
-
     }
 
   }
@@ -188,7 +187,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   backToProfile() {
-    this.route.navigate([`./profile/${this.currentUser.token}`])
+    this.route.navigate([`./taste-it/profile/${this.currentUser.token}`])
   }
 
 }

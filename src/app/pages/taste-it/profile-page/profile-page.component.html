@@ -1,14 +1,14 @@
 <div class="mt-8">
 
-    <h1>Profile</h1>
+    
 
-    <div *ngIf="!isLoading; else divProfile" class="alert alert-info">
-        <shared-loading-spinner *ngIf="!isLoading"></shared-loading-spinner>
-    </div>
+    <app-error404 *ngIf="showError; else divProfile"></app-error404>
+
+    <!-- <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner> -->
 
     <ng-template #divProfile>
 
-
+        <h1>Profile</h1>
 
         <div class="grid flex-column fadeIn">
 

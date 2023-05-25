@@ -81,6 +81,10 @@ export class RecipesPageComponent implements OnInit {
     this.apiService.postChangeStateRecipe(rid, false).subscribe(() => window.location.reload());
   }
 
+  changeState(event , recipeId) {
+    this.apiService.postChangeStateRecipe(recipeId, event['checked']).subscribe(() => window.location.reload());
+  }
+
   viewDetails(rid) {
     this.router.navigate([`./backend/view-recipe/${rid}`])
   }

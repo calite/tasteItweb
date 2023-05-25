@@ -9,7 +9,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ViewRecipePageComponent } from './view-recipe-page/view-recipe-page.component';
 import { CreateRecipePageComponent } from './create-recipe-page/create-recipe-page.component';
 import { EditRecipePageComponent } from './edit-recipe-page/edit-recipe-page.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditProfileComponent } from './profile-page/edit-profile/edit-profile.component';
 
 
 

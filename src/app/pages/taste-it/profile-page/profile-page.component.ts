@@ -32,6 +32,7 @@ export class ProfilePageComponent implements OnInit {
   public likesCount = 0;
   public samePerson: boolean = false;
   public canFollow: boolean = false;
+  public showError: boolean = true;
   private skipper: number = 0;
 
   private timer: any;
@@ -55,7 +56,7 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
-    private route : Router,
+    private route: Router,
     private commentDialog: MatDialog,
     private toastService: ToastService
   ) {
@@ -66,9 +67,15 @@ export class ProfilePageComponent implements OnInit {
     this.token = this.activatedRoute.snapshot.paramMap.get('token');
     this.apiService.getUserByToken(this.token).subscribe(
       response => {
-        //console.log(response)
-        this.currentUser = response
-        this.isLoading = true
+
+        if(response == undefined) {
+          this.showError = true;
+        } else {
+          this.currentUser = response
+          this.isLoading = true
+          this.showError = false;
+        }
+
       })
 
     this.checkPerson()
@@ -109,7 +116,6 @@ export class ProfilePageComponent implements OnInit {
         //this.isLoading = false;
       });
 
-    
     this.skipper = this.skipper + 10;
   }
 
@@ -164,25 +170,25 @@ export class ProfilePageComponent implements OnInit {
 
   viewRecipes() {
     const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
-      data: { userToken: this.token , option: 'recipes'}
+      data: { userToken: this.token, option: 'recipes' }
     })
   }
 
   viewLikes() {
     const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
-      data: { userToken: this.token , option: 'likes'}
+      data: { userToken: this.token, option: 'likes' }
     })
   }
 
   viewFollowers() {
     const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
-      data: { userToken: this.token , option: 'followers'}
+      data: { userToken: this.token, option: 'followers' }
     })
   }
 
   viewFollowing() {
     const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
-      data: { userToken: this.token , option: 'following'}
+      data: { userToken: this.token, option: 'following' }
     })
   }
 

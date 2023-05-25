@@ -8,6 +8,7 @@ import { RecipesPageComponent } from './recipes-page/recipes-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { ViewRecipeReportedComponent } from './view-recipe-reported/view-recipe-reported.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 
 
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BackRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    BarRatingModule
   ]
 })
 export class BackendModule { }

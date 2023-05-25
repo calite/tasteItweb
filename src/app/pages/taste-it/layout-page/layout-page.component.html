@@ -78,6 +78,16 @@
 
 </mat-toolbar>
 
+<div *ngIf="canGoTop" class="fab-container fadeIn">
+  <button mat-fab class="go-top" (click)="goTop()" color="primary" matTooltip="Go top">
+    <mat-icon>arrow_upward</mat-icon>
+  </button>
+
+  <button mat-mini-fab class="go-top-mini" (click)="goTop()" color="primary" matTooltip="Go top">
+    <mat-icon>arrow_upward</mat-icon>
+  </button>
+</div>
+
 <div class="container">
   <router-outlet></router-outlet>
 </div>

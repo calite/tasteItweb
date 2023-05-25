@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, TitleStrategy } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-layout-page',
@@ -12,6 +13,20 @@ export class LayoutPageComponent {
 
   public currentUser: UserResponse;
   public isAdmin: boolean;
+  private readonly viewport = inject(ViewportScroller);
+  public canGoTop : boolean = false;
+  
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+
+      if (window.pageYOffset > 500) {
+        this.canGoTop = true;
+      } else {
+        this.canGoTop = false;
+      }
+
+  }
+
 
   constructor(private authService: AuthService, private router: Router) {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')) //asignamos al usuario
@@ -54,6 +69,10 @@ export class LayoutPageComponent {
       this.router.navigate(['./backend/recipes'])
     }
 
+  }
+
+  goTop() {
+    this.viewport.scrollToPosition([0, 0]);
   }
 
 }
