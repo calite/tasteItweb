@@ -19,23 +19,22 @@ import { ViewRecipesDialogComponent } from 'src/app/shared/view-recipes-dialog/v
 export class ProfilePageComponent implements OnInit {
 
   @Output()
-  currentUser: UserResponse;
-  @Output()
   public comments: CommentsOnUserResponse[] = [];
-  @Input()
-  public isLoading: boolean = false;
-
+  @Output()
+  currentUser: UserResponse;
   private token: string;
   public recipesCount = 0;
   public followingCount = 0;
   public followersCount = 0;
   public likesCount = 0;
+  public isLoading: boolean = false;
   public samePerson: boolean = false;
   public canFollow: boolean = false;
-  public showError: boolean = true;
   private skipper: number = 0;
-
   private timer: any;
+
+  public error: boolean = true;
+  public showError: boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -52,36 +51,62 @@ export class ProfilePageComponent implements OnInit {
 
   }
 
-
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
     private route: Router,
     private commentDialog: MatDialog,
     private toastService: ToastService
-  ) {
-    this.comments = []
-  }
+  ) { }
 
   ngOnInit(): void {
+
     this.token = this.activatedRoute.snapshot.paramMap.get('token');
+    this.loadUser()
+
+  }
+
+  loadUser() {
+    this.isLoading = true
+
     this.apiService.getUserByToken(this.token).subscribe(
       response => {
 
-        if(response == undefined) {
+        if (response == undefined) {
+
+          this.error = true;
           this.showError = true;
+          this.isLoading = false;
+
         } else {
           this.currentUser = response
-          this.isLoading = true
-          this.showError = false;
+          
+          this.checkPerson()
+          this.checkFollow()
+          this.loadCounters()
+          this.loadComments(0);
+          
+          this.error = false;
+          this.isLoading = false;
         }
 
       })
 
-    this.checkPerson()
-    this.checkFollow()
 
-    //contadores
+
+  }
+
+  loadComments(skipper: number) {
+
+    this.apiService.getCommentsOnUser(this.token, skipper)
+      .subscribe(comments => {
+        this.comments.push(...comments)
+      });
+
+    this.skipper = this.skipper + 10;
+  }
+
+  loadCounters() {
     this.apiService.getCountRecipes(this.token)
       .subscribe(response => {
         this.recipesCount = response;
@@ -101,22 +126,6 @@ export class ProfilePageComponent implements OnInit {
       .subscribe(response => {
         this.likesCount = response;
       });
-
-    //comentarios
-    this.loadComments(0);
-
-  }
-
-  loadComments(skipper: number) {
-    //this.isLoading = true;
-
-    this.apiService.getCommentsOnUser(this.token, skipper)
-      .subscribe(comments => {
-        this.comments.push(...comments)
-        //this.isLoading = false;
-      });
-
-    this.skipper = this.skipper + 10;
   }
 
   checkPerson() {

@@ -1,9 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
+import { ToastService } from '../../../core/services/toast.service';
+import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-search-page',
@@ -15,15 +17,17 @@ export class SearchPageComponent {
 
   formSearch: FormGroup;
   public recipes: RecipesResponse[] = [];
-  public users: UserResponse[]
+  public users: UserResponse[] = [];
 
-  public isVisibleSearch = true
-  public isAdvancedSearch = false
+  public isLoading: boolean = false;
+  public isVisibleSearch: boolean = true;
+  public isAdvancedSearch: boolean = false;
+  public isFilterByUser : boolean = false;
 
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.formSearch = this.fb.group({
       name: '',
@@ -31,33 +35,48 @@ export class SearchPageComponent {
       difficulty: null,
       rating: null,
       ingredients: '',
-      tags: ''
+      tags: '',
+      nameUser: ['', Validators.required],
     });
   }
 
-
-  viewRecipe(recipeId: any) {
-    this.router.navigate(['/recipe/' + recipeId]);
-  }
-
   viewProfileCreator(token: string) {
-    this.router.navigate(['/profile/' + token]);
+    this.router.navigate(['./taste-it/profile/' + token]);
   }
 
-  onSubmit() {
+  searchRecipes() {
+
+    this.isLoading = true;
 
     const { name, country, difficulty, rating, ingredients, tags } = this.formSearch.value;
 
     this.apiService.getFilteredRecipes(name, country, difficulty, rating, ingredients, tags)
       .subscribe(response => {
         this.recipes = response;
-        this.isVisibleSearch = false
+        this.isVisibleSearch = false;
+        this.isLoading = false;
       });
+
+      this.isLoading = false;
+
+  }
+
+  searchUsers() {
+    const value = this.formSearch.get('nameUser').value
+
+    if(this.formSearch.valid) {
+      this.apiService.getUsersByName(value).subscribe(response => {
+        this.users = response;
+        this.isVisibleSearch = false;
+      })
+    }
 
   }
 
   resetForm() {
     this.formSearch.reset();
+    this.recipes = [];
+    this.users = [];
   }
 
   showHideMenu() {
@@ -67,6 +86,11 @@ export class SearchPageComponent {
 
   advancedSearch() {
     this.isAdvancedSearch = !this.isAdvancedSearch
+  }
+
+  filterByUser() {
+    this.isFilterByUser = !this.isFilterByUser
+    this.resetForm()
   }
 
 }

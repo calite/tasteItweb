@@ -45,6 +45,12 @@ export class LayoutPageComponent {
 
   }
 
+  goSearch() {
+    this.router.navigate(['']).then(() => {
+      this.router.navigate(['./taste-it/search/']);
+    });
+  }
+
   goRandom() {
 
     this.router.navigate(['']).then(() => {

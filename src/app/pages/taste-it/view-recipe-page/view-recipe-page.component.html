@@ -1,16 +1,19 @@
 <div class="mt-8">
 
-    <div *ngIf="showError; else divRecipe">
-        <app-error404></app-error404>
-        <!-- <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner> -->
+    <div *ngIf="error; else divRecipe">
+        <app-error404 *ngIf="showError"></app-error404>
     </div>
+    
+    <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
 
     <ng-template #divRecipe>
-        <h1>Recipe</h1>
 
+        <h1>Recipe</h1>
+        
         <div class="grid flex-column">
 
             <div class="grid flex-row align-items-center justify-content-evenly">
+
                 <img class="imgRecipe" [src]="recipe[0].recipe.image" [alt]="">
 
                 <div class="grid flex-column align-items-center justify-content-evenly">
@@ -125,21 +128,24 @@
 
                         </div>
 
-
-
                     </mat-tab>
                     <mat-tab label="Steps">
+
                         <div class="pr-3 pl-2 stepsCustom" *ngFor="let item of recipe[0].recipe.steps; let i = index">
                             <h3><u>Step {{i+1}}</u></h3>
                             <textarea class="text-area-step" disabled>{{ item }}</textarea>
                         </div>
+
                     </mat-tab>
                     <mat-tab label="Comments">
+
                         <app-comments-on-recipe [comments]="comments"></app-comments-on-recipe>
+
                     </mat-tab>
                 </mat-tab-group>
             </div>
         </div>
+
     </ng-template>
 
 </div>

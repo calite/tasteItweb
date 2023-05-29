@@ -16,7 +16,7 @@
       <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>HOME
     </button>
 
-    <button mat-menu-item [routerLink]="['./search']">
+    <button mat-menu-item (click)="goSearch()">
       <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>SEARCH
     </button>
 
@@ -46,7 +46,7 @@
       <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>HOME
     </button>
 
-    <button mat-button [routerLink]="['./search']">
+    <button mat-button (click)="goSearch()">
       <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>SEARCH
     </button>
 

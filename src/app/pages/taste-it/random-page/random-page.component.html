@@ -1,3 +1,5 @@
+<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+
 <div *ngIf="recipes" class="grid mt-8 flex align-items-center justify-content-center card-random">
 
 
@@ -12,7 +14,7 @@
             <div class="ml-2 flex flex-column align-items-center justify-content-around">
 
                 <button mat-mini-fab [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="Likes"
-                    class="button-custom" (click)="likeRecipe()">
+                    class="button-custom">
                     <mat-icon>thumb_up</mat-icon>
                 </button>
 

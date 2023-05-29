@@ -1,7 +1,7 @@
 <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
 
 <div class="grid p-3 flex align-items-center justify-content-center">
-    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3" class="cards fadeIn">
+    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3 cards fadeIn">
         <mat-card-header>
             <div mat-card-avatar>
                 <img class="imgProfile" [src]="recipe.user.imgProfile!" (click)="viewProfileCreator(recipe.user.token)">

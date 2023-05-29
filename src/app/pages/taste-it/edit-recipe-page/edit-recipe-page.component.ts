@@ -45,7 +45,7 @@ export class EditRecipePageComponent implements OnInit {
 
     this.apiService.getCheckOwnerRecipe(rid, token).subscribe(response => {
       if (!response) {
-        this.toastService.toastGenerator('', 'You are not the owner of that recipe', 4, ToastPositionEnum.BOTTOM_RIGHT);
+        this.toastService.toastGenerator('', 'You are not the owner of that recipe', 4, ToastPositionEnum.BOTTOM_LEFT);
         this.route.navigate(['.taste-it/home']); //enviamos al home si no lo es
       } else {
         this.apiService.getRecipeById(rid).subscribe(response => { //cargamos la receta para enviarsela al componente hijo

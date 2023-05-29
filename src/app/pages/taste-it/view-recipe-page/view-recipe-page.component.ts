@@ -22,10 +22,9 @@ import { CommentDialogComponent } from 'src/app/shared/comment-dialog/comment-di
 })
 export class ViewRecipePageComponent implements OnInit {
 
-
   @Output()
-  comments: CommentsOnRecipeResponse[];
-  public recipe: RecipesResponse[];
+  comments: CommentsOnRecipeResponse[] = [];
+  public recipe: RecipesResponse[] = [];
   private currentUser: User;
   public isLoading: boolean = false;
   public isLiked: boolean = false;
@@ -35,8 +34,10 @@ export class ViewRecipePageComponent implements OnInit {
   public canFollow: boolean = false;
   private skipper: number = 0;
   public likesCounter: number;
-  public showError: boolean = true;
   private timer: any;
+
+  public error: boolean = true;
+  public showError: boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -53,7 +54,6 @@ export class ViewRecipePageComponent implements OnInit {
 
   }
 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
@@ -62,22 +62,17 @@ export class ViewRecipePageComponent implements OnInit {
     private toastService: ToastService,
     private route: Router,
     private commentDialog: MatDialog,
-  ) {
-
-    this.comments = []
-    this.recipe = []
-  }
+  ) { }
 
   ngOnInit(): void {
 
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
-
     this.loadRecipe();
 
   }
 
   loadRecipe() {
-    // this.isLoading = true;
+    this.isLoading = true;
 
     this.activatedRoute.params
       .pipe(
@@ -86,9 +81,13 @@ export class ViewRecipePageComponent implements OnInit {
       .subscribe(recipe => {
 
         if (recipe.length == 0) {
+
+          this.error = true;
           this.showError = true;
+          this.isLoading = false;
+
         } else {
-          
+
           this.recipe = recipe;
 
           if (recipe[0].user.token === this.currentUser.token) {
@@ -102,17 +101,14 @@ export class ViewRecipePageComponent implements OnInit {
           this.getLikesCounter();
           this.loadComments(0);
 
-          this.showError = false;
-          // this.isLoading = false;
+          this.error = false;
+          this.isLoading = false;
         }
       })
-
-
 
   }
 
   loadComments(skipper: number) {
-    //this.isLoading = true;
 
     this.activatedRoute.params
       .pipe(
@@ -120,7 +116,6 @@ export class ViewRecipePageComponent implements OnInit {
       )
       .subscribe(comments => {
         this.comments.push(...comments)
-        //this.isLoading = false;
       });
 
     this.skipper = this.skipper + 10;

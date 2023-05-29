@@ -1,10 +1,10 @@
 <div class="mt-8">
 
-    
+    <div *ngIf="error; else divProfile">
+        <app-error404 *ngIf="showError"></app-error404>
+    </div>
 
-    <app-error404 *ngIf="showError; else divProfile"></app-error404>
-
-    <!-- <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner> -->
+    <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
 
     <ng-template #divProfile>
 
@@ -50,7 +50,6 @@
                 </div>
 
             </div>
-
 
 
             <div class="grid flex align-items-center justify-content-center mt-3">

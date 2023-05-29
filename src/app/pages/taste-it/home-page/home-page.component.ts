@@ -51,9 +51,7 @@ export class HomePageComponent implements OnInit {
 
     this.loadRecipes(0);
 
-    //const timer = interval(1800000)
     const timer = interval(180000)
-
     timer.subscribe(
       x => {
         this.authService.renewIdToken()

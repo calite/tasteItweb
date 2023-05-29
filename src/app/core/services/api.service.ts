@@ -159,12 +159,51 @@ export class ApiService {
 
     }
 
-    getUsersByName(term: string, skipper: number): Observable<UserResponse[]> {
+    getUsersByName(term: string): Observable<UserResponse[]> {
 
-        const url = `${this.apiUrl}user/byname/${term}/${skipper}`;
+        const url = `${this.apiUrl}user/byname_web/${term}`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<UserResponse[]>(url, { headers });
 
+    }
+
+    getFilteredRecipes(
+        name: string,
+        country: string,
+        difficulty: number,
+        rating: number,
+        ingredients: string,
+        tags: string
+    ): Observable<RecipesResponse[]> {
+
+        let params = new HttpParams();
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+
+        if (name) {
+            params = params.set('name', name);
+        }
+
+        if (country) {
+            params = params.set('country', country);
+        }
+
+        if (difficulty) {
+            params = params.set('difficulty', difficulty.toString());
+        }
+
+        if (rating) {
+            params = params.set('rating', rating.toString());
+        }
+
+        if (ingredients) {
+            params = params.set('ingredients', ingredients);
+        }
+
+        if (tags) {
+            params = params.set('tags', tags);
+        }
+
+        return this.http.get<RecipesResponse[]>(`${this.apiUrl}recipe/search`, { params, headers });
     }
 
     //random
@@ -429,44 +468,6 @@ export class ApiService {
         return this.http.get<number>(url, { headers });
     }
 
-    getFilteredRecipes(
-        name: string,
-        country: string,
-        difficulty: number,
-        rating: number,
-        ingredients: string,
-        tags: string
-    ): Observable<RecipesResponse[]> {
-
-        let params = new HttpParams();
-        const headers = { Authorization: `Bearer ${this.apiKey}` }
-
-        if (name) {
-            params = params.set('name', name);
-        }
-
-        if (country) {
-            params = params.set('country', country);
-        }
-
-        if (difficulty) {
-            params = params.set('difficulty', difficulty.toString());
-        }
-
-        if (rating) {
-            params = params.set('rating', rating.toString());
-        }
-
-        if (ingredients) {
-            params = params.set('ingredients', ingredients);
-        }
-
-        if (tags) {
-            params = params.set('tags', tags);
-        }
-
-        return this.http.get<RecipesResponse[]>(`${this.apiUrl}recipe/search`, { params, headers });
-    }
 
 
     //ADMINISTRACION
