@@ -171,7 +171,6 @@ export class ViewRecipePageComponent implements OnInit {
       this.comments = []
       this.skipper = 0;
       this.loadRecipe()
-      this.loadComments(this.skipper)
     })
   }
 
@@ -217,14 +216,15 @@ export class ViewRecipePageComponent implements OnInit {
   }
 
   commentUser() {
-    const dialogRef = this.commentDialog.open(CommentDialogComponent, {
+    this.commentDialog.open(CommentDialogComponent, {
       data: { receiverToken: this.recipe[0].user.token }
     });
-    dialogRef.componentInstance.formClosed.subscribe(() => {
-      this.comments = []
-      this.skipper = 0;
-      this.loadComments(this.skipper)
-    })
+    // dialogRef.componentInstance.formClosed.subscribe(() => {
+    //   this.comments = []
+    //   this.skipper = 0;
+    //   this.loadComments(this.skipper)
+
+    // })
   }
 
   getLikesCounter() {

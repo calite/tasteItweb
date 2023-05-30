@@ -31,15 +31,18 @@ export class CommentDialogComponent {
   }
   
   onSubmit() {
-    this.apiService.postCommentOnUser(
-      this.senderToken,
-      this.receiverToken,
-      this.formComment.controls.comment.value
-    ).subscribe( ()  => {
-      this.formClosed.emit();
-      this.toastService.toastGenerator('', 'user commented', 4, ToastPositionEnum.BOTTOM_LEFT)
-    })
-    this.dialogRef.close();
-  }
+
+    if(this.formComment.valid) {
+      this.apiService.postCommentOnUser(
+        this.senderToken,
+        this.receiverToken,
+        this.formComment.controls.comment.value
+      ).subscribe( ()  => {
+        this.formClosed.emit();
+        this.toastService.toastGenerator('', 'user commented', 4, ToastPositionEnum.BOTTOM_LEFT)
+      })
+      this.dialogRef.close();
+    }
+    }
 
 }

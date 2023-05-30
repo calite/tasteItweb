@@ -178,14 +178,15 @@ export class RecipeCreatorComponent {
       let difficulty = this.formRecipe.controls.difficulty.value
       let country = this.formRecipe.controls.country.value
 
-      this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+      var steps = this.removeEmpty(stepsData)
+      
+      this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, steps)
         .subscribe(response => {
 
           this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_LEFT)
           this.route.navigate([`./taste-it`])
 
         })
-
     }
 
   }
@@ -223,7 +224,9 @@ export class RecipeCreatorComponent {
 
       let rid = this.recipe[0].recipeId
 
-      this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, stepsData)
+      var steps = this.removeEmpty(stepsData)
+
+      this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, steps)
         .subscribe(response => {
 
           this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_LEFT)
@@ -234,6 +237,18 @@ export class RecipeCreatorComponent {
 
     }
 
+  }
+
+  removeEmpty(array) {
+    var i = 0;
+    while (i < array.length) {
+      if (array[i] === '') {
+        array.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return array
   }
 
   deleteRecipe() {

@@ -5,6 +5,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Comment</mat-label>
             <input matInput type="text" formControlName="comment">
+            <mat-error *ngIf="formComment.controls.comment.invalid">Say something!</mat-error>
         </mat-form-field>
     </form>
 </div>

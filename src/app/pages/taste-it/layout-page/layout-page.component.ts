@@ -14,16 +14,16 @@ export class LayoutPageComponent {
   public currentUser: UserResponse;
   public isAdmin: boolean;
   private readonly viewport = inject(ViewportScroller);
-  public canGoTop : boolean = false;
-  
+  public canGoTop: boolean = false;
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
 
-      if (window.pageYOffset > 500) {
-        this.canGoTop = true;
-      } else {
-        this.canGoTop = false;
-      }
+    if (window.pageYOffset > 500) {
+      this.canGoTop = true;
+    } else {
+      this.canGoTop = false;
+    }
 
   }
 
@@ -56,12 +56,12 @@ export class LayoutPageComponent {
     this.router.navigate(['']).then(() => {
       this.router.navigate(['./taste-it/random/'])
     });
-    
+
   }
 
   checkAdmin() {
-    if(this.currentUser.profile == 101) {
-        this.isAdmin = true;
+    if (this.currentUser.profile == 101) {
+      this.isAdmin = true;
     } else {
       this.isAdmin = false;
     }
@@ -71,14 +71,20 @@ export class LayoutPageComponent {
 
     this.checkAdmin()
 
-    if(this.isAdmin) {
+    if (this.isAdmin) {
       this.router.navigate(['./backend/recipes'])
     }
 
   }
 
   goTop() {
-    this.viewport.scrollToPosition([0, 0]);
+    //this.viewport.scrollToPosition([0, 0]);
+    var rootElement = document.documentElement;
+
+    rootElement.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 
 }
