@@ -26,7 +26,7 @@ export class RateDialogComponent {
   ) {
     this.formRate = new FormGroup({
       comment: new FormControl('', Validators.required),
-      rating: new FormControl(0, Validators.required)
+      rating: new FormControl(0.0, Validators.required)
     })
     this.token = JSON.parse(sessionStorage.getItem('currentUser')).token;
     this.rid = this.data['recipeId']

@@ -43,6 +43,7 @@ export class RecipeCreatorComponent {
 
   countries = environment.countriesArray;
 
+
   //edit
   @Input()
   recipe: RecipesResponse[] = []
@@ -53,6 +54,7 @@ export class RecipeCreatorComponent {
     private storage: Storage,
     private route: Router
   ) {
+
     this.formRecipe = new FormGroup({
       recipeName: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -109,6 +111,11 @@ export class RecipeCreatorComponent {
     if (index >= 0) {
       this.ingredients.splice(index, 1);
     }
+  }
+
+  isIngredientsEmpty(): boolean {
+    if(this.ingredients.length > 0 ) return false
+    else return true
   }
 
 

@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ApiService } from 'src/app/core/services/api.service';
-import { ToastService } from '../../../core/services/toast.service';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-page',
@@ -23,6 +22,9 @@ export class SearchPageComponent {
   public isVisibleSearch: boolean = true;
   public isAdvancedSearch: boolean = false;
   public isFilterByUser : boolean = false;
+  public results : boolean = true;
+
+  countries = environment.countriesArray;
 
   constructor(
     private apiService: ApiService,
@@ -52,6 +54,11 @@ export class SearchPageComponent {
 
     this.apiService.getFilteredRecipes(name, country, difficulty, rating, ingredients, tags)
       .subscribe(response => {
+
+        if(response.length == 0) {
+          this.results = false;
+        }
+
         this.recipes = response;
         this.isVisibleSearch = false;
         this.isLoading = false;
@@ -80,6 +87,8 @@ export class SearchPageComponent {
   }
 
   showHideMenu() {
+    // this.results = !this.results;
+    this.results = true;
     this.isVisibleSearch = !this.isVisibleSearch
   }
 

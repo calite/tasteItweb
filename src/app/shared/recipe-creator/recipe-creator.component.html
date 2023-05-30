@@ -85,18 +85,21 @@
                 <div class="flex flex-column align-items-center justify-content-center">
 
                     <mat-form-field class="col-12">
-                        <input matInput placeholder="Ingredients" name="newIngredient" formControlName="newIngredient"
+                        <input matInput placeholder="Add ingredients" name="newIngredient" formControlName="newIngredient"
                             [matChipInputFor]="ingredientsList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addIngredient($event)">
                     </mat-form-field>
 
-                    <mat-chip-grid #ingredientsList>
+                    <h2 *ngIf="ingredients.length > 0">List of ingredients</h2>
+
+                    <mat-chip-grid #ingredientsList [ngClass]="{ 'hidden': isIngredientsEmpty() }" class="grid-ingredients">
                         <mat-chip *ngFor="let ingredient of ingredients" [removable]="true"
                             (removed)="removeIngredient(ingredient)" class="chipCustom">
                             {{ ingredient }}
                             <mat-icon class="chipIcon" matChipRemove>cancel</mat-icon>
                         </mat-chip>
                     </mat-chip-grid>
+
 
                 </div>
 
@@ -106,15 +109,17 @@
 
                 <!-- <div class="col-6 flex flex-column align-items-center justify-content-center"> -->
 
-                    <button mat-fab matTooltip="Add step" (click)="addStep()" color="primary" class="mb-8">
-                        <mat-icon>add</mat-icon>
-                    </button>
+                <button mat-fab matTooltip="Add step" (click)="addStep()" color="primary" class="mb-8">
+                    <mat-icon>add</mat-icon>
+                </button>
 
                 <!-- </div> -->
 
             </div>
 
             <div class="col-5">
+
+                <h2 *ngIf="steps.length > 0">List of Steps</h2>
 
                 <div *ngFor="let step of steps; let i = index" class="flex align-items-center justify-content-center">
 
@@ -221,12 +226,14 @@
                 <div class="flex flex-column align-items-center justify-content-center">
 
                     <mat-form-field class="col-12">
-                        <input matInput placeholder="Ingredients" name="newIngredient" formControlName="newIngredient"
+                        <input matInput placeholder="Add ingredients" name="newIngredient" formControlName="newIngredient"
                             [matChipInputFor]="ingredientsList2" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addIngredient($event)">
                     </mat-form-field>
 
-                    <mat-chip-grid #ingredientsList2>
+                    <h2 *ngIf="ingredients.length > 0">List of ingredients</h2>
+
+                    <mat-chip-grid #ingredientsList2 [ngClass]="{ 'hidden': isIngredientsEmpty() }">
                         <mat-chip *ngFor="let ingredient of ingredients" [removable]="true"
                             (removed)="removeIngredient(ingredient)" class="chipCustom">
                             {{ ingredient }}
@@ -248,7 +255,10 @@
 
                 </div>
 
+
                 <div class="col-8">
+
+                    <h2 *ngIf="steps.length > 0">List of steps</h2>
 
                     <div *ngFor="let step of steps; let i = index"
                         class="flex align-items-center justify-content-center">

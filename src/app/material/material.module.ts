@@ -49,12 +49,11 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatProgressBarModule,
     MatSliderModule,
     MatTooltipModule,
-    MatChipsModule,
     MatBadgeModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ]
 })
 export class MaterialModule { }

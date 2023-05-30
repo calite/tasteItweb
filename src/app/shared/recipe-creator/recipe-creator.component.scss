@@ -50,6 +50,13 @@ mat-chip-grid {
   color: white !important;
 }
 
+.hidden {
+  display : none;
+}
+
+.grid-ingredients {
+  border-radius: 5px 5px 0px 0px;
+}
 
 
 /* Estilos para dispositivos móviles */
