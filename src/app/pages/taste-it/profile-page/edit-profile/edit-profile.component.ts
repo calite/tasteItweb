@@ -148,7 +148,9 @@ export class EditProfileComponent implements OnInit {
 
           this.toastService.toastGenerator('', 'Perfil updated', 4, ToastPositionEnum.BOTTOM_LEFT)
 
-          this.route.navigate([`./taste-it/profile/${this.currentUser.token}`])
+          this.route.navigate(['']).then(() => {
+            this.route.navigate([`./taste-it/profile/${this.currentUser.token}`])
+          });
         })
 
     }
