@@ -3,6 +3,9 @@
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const environment = {
+
+  apiUrl: 'https://great-dhawan.212-227-50-151.plesk.page/',
+  // apiUrl: 'https://localhost:7076/',
   firebase: {
     projectId: 'tasteit-java',
     appId: '1:604894604964:web:bd6270847ec058c0c24031',
