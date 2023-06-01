@@ -1,7 +1,25 @@
-<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+<!--SHIMMER-->
+<div *ngIf="isLoading">
+
+    <div class="grid p-3 flex align-items-center justify-content-center">
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+        <div class="col-12 sm:col-3 card-sh shine"></div>
+    </div>
+
+    <shared-loading-spinner></shared-loading-spinner>
+</div>
+<!--FIN SHIMMER-->
+
+
 
 <div class="grid p-3 flex align-items-center justify-content-center">
-    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3 cards fadeIn">
+    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3 cards">
         <mat-card-header>
             <div mat-card-avatar>
                 <img class="imgProfile" [src]="recipe.user.imgProfile!" (click)="viewProfileCreator(recipe.user.token)">

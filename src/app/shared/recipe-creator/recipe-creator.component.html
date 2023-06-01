@@ -12,7 +12,9 @@
             <div class="col-5 flex flex-column  align-items-center justify-content-center">
 
                 <label class="pick-photo-container">
-                    <label class="pick-photo-icon"><mat-icon>photo_camera</mat-icon></label>
+                    <label class="pick-photo-icon">
+                        <mat-icon>photo_camera</mat-icon>
+                    </label>
                     <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgRecipe"
                         class="inputImage" (change)="onFileSelected($event)">
                     <img matTooltip="Choose the photo" [src]="imgUrl" alt="" class="imgRecipe">
@@ -47,9 +49,6 @@
                 </mat-form-field>
 
                 <mat-form-field class="col-6">
-                    <!-- <mat-label>Country</mat-label>
-                    <input matInput type="text" placeholder="Country" name="country" formControlName="country">
-                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error> -->
 
                     <mat-label>Country</mat-label>
                     <mat-select placeholder="Country" name="country" formControlName="country">
@@ -57,6 +56,7 @@
                             {{item}}
                         </mat-option>
                     </mat-select>
+                   <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error>
 
                 </mat-form-field>
 
@@ -86,14 +86,16 @@
                 <div class="flex flex-column align-items-center justify-content-center">
 
                     <mat-form-field class="col-12">
-                        <input matInput placeholder="Add ingredients" name="newIngredient" formControlName="newIngredient"
-                            [matChipInputFor]="ingredientsList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addIngredient($event)">
+                        <input matInput placeholder="Add ingredients" name="newIngredient"
+                            formControlName="newIngredient" [matChipInputFor]="ingredientsList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="addIngredient($event)">
                     </mat-form-field>
 
                     <h2 *ngIf="ingredients.length > 0">List of ingredients</h2>
 
-                    <mat-chip-grid #ingredientsList [ngClass]="{ 'hidden': isIngredientsEmpty() }" class="grid-ingredients">
+                    <mat-chip-grid #ingredientsList [ngClass]="{ 'hidden': isIngredientsEmpty() }"
+                        class="grid-ingredients">
                         <mat-chip *ngFor="let ingredient of ingredients" [removable]="true"
                             (removed)="removeIngredient(ingredient)" class="chipCustom">
                             {{ ingredient }}
@@ -106,15 +108,15 @@
 
             </div>
 
-            <div class="col-2 flex flex-column align-items-center justify-content-end">
+            <div class="col-2 flex flex-column align-items-center">
 
-                <!-- <div class="col-6 flex flex-column align-items-center justify-content-center"> -->
+                <div class="col-6 flex flex-column align-items-center justify-content-center">
 
-                <button mat-fab matTooltip="Add step" (click)="addStep()" color="primary" class="mb-8">
-                    <mat-icon>add</mat-icon>
-                </button>
+                    <button mat-fab matTooltip="Add step" (click)="addStep()" color="primary" class="mb-8">
+                        <mat-icon>add</mat-icon>
+                    </button>
 
-                <!-- </div> -->
+                </div>
 
             </div>
 
@@ -197,7 +199,7 @@
                             {{item}}
                         </mat-option>
                     </mat-select>
-
+                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error>
 
                 </mat-form-field>
 
@@ -227,9 +229,10 @@
                 <div class="flex flex-column align-items-center justify-content-center">
 
                     <mat-form-field class="col-12">
-                        <input matInput placeholder="Add ingredients" name="newIngredient" formControlName="newIngredient"
-                            [matChipInputFor]="ingredientsList2" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addIngredient($event)">
+                        <input matInput placeholder="Add ingredients" name="newIngredient"
+                            formControlName="newIngredient" [matChipInputFor]="ingredientsList2"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="addIngredient($event)">
                     </mat-form-field>
 
                     <h2 *ngIf="ingredients.length > 0">List of ingredients</h2>

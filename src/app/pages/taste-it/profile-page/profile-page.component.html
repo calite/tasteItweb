@@ -4,13 +4,54 @@
         <app-error404 *ngIf="showError"></app-error404>
     </div>
 
-    <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+    <div *ngIf="isLoading">
+
+        <div class="title-sh shine"></div>
+
+        <div class="grid flex-column">
+
+
+            <div class="grid flex-row align-items-center justify-content-evenly">
+
+                <div class="photo-profile-sh shine"></div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="title-sh shine"></div>
+                </div>
+
+                <div class="grid p-2 mt-2 flex-column align-items-center justify-content-evenly botones">
+
+                    <div class="square-chip-sh shine"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid flex align-items-center justify-content-center mt-3">
+
+                <div class="col p-2 mt-2 grid flex-row align-items-center justify-content-evenly">
+                    <div class="col-12 sm:col-3 ml-8 small-chip-sh shine"></div>
+                    <div class="col-12 sm:col-3 ml-8 small-chip-sh shine"></div>
+                    <div class="col-12 sm:col-3 ml-8 small-chip-sh shine"></div>
+                    <div class="col-12 sm:col-3 ml-8 small-chip-sh shine"></div>
+                </div>
+
+            </div>
+
+            <div class="mt-3">
+                <div class="col-12 sm:col-3 ml-8 big-box-sh shine"></div>
+            </div>
+        </div>
+
+        <shared-loading-spinner></shared-loading-spinner>
+    </div>
 
     <ng-template #divProfile>
 
         <h1>Profile</h1>
 
-        <div class="grid flex-column fadeIn">
+        <div class="grid flex-column">
 
 
             <div class="grid flex-row align-items-center justify-content-evenly">

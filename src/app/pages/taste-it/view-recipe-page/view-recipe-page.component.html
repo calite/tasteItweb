@@ -3,13 +3,52 @@
     <div *ngIf="error; else divRecipe">
         <app-error404 *ngIf="showError"></app-error404>
     </div>
-    
-    <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+
+    <div *ngIf="isLoading">
+
+        <div class="title-sh shine"></div>
+
+        <div class="grid flex-column">
+
+            <div class="grid flex-row align-items-center justify-content-evenly">
+
+                <div class="col-12 sm:col-3 ml-8 photo-recipe-sh shine"></div>
+
+                <div class="grid flex-column align-items-center justify-content-evenly">
+
+                    <div class="flex flex-column align-items-center justify-content-center m-4">
+                        <div class="col-12 sm:col-3 ml-8 square-chip-sh shine"></div>
+                    </div>
+
+                    <div class="flex flex-row align-items-center justify-content-center">
+                        <div class="col-12 sm:col-3 ml-8 big-chip-sh shine"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col p-2 mt-2 grid flex-row align-items-center justify-content-evenly">
+                <div class="col-12 sm:col-3 ml-8 small-chip-sh shine"></div>
+                <div class="col-12 sm:col-3 ml-8 small-chip-sh shine"></div>
+                <div class="col-12 sm:col-3 ml-8 small-chip-sh shine"></div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col">
+                <div class="col-12 sm:col-3 big-box-sh shine"></div>
+            </div>
+        </div>
+
+        <shared-loading-spinner></shared-loading-spinner>
+    </div>
+
 
     <ng-template #divRecipe>
 
         <h1>Recipe</h1>
-        
+
         <div class="grid flex-column">
 
             <div class="grid flex-row align-items-center justify-content-evenly">

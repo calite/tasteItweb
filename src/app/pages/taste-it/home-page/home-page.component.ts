@@ -21,6 +21,7 @@ export class HomePageComponent implements OnInit {
   private skipper: number = 0;
   private currentUser: UserResponse;
   private timer: any;
+  private noMoreRecipes: boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -61,21 +62,27 @@ export class HomePageComponent implements OnInit {
   }
 
   loadRecipes(skipper: number) {
-    this.isLoading = true;
 
-    this.apiService.getRecipesHome(skipper)
-      .subscribe(response => {
+    if (!this.noMoreRecipes) {
 
-        this.recipes.push(...response);
-        this.isLoading = false;
+      this.isLoading = true;
 
-        if (response.length == 0) {
-          this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
-        }
+      this.apiService.getRecipesHome(skipper)
+        .subscribe(response => {
 
-      });
+          this.recipes.push(...response);
+          this.isLoading = false;
 
-    this.skipper = this.skipper + 10;
+          if (response.length == 0) {
+            this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
+            this.noMoreRecipes = true
+          }
+
+        });
+
+      this.skipper = this.skipper + 10;
+
+    }
 
   }
 

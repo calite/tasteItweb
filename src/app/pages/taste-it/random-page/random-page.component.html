@@ -1,4 +1,12 @@
-<shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
+<div *ngIf="isLoading" class="mt-8">
+
+    <div class="grid p-3 flex align-items-center justify-content-center">
+        <div class="col-12 sm:col-3 random-box-sh shine"></div>
+    </div>
+
+    <shared-loading-spinner></shared-loading-spinner>
+</div>
+
 
 <div *ngIf="recipes" class="grid mt-8 flex align-items-center justify-content-center card-random">
 
