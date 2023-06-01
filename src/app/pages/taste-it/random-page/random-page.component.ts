@@ -28,12 +28,12 @@ export class RandomPageComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.loadRandomRecipe()
+    this.loadRandomRecipes()
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
   }
 
 
-  loadRandomRecipe() {
+  loadRandomRecipes() {
     this.isLoading = true;
     this.apiService.getRandomRecipesWithLimit(10).subscribe(
       response => {
@@ -88,6 +88,11 @@ export class RandomPageComponent implements OnInit{
     const dialogRef = this.commentDialog.open(ViewRecipesDialogComponent, {
       data: { userToken: this.recipes[this.counter].user.token , option: 'followers'}
     })
+  }
+
+  loadMoreRecipes() {
+    this.counter = 0
+    this.loadRandomRecipes()
   }
 
 }

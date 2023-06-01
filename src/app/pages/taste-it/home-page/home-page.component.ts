@@ -20,7 +20,6 @@ export class HomePageComponent implements OnInit {
   public isLoading: boolean = false;
   private skipper: number = 0;
   private currentUser: UserResponse;
-
   private timer: any;
 
   @HostListener('window:scroll', ['$event'])

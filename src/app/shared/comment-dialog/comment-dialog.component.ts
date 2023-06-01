@@ -29,20 +29,20 @@ export class CommentDialogComponent {
     this.senderToken = JSON.parse(sessionStorage.getItem('currentUser')).token;
     this.receiverToken = this.data['receiverToken']
   }
-  
+
   onSubmit() {
 
-    if(this.formComment.valid) {
+    if (this.formComment.valid) {
       this.apiService.postCommentOnUser(
         this.senderToken,
         this.receiverToken,
         this.formComment.controls.comment.value
-      ).subscribe( ()  => {
+      ).subscribe(() => {
         this.formClosed.emit();
         this.toastService.toastGenerator('', 'user commented', 4, ToastPositionEnum.BOTTOM_LEFT)
       })
       this.dialogRef.close();
     }
-    }
+  }
 
 }

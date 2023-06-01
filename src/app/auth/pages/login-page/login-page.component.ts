@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ApiService } from '../../../core/services/api.service';
-import { ResetPasswordDialogComponent } from '../../dialogs/reset-password-dialog/reset-password-dialog.component';
+import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
 
 @Component({
   selector: 'app-login-page',
@@ -53,7 +53,6 @@ export class LoginPageComponent {
 
         })
         .catch(error => {
-          //console.log(error)
           if (error.code === 'auth/wrong-password') {
             this.toastService.alertGeneratorWithoutCancel('Error!', 'email or password wrong!', 4)
           }
@@ -83,7 +82,7 @@ export class LoginPageComponent {
   }
 
   resetPassword() {
-    const dialogRef = this.resetPasswordDialog.open(ResetPasswordDialogComponent);
+    this.resetPasswordDialog.open(ResetPasswordDialogComponent);
   }
 
 }

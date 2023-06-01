@@ -1,11 +1,10 @@
-import { Component, HostListener, Output, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-photos',
@@ -40,8 +39,6 @@ export class PhotosComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private toastService: ToastService,
-    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -64,10 +61,6 @@ export class PhotosComponent implements OnInit {
       .subscribe(recipes => {
         this.recipes.push(...recipes);
         this.isLoading = false;
-
-        if (recipes.length == 0) {
-          // this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
-        }
       });
 
     this.skipper = this.skipper + 10;

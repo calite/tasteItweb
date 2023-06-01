@@ -70,13 +70,10 @@ export class RecipesPageComponent implements OnInit {
     });
 
     this.skipper = this.skipper + 20;
-
-    console.log(this.recipes.length)
   }
 
   publishRecipe(rid) {
     this.apiService.postChangeStateRecipe(rid, true).subscribe(() => window.location.reload());
-
   }
 
   unpublishRecipe(rid) {

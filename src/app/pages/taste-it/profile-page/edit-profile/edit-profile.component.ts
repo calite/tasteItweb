@@ -45,7 +45,6 @@ export class EditProfileComponent implements OnInit {
 
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
     this.isOwner()
-
     this.formUser.get('username').setValue(this.currentUser.username)
     this.formUser.get('biography').setValue(this.currentUser.biography)
     this.imgUrl = this.currentUser.imgProfile
@@ -89,10 +88,8 @@ export class EditProfileComponent implements OnInit {
     try {
       await uploadBytes(imgRef, file);
       const url = await getDownloadURL(imgRef);
-      //console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
       return url;
     } catch (error) {
-      //console.log(`Error al subir la imagen: ${error}`);
       return '';
     }
   }
@@ -120,16 +117,10 @@ export class EditProfileComponent implements OnInit {
 
         this.imgUrl = await this.uploadPhoto() // subimos foto        
 
-        //if (this.currentUser.imgProfile != 'https://raw.githubusercontent.com/calite/no-image/main/no-image.png') {
-
         const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto vieja
 
         deleteObject(uriOldImage).then(() => {
-          //console.log('image deleted')
-        }).catch(error => {
-          //console.log('something wrong happen' + error)
-        })
-        //}
+        }).catch(error => {  })
 
       }
 
@@ -164,18 +155,11 @@ export class EditProfileComponent implements OnInit {
         if (result.success === true) {
 
           this.apiService.postDeleteUser(this.currentUser.token).subscribe(
-            response => {
-              //console.log(response)
-            }
-          )
+            response => { })
 
           const uriOldImage = ref(this.storage, this.currentUser.imgProfile) // borramos la foto del usuario
 
-          deleteObject(uriOldImage).then(() => {
-            //console.log('image deleted')
-          }).catch(error => {
-            //console.log('something wrong happen' + error)
-          })
+          deleteObject(uriOldImage).then(() => { }).catch(error => { })
 
           this.authService.deleteUser();
 

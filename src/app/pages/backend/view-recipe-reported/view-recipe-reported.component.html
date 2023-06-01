@@ -59,14 +59,6 @@
                 <div>State: 
                     <mat-slide-toggle color="warn" [checked]="recipe[0].recipe.active" (change)="changeState($event)">{{state}}</mat-slide-toggle>
                 </div>
-
-                <!-- <button *ngIf="!recipe[0].recipe.active" mat-mini-fab color="warn" matTooltip="Publish"
-                    (click)="publishRecipe(recipe[0].recipeId)"><mat-icon>close</mat-icon></button>
-    
-                <button *ngIf="recipe[0].recipe.active" mat-mini-fab color="primary" matTooltip="Unpublish"
-                    (click)="unpublishRecipe(recipe[0].recipeId)"><mat-icon>check</mat-icon></button> -->
-
-
     
             </div>
 
@@ -100,8 +92,6 @@
             </div>
 
         </div>
-
-
 
     </div>
 

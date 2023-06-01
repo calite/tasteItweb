@@ -287,64 +287,124 @@ body {
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  }
-  @-webkit-keyframes wobble {
+}
+
+@-webkit-keyframes wobble {
   0% {
-  -webkit-transform: none;
-  transform: none;
+    -webkit-transform: none;
+    transform: none;
   }
+
   15% {
-  -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
-  transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
   }
+
   30% {
-  -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
-  transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
   }
+
   45% {
-  -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-  transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
   }
+
   60% {
-  -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-  transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
   }
+
   75% {
-  -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-  transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
   }
+
   100% {
-  -webkit-transform: none;
-  transform: none;
+    -webkit-transform: none;
+    transform: none;
   }
-  }
-  @keyframes wobble {
+}
+
+@keyframes wobble {
   0% {
-  -webkit-transform: none;
-  transform: none;
+    -webkit-transform: none;
+    transform: none;
   }
+
   15% {
-  -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
-  transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
   }
+
   30% {
-  -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
-  transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
   }
+
   45% {
-  -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-  transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
   }
+
   60% {
-  -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-  transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
   }
+
   75% {
-  -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-  transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
   }
+
   100% {
-  -webkit-transform: none;
-  transform: none;
+    -webkit-transform: none;
+    transform: none;
   }
-  } 
+}
+
+
+//shimmer
+
+.shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 104px; 
+  display: inline-block;
+  position: relative; 
+  
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards; 
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeholderShimmer;
+  -webkit-animation-timing-function: linear;
+  }
+
+.box {
+  height: 104px;
+  width: 100px;
+}
+
+.lines {
+  height: 10px;
+  margin-top: 10px;
+  width: 200px; 
+}
+
+.photo {
+  display: block!important;
+  width: 325px; 
+  height: 100px; 
+  margin-top: 15px;
+}
+
+@-webkit-keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  
+  100% {
+    background-position: 468px 0; 
+  }
+}

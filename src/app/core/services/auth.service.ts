@@ -94,7 +94,7 @@ export class AuthService {
     const auth = getAuth()
 
     sendPasswordResetEmail(auth, email).then(() => {
-      this.toastService.alertGeneratorWithoutCancel('', `an email was send to ${email}`, 4)
+      this.toastService.alertGeneratorWithoutCancel('', `an email was send to ${email}`, 2)
     }).catch(error => {
       if (error.code === 'auth/user-not-found') {
         this.toastService.toastGenerator('', 'that emails is not registered', 4, ToastPositionEnum.BOTTOM_LEFT)

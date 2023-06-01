@@ -1,1 +1,12 @@
 <taste-it-recycler-view [recipes]="recipes" [isLoading]="isLoading"></taste-it-recycler-view>
+
+<!--Si no tienes recetas-->
+<div *ngIf="noData">
+
+    <div class="flex flex-column align-items-center justify-content-center alert-no-recipes">
+        Looks like you don´t have any recipe
+
+        <button mat-flat-button color="primary" class="m-5" (click)="goCreateRecipe()">Create your first recipe!</button>
+    </div>
+
+</div>

@@ -6,7 +6,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { AuthRoutingModule } from './auth-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ResetPasswordDialogComponent } from './dialogs/reset-password-dialog/reset-password-dialog.component';
+import { ResetPasswordDialogComponent } from './pages/login-page/reset-password-dialog/reset-password-dialog.component';
 
 
 @NgModule({

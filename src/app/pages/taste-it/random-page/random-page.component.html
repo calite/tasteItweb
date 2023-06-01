@@ -99,7 +99,7 @@
 
     <div class="back-button">
 
-        <button mat-fab *ngIf="counter != 0" (click)="previousRecipe()">
+        <button mat-fab *ngIf="counter != 0" (click)="previousRecipe()" matTooltip="Previous Recipe">
             <mat-icon>west</mat-icon>
         </button>
 
@@ -108,8 +108,12 @@
 
     <div class="forward-button">
 
-        <button mat-fab *ngIf="counter != recipes.length - 1" (click)="nextRecipe()">
+        <button mat-fab *ngIf="counter != recipes.length - 1" (click)="nextRecipe()" matTooltip="Next recipe">
             <mat-icon>east</mat-icon>
+        </button>
+
+        <button mat-fab *ngIf="counter == recipes.length - 1" (click)="loadMoreRecipes()" matTooltip="More recipes">
+            <mat-icon>cached</mat-icon>
         </button>
 
     </div>

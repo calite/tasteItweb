@@ -1,4 +1,4 @@
-import { Component, Input, Output, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Output, ViewEncapsulation, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,6 +22,7 @@ export class ProfilePageComponent implements OnInit {
   public comments: CommentsOnUserResponse[] = [];
   @Output()
   currentUser: UserResponse;
+
   private token: string;
   public recipesCount = 0;
   public followingCount = 0;
@@ -32,7 +33,6 @@ export class ProfilePageComponent implements OnInit {
   public canFollow: boolean = false;
   private skipper: number = 0;
   private timer: any;
-
   public error: boolean = true;
   public showError: boolean = false;
 

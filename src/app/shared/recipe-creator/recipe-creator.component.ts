@@ -114,7 +114,7 @@ export class RecipeCreatorComponent {
   }
 
   isIngredientsEmpty(): boolean {
-    if(this.ingredients.length > 0 ) return false
+    if (this.ingredients.length > 0) return false
     else return true
   }
 
@@ -156,17 +156,13 @@ export class RecipeCreatorComponent {
     try {
       await uploadBytes(imgRef, file);
       const url = await getDownloadURL(imgRef);
-      //console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
       return url;
     } catch (error) {
-      //console.log(`Error al subir la imagen: ${error}`);
       return '';
     }
   }
 
   async onSubmitCreate() {
-
-    //console.log(this.imgUrl)
 
     if (this.imgUrl === '') {
       this.toastService.toastGenerator('', 'pick the image', 4, ToastPositionEnum.BOTTOM_LEFT)
@@ -186,7 +182,7 @@ export class RecipeCreatorComponent {
       let country = this.formRecipe.controls.country.value
 
       var steps = this.removeEmpty(stepsData)
-      
+
       this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, steps)
         .subscribe(response => {
 
@@ -219,12 +215,9 @@ export class RecipeCreatorComponent {
 
         try {
           deleteObject(uriOldImage).then(() => {
-            //console.log('image deleted')
           }).catch(error => {
-            //console.log('something wrong happen' + error)
           })
         } catch (error) {
-          //console.log(error)
         }
 
       }
@@ -272,9 +265,9 @@ export class RecipeCreatorComponent {
           const uriOldImage = ref(this.storage, this.recipe[0].recipe.image) // borramos la foto de la receta
 
           deleteObject(uriOldImage).then(() => {
-            //console.log('image deleted')
+
           }).catch(error => {
-            //console.log('something wrong happen' + error)
+
           })
 
           this.route.navigate(['./taste-it/home']);

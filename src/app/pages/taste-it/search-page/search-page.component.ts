@@ -87,7 +87,6 @@ export class SearchPageComponent {
   }
 
   showHideMenu() {
-    // this.results = !this.results;
     this.results = true;
     this.isVisibleSearch = !this.isVisibleSearch
   }

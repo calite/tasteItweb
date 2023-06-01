@@ -12,7 +12,7 @@
 
   <mat-menu #menuMobile="matMenu" class="flex flex-column justify-content-center align-items-center">
 
-    <button mat-menu-item [routerLink]="['.']">
+    <button mat-menu-item (click)="goHome()">
       <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>HOME
     </button>
 
@@ -20,11 +20,11 @@
       <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>SEARCH
     </button>
 
-    <button mat-menu-item [routerLink]="['./random']">
+    <button mat-menu-item (click)="goRandom()">
       <mat-icon aria-hidden="false" fontIcon="shuffle"></mat-icon>RANDOM
     </button>
 
-    <button mat-menu-item [routerLink]="['./my-book']">
+    <button mat-menu-item (click)="goMyBook()">
       <mat-icon aria-hidden="false" fontIcon="book"></mat-icon>MY BOOK
     </button>
 
@@ -36,13 +36,13 @@
 
   <div class="flex align-items-center justify-content-center">
 
-    <img class="logo_mini" src="assets/tasteIt_logo3.png">
+    <img class="logo_mini" src="assets/tasteIt_logo3.png" (click)="goHome()">
 
   </div>
 
   <div class="flex align-items-center justify-content-center menu-desktop">
 
-    <button mat-button [routerLink]="['.']">
+    <button mat-button (click)="goHome()">
       <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>HOME
     </button>
 
@@ -54,7 +54,7 @@
       <mat-icon aria-hidden="false" fontIcon="shuffle"></mat-icon>RANDOM
     </button>
 
-    <button mat-button [routerLink]="['./my-book']">
+    <button mat-button (click)="goMyBook()">
       <mat-icon aria-hidden="false" fontIcon="book"></mat-icon>MY BOOK
     </button>
 
@@ -62,7 +62,6 @@
 
   <!--FIN Menu desktop-->
 
-  
   <div class="flex align-items-center justify-content-center">
 
     <button mat-button *ngIf="isAdmin" (click)="goBackend()" matTooltip="Backend"><mat-icon fontIcon="security"></mat-icon></button>

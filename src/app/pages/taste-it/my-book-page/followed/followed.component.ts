@@ -2,8 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/core/services/api.service';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
-import { ToastService } from 'src/app/core/services/toast.service';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-followed',
@@ -17,8 +16,9 @@ export class FollowedComponent implements OnInit {
   public isLoading : boolean = false;
   private token: string;
   private skipper: number = 0;
-
   private timer: any;
+
+  public noData : boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -38,7 +38,7 @@ export class FollowedComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private toastService: ToastService
+    private router : Router
   ) {
     this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.token = this.currentUser.token;
@@ -54,16 +54,18 @@ export class FollowedComponent implements OnInit {
     this.isLoading = true;
 
     this.apiService.getRecipesFollowed(this.token, skipper)
-      .subscribe(recipes => {
-        this.recipes.push(...recipes);
+      .subscribe(response => {
+        if(response.length == 0 && this.recipes.length == 0) this.noData = true
+        this.recipes.push(...response);
         this.isLoading = false;
 
-        if(recipes.length == 0) {
-          // this.toastService.toastGenerator('','There is no more recipes',4, ToastPositionEnum.BOTTOM_RIGHT)
-        }
       });
 
       this.skipper = this.skipper + 10;
   }
+
+  goSearch() {
+    this.router.navigate(['./taste-it/search/']);
+}
 
 }

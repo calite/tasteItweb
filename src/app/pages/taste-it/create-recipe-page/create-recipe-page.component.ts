@@ -18,7 +18,4 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
 })
 export class CreateRecipePageComponent {
 
-  
-
-
 }

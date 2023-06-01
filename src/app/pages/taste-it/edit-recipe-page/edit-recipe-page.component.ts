@@ -50,7 +50,6 @@ export class EditRecipePageComponent implements OnInit {
       } else {
         this.apiService.getRecipeById(rid).subscribe(response => { //cargamos la receta para enviarsela al componente hijo
           this.recipe = response;
-          //console.log(response)
         });
       }
     })

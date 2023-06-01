@@ -28,12 +28,11 @@ export class RegisterPageComponent {
     private router: Router,
     private toastService: ToastService,
     private storage: Storage,
-    private http: HttpClient
   ) {
     this.formRegister = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required,Validators.minLength(6)]),
-      repeatPassword: new FormControl('', [Validators.required,Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      repeatPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
   }
 
@@ -71,18 +70,16 @@ export class RegisterPageComponent {
     const imgBlob = await this.convertImageToBlob(img);
     const uuid = uuidv4();
     const imgRef = ref(this.storage, `images/${uuid}`);
-  
+
     try {
       await uploadBytes(imgRef, imgBlob);
       const url = await getDownloadURL(imgRef);
-      //console.log(`Imagen subida correctamente. URL de descarga: ${url}`);
       return url;
     } catch (error) {
-      //console.log(`Error al subir la imagen: ${error}`);
       return '';
     }
   }
-  
+
 
   onSubmit() {
     if (this.formRegister.valid) {
@@ -94,8 +91,6 @@ export class RegisterPageComponent {
             const email = this.formRegister.get('email').value;
             const username = email.split('@')[0].slice(0);
             const img = await this.uploadPhoto()
-
-            //console.log(img)
 
             this.apiService.registerUser(response.user['uid'], username, img, 'my biography').subscribe()
 

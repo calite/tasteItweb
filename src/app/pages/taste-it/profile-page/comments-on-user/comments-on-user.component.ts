@@ -18,9 +18,7 @@ export class CommentsOnUserComponent {
 
   constructor(
     private router: Router,
-  ){
-    
-  }
+  ){ }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.comments) {

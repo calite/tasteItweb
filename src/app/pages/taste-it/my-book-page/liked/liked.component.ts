@@ -1,24 +1,23 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/core/services/api.service';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
-import { ToastService } from 'src/app/core/services/toast.service';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-liked',
   templateUrl: './liked.component.html',
   styleUrls: ['./liked.component.scss']
 })
-export class LikedComponent {
+export class LikedComponent implements OnInit {
 
   public recipes: RecipesResponse[] = [];
   private currentUser: UserResponse;
   public isLoading: boolean = false;
   private token: string;
   private skipper: number = 0;
-
   private timer: any;
+  public noData : boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -38,7 +37,7 @@ export class LikedComponent {
 
   constructor(
     private apiService: ApiService,
-    private toastService: ToastService
+    private router : Router
   ) {
     this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.token = this.currentUser.token;
@@ -55,16 +54,17 @@ export class LikedComponent {
     this.isLoading = true;
 
     this.apiService.getRecipesLiked(this.token, skipper)
-      .subscribe(recipes => {
-        this.recipes.push(...recipes);
+      .subscribe(response => {
+        if(response.length == 0 && this.recipes.length == 0) this.noData = true
+        this.recipes.push(...response);
         this.isLoading = false;
-
-        if(recipes.length == 0) {
-          // this.toastService.toastGenerator('','There is no more recipes',4, ToastPositionEnum.BOTTOM_RIGHT)
-        }
       });
 
       this.skipper = this.skipper + 10;
+  }
+
+  goSearch() {
+        this.router.navigate(['./taste-it/search/']);
   }
 
 }

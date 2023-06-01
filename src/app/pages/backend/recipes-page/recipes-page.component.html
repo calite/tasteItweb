@@ -50,19 +50,7 @@
             <td>{{item.creator.username}}</td>
             <td>{{item.reportsCount}}</td>
             <td>
-
-                <!-- <button *ngIf="!item.recipe.active" mat-mini-fab color="warn" matTooltip="Publish"
-                    (click)="publishRecipe(item.recipeId)">
-                    <mat-icon>close</mat-icon>
-                </button>
-
-                <button *ngIf="item.recipe.active" mat-mini-fab color="primary" matTooltip="Unpublish"
-                    (click)="unpublishRecipe(item.recipeId)">
-                    <mat-icon>check</mat-icon>
-                </button> -->
-
                 <mat-slide-toggle color="warn" [checked]="item.recipe.active" (change)="changeState($event , item.recipeId)"></mat-slide-toggle>
-
             </td>
             <td><button mat-raised-button color="primary" (click)="viewDetails(item.recipeId)">View</button></td>
         </tr>

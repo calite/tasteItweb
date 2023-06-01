@@ -37,12 +37,16 @@ export class LayoutPageComponent {
     this.authService.logout();
   }
 
-  goProfile() {
+  goHome() {
+    this.router.navigate(['']).then(() => {
+      this.router.navigate(['./taste-it/']);
+    });
+  }
 
+  goProfile() {
     this.router.navigate(['']).then(() => {
       this.router.navigate(['./taste-it/profile/' + this.currentUser.token]);
     });
-
   }
 
   goSearch() {
@@ -52,11 +56,15 @@ export class LayoutPageComponent {
   }
 
   goRandom() {
-
     this.router.navigate(['']).then(() => {
       this.router.navigate(['./taste-it/random/'])
     });
+  }
 
+  goMyBook() {
+    this.router.navigate(['']).then(() => {
+      this.router.navigate(['./taste-it/my-book/'])
+    });
   }
 
   checkAdmin() {
@@ -78,7 +86,6 @@ export class LayoutPageComponent {
   }
 
   goTop() {
-    //this.viewport.scrollToPosition([0, 0]);
     var rootElement = document.documentElement;
 
     rootElement.scrollTo({

@@ -19,8 +19,6 @@ export class ViewRecipesDialogComponent implements OnInit {
   public option: string
   private userToken;
 
-  private pepito: [UserResponse,boolean]
-
   constructor(
     private apiService: ApiService,
     private router : Router,

@@ -35,7 +35,6 @@ export class ViewRecipePageComponent implements OnInit {
   private skipper: number = 0;
   public likesCounter: number;
   private timer: any;
-
   public error: boolean = true;
   public showError: boolean = false;
 
@@ -191,7 +190,6 @@ export class ViewRecipePageComponent implements OnInit {
       JSON.parse(sessionStorage.getItem('currentUser')).token,
       this.recipe[0].user.token
     ).subscribe(response => {
-      //console.log(response)
       if (response) {
         this.canFollow = true;
       } else {
@@ -219,12 +217,6 @@ export class ViewRecipePageComponent implements OnInit {
     this.commentDialog.open(CommentDialogComponent, {
       data: { receiverToken: this.recipe[0].user.token }
     });
-    // dialogRef.componentInstance.formClosed.subscribe(() => {
-    //   this.comments = []
-    //   this.skipper = 0;
-    //   this.loadComments(this.skipper)
-
-    // })
   }
 
   getLikesCounter() {
