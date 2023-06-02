@@ -21,8 +21,8 @@ export class SearchPageComponent {
   public isLoading: boolean = false;
   public isVisibleSearch: boolean = true;
   public isAdvancedSearch: boolean = false;
-  public isFilterByUser : boolean = false;
-  public results : boolean = true;
+  public isFilterByUser: boolean = false;
+  public results: boolean = true;
 
   countries = environment.countriesArray;
 
@@ -55,26 +55,34 @@ export class SearchPageComponent {
     this.apiService.getFilteredRecipes(name, country, difficulty, rating, ingredients, tags)
       .subscribe(response => {
 
-        if(response.length == 0) {
+        if (response.length == 0) {
           this.results = false;
+        } else {
+          this.results = true;
         }
 
         this.recipes = response;
-        this.isVisibleSearch = false;
+        //this.isVisibleSearch = false;
         this.isLoading = false;
       });
 
-      this.isLoading = false;
+    this.isLoading = false;
 
   }
 
   searchUsers() {
     const value = this.formSearch.get('nameUser').value
 
-    if(this.formSearch.valid) {
+    if (this.formSearch.valid) {
       this.apiService.getUsersByName(value).subscribe(response => {
         this.users = response;
-        this.isVisibleSearch = false;
+        //this.isVisibleSearch = false;
+
+        if (response.length == 0) {
+          this.results = false;
+        } else {
+          this.results = true;
+        }
       })
     }
 

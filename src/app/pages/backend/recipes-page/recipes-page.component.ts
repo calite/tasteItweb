@@ -1,11 +1,11 @@
-import { Component, HostListener, OnInit, SimpleChanges } from '@angular/core';
-import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { Component, HostListener, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { RecipesReported } from 'src/app/core/interfaces/recipeReported.interface';
 import { ApiService } from 'src/app/core/services/api.service';
-import { ToastService } from 'src/app/core/services/toast.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { _MatTabGroupBase } from '@angular/material/tabs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-recipes-page',
@@ -17,30 +17,19 @@ export class RecipesPageComponent implements OnInit {
   public recipes: RecipesReported[] = [];
   public recipesFiltered: RecipesReported[] = [];
 
-  private skipper: number = 0;
-  private timer: any
-
   formFilter: FormGroup;
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll() {
+  displayedColumns: string[] = ['id', 'name', 'creator', 'reports', 'state'];
+  dataSource = new MatTableDataSource<RecipesReported>(this.recipes);
 
-    if (this.timer) {
-      clearTimeout(this.timer);
-    }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    this.timer = setTimeout(() => {
-      if (window.pageYOffset + window.innerHeight > document.documentElement.scrollHeight - 100) {
-        this.loadRecipesReported(this.skipper);
-      }
-    }, 200);
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
-
 
   constructor(
     private apiService: ApiService,
-    private toastService: ToastService,
     private router: Router,
     private fb: FormBuilder,
   ) {
@@ -53,23 +42,16 @@ export class RecipesPageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.loadRecipesReported(0);
+    this.loadRecipesReported();
 
   }
 
-  loadRecipesReported( skipper : number ) {
+  loadRecipesReported() {
 
-    this.apiService.getRecipesReported(skipper).subscribe((response) => {
-
-      this.recipes.push(...response);
+    this.apiService.getRecipesReported().subscribe((response) => {
+      this.recipes = response;
       this.recipesFiltered = this.recipes;
-
-      if (response.length == 0) {
-        this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
-      }
-    });
-
-    this.skipper = this.skipper + 20;
+      })
   }
 
   publishRecipe(rid) {
@@ -110,6 +92,6 @@ export class RecipesPageComponent implements OnInit {
 
   resetFilter() {
     this.formFilter.reset();
-    this.recipesFiltered = this.recipes;
+    this.loadRecipesReported();
   }
 }

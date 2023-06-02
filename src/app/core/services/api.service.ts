@@ -470,8 +470,8 @@ export class ApiService {
 
     //ADMINISTRACION
 
-    getRecipesReported(skipper : number) {
-        const url = `${this.apiUrl}admin/recipes/all/${skipper}`;
+    getRecipesReported() {
+        const url = `${this.apiUrl}admin/recipes/all`;
         const headers = { Authorization: `Bearer ${this.apiKey}` }
         return this.http.get<RecipesReported[]>(url, { headers });
     }
