@@ -10,3 +10,8 @@
         <p>{{comment.comment.comment}}</p>
     </mat-card-content>
 </mat-card>
+
+
+<div class="div-alert" *ngIf="comments.length == 0">
+    Nobody commented this user.
+</div>

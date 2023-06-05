@@ -56,10 +56,13 @@
 
             <div class="">
 
-                <div>State: 
-                    <mat-slide-toggle color="warn" [checked]="recipe[0].recipe.active" (change)="changeState($event)">{{state}}</mat-slide-toggle>
+                <div>
+                    <mat-slide-toggle color="warn" [checked]="recipe[0].recipe.active" (change)="changeState($event)">
+                        <span *ngIf="!recipe[0].recipe.active">Unpublished</span>
+                        <span *ngIf="recipe[0].recipe.active">Published</span>
+                    </mat-slide-toggle>
                 </div>
-    
+
             </div>
 
             <div class="flex align-items-center justify-content-evenly">
@@ -86,9 +89,19 @@
                 <p>{{recipe[0].recipe.description | slice:0:250}}</p>
             </div>
 
-            <div class="step-recipe" *ngFor="let item of recipe[0].recipe.steps; let i = index">
-                <h2>Step {{i+1}}</h2>
-                <p>{{item}}</p>
+            <div>
+                
+                <mat-slide-toggle color="warn" [checked]="viewSteps" (change)="changeViewSteps()">
+                    <span *ngIf="!viewSteps">Hide Steps</span>
+                    <span *ngIf="viewSteps">Show Steps</span>
+                </mat-slide-toggle>
+            </div>
+
+            <div *ngIf="viewSteps">
+                <div class="step-recipe" *ngFor="let item of recipe[0].recipe.steps; let i = index">
+                    <h2>Step {{i+1}}</h2>
+                    <p>{{item}}</p>
+                </div>
             </div>
 
         </div>
@@ -96,7 +109,7 @@
     </div>
 
 
-    <div class="col-4">
+    <div class="col-4 mt-2">
 
         <div class="col-11">
 

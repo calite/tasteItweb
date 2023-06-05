@@ -26,6 +26,8 @@ export class ViewRecipeReportedComponent implements OnInit {
 
   public state = 'Unpublish';
 
+  public viewSteps = false;
+
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
@@ -98,15 +100,15 @@ export class ViewRecipeReportedComponent implements OnInit {
   }
 
   publishRecipe(rid) {
-    this.apiService.postChangeStateRecipe(rid, true).subscribe(() => window.location.reload());
+    this.apiService.postChangeStateRecipe(rid, true).subscribe(() => this.loadData());
   }
 
   unpublishRecipe(rid) {
-    this.apiService.postChangeStateRecipe(rid, false).subscribe(() => window.location.reload());
+    this.apiService.postChangeStateRecipe(rid, false).subscribe(() => this.loadData());
   }
 
   changeState(event) {
-    this.apiService.postChangeStateRecipe(this.recipe[0].recipeId, event['checked']).subscribe(() => window.location.reload());
+    this.apiService.postChangeStateRecipe(this.recipe[0].recipeId, event['checked']).subscribe(() => this.loadData());
   }
 
   viewRecipes() {
@@ -131,6 +133,10 @@ export class ViewRecipeReportedComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewRecipesDialogComponent, {
       data: { userToken: this.recipe[0].user.token, option: 'following' }
     })
+  }
+
+  changeViewSteps() {
+    this.viewSteps = !this.viewSteps;
   }
 
 }

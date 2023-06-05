@@ -186,11 +186,11 @@ export class ApiService {
         }
 
         if (difficulty) {
-            params = params.set('difficulty', difficulty.toString());
+            params = params.set('difficulty', difficulty);
         }
 
         if (rating) {
-            params = params.set('rating', rating.toString());
+            params = params.set('rating', rating);
         }
 
         if (ingredients) {
@@ -506,7 +506,29 @@ export class ApiService {
 
     }
 
+    getFilteredRecipesReported(
+        name: string,
+        creator: string,
+        active: boolean
+    ): Observable<RecipesReported[]> {
 
+        let params = new HttpParams();
+        const headers = { Authorization: `Bearer ${this.apiKey}` }
+
+        if (name) {
+            params = params.set('name', name);
+        }
+
+        if (creator) {
+            params = params.set('creator', creator);
+        }
+
+        if (active != null) {
+            params = params.set('active', active);
+        }
+
+        return this.http.get<RecipesReported[]>(`${this.apiUrl}admin/recipes/filter`, { params, headers });
+    }
 
 
 
