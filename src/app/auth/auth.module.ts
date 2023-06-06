@@ -7,6 +7,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ResetPasswordDialogComponent } from './pages/login-page/reset-password-dialog/reset-password-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ResetPasswordDialogComponent } from './pages/login-page/reset-password-
     CommonModule,
     AuthRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class AuthModule { }

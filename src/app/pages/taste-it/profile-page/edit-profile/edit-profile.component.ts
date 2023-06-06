@@ -8,6 +8,8 @@ import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { v4 as uuidv4 } from 'uuid';
 import { Storage, ref, uploadBytes, getDownloadURL, deleteObject } from '@angular/fire/storage';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-profile',
@@ -24,7 +26,10 @@ export class EditProfileComponent implements OnInit {
   imgSelected: File;
   imgUrl: string;
 
+  languages = environment.languagesArray;
+
   constructor(
+    public translate: TranslateService,
     private apiService: ApiService,
     private authService: AuthService,
     private toastService: ToastService,
@@ -39,6 +44,7 @@ export class EditProfileComponent implements OnInit {
       confirmPassword: new FormControl(''),
       imgProfile: new FormControl('')
     })
+    this.translate.use(localStorage.getItem('language'))
   }
 
   ngOnInit(): void {
@@ -62,7 +68,7 @@ export class EditProfileComponent implements OnInit {
     const token = this.currentUser.token
 
     if (tokenFromUrl != token) {
-      this.toastService.toastGenerator('', 'You are not the owner of this account', 4, ToastPositionEnum.BOTTOM_RIGHT);
+      this.toastService.toastGenerator('', this.translate.instant('PROFILE.NOT_OWNER'), 4, ToastPositionEnum.BOTTOM_RIGHT);
       this.route.navigate(['./taste-it/home']); //enviamos al home si no lo es
     }
 
@@ -101,10 +107,15 @@ export class EditProfileComponent implements OnInit {
       let password = this.formUser.get('password').value
       let confirmPassword = this.formUser.get('confirmPassword').value
 
-      if (password === confirmPassword && password.length > 0) {
+      if(password === confirmPassword && password.length <= 6){
+        this.toastService.toastGenerator('', this.translate.instant('LOGIN.INVALID_PASS_MSG'), 4, ToastPositionEnum.BOTTOM_LEFT)
+        return
+      }
+
+      if (password === confirmPassword && password.length >= 6) {
         this.authService.changePassword(password)
       } else {
-        this.toastService.toastGenerator('', 'password are not equals', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('PROFILE.PASS_NOT_EQUAL'), 4, ToastPositionEnum.BOTTOM_LEFT)
         return
       }
 
@@ -137,7 +148,7 @@ export class EditProfileComponent implements OnInit {
           this.currentUser.biography = biography
           sessionStorage.setItem("currentUser", JSON.stringify(this.currentUser))
 
-          this.toastService.toastGenerator('', 'Perfil updated', 4, ToastPositionEnum.BOTTOM_LEFT)
+          this.toastService.toastGenerator('', this.translate.instant('PROFILE.UPDATED'), 4, ToastPositionEnum.BOTTOM_LEFT)
 
           this.route.navigate(['']).then(() => {
             this.route.navigate([`./taste-it/profile/${this.currentUser.token}`])
@@ -150,7 +161,7 @@ export class EditProfileComponent implements OnInit {
 
   deleteAccount() {
 
-    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? All your data will be lost', 3)
+    this.toastService.alertGenerator(this.translate.instant('PROFILE.CONFIRM_DELETE_TITLE'), this.translate.instant('PROFILE.CONFIRM_DELETE'), 3)
       .subscribe((result) => {
         if (result.success === true) {
 

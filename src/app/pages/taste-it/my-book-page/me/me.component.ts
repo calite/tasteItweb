@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-me',
@@ -36,11 +37,13 @@ export class MeComponent implements OnInit {
 
 
   constructor(
+    public translate: TranslateService,
     private apiService: ApiService,
     private router : Router
   ) {
     this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.token = this.currentUser.token;
+    this.translate.use(localStorage.getItem('language'))
   }
 
   ngOnInit(): void {

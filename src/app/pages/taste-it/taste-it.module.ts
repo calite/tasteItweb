@@ -23,6 +23,7 @@ import { MeComponent } from './my-book-page/me/me.component';
 import { FollowedComponent } from './my-book-page/followed/followed.component';
 import { LikedComponent } from './my-book-page/liked/liked.component';
 import { PhotosComponent } from './profile-page/photos/photos.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -42,8 +43,7 @@ import { PhotosComponent } from './profile-page/photos/photos.component';
         MeComponent,
         FollowedComponent,
         LikedComponent,
-        PhotosComponent
-
+        PhotosComponent,
     ],
     imports: [
         CommonModule,
@@ -52,7 +52,8 @@ import { PhotosComponent } from './profile-page/photos/photos.component';
         ReactiveFormsModule,
         TasteItRoutingModule,
         SharedModule,
-        BarRatingModule
+        BarRatingModule,
+        TranslateModule
     ]
 })
 export class TasteItModule { }

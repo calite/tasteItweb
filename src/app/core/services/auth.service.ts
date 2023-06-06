@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { UserResponse } from '../interfaces/user.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,13 @@ export class AuthService {
   currentUser: any;
 
 
-  constructor(private auth: Auth, private apiService: ApiService, private router: Router, private toastService: ToastService) {
+  constructor(
+    private auth: Auth, 
+    private router: Router, 
+    private toastService: ToastService,
+    public translate: TranslateService,
+    ) {
+      this.translate.use(localStorage.getItem('language'))
   }
 
   register({ email, password }: any) {
@@ -86,7 +93,7 @@ export class AuthService {
     updatePassword(user, newPassword).then(() => {
     }).catch(error => {
       if (error.code == 'auth/weak-password')
-        this.toastService.toastGenerator('', 'Password should be at least 6 characters', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('LOGIN.INVALID_PASS_MSG'), 4, ToastPositionEnum.BOTTOM_LEFT)
     })
   }
 
@@ -94,10 +101,10 @@ export class AuthService {
     const auth = getAuth()
 
     sendPasswordResetEmail(auth, email).then(() => {
-      this.toastService.alertGeneratorWithoutCancel('', `an email was send to ${email}`, 2)
+      this.toastService.alertGeneratorWithoutCancel('', this.translate.instant('LOGIN.EMAIL_SENT',{email : email}), 2)
     }).catch(error => {
       if (error.code === 'auth/user-not-found') {
-        this.toastService.toastGenerator('', 'that emails is not registered', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('LOGIN.EMAIL_REGISTERED'), 4, ToastPositionEnum.BOTTOM_LEFT)
       }
     })
 

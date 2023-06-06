@@ -47,7 +47,7 @@
 
     <ng-template #divRecipe>
 
-        <h1>Recipe</h1>
+        <h1>{{ 'RECIPE.RECIPE_TITLE' | translate }}</h1>
 
         <div class="grid flex-column">
 
@@ -58,28 +58,28 @@
                 <div class="grid flex-column align-items-center justify-content-evenly">
 
                     <div class="recipeCard flex flex-column align-items-center justify-content-center m-4">
-                        <h3 matTooltip="Recipe name">{{ recipe[0].recipe.name }}</h3>
+                        <h3 matTooltip="{{ 'RECIPE.RECIPE_NAME_TOOLTIP' | translate }}">{{ recipe[0].recipe.name }}</h3>
                         <bar-rating [(rate)]="recipe[0].recipe['rating']" [max]="5" [readOnly]="true"
-                            matTooltip="Rating"></bar-rating>
+                            matTooltip="{{ 'RECIPE.RATING_TOOLTIP' | translate }}"></bar-rating>
                     </div>
 
                     <div class="user-card-little flex flex-row align-items-center justify-content-center">
 
                         <span class="flex flex-row align-items-center justify-content-center"
-                            [routerLink]="['../../profile', recipe[0].user.token]" matTooltip="Profile">
+                            [routerLink]="['../../profile', recipe[0].user.token]" matTooltip="{{ 'RECIPE.PROFILE_TOOLTIP' | translate }}">
 
                             <img class="imgProfile" [src]="recipe[0].user.imgProfile">
                             <button mat-button color="warm">{{recipe[0].user.username | titlecase }}</button>
 
                         </span>
 
-                        <button mat-button color="warm" matTooltip="Follow" [disabled]="samePerson"
+                        <button mat-button color="warm" matTooltip="{{ 'PROFILE.FOLLOW_BTN' | translate }}" [disabled]="samePerson"
                             (click)="postFollowUser()">
                             <mat-icon *ngIf="canFollow">person_remove</mat-icon>
                             <mat-icon *ngIf="!canFollow">person_add</mat-icon>
                         </button>
 
-                        <button mat-button color="warm" matTooltip="Comment" [disabled]="samePerson"
+                        <button mat-button color="warm" matTooltip="{{ 'PROFILE.COMMENT_BTN' | translate }}" [disabled]="samePerson"
                             (click)="commentUser()">
                             <mat-icon>comment</mat-icon>
                         </button>
@@ -94,34 +94,34 @@
 
             <div class="col p-2 mt-2 grid flex-row align-items-center justify-content-evenly">
 
-                <button mat-fab extended [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="Like this recipe"
+                <button mat-fab extended [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="{{ 'RECIPE.LIKE_RECIPE_TOOLTIP' | translate }}"
                     color="primary" *ngIf="!isLiked" (click)="likeRecipe()">
                     <mat-icon>thumb_up</mat-icon>
-                    Like
+                    {{ 'RECIPE.LIKE_BTN' | translate }}
                 </button>
 
-                <button mat-fab extended [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="Dislike this recipe"
+                <button mat-fab extended [matBadge]="likesCounter" matBadgeColor="warn" matTooltip="{{ 'RECIPE.DISLIKE_RECIPE_TOOLTIP' | translate }}"
                     color="primary" *ngIf="isLiked" (click)="likeRecipe()">
                     <mat-icon>thumb_down</mat-icon>
-                    Dislike
+                    {{ 'RECIPE.DISLIKE_BTN' | translate }}
                 </button>
 
-                <button mat-fab extended [matBadge]="comments.length" matBadgeColor="warn" matTooltip="Rate this recipe"
+                <button mat-fab extended [matBadge]="comments.length" matBadgeColor="warn" matTooltip="{{ 'RECIPE.RATE_RECIPE_TOOLTIP' | translate }}"
                     color="primary" (click)="rateRecipe()">
                     <mat-icon>star_rate</mat-icon>
-                    Rate
+                    {{ 'RECIPE.RATE_BTN' | translate }}
                 </button>
 
-                <button mat-fab extended matTooltip="Report this recipe" color="primary" *ngIf="isReportable"
+                <button mat-fab extended matTooltip="{{ 'RECIPE.REPORT_RECIPE_TOOLTIP' | translate }}" color="primary" *ngIf="isReportable"
                     (click)="reportRecipe()">
                     <mat-icon>report</mat-icon>
-                    Report
+                    {{ 'RECIPE.REPORT_BTN' | translate }}
                 </button>
 
-                <button mat-fab extended matTooltip="Edit this recipe" color="primary" *ngIf="isEditable"
+                <button mat-fab extended matTooltip="{{ 'RECIPE.EDIT_RECIPE_TOOLTIP' | translate }}" color="primary" *ngIf="isEditable"
                     (click)="editRecipe()">
                     <mat-icon>edit</mat-icon>
-                    Edit
+                    {{ 'RECIPE.EDIT_BTN' | translate }}
                 </button>
 
 
@@ -134,12 +134,12 @@
         <div class="grid">
             <div class="col">
                 <mat-tab-group [disableRipple]=true>
-                    <mat-tab label="Information" class="mat-tab-label-active">
+                    <mat-tab label="{{ 'RECIPE.INFORMATION_TITLE' | translate }}" class="mat-tab-label-active">
 
                         <div class="grid infoAdicional">
 
                             <div class="col-6">
-                                <p><strong>Ingredients:</strong></p>
+                                <p><strong>{{ 'RECIPE.INFORMATION_TITLE' | translate }}:</strong></p>
                                 <mat-chip-set>
                                     <mat-chip *ngFor="let item of recipe[0].recipe.ingredients" class="chipCustom">
                                         {{ item }}</mat-chip>
@@ -147,16 +147,16 @@
                             </div>
 
                             <div class="col-6">
-                                <p><strong>Description:</strong></p>
+                                <p><strong>{{ 'RECIPE.DESCRIPTION_TITLE' | translate }}:</strong></p>
                                 <p>{{ recipe[0].recipe.description }}</p>
-                                <p><strong>Difficulty:</strong></p>
+                                <p><strong>{{ 'RECIPE.DIFFICULTY_TOOLTIP' | translate }}:</strong></p>
                                 <p>{{ recipe[0].recipe.difficulty }}</p>
-                                <p><strong>country:</strong></p>
+                                <p><strong>{{ 'RECIPE.COUNTRY_TOOLTIP' | translate }}:</strong></p>
                                 <p>{{ recipe[0].recipe.country | titlecase }}</p>
                             </div>
 
                             <div class="col-12">
-                                <p><strong>Tags:</strong></p>
+                                <p><strong>{{ 'RECIPE.COUNTRY_TOOLTIP' | translate }}:</strong></p>
                                 <mat-chip-set>
                                     <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item |
                                         titlecase}}
@@ -167,15 +167,15 @@
                         </div>
 
                     </mat-tab>
-                    <mat-tab label="Steps">
+                    <mat-tab label="{{ 'RECIPE.STEPS_TITLE' | translate }}">
 
                         <div class="pr-3 pl-2 stepsCustom" *ngFor="let item of recipe[0].recipe.steps; let i = index">
-                            <h3><u>Step {{i+1}}</u></h3>
+                            <h3><u>{{ 'RECIPE.STEP_TITLE' | translate }} {{i+1}}</u></h3>
                             <textarea class="text-area-step" disabled>{{ item }}</textarea>
                         </div>
 
                     </mat-tab>
-                    <mat-tab label="Comments">
+                    <mat-tab label="{{ 'RECIPE.COMMENTS' | translate }}">
 
                         <app-comments-on-recipe [comments]="comments"></app-comments-on-recipe>
 

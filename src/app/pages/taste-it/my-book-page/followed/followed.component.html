@@ -4,9 +4,8 @@
 <div *ngIf="noData">
 
     <div class="flex flex-column align-items-center justify-content-center alert-no-recipes">
-        Looks like you don´t have any user followed
-
-        <button mat-flat-button color="primary" class="m-5" (click)="goSearch()">Go search</button>
+        {{ 'MY_BOOK.NO_RECIPES_FOLLOWED' | translate }}
+        <button mat-flat-button color="primary" class="m-5" (click)="goSearch()">{{ 'MY_BOOK.GO_SEARCH' | translate }}</button>
     </div>
 
 </div>

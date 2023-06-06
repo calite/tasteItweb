@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-my-book-page',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./my-book-page.component.scss']
 })
 export class MyBookPageComponent {
+
+  constructor(public translate: TranslateService) {
+    this.translate.use(localStorage.getItem('language'))
+  }
 
 }

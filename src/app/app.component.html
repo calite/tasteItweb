@@ -1,1 +1,11 @@
 <router-outlet></router-outlet>
+
+<div class="flex align-items-end justify-content-end">
+    
+    <select #langSelect (change)="changeLanguage(langSelect.value)">
+        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === defaultLang">{{ lang }}
+        </option>
+    </select>
+
+</div>
+

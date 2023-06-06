@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 
@@ -14,12 +15,15 @@ export class ResetPasswordDialogComponent {
   formReset : FormGroup;
 
   constructor(
+    public translate: TranslateService,
     private authService: AuthService,
     public dialogRef: MatDialogRef<ResetPasswordDialogComponent>,
   ) {
     this.formReset = new FormGroup({
       email : new FormControl('', Validators.required)
     })
+
+    this.translate.use(localStorage.getItem('language'))
   }
 
   onSubmit() {

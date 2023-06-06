@@ -1,17 +1,17 @@
 <div class="mt-8">
 
     <div class="d-flex justify-content-center">
-        <h2>Recipes</h2>
+        <h2>{{ 'MY_BOOK.RECIPES' | translate }}</h2>
     </div>
     <div>
         <mat-tab-group [disableRipple]=true>
-            <mat-tab label="My Recipes" class="mat-tab-label-active">
+            <mat-tab label="{{ 'MY_BOOK.MY_RECIPES' | translate }}" class="mat-tab-label-active">
                 <app-me></app-me>
             </mat-tab>
-            <mat-tab label="My Liked Recipes">
+            <mat-tab label="{{ 'MY_BOOK.MY_LIKED_RECIPES' | translate }}">
                 <app-liked></app-liked>
             </mat-tab>
-            <mat-tab label="My Followed Users">
+            <mat-tab label="{{ 'MY_BOOK.MY_FOLLOWED_RECIPES' | translate }}">
                 <app-followed></app-followed>
             </mat-tab>
         </mat-tab-group>

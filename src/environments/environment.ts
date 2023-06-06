@@ -15,6 +15,16 @@ export const environment = {
     measurementId: 'G-LJKZXQ18LZ',
   },
 
+  languagesArray: [
+    'spanish',
+    'english'
+  ],
+
+  languages : [
+    'es-ES',
+    'en-GB'
+  ],
+
   countriesArray: [
     'Afghanistan',
     'Argentina',

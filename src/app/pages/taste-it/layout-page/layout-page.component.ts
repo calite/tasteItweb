@@ -3,6 +3,7 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, TitleStrategy } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-layout-page',
@@ -28,9 +29,14 @@ export class LayoutPageComponent {
   }
 
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public translate: TranslateService,
+  ) {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')) //asignamos al usuario
     this.checkAdmin();
+    this.translate.use(localStorage.getItem('language'))
   }
 
   onLogout() {

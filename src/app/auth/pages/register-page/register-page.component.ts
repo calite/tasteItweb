@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
-import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -23,6 +23,7 @@ export class RegisterPageComponent {
 
 
   constructor(
+    public translate: TranslateService,
     private authService: AuthService,
     private apiService: ApiService,
     private router: Router,
@@ -34,6 +35,8 @@ export class RegisterPageComponent {
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       repeatPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
+
+    this.translate.use(localStorage.getItem('language'))
   }
 
   showPassword(type) {
@@ -94,14 +97,14 @@ export class RegisterPageComponent {
 
             this.apiService.registerUser(response.user['uid'], username, img, 'my biography').subscribe()
 
-            this.toastService.alertGenerator('Great!', 'almost done, just log in to start!', 1)
+            this.toastService.alertGenerator(this.translate.instant('COMMON.GREAT'), this.translate.instant('LOGIN.ALMOST_DONE'), 1)
 
             this.router.navigate(['./auth/login'])
 
           })
           .catch(error => {
             if (error.code = 'auth/email-already-in-use') {
-              this.toastService.alertGeneratorWithoutCancel('Error!', 'email already in use', 4)
+              this.toastService.alertGeneratorWithoutCancel('Error!', this.translate.instant('LOGIN.EMAIL_USED'), 4)
             }
           })
       }

@@ -9,16 +9,17 @@
             <mat-label>Email</mat-label>
             <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email" color="primary" autocomplete="username">
             <mat-icon matSuffix>alternate_email</mat-icon>
-            <mat-error *ngIf="formLogin.controls.email.invalid">Invalid email</mat-error>
+            <mat-error *ngIf="formLogin.controls.email.invalid">{{ 'LOGIN.INVALID_EMAIL' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" class="form-control" placeholder="Password" formControlName="password" autocomplete="current-password">
+            <mat-label>{{ 'LOGIN.PASS' | translate }}</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" class="form-control" placeholder="{{ 'LOGIN.PASS' | translate }}" formControlName="password" autocomplete="current-password">
             <button mat-icon-button matSuffix type="button" (click)="showPassword()" [attr.aria-pressed]="hide" tabindex="-1">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="formLogin.controls.password.value.length">At least 6 chars</mat-error>
+            <mat-error *ngIf="formLogin.controls.password.invalid && !formLogin.controls.password.value.length">{{ 'LOGIN.INVALID_PASS' | translate }}</mat-error>
+            <mat-error *ngIf="formLogin.controls.password.value.length">{{ 'LOGIN.INVALID_LENGTH' | translate }}</mat-error>
         </mat-form-field>
         
 
@@ -28,8 +29,8 @@
     </form>
 
     <div class="flex flex-column justify-content-end mt-5">
-        <button mat-flat-button routerLink="/auth/register">Don´t have an account?</button>
-        <button mat-flat-button (click)="resetPassword()">Forgot your password?</button>
+        <button mat-flat-button routerLink="/auth/register">{{ 'LOGIN.NO_ACC' | translate }}</button>
+        <button mat-flat-button (click)="resetPassword()">{{ 'LOGIN.RESET_PASS' | translate }}</button>
     </div>
 
 </div>

@@ -70,4 +70,8 @@ export class PhotosComponent implements OnInit {
     this.router.navigate(['./taste-it/recipe/' + recipeId]);
   }
 
+  goCreateRecipe() {
+    this.router.navigate(['./taste-it/create-recipe/'])
+  }
+
 }

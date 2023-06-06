@@ -13,19 +13,19 @@
   <mat-menu #menuMobile="matMenu" class="flex flex-column justify-content-center align-items-center">
 
     <button mat-menu-item (click)="goHome()">
-      <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>HOME
+      <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>{{ 'MENU.HOME' | translate }}
     </button>
 
     <button mat-menu-item (click)="goSearch()">
-      <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>SEARCH
+      <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>{{ 'MENU.SEARCH' | translate }}
     </button>
 
     <button mat-menu-item (click)="goRandom()">
-      <mat-icon aria-hidden="false" fontIcon="shuffle"></mat-icon>RANDOM
+      <mat-icon aria-hidden="false" fontIcon="shuffle"></mat-icon>{{ 'MENU.RANDOM' | translate }}
     </button>
 
     <button mat-menu-item (click)="goMyBook()">
-      <mat-icon aria-hidden="false" fontIcon="book"></mat-icon>MY BOOK
+      <mat-icon aria-hidden="false" fontIcon="book"></mat-icon>{{ 'MENU.MY_BOOK' | translate }}
     </button>
 
   </mat-menu>
@@ -43,19 +43,19 @@
   <div class="flex align-items-center justify-content-center menu-desktop">
 
     <button mat-button (click)="goHome()">
-      <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>HOME
+      <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>{{ 'MENU.HOME' | translate }}
     </button>
 
     <button mat-button (click)="goSearch()">
-      <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>SEARCH
+      <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>{{ 'MENU.SEARCH' | translate }}
     </button>
 
     <button mat-button (click)="goRandom()">
-      <mat-icon aria-hidden="false" fontIcon="shuffle"></mat-icon>RANDOM
+      <mat-icon aria-hidden="false" fontIcon="shuffle"></mat-icon>{{ 'MENU.RANDOM' | translate }}
     </button>
 
     <button mat-button (click)="goMyBook()">
-      <mat-icon aria-hidden="false" fontIcon="book"></mat-icon>MY BOOK
+      <mat-icon aria-hidden="false" fontIcon="book"></mat-icon>{{ 'MENU.MY_BOOK' | translate }}
     </button>
 
   </div>
@@ -64,14 +64,14 @@
 
   <div class="flex align-items-center justify-content-center">
 
-    <button mat-button *ngIf="isAdmin" (click)="goBackend()" matTooltip="Backend"><mat-icon fontIcon="security"></mat-icon></button>
+    <button mat-button *ngIf="isAdmin" (click)="goBackend()" matTooltip="{{ 'MENU.BACKEND' | translate }}"><mat-icon fontIcon="security"></mat-icon></button>
 
     <button mat-button (click)="onLogout()">
       <mat-icon>logout</mat-icon>
-      <span>Logout</span>
+      <span>{{ 'MENU.LOGOUT' | translate }}</span>
     </button>
 
-    <img class="imgProfile" matTooltip="Your profile" [src]="currentUser.imgProfile!" (click)="goProfile()">
+    <img class="imgProfile" matTooltip="{{ 'MENU.YOUR_PROFILE' | translate }}" [src]="currentUser.imgProfile!" (click)="goProfile()">
 
   </div>
 

@@ -1,10 +1,10 @@
 <mat-card class="user-cards" *ngFor="let comment of comments">
     <mat-card-header>
         <div mat-card-avatar>
-            <img class="imgProfile" [src]="comment.user.imgProfile!" matTooltip="Profile">
+            <img class="imgProfile" [src]="comment.user.imgProfile!" matTooltip="{{ 'RECIPE.PROFILE_TOOLTIP' | translate }}">
         </div>
 
-        <mat-card-title (click)="viewProfileCreator(comment.user.token)" class="ml-2" matTooltip="Username">
+        <mat-card-title (click)="viewProfileCreator(comment.user.token)" class="ml-2" matTooltip="{{ 'RECIPE.USERNAME_TOOLTIP' | translate }}">
             {{comment.user.username | titlecase }}</mat-card-title>
         <mat-card-subtitle class="ml-2">{{comment.c.dateCreated | date: 'dd/MM/yyyy' }}</mat-card-subtitle>
         <bar-rating [(rate)]="comment.c.rating" [max]="5" [readOnly]="true"></bar-rating>
@@ -16,7 +16,7 @@
 </mat-card>
 
 <div class="div-alert" *ngIf="comments.length == 0">
-    Nobody commented this recipe yet.
+    {{ 'RECIPE.NO_COMMENTS' | translate }}
 </div>
 
 

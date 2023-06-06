@@ -211,6 +211,14 @@ $star-utf8: '\2605';
   color: yellow;
 }
 
+.alert-no-recipes {
+  background-color: rgb(215,135,135);
+  color: white;
+  padding: 15px;
+  margin:15px;
+  border-radius: 15px 15px 15px 15px;
+}
+
 body {
   margin: 0px;
   padding: 0px;

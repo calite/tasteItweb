@@ -1,6 +1,6 @@
 <div class="mt-8">
 
-    <h2>Edit Profile</h2>
+    <h2>{{ 'PROFILE.EDIT_PROFILE' | translate }}</h2>
 
     <form class="flex flex-column align-items-center justify-content-center" [formGroup]="formUser">
 
@@ -11,7 +11,7 @@
                 <label>
                     <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgProfile"
                         class="inputImage" (change)="onFileSelected($event)">
-                    <img matTooltip="Change your photo" [src]="imgUrl" alt="image profile" class="imgProfile">
+                    <img matTooltip="{{ 'PROFILE.CHANGE_PHOTO' | translate }}" [src]="imgUrl" alt="image profile" class="imgProfile">
                 </label>
 
             </div>
@@ -19,21 +19,40 @@
             <div class="col-12 md:col-6 lg:col-6 flex flex-column align-items-center justify-content-center">
 
                 <mat-form-field>
-                    <input matInput type="text" placeholder="Username" name="username" formControlName="username"
+                    <mat-label>{{ 'PROFILE.USERNAME' | translate }}</mat-label>
+                    <input matInput type="text" placeholder="{{ 'PROFILE.USERNAME' | translate }}" name="username" formControlName="username"
                         autocomplete="username">
-                    <mat-error *ngIf="formUser.controls.username.invalid">Username needed</mat-error>
+                    <mat-error *ngIf="formUser.controls.username.invalid">{{ 'PROFILE.USERNAME_NEEDED' | translate }}</mat-error>
                 </mat-form-field>
 
                 <div class="grid flex-auto flex-column">
 
                     <mat-form-field>
-                        <input matInput type="password" placeholder="Password" name="password"
+                        <mat-label>{{ 'LOGIN.PASS' | translate }}</mat-label>
+                        <input matInput type="password" placeholder="{{ 'LOGIN.PASS' | translate }}" name="password"
                             formControlName="password" autocomplete="new-password">
                     </mat-form-field>
 
                     <mat-form-field>
-                        <input matInput type="password" placeholder="Confirm password" name="confirmPassword"
+                        <mat-label>{{ 'LOGIN.CONFIRM_PASS' | translate }}</mat-label>
+                        <input matInput type="password" placeholder="{{ 'LOGIN.CONFIRM_PASS' | translate }}" name="confirmPassword"
                             formControlName="confirmPassword" autocomplete="current-password">
+                    </mat-form-field>
+
+                </div>
+
+                <div>
+
+                    <!--POR CAMBIAR-->
+                    <mat-form-field>
+
+                        <mat-label>Language</mat-label>
+                        <mat-select placeholder="Language" name="language" formControlName="language">
+                            <mat-option *ngFor="let item of languages" [value]="item">
+                                {{item | titlecase }}
+                            </mat-option>
+                        </mat-select>
+
                     </mat-form-field>
 
                 </div>
@@ -43,10 +62,10 @@
             <div class="col-12 flex align-items-center justify-content-center">
 
                 <mat-form-field class="col-11">
-                    <textarea matInput type="text" placeholder="Biography" name="biography" formControlName="biography"
+                    <textarea matInput type="text" placeholder="{{ 'PROFILE.BIOGRAPHY' | translate }}" name="biography" formControlName="biography"
                         rows="8" class="text-area-biography"></textarea>
-                        <mat-error *ngIf="this.formUser.get('biography').value.length > 250">Biography too large</mat-error>
-                        <mat-error *ngIf="formUser.controls.biography.invalid">Biography needed</mat-error>
+                    <mat-error *ngIf="this.formUser.get('biography').value.length > 250">{{ 'PROFILE.BIOGRAPHY_TOO_LARGE' | translate }}</mat-error>
+                    <mat-error *ngIf="formUser.controls.biography.invalid">{{ 'PROFILE.BIOGRAPHY_NEEDED' | translate }}</mat-error>
                 </mat-form-field>
 
             </div>
@@ -57,15 +76,15 @@
 
             <div class="col flex align-items-center justify-content-around">
 
-                <button mat-button color="warn" (click)="backToProfile()">Cancel</button>
+                <button mat-button color="warn" (click)="backToProfile()">{{ 'COMMON.CANCEL' | translate }}</button>
 
-                <button mat-raised-button color="primary" (click)="onSubmit()">Edit user</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'PROFILE.EDIT_USER' | translate }}</button>
 
             </div>
 
             <div class="col flex align-items-center justify-content-center">
 
-                <button mat-button (click)="deleteAccount()" class="mt-8" color="warn">Delete Account</button>
+                <button mat-button (click)="deleteAccount()" class="mt-8" color="warn">{{ 'PROFILE.DELETE_ACC' | translate }}</button>
 
             </div>
 

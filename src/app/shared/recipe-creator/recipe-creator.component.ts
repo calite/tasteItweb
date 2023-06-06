@@ -54,7 +54,6 @@ export class RecipeCreatorComponent {
     private storage: Storage,
     private route: Router
   ) {
-
     this.formRecipe = new FormGroup({
       recipeName: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),

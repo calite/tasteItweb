@@ -1,7 +1,7 @@
 <div class="flex flex-column justify-content-center align-items-center">
     <img src="assets/tasteIt_logo2.png">
     <span class="text-lg mb-4">
-        Register
+        {{ 'LOGIN.RESET_REGISTER_TITLE' | translate }}
     </span>
 
     <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formRegister"
@@ -12,36 +12,38 @@
             <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email"
                 autocomplete="username">
             <mat-icon matSuffix>alternate_email</mat-icon>
-            <mat-error *ngIf="formRegister.controls.email.invalid">Invalid email</mat-error>
+            <mat-error *ngIf="formRegister.controls.email.invalid">{{ 'LOGIN.INVALID_EMAIL' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput [type]="hide1 ? 'password' : 'text'" class="form-control" placeholder="Password"
+            <mat-label>{{ 'LOGIN.PASS' | translate }}</mat-label>
+            <input matInput [type]="hide1 ? 'password' : 'text'" class="form-control" placeholder="{{ 'LOGIN.PASS' | translate }}"
                 formControlName="password" autocomplete="new-password">
-            <button mat-icon-button matSuffix type="button" (click)="showPassword(1)" [attr.aria-pressed]="hide1" tabindex="-1">
+            <button mat-icon-button matSuffix type="button" (click)="showPassword(1)" tabindex="-1">
                 <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="formRegister.controls.password.value.length">At least 6 chars</mat-error>
+            <mat-error *ngIf="formRegister.controls.password.invalid && !formRegister.controls.password.value.length">{{ 'LOGIN.INVALID_PASS' | translate }}</mat-error>
+            <mat-error *ngIf="formRegister.controls.password.value.length">{{ 'LOGIN.INVALID_LENGTH' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Repeat Password</mat-label>
-            <input matInput [type]="hide2 ? 'password' : 'text'" class="form-control" placeholder="Repeat password"
+            <mat-label>{{ 'LOGIN.REPEAT_PASS' | translate }}</mat-label>
+            <input matInput [type]="hide2 ? 'password' : 'text'" class="form-control" placeholder="{{ 'LOGIN.REPEAT_PASS' | translate }}"
                 formControlName="repeatPassword" autocomplete="current-password">
-            <button mat-icon-button matSuffix type="button" (click)="showPassword(2)" [attr.aria-pressed]="hide2" tabindex="-1">
+            <button mat-icon-button matSuffix type="button" (click)="showPassword(2)" tabindex="-1">
                 <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="formRegister.controls.password.value.length">At least 6 chars</mat-error>
+            <mat-error *ngIf="formRegister.controls.repeatPassword.invalid && !formRegister.controls.repeatPassword.value.length">{{ 'LOGIN.INVALID_PASS' | translate }}</mat-error>
+            <mat-error *ngIf="formRegister.controls.repeatPassword.value.length">{{ 'LOGIN.INVALID_LENGTH' | translate }}</mat-error>
         </mat-form-field>
 
         <button mat-flat-button color="primary" type="submit" [disabled]="formRegister.invalid">
-            REGISTER!
+            {{ 'LOGIN.REGISTER_BTN' | translate }}
         </button>
     </form>
 
     <div class="flex justify-content-end mt-5">
-        <button mat-flat-button routerLink="/auth/login">Already have an account?</button>
+        <button mat-flat-button routerLink="/auth/login">{{ 'LOGIN.ACC_ALREADY' | translate }}</button>
     </div>
 </div>
 

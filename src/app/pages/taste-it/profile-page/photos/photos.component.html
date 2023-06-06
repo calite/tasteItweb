@@ -1,5 +1,12 @@
 <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
 
+<div *ngIf="recipes.length == 0">
+    <div class="flex flex-column align-items-center justify-content-center alert-no-recipes">
+        {{ 'MY_BOOK.NO_RECIPES' | translate }}
+        <button mat-flat-button color="primary" class="m-5" (click)="goCreateRecipe()">{{ 'MY_BOOK.CREATE' | translate }}</button>
+    </div>
+</div>
+
 <div class="grid flex-row align-items-center justify-content-evenly">
     <mat-card *ngFor="let recipe of recipes" class="cards" (click)="viewRecipe(recipe.recipeId)">
         <mat-card-header>

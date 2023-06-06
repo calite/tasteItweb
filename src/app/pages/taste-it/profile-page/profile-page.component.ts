@@ -9,6 +9,7 @@ import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { CommentDialogComponent } from 'src/app/shared/comment-dialog/comment-dialog.component';
 import { ViewRecipesDialogComponent } from 'src/app/shared/view-recipes-dialog/view-recipes-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile-page',
@@ -52,12 +53,15 @@ export class ProfilePageComponent implements OnInit {
   }
 
   constructor(
+    public translate: TranslateService,
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
     private route: Router,
     private commentDialog: MatDialog,
     private toastService: ToastService
-  ) { }
+  ) {
+    this.translate.use(localStorage.getItem('language'))
+  }
 
   ngOnInit(): void {
 
@@ -80,12 +84,12 @@ export class ProfilePageComponent implements OnInit {
 
         } else {
           this.currentUser = response
-          
+
           this.checkPerson()
           this.checkFollow()
           this.loadCounters()
           this.loadComments(0);
-          
+
           this.error = false;
           this.isLoading = false;
         }
@@ -154,9 +158,9 @@ export class ProfilePageComponent implements OnInit {
     ).subscribe(response => {
       this.checkFollow()
       if (!this.canFollow) {
-        this.toastService.toastGenerator('', 'start following', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('PROFILE.FOLLOW'), 4, ToastPositionEnum.BOTTOM_LEFT)
       } else {
-        this.toastService.toastGenerator('', 'stop following', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('PROFILE.NO_FOLLOW'), 4, ToastPositionEnum.BOTTOM_LEFT)
       }
     })
   }

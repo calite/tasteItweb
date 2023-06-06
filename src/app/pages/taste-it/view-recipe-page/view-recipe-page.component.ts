@@ -12,6 +12,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { ReportDialogComponent } from 'src/app/shared/report-dialog/report-dialog.component';
 import { RateDialogComponent } from 'src/app/shared/rate-dialog/rate-dialog.component';
 import { CommentDialogComponent } from 'src/app/shared/comment-dialog/comment-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -54,6 +55,7 @@ export class ViewRecipePageComponent implements OnInit {
   }
 
   constructor(
+    public translate: TranslateService,
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private reportDialog: MatDialog,
@@ -61,7 +63,10 @@ export class ViewRecipePageComponent implements OnInit {
     private toastService: ToastService,
     private route: Router,
     private commentDialog: MatDialog,
-  ) { }
+  ) 
+  { 
+    this.translate.use(localStorage.getItem('language'))
+  }
 
   ngOnInit(): void {
 
@@ -146,9 +151,9 @@ export class ViewRecipePageComponent implements OnInit {
       ).subscribe(response => {
         this.checkLike()
         if (!this.isLiked) {
-          this.toastService.toastGenerator('', 'recipe liked', 4, ToastPositionEnum.BOTTOM_LEFT)
+          this.toastService.toastGenerator('', this.translate.instant('RECIPE.LIKED_TOAST'), 4, ToastPositionEnum.BOTTOM_LEFT)
         } else {
-          this.toastService.toastGenerator('', 'recipe disliked', 4, ToastPositionEnum.BOTTOM_LEFT)
+          this.toastService.toastGenerator('', this.translate.instant('RECIPE.DISLIKED_TOAST'), 4, ToastPositionEnum.BOTTOM_LEFT)
         }
 
         this.getLikesCounter();
@@ -206,9 +211,9 @@ export class ViewRecipePageComponent implements OnInit {
     ).subscribe(response => {
       this.checkFollow()
       if (!this.canFollow) {
-        this.toastService.toastGenerator('', 'start following', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('PROFILE.FOLLOW'), 4, ToastPositionEnum.BOTTOM_LEFT)
       } else {
-        this.toastService.toastGenerator('', 'stop following', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('PROFILE.NO_FOLLOW'), 4, ToastPositionEnum.BOTTOM_LEFT)
       }
     })
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ApiService } from '../../../core/services/api.service';
@@ -18,6 +19,7 @@ export class LoginPageComponent {
   hide = true;
 
   constructor(
+    public translate: TranslateService,
     private authService: AuthService,
     private apiService: ApiService,
     private router: Router,
@@ -28,6 +30,8 @@ export class LoginPageComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
+
+    this.translate.use(localStorage.getItem('language'))
   }
 
   showPassword() {
@@ -54,10 +58,10 @@ export class LoginPageComponent {
         })
         .catch(error => {
           if (error.code === 'auth/wrong-password') {
-            this.toastService.alertGeneratorWithoutCancel('Error!', 'email or password wrong!', 4)
+            this.toastService.alertGeneratorWithoutCancel('Error!', this.translate.instant('LOGIN.ERR_LOGIN'), 4)
           }
           if (error.code === 'auth/user-not-found') {
-            this.toastService.alertGenerator('Ups!', 'Looks like you dont have and account, do you want to register?', 4)
+            this.toastService.alertGenerator('Ups!', this.translate.instant('LOGIN.NO_ACC_WARNING'), 4)
               .subscribe((result) => {
                 if (result.success === true) {
                   this.router.navigate(['/auth/register']);

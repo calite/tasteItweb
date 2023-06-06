@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { TranslateService } from '@ngx-translate/core';
 import { interval } from 'rxjs';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
@@ -39,12 +40,14 @@ export class HomePageComponent implements OnInit {
   }
 
   constructor(
+    public translate: TranslateService,
     private apiService: ApiService,
     private authService: AuthService,
     private toastService: ToastService,
     private router: Router
   ) {
     this.currentUser = this.authService.getUser(); //traemos el usuario de local
+    this.translate.use(localStorage.getItem('language'))
   }
 
   ngOnInit() {
@@ -74,7 +77,7 @@ export class HomePageComponent implements OnInit {
           this.isLoading = false;
 
           if (response.length == 0) {
-            this.toastService.toastGenerator('', 'There is no more recipes', 4, ToastPositionEnum.BOTTOM_RIGHT)
+            this.toastService.toastGenerator('', this.translate.instant('HOME.NO_MORE_RECIPES'), 4, ToastPositionEnum.BOTTOM_RIGHT)
             this.noMoreRecipes = true
           }
 

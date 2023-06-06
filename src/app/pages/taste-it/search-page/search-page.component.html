@@ -3,7 +3,8 @@
   <div class="grid">
 
     <div class="show-menu-button">
-      <button mat-mini-fab color="primary" class="ml-2" (click)="showHideMenu()" matTooltip="Show/hide search box">
+      <button mat-mini-fab color="primary" class="ml-2" (click)="showHideMenu()"
+        matTooltip="{{ 'SEARCH.HIDE_SEARCH_BTN_TOOLTIP' | translate }}">
         <mat-icon>tune</mat-icon>
       </button>
     </div>
@@ -11,13 +12,14 @@
     <div class="col-12 filter-box flex flex-column align-items-center"
       [ngClass]="{fadeInDown: isVisibleSearch , fadeOut: !isVisibleSearch }">
 
-      <h2 *ngIf="!isFilterByUser">Search Recipes</h2>
-      <h2 *ngIf="isFilterByUser">Search Users</h2>
+      <h2 *ngIf="!isFilterByUser">{{ 'SEARCH.SEARCH_RECIPES_TITLES' | translate }}</h2>
+      <h2 *ngIf="isFilterByUser">{{ 'SEARCH.SEARCH_USERS_TITLES' | translate }}</h2>
 
       <div class="flex flex-column align-items-start justify-content-center">
-        <mat-slide-toggle [checked]="isFilterByUser" (change)="filterByUser()">user filter</mat-slide-toggle>
+        <mat-slide-toggle [checked]="isFilterByUser" (change)="filterByUser()">{{ 'SEARCH.USERS_FILTER_TOOLTIP' |
+          translate }}</mat-slide-toggle>
         <mat-slide-toggle [checked]="isAdvancedSearch" (change)="advancedSearch()" [disabled]="isFilterByUser"
-          class="mt-4">Advanced filter</mat-slide-toggle>
+          class="mt-4">{{ 'SEARCH.ADVANCED_FILTER_TOOLTIP' | translate }}</mat-slide-toggle>
 
       </div>
 
@@ -27,14 +29,14 @@
         <div class="col flex flex-column justify-content-center align-items-center">
 
           <mat-form-field color="primary">
-            <mat-label>Name</mat-label>
-            <input matInput type="text" class="form-control" placeholder="By name" formControlName="name"
-              color="primary">
+            <mat-label>{{ 'SEARCH.NAME_LABEL' | translate }}</mat-label>
+            <input matInput type="text"  placeholder="{{ 'SEARCH.NAME_LABEL' | translate }}"
+              formControlName="name" color="primary">
           </mat-form-field>
 
           <mat-form-field color="primary" *ngIf="isAdvancedSearch">
-            <mat-label>Country</mat-label>
-            <mat-select placeholder="Country" name="country" formControlName="country">
+            <mat-label>{{ 'SEARCH.COUNTRY_LABEL' | translate }}</mat-label>
+            <mat-select placeholder="{{ 'SEARCH.COUNTRY_LABEL' | translate }}" name="country" formControlName="country">
               <mat-option *ngFor="let item of countries" [value]="item">
                 {{item}}
               </mat-option>
@@ -42,35 +44,35 @@
           </mat-form-field>
 
           <mat-form-field color="primary" *ngIf="isAdvancedSearch">
-            <mat-label>Difficulty</mat-label>
-            <input matInput type="number" class="form-control" placeholder="By difficulty" formControlName="difficulty"
-              color="primary" min="0" max="5">
+            <mat-label>{{ 'SEARCH.DIFFICULTY_LABEL' | translate }}</mat-label>
+            <input matInput type="number"  placeholder="{{ 'SEARCH.DIFFICULTY_LABEL' | translate }}"
+              formControlName="difficulty" color="primary" min="0" max="5">
           </mat-form-field>
 
           <mat-form-field color="primary" *ngIf="isAdvancedSearch">
-            <mat-label>Rating</mat-label>
-            <input matInput type="number" class="form-control" placeholder="By rating" formControlName="rating"
-              color="primary" min="0" max="5">
+            <mat-label>{{ 'SEARCH.RATING_LABEL' | translate }}</mat-label>
+            <input matInput type="number"  placeholder="{{ 'SEARCH.RATING_LABEL' | translate }}"
+              formControlName="rating" color="primary" min="0" max="5">
           </mat-form-field>
 
           <mat-form-field color="primary" *ngIf="isAdvancedSearch">
-            <mat-label>Tags</mat-label>
-            <input matInput type="text" class="form-control" placeholder="By tags" formControlName="tags"
-              color="primary">
+            <mat-label>{{ 'SEARCH.TAGS_LABEL' | translate }}</mat-label>
+            <input matInput type="text"  placeholder="{{ 'SEARCH.TAGS_LABEL' | translate }}"
+              formControlName="tags" color="primary">
           </mat-form-field>
 
           <mat-form-field color="primary">
-            <mat-label>Ingredients</mat-label>
-            <input matInput type="text" class="form-control" placeholder="By ingredients" formControlName="ingredients"
-              color="primary">
+            <mat-label>{{ 'SEARCH.INGREDIENTS_LABEL' | translate }}</mat-label>
+            <input matInput type="text"  placeholder="{{ 'SEARCH.INGREDIENTS_LABEL' | translate }}"
+              formControlName="ingredients" color="primary">
           </mat-form-field>
 
           <div>
             <button mat-flat-button color="primary" (click)="searchRecipes()">
-              Search
+              {{ 'SEARCH.SEARCH_BTN' | translate }}
             </button>
             <button mat-button class="ml-2" color="primary" (click)="resetForm()">
-              reset
+              {{ 'SEARCH.RESET_BTN' | translate }}
             </button>
           </div>
 
@@ -84,18 +86,18 @@
         <div class="col flex flex-column justify-content-center align-items-center">
 
           <mat-form-field color="primary">
-            <mat-label>Name</mat-label>
-            <input matInput type="text" class="form-control" placeholder="By name" formControlName="nameUser"
-              color="primary">
-            <mat-error>field needed</mat-error>
+            <mat-label>{{ 'SEARCH.NAME_LABEL' | translate }}</mat-label>
+            <input matInput type="text"  placeholder="{{ 'SEARCH.NAME_LABEL' | translate }}"
+              formControlName="nameUser" color="primary">
+            <mat-error>{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
           </mat-form-field>
 
           <div>
             <button mat-flat-button color="primary" (click)="searchUsers()">
-              Search
+              {{ 'SEARCH.SEARCH_BTN' | translate }}
             </button>
             <button mat-button class="ml-2" color="primary" (click)="resetForm()">
-              reset
+              {{ 'SEARCH.RESET_BTN' | translate }}
             </button>
           </div>
 
