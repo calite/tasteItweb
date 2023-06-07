@@ -100,4 +100,10 @@ export class LayoutPageComponent {
     });
   }
 
+  changeLanguage(language : string) {
+    language === this.translate.currentLang
+    localStorage.setItem('language', language); //multilenguage
+    this.translate.use(language)
+  }
+
 }

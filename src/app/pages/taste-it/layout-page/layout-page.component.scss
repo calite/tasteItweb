@@ -43,11 +43,16 @@ button.mat-fab {
     display: none;
 }
 
+.menu-fix {
+    min-width: none!important;
+}
+
 
 /* Estilos para dispositivos móviles */
 @media (max-width:767px) {
     .logo_mini {
-        display: none;
+        // margin-left: 50px;
+        width: 175px;
     }
 
     .menu-desktop {

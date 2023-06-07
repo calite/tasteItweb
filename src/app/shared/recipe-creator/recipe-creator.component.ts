@@ -12,6 +12,7 @@ import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -49,6 +50,7 @@ export class RecipeCreatorComponent {
   recipe: RecipesResponse[] = []
 
   constructor(
+    public translate: TranslateService,
     private apiService: ApiService,
     private toastService: ToastService,
     private storage: Storage,
@@ -64,6 +66,7 @@ export class RecipeCreatorComponent {
     })
     this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.token = this.currentUser.token;
+    this.translate.use(localStorage.getItem('language'))
   }
 
   ngOnChanges(changes: SimpleChanges) { //nos traemos los datos de la receta
@@ -125,7 +128,7 @@ export class RecipeCreatorComponent {
       this.formRecipe.addControl(controlName, new FormControl(''));
       this.steps.push({ name: controlName, placeholder: 'Enter step details', formControlName: controlName, value: '' });
     } else {
-      this.toastService.toastGenerator('', 'the limit of steps has been reached', 4, ToastPositionEnum.BOTTOM_LEFT);
+      this.toastService.toastGenerator('', this.translate.instant('CREATOR.STEP_LIMIT'), 4, ToastPositionEnum.BOTTOM_LEFT);
     }
 
   }
@@ -164,7 +167,7 @@ export class RecipeCreatorComponent {
   async onSubmitCreate() {
 
     if (this.imgUrl === '') {
-      this.toastService.toastGenerator('', 'pick the image', 4, ToastPositionEnum.BOTTOM_LEFT)
+      this.toastService.toastGenerator('', this.translate.instant('CREATOR.CHOOSE_PHOTO'), 4, ToastPositionEnum.BOTTOM_LEFT)
     }
 
     if (this.formRecipe.valid && this.imgUrl !== '') {
@@ -185,7 +188,7 @@ export class RecipeCreatorComponent {
       this.apiService.postCreateRecipe(this.token, name, description, country, this.imgUrl, difficulty, this.ingredients, steps)
         .subscribe(response => {
 
-          this.toastService.toastGenerator('', 'recipe created', 4, ToastPositionEnum.BOTTOM_LEFT)
+          this.toastService.toastGenerator('', this.translate.instant('CREATOR.CREATED_RECIPE'), 4, ToastPositionEnum.BOTTOM_LEFT)
           this.route.navigate([`./taste-it`])
 
         })
@@ -228,7 +231,7 @@ export class RecipeCreatorComponent {
       this.apiService.postEditRecipe(rid, name, description, country, this.imgUrl, difficulty, this.ingredients, steps)
         .subscribe(response => {
 
-          this.toastService.toastGenerator('', 'recipe edited', 4, ToastPositionEnum.BOTTOM_LEFT)
+          this.toastService.toastGenerator('', this.translate.instant('CREATOR.EDITED_RECIPE'), 4, ToastPositionEnum.BOTTOM_LEFT)
           this.route.navigate([`./taste-it/recipe/${rid}`])
 
         })
@@ -252,7 +255,7 @@ export class RecipeCreatorComponent {
 
   deleteRecipe() {
 
-    this.toastService.alertGenerator('Delete Confirmation', 'Are you sure? the data will be lost', 3)
+    this.toastService.alertGenerator(this.translate.instant('PROFILE.CONFIRM_DELETE_TITLE'), this.translate.instant('CREATOR.CONFIRM_DELETE'), 3)
 
       .subscribe((result) => {
         if (result.success === true) {
@@ -269,7 +272,9 @@ export class RecipeCreatorComponent {
 
           })
 
-          this.route.navigate(['./taste-it/home']);
+          this.route.navigate(['']).then(() => {
+            this.route.navigate(['./taste-it/']);
+          });
 
         }
       });

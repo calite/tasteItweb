@@ -4,6 +4,7 @@
     border: 5px solid #b92617;
     border-radius: 25px 25px 25px 25px;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .img-profile {
@@ -75,22 +76,27 @@
     z-index: 100;
 }
 
+.back-fix {
+    background-color: maroon;
+    border-radius: 0 0 45px 45px;
+}
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 767px) {
 
     .img-recipe {
-        height: 90px;
-        width: 90px;
+        height: 150px;
+        width: 150px;
     }
 
     .back-button {
-        top: 90%;
-        left: 10%;
+        top: 50%;
+        left: 1%;
     }
     
     .forward-button {
-        top: 90%;
-        right: 10%;
+        top: 50%;
+        right: 1%;
     }
 
     .card-random {

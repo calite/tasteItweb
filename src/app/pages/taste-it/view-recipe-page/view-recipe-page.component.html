@@ -66,7 +66,7 @@
                     <div class="user-card-little flex flex-row align-items-center justify-content-center">
 
                         <span class="flex flex-row align-items-center justify-content-center"
-                            [routerLink]="['../../profile', recipe[0].user.token]" matTooltip="{{ 'RECIPE.PROFILE_TOOLTIP' | translate }}">
+                            [routerLink]="['../../profile', recipe[0].user.token]" matTooltip="{{ 'RANDOM.PROFILE_TOOLTIP' | translate }}">
 
                             <img class="imgProfile" [src]="recipe[0].user.imgProfile">
                             <button mat-button color="warm">{{recipe[0].user.username | titlecase }}</button>
@@ -138,15 +138,15 @@
 
                         <div class="grid infoAdicional">
 
-                            <div class="col-6">
-                                <p><strong>{{ 'RECIPE.INFORMATION_TITLE' | translate }}:</strong></p>
+                            <div class="col-12 sm:col-6">
+                                <p><strong>{{ 'RECIPE.INGREDIENTS_TITLE' | translate }}:</strong></p>
                                 <mat-chip-set>
                                     <mat-chip *ngFor="let item of recipe[0].recipe.ingredients" class="chipCustom">
                                         {{ item }}</mat-chip>
                                 </mat-chip-set>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-12 sm:col-6">
                                 <p><strong>{{ 'RECIPE.DESCRIPTION_TITLE' | translate }}:</strong></p>
                                 <p>{{ recipe[0].recipe.description }}</p>
                                 <p><strong>{{ 'RECIPE.DIFFICULTY_TOOLTIP' | translate }}:</strong></p>
@@ -156,7 +156,7 @@
                             </div>
 
                             <div class="col-12">
-                                <p><strong>{{ 'RECIPE.COUNTRY_TOOLTIP' | translate }}:</strong></p>
+                                <p><strong>{{ 'RECIPE.TAGS_TITLE' | translate }}:</strong></p>
                                 <mat-chip-set>
                                     <mat-chip *ngFor="let item of recipe[0].recipe.tags" class="chipCustom">{{item |
                                         titlecase}}

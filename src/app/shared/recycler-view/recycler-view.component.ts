@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 

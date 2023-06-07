@@ -2,9 +2,9 @@
 
     <div class="col flex flex-column align-items-center justify-content-center mt-8">
 
-        <h1>Whoops!</h1>
+        <h1>{{ '404.TITLE' | translate }}</h1>
 
-        <h2>That URL doesnt exist!</h2>
+        <h2>{{ '404.NOT_FOUND' | translate }}</h2>
 
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="470" height="290" viewBox="0 0 470 290">
             <defs>
@@ -49,9 +49,9 @@
             </g>
         </svg>
 
-        <h3>Please go back home</h3>
+        <h3>{{ '404.BACK_HOME' | translate }}</h3>
 
-        <h4><button mat-raised-button color="primary" (click)="goHome()">HOME</button></h4>
+        <h4><button mat-raised-button color="primary" (click)="goHome()">{{ 'MENU.HOME' | translate }}</button></h4>
 
     </div>
 

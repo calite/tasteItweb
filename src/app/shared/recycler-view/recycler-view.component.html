@@ -19,25 +19,25 @@
 
 
 <div class="grid p-3 flex align-items-center justify-content-center">
-    <mat-card *ngFor="let recipe of recipes" class="col-12 sm:col-3 cards">
+    <mat-card *ngFor="let recipe of recipes" class="col-12 lg:col-4 md:col-6 cards">
         <mat-card-header>
             <div mat-card-avatar>
-                <img class="imgProfile" [src]="recipe.user.imgProfile!" (click)="viewProfileCreator(recipe.user.token)">
+                <img class="imgProfile" [src]="recipe.user.imgProfile!" (click)="viewProfileCreator(recipe.user.token)" matTooltip="{{ 'RANDOM.PROFILE_TOOLTIP' | translate }}">
             </div>
-            <mat-card-title matTooltip="Name of the creator" (click)="viewProfileCreator(recipe.user.token)">{{ recipe.user.username | titlecase }}</mat-card-title>
-            <mat-card-subtitle matTooltip="Name of the recipe" (click)="viewRecipe(recipe.recipeId)">{{ recipe.recipe.name | slice:0:45 }}<span *ngIf="recipe.recipe.name.length > 45">...</span>
+            <mat-card-title matTooltip="{{ 'RECIPE.CREATOR_NAME' | translate }}" (click)="viewProfileCreator(recipe.user.token)">{{ recipe.user.username | titlecase }}</mat-card-title>
+            <mat-card-subtitle matTooltip="{{ 'RECIPE.RECIPE_NAME_TOOLTIP' | translate }}" (click)="viewRecipe(recipe.recipeId)">{{ recipe.recipe.name | slice:0:45 }}<span *ngIf="recipe.recipe.name.length > 45">...</span>
                 </mat-card-subtitle>
         </mat-card-header>
         <div class="flex align-items-center justify-content-center imgContainer">
             <img class="imgRecipeCard" [src]="recipe.recipe.image" alt=""
                 (click)="viewRecipe(recipe.recipeId)" />
 
-                <button mat-mini-fab matTooltip="Rating" class="ratingContainer" color="primary">
+                <button mat-mini-fab matTooltip="{{ 'RANDOM.RATING_TOOLTIP' | translate }}" class="ratingContainer" color="primary">
                     <mat-icon>star</mat-icon>
                     {{ recipe.recipe.rating | number: '.0-1' }}
                 </button>
 
-                <button mat-mini-fab matTooltip="Difficulty" class="difficultyContainer" color="primary">
+                <button mat-mini-fab matTooltip="{{ 'RECIPE.DIFFICULTY_TOOLTIP' | translate }}" class="difficultyContainer" color="primary">
                     <mat-icon>speed</mat-icon>
                     {{ recipe.recipe.difficulty }}
                 </button>

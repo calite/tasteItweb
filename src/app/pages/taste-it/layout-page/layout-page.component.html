@@ -2,7 +2,7 @@
 
   <!--Menu movil-->
 
-  <div class="flex align-items-start flex-wrap menu_mobile">
+  <div class="flex align-items-start menu_mobile">
 
     <button mat-icon-button [matMenuTriggerFor]="menuMobile">
       <mat-icon>menu</mat-icon>
@@ -64,14 +64,33 @@
 
   <div class="flex align-items-center justify-content-center">
 
-    <button mat-button *ngIf="isAdmin" (click)="goBackend()" matTooltip="{{ 'MENU.BACKEND' | translate }}"><mat-icon fontIcon="security"></mat-icon></button>
-
-    <button mat-button (click)="onLogout()">
-      <mat-icon>logout</mat-icon>
-      <span>{{ 'MENU.LOGOUT' | translate }}</span>
+    <button mat-button [matMenuTriggerFor]="options" class="menu-fix">
+      <mat-icon>more_vert</mat-icon>
     </button>
+    <mat-menu #options="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="languages">
+        <mat-icon>translate</mat-icon>
+        {{ 'MENU.LANGS' | translate }}
+      </button>
 
-    <img class="imgProfile" matTooltip="{{ 'MENU.YOUR_PROFILE' | translate }}" [src]="currentUser.imgProfile!" (click)="goProfile()">
+      <button mat-menu-item *ngIf="isAdmin" (click)="goBackend()">
+        <mat-icon>security</mat-icon>
+        <span>{{ 'MENU.BACKEND' | translate }}</span>
+      </button>
+
+      <button mat-menu-item (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        <span>{{ 'MENU.LOGOUT' | translate }}</span>
+      </button>
+    </mat-menu>
+
+    <mat-menu #languages="matMenu">
+      <button mat-menu-item (click)="changeLanguage('en-GB')">{{ 'MENU.EN' | translate }}</button>
+      <button mat-menu-item (click)="changeLanguage('es-ES')">{{ 'MENU.ES' | translate }}</button>
+    </mat-menu>
+
+    <img class="imgProfile" matTooltip="{{ 'MENU.YOUR_PROFILE' | translate }}" [src]="currentUser.imgProfile!"
+      (click)="goProfile()">
 
   </div>
 

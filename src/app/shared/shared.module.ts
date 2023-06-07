@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { RecipeCreatorComponent } from './recipe-creator/recipe-creator.component';
 import { RecyclerViewComponent } from './recycler-view/recycler-view.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -41,7 +42,8 @@ import { RecyclerViewComponent } from './recycler-view/recycler-view.component';
     RouterModule,
     MaterialModule,
     ReactiveFormsModule,
-    BarRatingModule
+    BarRatingModule,
+    TranslateModule
   ]
 })
 export class SharedModule { }

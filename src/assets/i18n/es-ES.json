@@ -3,7 +3,9 @@
         "CANCEL": "Cancelar",
         "RESET": "Reiniciar",
         "OK": "Aceptar",
-        "GREAT": "Genial!"
+        "GREAT": "¡Genial!",
+        "SAY_SOMETHING": "Escribe algo",
+        "LOADING": "Cargando..."
     },
     "LOGIN": {
         "PASS": "Contraseña",
@@ -16,15 +18,15 @@
         "RESET_PASS": "¿Has olvidado tu contraseña?",
         "RESET_PASS_TITLE": "Reiniciar Contraseña",
         "RESET_REGISTER_TITLE": "Registro",
-        "REGISTER_BTN": "Registrarse!",
+        "REGISTER_BTN": "¡Registrarse!",
         "ACC_ALREADY": "¿Ya tienes una cuenta?",
         "INVALID_PASS_MSG": "La contraseña debe tener al menos 6 caracteres",
         "EMAIL_SENT": "Un correo fue enviado a {{email}}",
-        "EMAIL_REGISTERED": "Ese email no esta registrado",
-        "ERR_LOGIN": "email o contraseña incorrectos",
+        "EMAIL_REGISTERED": "Ese email no está registrado",
+        "ERR_LOGIN": "Email o contraseña incorrectos",
         "NO_ACC_WARNING": "Parece que no tienes una cuenta, ¿Quieres registrarte?",
-        "ALMOST_DONE": "Ya casi estas, haz login para comenzar!",
-        "EMAIL_USED": "Ese email ya esta en uso"
+        "ALMOST_DONE": "¡Ya casi estás, haz login para comenzar!",
+        "EMAIL_USED": "Ese email ya está en uso"
     },
     "MENU": {
         "RECIPES": "RECETAS",
@@ -35,18 +37,21 @@
         "MY_BOOK": "MI LIBRO",
         "LOGOUT": "Salir",
         "BACKEND": "Administración",
-        "YOUR_PROFILE": "Tu perfil"
+        "YOUR_PROFILE": "Tu perfil",
+        "LANGS": "Lenguajes",
+        "EN": "Inglés",
+        "ES": "Español"
     },
     "HOME": {
         "CREATE_RECIPE": "Crear receta",
-        "NO_MORE_RECIPES": "No hay mas recetas"
+        "NO_MORE_RECIPES": "No hay más recetas"
     },
     "MY_BOOK": {
         "RECIPES": "Recetas",
         "MY_RECIPES": "Mis recetas",
         "MY_LIKED_RECIPES": "Mis likes en recetas",
         "MY_FOLLOWED_RECIPES": "Recetas de mis seguidores",
-        "NO_RECIPES_FOLLOWED": "No estas siguiendo a ningún usuario",
+        "NO_RECIPES_FOLLOWED": "No estás siguiendo a ningún usuario",
         "NO_RECIPES_LIKED": "No tienes ningún like en recetas",
         "NO_RECIPES": "No tienes ninguna receta",
         "GO_SEARCH": "Buscar",
@@ -58,27 +63,27 @@
         "CHANGE_PHOTO": "Cambiar tu foto",
         "USERNAME": "Apodo",
         "USERNAM_NEEDED": "Apodo necesario",
-        "BIOGRAPHY": "Biografia",
-        "BIOGRAPHY_TOO_LARGE": "Biografia demasiado larga, maximo 250 caracteres",
-        "BIOGRAPHY_NEEDED": "Biografia necesaria",
-        "EDIT_USER": "Editar ususario",
+        "BIOGRAPHY": "Biografía",
+        "BIOGRAPHY_TOO_LARGE": "Biografía demasiado larga, máximo 250 caracteres",
+        "BIOGRAPHY_NEEDED": "Biografía necesaria",
+        "EDIT_USER": "Editar usuario",
         "DELETE_ACC": "Borrar cuenta",
         "NOT_OWNER": "No eres el propietario de esa cuenta",
         "PASS_NOT_EQUAL": "Las contraseñas no son iguales",
         "UPDATED": "Perfil actualizado",
         "CONFIRM_DELETE_TITLE": "Confirmación",
-        "CONFIRM_DELETE": "¿Estas seguro que quieres borrar tu cuenta? Todos tus datos seran perdidos",
-        "FOLLOW": "Empezando a seguir",
-        "NO_FOLLOW": "Dejar de seguir",
+        "CONFIRM_DELETE": "¿Estás seguro que quieres borrar tu cuenta? Todos tus datos serán perdidos",
+        "FOLLOW": "Empiezas a seguir",
+        "NO_FOLLOW": "Dejas de seguir",
         "TITLE": "Perfil",
         "FOLLOW_BTN": "Seguir",
         "FOLLOW_BTN_TOOLTIP": "Seguir a este usuario",
         "UNFOLLOW_BTN": "No seguir",
-        "UNFOLLOW_BTN_TOOLTIP": "dejar de Seguir a este usuario",
+        "UNFOLLOW_BTN_TOOLTIP": "Dejar de seguir a este usuario",
         "RECIPES_BTN": "Recetas",
         "RECIPES_BTN_TOOLTIP": "Ver recetas",
         "LIKES_BTN": "Likes",
-        "LIKES_BTN_TOOLTIP": "View likes",
+        "LIKES_BTN_TOOLTIP": "Ver likes",
         "FOLLOWERS_BTN": "Seguidores",
         "FOLLOWERS_BTN_TOOLTIP": "Ver seguidores",
         "FOLLOWING_BTN": "Siguiendo",
@@ -87,8 +92,10 @@
         "COMMENT_BTN": "Comentar",
         "COMMENT_BTN_TOOLTIP": "Comentar a este usuario",
         "COMMENTS": "Comentarios",
+        "COMMENT": "Comentario",
         "EDIT_BTN": "Editar perfil",
-        "EDIT_BTN_TOOLTIP": "Editar tu perfil"
+        "EDIT_BTN_TOOLTIP": "Editar tu perfil",
+        "COMMENT_ALERT": "Usuario commentado"
     },
     "RANDOM": {
         "LIKES_TOOLTIP": "Likes",
@@ -101,12 +108,12 @@
         "INGREDIENTS_TITLE": "Ingredientes",
         "DESCRIPTION_TITLE": "Descripción",
         "STEPS_TITLE": "Pasos",
-        "PREVIOUS_RECIPE_TOOLTIP": "Anterior receta",
+        "PREVIOUS_RECIPE_TOOLTIP": "Receta anterior",
         "NEXT_RECIPE_TOOLTIP": "Siguiente receta",
-        "MORE_RECIPES_TOOLTIP": "Mas recetas"
+        "MORE_RECIPES_TOOLTIP": "Más recetas"
     },
     "SEARCH": {
-        "HIDE_SEARCH_BTN_TOOLTIP": "Mostar/ocultar buscador",
+        "HIDE_SEARCH_BTN_TOOLTIP": "Mostrar/Ocultar buscador",
         "SEARCH_RECIPES_TITLES": "Buscar recetas",
         "SEARCH_USERS_TITLES": "Buscar usuarios",
         "USERS_FILTER_TOOLTIP": "Filtro de usuarios",
@@ -114,34 +121,32 @@
         "NAME_LABEL": "Nombre",
         "COUNTRY_LABEL": "Ciudad",
         "DIFFICULTY_LABEL": "Dificultad",
-        "RATING_LABEL": "Rating",
+        "RATING_LABEL": "Puntuación",
         "TAGS_LABEL": "Tags",
         "INGREDIENTS_LABEL": "Ingredientes",
         "SEARCH_BTN": "Buscar",
-        "RESET_BTN": "Reinciar",
-        "ERR_FIELD": "Campo necesario"
+        "RESET_BTN": "Reiniciar",
+        "ERR_FIELD": "Campo necesario",
+        "INFO_COMAS" : "Ej: tomate, pollo"
     },
     "RECIPE": {
         "USERNAME_TOOLTIP": "Usuario",
-        "PROFILE_TOOLTIP": "Profile",
+        "PROFILE_TOOLTIP": "Perfil",
         "NO_COMMENTS": "Esta receta no ha sido comentada aún.",
-        "LIKED_TOAST" : "Has dado like a la receta",
-        "DISLIKED_TOAST" : "Has quitado el like a la receta",
-
-        "RECIPE_NAME_TOOLTIP" : "Nombre de la receta",
-        "LIKE_RECIPE_TOOLTIP" : "Da Like a esta receta",
-        "DISLIKE_RECIPE_TOOLTIP" : "Quita el like a esta receta",
-        "RATE_RECIPE_TOOLTIP" : "Puntua esta receta",
-
-        "REPORT_RECIPE_TOOLTIP" : "Denunciar esta receta",
-        "EDIT_RECIPE_TOOLTIP" : "Editar la receta",
-        "LIKE_BTN" : "Like",
-        "DISLIKE_BTN" : "Quitar like",
-        "RATE_BTN" : "Puntuar",
-        "REPORT_BTN" : "Reportar",
-        "EDIT_BTN" : "Editar",
-
-        "RECIPE_TITLE" : "Receta",
+        "LIKED_TOAST": "Has dado like a la receta",
+        "DISLIKED_TOAST": "Has quitado el like a la receta",
+        "RECIPE_NAME_TOOLTIP": "Nombre de la receta",
+        "LIKE_RECIPE_TOOLTIP": "Dar like a esta receta",
+        "DISLIKE_RECIPE_TOOLTIP": "Quitar el like a esta receta",
+        "RATE_RECIPE_TOOLTIP": "Puntuar esta receta",
+        "REPORT_RECIPE_TOOLTIP": "Denunciar esta receta",
+        "EDIT_RECIPE_TOOLTIP": "Editar la receta",
+        "LIKE_BTN": "Dar like",
+        "DISLIKE_BTN": "Quitar like",
+        "RATE_BTN": "Puntuar",
+        "REPORT_BTN": "Reportar",
+        "EDIT_BTN": "Editar",
+        "RECIPE_TITLE": "Receta",
         "INGREDIENTS_TITLE": "Ingredientes",
         "INFORMATION_TITLE": "Información",
         "COMMENTS": "Comentarios",
@@ -149,8 +154,38 @@
         "STEPS_TITLE": "Pasos",
         "STEP_TITLE": "Paso",
         "TAGS_TITLE": "Tags",
-        "DIFFICULTY_TOOLTIP": "Difficultad",
+        "DIFFICULTY_TOOLTIP": "Dificultad",
         "RATING_TOOLTIP": "Puntuación",
-        "COUNTRY_TOOLTIP": "País"
+        "COUNTRY_TOOLTIP": "País",
+        "CREATOR_NAME": "Nombre del creador"
+    },
+    "404": {
+        "TITLE": "¡Vaya!",
+        "NOT_FOUND": "Esa URL no existe",
+        "BACK_HOME": "Por favor regresa al inicio"
+    },
+    "RATE": {
+        "TITLE": "Puntúa esta receta"
+    },
+    "CREATOR": {
+        "EDIT_TITLE": "Editar receta",
+        "DELETE": "Borrar receta",
+        "CHOOSE_PHOTO": "Elige la foto",
+        "PHOTO_NEEDED": "Foto necesaria",
+        "DESCRIPTION_LABEL": "Descripción",
+        "ADD_ING": "Añadir ingrediente",
+        "ADD_STEP": "Añadir paso",
+        "LIST_ING": "Lista de ingredientes",
+        "LIST_STEPS": "Lista de pasos",
+        "DELETE_STEP": "Borrar paso",
+        "DESC_STEP": "Describe el paso",
+        "STEP_LIMIT": "Se ha alcanzado el límite de pasos",
+        "CREATED_RECIPE": "Receta creada",
+        "EDITED_RECIPE": "Receta editada",
+        "CONFIRM_DELETE": "¿Estás seguro que quieres borrar la receta?"
+    },
+    "REPORT": {
+        "TITLE": "¿Por qué quieres denunciar la receta?",
+        "REASON": "Motivo"
     }
 }

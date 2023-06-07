@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { RecipesResponse } from 'src/app/core/interfaces/recipe.interface';
 import { UserResponse } from 'src/app/core/interfaces/user.interface';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-recipes-dialog',
@@ -20,6 +21,7 @@ export class ViewRecipesDialogComponent implements OnInit {
   private userToken;
 
   constructor(
+    public translate: TranslateService,
     private apiService: ApiService,
     private router : Router,
     private dialogRef: MatDialogRef<ViewRecipesDialogComponent>,
@@ -27,7 +29,9 @@ export class ViewRecipesDialogComponent implements OnInit {
   ) {
     this.userToken = this.data['userToken']
     this.option = this.data['option']
+    this.translate.use(localStorage.getItem('language'))
   }
+  
   ngOnInit(): void {
     if (this.option == 'recipes') {
       this.apiService.getRecipesByUser(this.userToken, 0).subscribe(response => {

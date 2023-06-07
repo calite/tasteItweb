@@ -3,7 +3,9 @@
         "CANCEL": "Cancel",
         "RESET": "Reset!",
         "OK": "Ok!",
-        "GREAT": "Great!"
+        "GREAT": "Great!",
+        "SAY_SOMETHING": "Say something!",
+        "LOADING": "Loading..."
     },
     "LOGIN": {
         "PASS": "Password",
@@ -35,7 +37,10 @@
         "MY_BOOK": "MY BOOK",
         "BACKEND": "Backend",
         "LOGOUT": "Logout",
-        "YOUR_PROFILE": "Your profile"
+        "YOUR_PROFILE": "Your profile",
+        "LANGS": "Languages",
+        "EN": "English",
+        "ES": "Spanish"
     },
     "HOME": {
         "CREATE_RECIPE": "Create recipe",
@@ -87,8 +92,10 @@
         "COMMENT_BTN": "Comment",
         "COMMENT_BTN_TOOLTIP": "Comment this user",
         "COMMENTS": "Comments",
+        "COMMENT": "Comment",
         "EDIT_BTN": "Edit profile",
-        "EDIT_BTN_TOOLTIP": "Edit your profile"
+        "EDIT_BTN_TOOLTIP": "Edit your profile",
+        "COMMENT_ALERT" : "User commented"
     },
     "RANDOM": {
         "LIKES_TOOLTIP": "Likes",
@@ -96,14 +103,14 @@
         "RATING_TOOLTIP": "Rating",
         "PROFILE_TOOLTIP": "Go to profile",
         "FOLLOWERS_TOOLTIP": "Followers",
-        "VIEW_FOLLOWERS_TOOLTIP": "Ver followers",
+        "VIEW_FOLLOWERS_TOOLTIP": "View followers",
         "PHOTO_TOOLTIP": "Go to recipe",
         "INGREDIENTS_TITLE": "Ingredients",
         "DESCRIPTION_TITLE": "Description",
         "STEPS_TITLE": "Steps",
         "PREVIOUS_RECIPE_TOOLTIP": "Previous Recipe",
         "NEXT_RECIPE_TOOLTIP": "Next recipe",
-        "MORE_RECIPES_TOOLTIP": "More recipe"
+        "MORE_RECIPES_TOOLTIP": "More recipes"
     },
     "SEARCH": {
         "HIDE_SEARCH_BTN_TOOLTIP": "Show/hide search box",
@@ -119,30 +126,27 @@
         "INGREDIENTS_LABEL": "Ingredients",
         "SEARCH_BTN": "Search",
         "RESET_BTN": "Reset",
-        "ERR_FIELD": "Field needed"
+        "ERR_FIELD": "Field needed",
+        "INFO_COMAS" : "Ex: tomato, chicken"
     },
     "RECIPE": {
-        "USERNAME_TOOLTIP": "Usuario",
+        "USERNAME_TOOLTIP": "User",
         "PROFILE_TOOLTIP": "Profile",
         "NO_COMMENTS": "Nobody commented this recipe yet.",
-        "LIKED_TOAST" : "recipe liked",
-        "DISLIKED_TOAST" : "recipe disliked",
-
-        "RECIPE_NAME_TOOLTIP" : "Nombre de la receta",
-        "LIKE_RECIPE_TOOLTIP" : "Da Like a esta receta",
-        "DISLIKE_RECIPE_TOOLTIP" : "Quita el like a esta receta",
-        "RATE_RECIPE_TOOLTIP" : "Puntua esta receta",
-
-        "REPORT_RECIPE_TOOLTIP" : "Report this recipe",
-        "EDIT_RECIPE_TOOLTIP" : "Edit this recipe",
-        "LIKE_BTN" : "Like",
-        "DISLIKE_BTN" : "Dislike",
-        "RATE_BTN" : "Rate",
-        "REPORT_BTN" : "Report",
-        "EDIT_BTN" : "Edit",
-
-
-        "RECIPE_TITLE" : "Recipe",
+        "LIKED_TOAST": "recipe liked",
+        "DISLIKED_TOAST": "recipe disliked",
+        "RECIPE_NAME_TOOLTIP": "Name of the recipe",
+        "LIKE_RECIPE_TOOLTIP": "Like recipe",
+        "DISLIKE_RECIPE_TOOLTIP": "Dislike recipe",
+        "RATE_RECIPE_TOOLTIP": "Rate this recipe",
+        "REPORT_RECIPE_TOOLTIP": "Report this recipe",
+        "EDIT_RECIPE_TOOLTIP": "Edit this recipe",
+        "LIKE_BTN": "Like",
+        "DISLIKE_BTN": "Dislike",
+        "RATE_BTN": "Rate",
+        "REPORT_BTN": "Report",
+        "EDIT_BTN": "Edit",
+        "RECIPE_TITLE": "Recipe",
         "INGREDIENTS_TITLE": "Ingredients",
         "INFORMATION_TITLE": "Information",
         "COMMENTS": "Comments",
@@ -152,8 +156,36 @@
         "TAGS_TITLE": "Tags",
         "DIFFICULTY_TOOLTIP": "Difficulty",
         "RATING_TOOLTIP": "Rating",
-        "COUNTRY_TOOLTIP": "Country"
-    
-    
+        "COUNTRY_TOOLTIP": "Country",
+        "CREATOR_NAME": "Name of the creator"
+    },
+    "404": {
+        "TITLE": "Whoops!",
+        "NOT_FOUND": "That URL doesnt exist!",
+        "BACK_HOME": "Please go back home"
+    },
+    "RATE": {
+        "TITLE": "Rate this recipe"
+    },
+    "CREATOR": {
+        "EDIT_TITLE": "Edit recipe",
+        "DELETE": "Delete recipe",
+        "CHOOSE_PHOTO": "Choose the photo",
+        "PHOTO_NEEDED": "Photo needed",
+        "DESCRIPTION_LABEL": "Description",
+        "ADD_ING": "Add ingredient",
+        "ADD_STEP": "Add step",
+        "LIST_ING": "List of ingredients",
+        "LIST_STEPS": "List of steps",
+        "DELETE_STEP": "Delete step",
+        "DESC_STEP": "Enter step details",
+        "STEP_LIMIT": "the limit of steps has been reached",
+        "CREATED_RECIPE": "Recipe created",
+        "EDITED_RECIPE": "Recipe edited",
+        "CONFIRM_DELETE": "Are you sure? The recipe will be deleted"
+    },
+    "REPORT": {
+        "TITLE": "Why do you want to report the recipe?",
+        "REASON": "Reason"
     }
 }

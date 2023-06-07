@@ -1,9 +1,9 @@
 <div class="mt-8">
 
-    <h1 *ngIf="!editRecipe">Create recipe</h1>
-    <h1 *ngIf="editRecipe">Edit recipe</h1>
+    <h1 *ngIf="!editRecipe">{{ 'HOME.CREATE_RECIPE' | translate }}</h1>
+    <h1 *ngIf="editRecipe">{{ 'CREATOR.EDIT_TITLE' | translate }}</h1>
 
-    <button mat-button *ngIf="editRecipe" (click)="deleteRecipe()" color="warn">Delete Recipe</button>
+    <button mat-button *ngIf="editRecipe" (click)="deleteRecipe()" color="warn">{{ 'CREATOR.DELETE' | translate }}</button>
 
     <form [formGroup]="formRecipe" class="form-desktop">
 
@@ -17,24 +17,24 @@
                     </label>
                     <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgRecipe"
                         class="inputImage" (change)="onFileSelected($event)">
-                    <img matTooltip="Choose the photo" [src]="imgUrl" alt="" class="imgRecipe">
-                    <mat-error *ngIf="formRecipe.controls.imgRecipe.invalid">image needed</mat-error>
+                    <img matTooltip="{{ 'CREATOR.CHOOSE_PHOTO' | translate }}" [src]="imgUrl" alt="" class="imgRecipe">
+                    <mat-error *ngIf="formRecipe.controls.imgRecipe.invalid">{{ 'CREATOR.PHOTO_NEEDED' | translate }}</mat-error>
                 </label>
 
             </div>
 
             <div class="col-2 flex flex-column align-items-center justify-content-center">
-                <button mat-fab matTooltip="Create recipe" color="primary" (click)="onSubmitCreate()" class="mt-2"
+                <button mat-fab matTooltip="{{ 'HOME.CREATE_RECIPE' | translate }}" color="primary" (click)="onSubmitCreate()" class="mt-2"
                     *ngIf="!editRecipe">
                     <mat-icon>save</mat-icon>
                 </button>
 
-                <button mat-fab matTooltip="Edit Recipe" color="primary" (click)="onSubmitEdit()" class="mt-2"
+                <button mat-fab matTooltip="{{ 'CREATOR.EDIT_TITLE' | translate }}" color="primary" (click)="onSubmitEdit()" class="mt-2"
                     *ngIf="editRecipe">
                     <mat-icon>save</mat-icon>
                 </button>
 
-                <button mat-fab matTooltip="cancel" color="primary" (click)="onCancel()" class="mt-5">
+                <button mat-fab matTooltip="{{ 'COMMON.CANCEL' | translate }}" color="primary" (click)="onCancel()" class="mt-5">
                     <mat-icon>close</mat-icon>
                 </button>
             </div>
@@ -42,26 +42,26 @@
             <div class="col-5 flex flex-column  align-items-center justify-content-center">
 
                 <mat-form-field class="col-6">
-                    <mat-label>Recipe Name</mat-label>
-                    <input matInput type="text" placeholder="Recipe Name" name="recipeName"
+                    <mat-label>{{ 'SEARCH.NAME_LABEL' | translate }}</mat-label>
+                    <input matInput type="text" placeholder="{{ 'SEARCH.NAME_LABEL' | translate }}" name="recipeName"
                         formControlName="recipeName">
-                    <mat-error *ngIf="formRecipe.controls.recipeName.invalid">name needed</mat-error>
+                    <mat-error *ngIf="formRecipe.controls.recipeName.invalid">{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="col-6">
 
-                    <mat-label>Country</mat-label>
-                    <mat-select placeholder="Country" name="country" formControlName="country">
+                    <mat-label>{{ 'SEARCH.COUNTRY_LABEL' | translate }}</mat-label>
+                    <mat-select placeholder="{{ 'SEARCH.COUNTRY_LABEL' | translate }}" name="country" formControlName="country">
                         <mat-option *ngFor="let item of countries" [value]="item">
                             {{item}}
                         </mat-option>
                     </mat-select>
-                   <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error>
+                   <mat-error *ngIf="formRecipe.controls.country.invalid">{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
 
                 </mat-form-field>
 
                 <section>
-                    <label>Difficulty: </label>
+                    <label>{{ 'SEARCH.DIFFICULTY_LABEL' | translate }}: </label>
                     <mat-slider min="0" max="5" step="1" showTickMarks discrete>
                         <input type="range" matSliderThumb formControlName="difficulty">
                     </mat-slider>
@@ -76,23 +76,23 @@
             <div class="col-5">
 
                 <mat-form-field class="text-area-description">
-                    <mat-label>Description</mat-label>
-                    <textarea matInput type="text" placeholder="Description" name="description"
+                    <mat-label>{{ 'CREATOR.DESCRIPTION_LABEL' | translate }}</mat-label>
+                    <textarea matInput type="text" placeholder="{{ 'CREATOR.DESCRIPTION_LABEL' | translate }}" name="description"
                         formControlName="description" rows="3"></textarea>
-                    <mat-error *ngIf="formRecipe.controls.description.invalid">description needed</mat-error>
+                    <mat-error *ngIf="formRecipe.controls.description.invalid">{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
                 </mat-form-field>
 
 
                 <div class="flex flex-column align-items-center justify-content-center">
 
                     <mat-form-field class="col-12">
-                        <input matInput placeholder="Add ingredients" name="newIngredient"
+                        <input matInput placeholder="{{ 'CREATOR.ADD_ING' | translate }}" name="newIngredient"
                             formControlName="newIngredient" [matChipInputFor]="ingredientsList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                             (matChipInputTokenEnd)="addIngredient($event)">
                     </mat-form-field>
 
-                    <h2 *ngIf="ingredients.length > 0">List of ingredients</h2>
+                    <h2 *ngIf="ingredients.length > 0">{{ 'CREATOR.LIST_ING' | translate }}</h2>
 
                     <mat-chip-grid #ingredientsList [ngClass]="{ 'hidden': isIngredientsEmpty() }"
                         class="grid-ingredients">
@@ -112,7 +112,7 @@
 
                 <div class="col-6 flex flex-column align-items-center justify-content-center">
 
-                    <button mat-fab matTooltip="Add step" (click)="addStep()" color="primary" class="mb-8">
+                    <button mat-fab matTooltip="{{ 'CREATOR.ADD_STEP' | translate }}" (click)="addStep()" color="primary" class="mb-8">
                         <mat-icon>add</mat-icon>
                     </button>
 
@@ -122,17 +122,17 @@
 
             <div class="col-5">
 
-                <h2 *ngIf="steps.length > 0">List of Steps</h2>
+                <h2 *ngIf="steps.length > 0">{{ 'CREATOR.LIST_STEPS' | translate }}</h2>
 
                 <div *ngFor="let step of steps; let i = index" class="flex align-items-center justify-content-center">
 
                     <mat-form-field class="flex justify-content-center align-items-center text-area-description">
-                        <mat-label>Step {{i+1}}</mat-label>
-                        <textarea matInput type="text" [name]="step.name" [placeholder]="step.placeholder"
+                        <mat-label>{{ 'RECIPE.STEP_TITLE' | translate }} {{i+1}}</mat-label>
+                        <textarea matInput type="text" [name]="step.name" placeholder="{{ 'CREATOR.DESC_STEP' | translate }}"
                             [formControlName]="step.name" [value]="step.value" rows="3"></textarea>
                     </mat-form-field>
 
-                    <button mat-fab matTooltip="delete step" class="m-1" color="primary" (click)="removeStep(i)">
+                    <button mat-fab matTooltip="{{ 'CREATOR.DELETE_STEP' | translate }}" class="m-1" color="primary" (click)="removeStep(i)">
                         <mat-icon>close</mat-icon>
                     </button>
 
@@ -155,25 +155,25 @@
                 <label>
                     <input type="file" accept="image/png, image/jpeg, image/png" formControlName="imgRecipe"
                         class="inputImage" (change)="onFileSelected($event)">
-                    <img matTooltip="Choose the photo" [src]="imgUrl" alt="" class="imgRecipe">
-                    <mat-error *ngIf="formRecipe.controls.imgRecipe.invalid">image needed</mat-error>
+                    <img matTooltip="{{ 'CREATOR.CHOOSE_PHOTO' | translate }}" [src]="imgUrl" alt="" class="imgRecipe">
+                    <mat-error *ngIf="formRecipe.controls.imgRecipe.invalid">{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
                 </label>
 
             </div>
 
             <div class="col-12 flex align-items-center justify-content-center">
 
-                <button mat-fab matTooltip="Create recipe" color="primary" (click)="onSubmitCreate()" class="mt-2 mr-2"
+                <button mat-fab matTooltip="{{ 'HOME.CREATE_RECIPE' | translate }}" color="primary" (click)="onSubmitCreate()" class="mt-2 mr-2"
                     *ngIf="!editRecipe">
                     <mat-icon>save</mat-icon>
                 </button>
 
-                <button mat-fab matTooltip="Edit Recipe" color="primary" (click)="onSubmitEdit()" class="mt-2 mr-2"
+                <button mat-fab matTooltip="{{ 'CREATOR.EDIT_TITLE' | translate }}" color="primary" (click)="onSubmitEdit()" class="mt-2 mr-2"
                     *ngIf="editRecipe">
                     <mat-icon>save</mat-icon>
                 </button>
 
-                <button mat-fab matTooltip="cancel" color="primary" (click)="onCancel()" class="mt-2 ml-2">
+                <button mat-fab matTooltip="{{ 'COMMON.CANCEL' | translate }}" color="primary" (click)="onCancel()" class="mt-2 ml-2">
                     <mat-icon>close</mat-icon>
                 </button>
 
@@ -182,29 +182,26 @@
             <div class="col-12 flex flex-column  align-items-center justify-content-center">
 
                 <mat-form-field class="col-6">
-                    <mat-label>Recipe Name</mat-label>
-                    <input matInput type="text" placeholder="Recipe Name" name="recipeName"
+                    <mat-label>{{ 'SEARCH.NAME_LABEL' | translate }}</mat-label>
+                    <input matInput type="text" placeholder="{{ 'SEARCH.NAME_LABEL' | translate }}" name="recipeName"
                         formControlName="recipeName">
-                    <mat-error *ngIf="formRecipe.controls.recipeName.invalid">name needed</mat-error>
+                    <mat-error *ngIf="formRecipe.controls.recipeName.invalid">{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="col-6">
-                    <!-- <mat-label>Country</mat-label>
-                    <input matInput type="text" placeholder="Country" name="country" formControlName="country">
-                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error> -->
 
-                    <mat-label>Country</mat-label>
-                    <mat-select placeholder="Country" name="country" formControlName="country">
+                    <mat-label>{{ 'SEARCH.COUNTRY_LABEL' | translate }}</mat-label>
+                    <mat-select placeholder="{{ 'SEARCH.COUNTRY_LABEL' | translate }}" name="country" formControlName="country">
                         <mat-option *ngFor="let item of countries" [value]="item">
                             {{item}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="formRecipe.controls.country.invalid">country needed</mat-error>
+                    <mat-error *ngIf="formRecipe.controls.country.invalid">{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
 
                 </mat-form-field>
 
                 <section>
-                    <label>Difficulty: </label>
+                    <label>{{ 'SEARCH.DIFFICULTY_LABEL' | translate }}: </label>
                     <mat-slider min="0" max="5" step="1" showTickMarks discrete>
                         <input type="range" matSliderThumb formControlName="difficulty">
                     </mat-slider>
@@ -219,10 +216,10 @@
             <div class="col-6">
 
                 <mat-form-field class="text-area-description">
-                    <mat-label>Description</mat-label>
-                    <textarea matInput type="text" placeholder="Description" name="description"
+                    <mat-label>{{ 'CREATOR.DESCRIPTION_LABEL' | translate }}</mat-label>
+                    <textarea matInput type="text" placeholder="{{ 'CREATOR.DESCRIPTION_LABEL' | translate }}" name="description"
                         formControlName="description" rows="5"></textarea>
-                    <mat-error *ngIf="formRecipe.controls.description.invalid">description needed</mat-error>
+                    <mat-error *ngIf="formRecipe.controls.description.invalid">{{ 'SEARCH.ERR_FIELD' | translate }}</mat-error>
                 </mat-form-field>
 
 
@@ -235,7 +232,7 @@
                             (matChipInputTokenEnd)="addIngredient($event)">
                     </mat-form-field>
 
-                    <h2 *ngIf="ingredients.length > 0">List of ingredients</h2>
+                    <h2 *ngIf="ingredients.length > 0">{{ 'CREATOR.LIST_ING' | translate }}</h2>
 
                     <mat-chip-grid #ingredientsList2 [ngClass]="{ 'hidden': isIngredientsEmpty() }">
                         <mat-chip *ngFor="let ingredient of ingredients" [removable]="true"
@@ -253,7 +250,7 @@
 
                 <div class="col-2 flex align-items-start justify-content-end">
 
-                    <button mat-fab matTooltip="Add step" (click)="addStep()" color="primary" class="">
+                    <button mat-fab matTooltip="{{ 'CREATOR.ADD_STEP' | translate }}" (click)="addStep()" color="primary" class="">
                         <mat-icon>add</mat-icon>
                     </button>
 
@@ -262,18 +259,18 @@
 
                 <div class="col-8">
 
-                    <h2 *ngIf="steps.length > 0">List of steps</h2>
+                    <h2 *ngIf="steps.length > 0">{{ 'CREATOR.LIST_STEPS' | translate }}</h2>
 
                     <div *ngFor="let step of steps; let i = index"
                         class="flex align-items-center justify-content-center">
 
                         <mat-form-field class="flex justify-content-center align-items-center text-area-description">
-                            <mat-label>Step {{i+1}}</mat-label>
-                            <textarea matInput type="text" [name]="step.name" [placeholder]="step.placeholder"
+                            <mat-label>{{ 'RECIPE.STEP_TITLE' | translate }} {{i+1}}</mat-label>
+                            <textarea matInput type="text" [name]="step.name" placeholder="{{ 'RECIPE.DESC_STEP' | translate }}"
                                 [formControlName]="step.name" [value]="step.value" rows="3"></textarea>
                         </mat-form-field>
 
-                        <button mat-fab matTooltip="delete step" class="m-1" color="primary" (click)="removeStep(i)">
+                        <button mat-fab matTooltip="{{ 'CREATOR.DELETE_STEP' | translate }}" class="m-1" color="primary" (click)="removeStep(i)">
                             <mat-icon>close</mat-icon>
                         </button>
 

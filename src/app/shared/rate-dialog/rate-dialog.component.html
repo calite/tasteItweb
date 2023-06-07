@@ -1,11 +1,11 @@
 <div mat-dialog-content>
-    <p>Rate this recipe</p>
+    <p>{{ 'RATE.TITLE' | translate }}</p>
     <form class="flex flex-column align-items-center justify-content-center"
         [formGroup]="formRate">
         <mat-form-field appearance="fill">
-            <mat-label>Comment</mat-label>
+            <mat-label>{{ 'PROFILE.COMMENT' | translate }}</mat-label>
             <input matInput type="text" formControlName="comment">
-            <mat-error *ngIf="formRate.controls.comment.invalid">Fill the comment</mat-error>
+            <mat-error *ngIf="formRate.controls.comment.invalid">{{ 'COMMON.SAY_SOMETHING' | translate }}</mat-error>
         </mat-form-field>
 
         <bar-rating [(rate)]="rate" [max]="5.0" formControlName="rating"></bar-rating>
@@ -13,6 +13,6 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close color="primary">Cancel</button>
-    <button mat-button cdkFocusInitial color="accent" (click)="onSubmit()">Ok</button>
+    <button mat-button mat-dialog-close color="primary">{{ 'COMMON.CANCEL' | translate }}</button>
+    <button mat-button cdkFocusInitial color="accent" (click)="onSubmit()">{{ 'COMMON.OK' | translate }}</button>
 </div>

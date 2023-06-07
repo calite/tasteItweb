@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastPositionEnum } from '@costlydeveloper/ngx-awesome-popup';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 
@@ -18,6 +19,7 @@ export class CommentDialogComponent {
   @Output() formClosed = new EventEmitter();
 
   constructor(
+    public translate: TranslateService,
     private apiService: ApiService,
     private toastService: ToastService,
     public dialogRef: MatDialogRef<CommentDialogComponent>,
@@ -28,6 +30,7 @@ export class CommentDialogComponent {
     })
     this.senderToken = JSON.parse(sessionStorage.getItem('currentUser')).token;
     this.receiverToken = this.data['receiverToken']
+    this.translate.use(localStorage.getItem('language'))
   }
 
   onSubmit() {
@@ -39,7 +42,7 @@ export class CommentDialogComponent {
         this.formComment.controls.comment.value
       ).subscribe(() => {
         this.formClosed.emit();
-        this.toastService.toastGenerator('', 'user commented', 4, ToastPositionEnum.BOTTOM_LEFT)
+        this.toastService.toastGenerator('', this.translate.instant('PROFILE.COMMENT_ALERT'), 4, ToastPositionEnum.BOTTOM_LEFT)
       })
       this.dialogRef.close();
     }

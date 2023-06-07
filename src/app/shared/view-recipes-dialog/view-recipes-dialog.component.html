@@ -1,6 +1,7 @@
 <div class="container" *ngIf="option == 'recipes' || option =='likes'">
 
-    <h3>{{option | titlecase }}</h3>
+    <h3 *ngIf="option == 'recipes'">{{ 'PROFILE.RECIPES_BTN' | translate }}</h3>
+    <h3 *ngIf="option == 'likes'">{{ 'PROFILE.LIKES_BTN' | translate }}</h3>
 
 
     <div *ngFor="let recipe of recipes" class="grid mt-2 mini-card">
@@ -34,7 +35,8 @@
 
 <div class="container" *ngIf="option == 'followers' || option =='following'">
 
-    <h3>{{option | titlecase }}</h3>
+    <h3 *ngIf="option == 'followers'">{{ 'PROFILE.FOLLOWERS_BTN' | translate }}</h3>
+    <h3 *ngIf="option == 'following'">{{ 'PROFILE.FOLLOWING_BTN' | translate }}</h3>
 
     <div *ngFor="let user of users" class="grid mt-2 mini-card">
         <div class="col-3">
