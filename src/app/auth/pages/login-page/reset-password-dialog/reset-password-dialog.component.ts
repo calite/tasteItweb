@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-reset-password-dialog',
