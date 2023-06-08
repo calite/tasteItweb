@@ -20,6 +20,7 @@ export class RegisterPageComponent {
   formRegister: FormGroup;
   hide1 = true;
   hide2 = true;
+  registerInto = false;
 
 
   constructor(
@@ -30,8 +31,10 @@ export class RegisterPageComponent {
     private toastService: ToastService,
     private storage: Storage,
   ) {
+    var temp = sessionStorage.getItem('temp')
+
     this.formRegister = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl(temp, [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       repeatPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
@@ -86,6 +89,9 @@ export class RegisterPageComponent {
 
   onSubmit() {
     if (this.formRegister.valid) {
+
+      this.registerInto = true;
+
       if (this.formRegister.valid && this.formRegister.get('password').value == this.formRegister.get('repeatPassword').value) {
 
         this.authService.register({ email: this.formRegister.get('email').value, password: this.formRegister.get('password').value })
@@ -97,13 +103,18 @@ export class RegisterPageComponent {
 
             this.apiService.registerUser(response.user['uid'], username, img, 'my biography').subscribe()
 
+            this.registerInto = false;
+
             this.toastService.alertGenerator(this.translate.instant('COMMON.GREAT'), this.translate.instant('LOGIN.ALMOST_DONE'), 1)
+
+            sessionStorage.setItem('temp', this.formRegister.controls.email.value);
 
             this.router.navigate(['./auth/login'])
 
           })
           .catch(error => {
             if (error.code = 'auth/email-already-in-use') {
+              this.registerInto = false;
               this.toastService.alertGeneratorWithoutCancel('Error!', this.translate.instant('LOGIN.EMAIL_USED'), 4)
             }
           })

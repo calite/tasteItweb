@@ -26,7 +26,10 @@
         "ERR_LOGIN": "Email o contraseña incorrectos",
         "NO_ACC_WARNING": "Parece que no tienes una cuenta, ¿Quieres registrarte?",
         "ALMOST_DONE": "¡Ya casi estás, haz login para comenzar!",
-        "EMAIL_USED": "Ese email ya está en uso"
+        "EMAIL_USED": "Ese email ya está en uso",
+        "WAIT" : "Espera!",
+        "LOGIN_INTO" : "Entrando en el servidor...",
+        "REGISTER_INTO" : "Creando cuenta..."
     },
     "MENU": {
         "RECIPES": "RECETAS",
@@ -40,7 +43,8 @@
         "YOUR_PROFILE": "Tu perfil",
         "LANGS": "Lenguajes",
         "EN": "Inglés",
-        "ES": "Español"
+        "ES": "Español",
+        "GO_TOP" : "Ir arriba"
     },
     "HOME": {
         "CREATE_RECIPE": "Crear receta",
@@ -95,7 +99,8 @@
         "COMMENT": "Comentario",
         "EDIT_BTN": "Editar perfil",
         "EDIT_BTN_TOOLTIP": "Editar tu perfil",
-        "COMMENT_ALERT": "Usuario commentado"
+        "COMMENT_ALERT": "Usuario commentado",
+        "NO_RECIPES" : "Aún no hay recetas."
     },
     "RANDOM": {
         "LIKES_TOOLTIP": "Likes",

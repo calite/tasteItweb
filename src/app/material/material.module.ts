@@ -15,10 +15,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from "@angular/material/slider"
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatSlideToggleModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }

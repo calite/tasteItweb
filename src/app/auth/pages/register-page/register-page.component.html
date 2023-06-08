@@ -1,50 +1,70 @@
 <div class="flex flex-column justify-content-center align-items-center">
     <img src="assets/tasteIt_logo2.png">
-    <span class="text-lg mb-4">
+    <span class="text-lg mb-4" *ngIf="!registerInto">
         {{ 'LOGIN.RESET_REGISTER_TITLE' | translate }}
     </span>
 
-    <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formRegister"
-        (ngSubmit)="onSubmit()">
+    <div *ngIf="!registerInto">
 
-        <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email"
-                autocomplete="username">
-            <mat-icon matSuffix>alternate_email</mat-icon>
-            <mat-error *ngIf="formRegister.controls.email.invalid">{{ 'LOGIN.INVALID_EMAIL' | translate }}</mat-error>
-        </mat-form-field>
+        <form class="flex flex-column justify-content-center align-items-center" [formGroup]="formRegister"
+            (ngSubmit)="onSubmit()">
 
-        <mat-form-field>
-            <mat-label>{{ 'LOGIN.PASS' | translate }}</mat-label>
-            <input matInput [type]="hide1 ? 'password' : 'text'" class="form-control" placeholder="{{ 'LOGIN.PASS' | translate }}"
-                formControlName="password" autocomplete="new-password">
-            <button mat-icon-button matSuffix type="button" (click)="showPassword(1)" tabindex="-1">
-                <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput type="text" class="form-control" placeholder="jhon@doe.com" formControlName="email"
+                    autocomplete="username">
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-error *ngIf="formRegister.controls.email.invalid">{{ 'LOGIN.INVALID_EMAIL' | translate }}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{ 'LOGIN.PASS' | translate }}</mat-label>
+                <input matInput [type]="hide1 ? 'password' : 'text'" class="form-control"
+                    placeholder="{{ 'LOGIN.PASS' | translate }}" formControlName="password" autocomplete="new-password">
+                <button mat-icon-button matSuffix type="button" (click)="showPassword(1)" tabindex="-1">
+                    <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error
+                    *ngIf="formRegister.controls.password.invalid && !formRegister.controls.password.value.length">{{
+                    'LOGIN.INVALID_PASS' | translate }}</mat-error>
+                <mat-error *ngIf="formRegister.controls.password.value.length">{{ 'LOGIN.INVALID_LENGTH' | translate }}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{ 'LOGIN.REPEAT_PASS' | translate }}</mat-label>
+                <input matInput [type]="hide2 ? 'password' : 'text'" class="form-control"
+                    placeholder="{{ 'LOGIN.REPEAT_PASS' | translate }}" formControlName="repeatPassword"
+                    autocomplete="current-password">
+                <button mat-icon-button matSuffix type="button" (click)="showPassword(2)" tabindex="-1">
+                    <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error
+                    *ngIf="formRegister.controls.repeatPassword.invalid && !formRegister.controls.repeatPassword.value.length">
+                    {{ 'LOGIN.INVALID_PASS' | translate }}</mat-error>
+                <mat-error *ngIf="formRegister.controls.repeatPassword.value.length">{{ 'LOGIN.INVALID_LENGTH' |
+                    translate }}</mat-error>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="formRegister.invalid">
+                {{ 'LOGIN.REGISTER_BTN' | translate }}
             </button>
-            <mat-error *ngIf="formRegister.controls.password.invalid && !formRegister.controls.password.value.length">{{ 'LOGIN.INVALID_PASS' | translate }}</mat-error>
-            <mat-error *ngIf="formRegister.controls.password.value.length">{{ 'LOGIN.INVALID_LENGTH' | translate }}</mat-error>
-        </mat-form-field>
+        </form>
 
-        <mat-form-field>
-            <mat-label>{{ 'LOGIN.REPEAT_PASS' | translate }}</mat-label>
-            <input matInput [type]="hide2 ? 'password' : 'text'" class="form-control" placeholder="{{ 'LOGIN.REPEAT_PASS' | translate }}"
-                formControlName="repeatPassword" autocomplete="current-password">
-            <button mat-icon-button matSuffix type="button" (click)="showPassword(2)" tabindex="-1">
-                <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="formRegister.controls.repeatPassword.invalid && !formRegister.controls.repeatPassword.value.length">{{ 'LOGIN.INVALID_PASS' | translate }}</mat-error>
-            <mat-error *ngIf="formRegister.controls.repeatPassword.value.length">{{ 'LOGIN.INVALID_LENGTH' | translate }}</mat-error>
-        </mat-form-field>
+        <div class="flex justify-content-center mt-5">
+            <button mat-flat-button routerLink="/auth/login">{{ 'LOGIN.ACC_ALREADY' | translate }}</button>
+        </div>
 
-        <button mat-flat-button color="primary" type="submit" [disabled]="formRegister.invalid">
-            {{ 'LOGIN.REGISTER_BTN' | translate }}
-        </button>
-    </form>
-
-    <div class="flex justify-content-end mt-5">
-        <button mat-flat-button routerLink="/auth/login">{{ 'LOGIN.ACC_ALREADY' | translate }}</button>
     </div>
+</div>
+
+<div class="flex flex-column align-items-center justify-content-center registerInto" *ngIf="registerInto">
+
+    <h2>{{ 'LOGIN.WAIT' | translate }}</h2>
+    <h3>{{ 'LOGIN.REGISTER_INTO' | translate }}</h3>
+    <mat-spinner></mat-spinner>
+
 </div>
 
 <img id="imgHidden" src="assets/no-image.png">

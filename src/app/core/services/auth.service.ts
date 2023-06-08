@@ -17,7 +17,8 @@ export class AuthService {
 
 
   constructor(
-    private auth: Auth, 
+    private auth: Auth,
+    private apiService : ApiService, 
     private router: Router, 
     private toastService: ToastService,
     public translate: TranslateService,

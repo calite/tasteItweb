@@ -1,16 +1,16 @@
 <shared-loading-spinner *ngIf="isLoading"></shared-loading-spinner>
 
 <div *ngIf="recipes.length == 0">
-    <div class="flex flex-column align-items-center justify-content-center alert-no-recipes">
-        {{ 'MY_BOOK.NO_RECIPES' | translate }}
-        <button mat-flat-button color="primary" class="m-5" (click)="goCreateRecipe()">{{ 'MY_BOOK.CREATE' | translate }}</button>
+    <div class="alert-no-recipes">
+        {{ 'PROFILE.NO_RECIPES' | translate }}
+        <!-- <button mat-flat-button color="primary" class="m-5" (click)="goCreateRecipe()">{{ 'MY_BOOK.CREATE' | translate }}</button> -->
     </div>
 </div>
 
 <div class="grid flex-row align-items-center justify-content-evenly">
     <mat-card *ngFor="let recipe of recipes" class="cards" (click)="viewRecipe(recipe.recipeId)">
         <mat-card-header>
-            <mat-card-title [matTooltip]="recipe.recipe.name">{{recipe.recipe.name | slice:0:20}}...</mat-card-title>
+            <mat-card-title [matTooltip]="recipe.recipe.name">{{recipe.recipe.name | slice:0:20}}<span *ngIf="recipe.recipe.name.length > 20">...</span></mat-card-title>
         </mat-card-header>
         <img [src]="recipe.recipe.image">
     </mat-card>

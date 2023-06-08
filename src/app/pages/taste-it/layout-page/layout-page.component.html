@@ -97,11 +97,11 @@
 </mat-toolbar>
 
 <div *ngIf="canGoTop" class="fab-container fadeIn">
-  <button mat-fab class="go-top" (click)="goTop()" color="primary" matTooltip="Go top">
+  <button mat-fab class="go-top" (click)="goTop()" color="primary" matTooltip="{{ 'MENU.GO_TOP' | translate }}">
     <mat-icon>arrow_upward</mat-icon>
   </button>
 
-  <button mat-mini-fab class="go-top-mini" (click)="goTop()" color="primary" matTooltip="Go top">
+  <button mat-mini-fab class="go-top-mini" (click)="goTop()" color="primary" matTooltip="{{ 'MENU.GO_TOP' | translate }}">
     <mat-icon>arrow_upward</mat-icon>
   </button>
 </div>

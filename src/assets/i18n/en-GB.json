@@ -26,7 +26,9 @@
         "ERR_LOGIN": "email or password wrong!",
         "NO_ACC_WARNING": "Looks like you dont have and account, do you want to register?",
         "ALMOST_DONE": "almost done, just log in to start!",
-        "EMAIL_USED": "email already in use"
+        "EMAIL_USED": "email already in use",
+        "WAIT" : "Wait!",
+        "LOGIN_INTO" : "Login into the server..."
     },
     "MENU": {
         "RECIPES": "RECIPES",
@@ -40,7 +42,8 @@
         "YOUR_PROFILE": "Your profile",
         "LANGS": "Languages",
         "EN": "English",
-        "ES": "Spanish"
+        "ES": "Spanish",
+        "GO_TOP" : "Go top"
     },
     "HOME": {
         "CREATE_RECIPE": "Create recipe",
@@ -95,7 +98,8 @@
         "COMMENT": "Comment",
         "EDIT_BTN": "Edit profile",
         "EDIT_BTN_TOOLTIP": "Edit your profile",
-        "COMMENT_ALERT" : "User commented"
+        "COMMENT_ALERT" : "User commented",
+        "NO_RECIPES" : "There is no recipes yet."
     },
     "RANDOM": {
         "LIKES_TOOLTIP": "Likes",

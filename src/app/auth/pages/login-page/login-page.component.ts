@@ -17,6 +17,7 @@ export class LoginPageComponent {
 
   formLogin: FormGroup;
   hide = true;
+  loginInto = false;
 
   constructor(
     public translate: TranslateService,
@@ -26,8 +27,11 @@ export class LoginPageComponent {
     private toastService: ToastService,
     private resetPasswordDialog: MatDialog,
   ) {
+
+    var temp = sessionStorage.getItem('temp')
+
     this.formLogin = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl(temp, [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
 
@@ -42,6 +46,8 @@ export class LoginPageComponent {
   onSubmit() {
     if (this.formLogin.valid) {
 
+      this.loginInto = true;
+
       this.authService.login(this.formLogin.value)
         .then(response => { //almacenamos la repuesta de firebase en local
           sessionStorage.setItem('userFirebase', JSON.stringify(response.user))
@@ -51,19 +57,24 @@ export class LoginPageComponent {
 
           this.apiService.getUserByToken(response.user.uid)
             .subscribe(response => { //almacenamos los datos del usuario desde neo en local
+              sessionStorage.removeItem('temp');
               sessionStorage.setItem('currentUser', JSON.stringify(response));
+              this.loginInto = false;
               this.router.navigate(['/taste-it']);
             })
 
         })
         .catch(error => {
           if (error.code === 'auth/wrong-password') {
+            this.loginInto = false;
             this.toastService.alertGeneratorWithoutCancel('Error!', this.translate.instant('LOGIN.ERR_LOGIN'), 4)
           }
           if (error.code === 'auth/user-not-found') {
+            this.loginInto = false;
             this.toastService.alertGenerator('Ups!', this.translate.instant('LOGIN.NO_ACC_WARNING'), 4)
               .subscribe((result) => {
                 if (result.success === true) {
+                  sessionStorage.setItem('temp', this.formLogin.controls.email.value);
                   this.router.navigate(['/auth/register']);
                 }
               });
